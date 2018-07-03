@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,32 +43,32 @@
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate="Masukkan Nama PIC">
-					<input class="input100" type="text" name="namaPIC" placeholder="Nama PIC">
+					<input class="input100" type="text" name="NamaPIC" placeholder="Nama PIC">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Masukkan password">
-					<input class="input100" type="text" name="password" placeholder="Password">
+					<input class="input100" type="text" name="Password" placeholder="Password">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Masukkan Divisi">
-					<input class="input100" type="text" name="divisi" placeholder="Divisi">
+					<input class="input100" type="text" name="Divisi" placeholder="Divisi">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Masukkan Jabatan">
-					<input class="input100" type="text" name="jabatan" placeholder="Jabatan">
+					<input class="input100" type="text" name="Jabatan" placeholder="Jabatan">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Masukkan Tahun Masuk PIC">
-					<input class="input100" name="tahunMasuk" placeholder="Tahun Masuk PIC">
+					<input class="input100" name="TahunMasuk" placeholder="Tahun Masuk PIC">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Masukkan Jumlah Pengecekan">
-					<input class="input100" name="jmlPengecekan" placeholder="Jumlah Pengecekan">
+					<input class="input100" name="JumlahPengecekan" placeholder="Jumlah Pengecekan">
 					<span class="focus-input100"></span>
 				</div>
 
