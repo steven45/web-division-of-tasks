@@ -11,5 +11,5 @@ $route['admin/validation'] = 'cAdmin/validation';
 $route['admin/beranda'] = 'cAdmin/beranda';
 
 //Halaman User
-$route['default_controller'] = 'cUser';
+$route['pic'] = 'cUser';
 //$route['admin/validation'] = 'cAdmin/validation';
