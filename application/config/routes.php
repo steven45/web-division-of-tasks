@@ -9,5 +9,10 @@ $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = 'cAdmin';
 $route['admin/validation'] = 'cAdmin/validation';
 $route['admin/beranda'] = 'cAdmin/beranda';
+
 $route['admin/keluar'] = 'cAdmin/keluar';
 $route['admin/tambahpic'] = 'cAdmin/tambahPIC';
+
+//Halaman User
+$route['default_controller'] = 'cUser';
+//$route['admin/validation'] = 'cAdmin/validation';
