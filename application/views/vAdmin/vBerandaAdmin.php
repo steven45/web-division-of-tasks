@@ -1,3 +1,6 @@
+<?php if (!isset($_SESSION['nama'])) {
+  redirect(base_url("admin"));
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Halaman Admin</title>
+  <title>Beranda Admin</title>
   <!-- Bootstrap core CSS-->
 
   <link rel="icon" type="image/png" href= "<?php echo base_url('assets/images/icons/favicon.ico'); ?> "/>
@@ -1028,21 +1031,20 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin keluar?</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-body">Jika anda keluar maka anda harus memasukkan username dan password kembali</div>
           <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
+            <a class="btn btn-primary" href="<?php echo site_url('admin/keluar'); ?>">Keluar</a>
           </div>
         </div>
       </div>
     </div>
     <!-- Bootstrap core JavaScript-->
-    <?php echo base_url('js/sb-admin-charts.min.js'); ?>
     <script src="<?php echo base_url('assets/home/vendor/jquery/jquery.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/home/vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
     <!-- Core plugin JavaScript-->
