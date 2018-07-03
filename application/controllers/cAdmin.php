@@ -104,9 +104,9 @@ class cAdmin extends CI_Controller {
 
 	public function tambahPIC()
 	{
-		$this->load->view('vAdmin/template/vHeaderAdmin.php');
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
 		$this->load->view('vAdmin/vTambahPIC');
-		$this->load->view('vAdmin/template/vFooterAdmin.php');
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
 	public function lihatPIC()
