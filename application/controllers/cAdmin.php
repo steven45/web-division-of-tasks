@@ -55,7 +55,7 @@ class cAdmin extends CI_Controller {
 		redirect(base_url("admin"));
 	}
 
-	public function tambahPIC()
+	public function validasiTambahPIC()
 	{
 		// if (isset($_POST['submit']))
 		// {
@@ -65,11 +65,18 @@ class cAdmin extends CI_Controller {
 		// 	$divisi = $this->input->post('Divisi');
 		// 	$jabatan = $this->input->post('Jabatan');
 		// 	$tahunMasuk = $this->input->post('Tahun Masuk');
-		// 	$jumlahPengecekan = 
+		// 	$jumlahPengecekan = $this->input->post('Jumlah Pengecekan');
+
+		// 	$data = array(
+		// 		'NIK' => $NIK,
+		// 		'Nama PIC' => $namaPIC,
+		// 		'Divisi' => $divisi,
+
+		// 	);	
 		// }
 	}
 
-	public function validasiTambahPIC()
+	public function tambahPIC()
 	{
 		$this->load->view('vAdmin/vTambahPIC');
 	}
