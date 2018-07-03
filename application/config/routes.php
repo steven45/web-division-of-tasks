@@ -12,7 +12,7 @@ $route['admin/beranda'] = 'cAdmin/beranda';
 
 $route['admin/keluar'] = 'cAdmin/keluar';
 $route['admin/tambahpic'] = 'cAdmin/tambahPIC';
-
+$route['admin/validasitambahpic'] = 'cAdmin/validasiTambahPIC';
 //Halaman User
 $route['pic'] = 'cUser';
 //$route['admin/validation'] = 'cAdmin/validation';

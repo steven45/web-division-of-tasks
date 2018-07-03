@@ -57,23 +57,49 @@ class cAdmin extends CI_Controller {
 
 	public function validasiTambahPIC()
 	{
-		// if (isset($_POST['submit']))
-		// {
-		// 	$NIK = $this->input->post('NIK');
-		// 	$namaPIC = $this->input->post('Nama PIC');
-		// 	$password = $this->input->post('Password');
-		// 	$divisi = $this->input->post('Divisi');
-		// 	$jabatan = $this->input->post('Jabatan');
-		// 	$tahunMasuk = $this->input->post('Tahun Masuk');
-		// 	$jumlahPengecekan = $this->input->post('Jumlah Pengecekan');
+		if (isset($_POST['submit']))
+		{
+			$NIK = $this->input->post('NIK');
+			$namaPIC = $this->input->post('NamaPIC');
+			$password = $this->input->post('Password');
+			$divisi = $this->input->post('Divisi');
+			$jabatan = $this->input->post('Jabatan');
+			$tahunMasuk = $this->input->post('TahunMasuk');
+			$jumlahPengecekan = $this->input->post('JumlahPengecekan');
+			// $NIK = '155150200111246';
+			// $namaPIC = 'Vriza Wahyu AA';
+			// $password = 'Haloo';
+			// $divisi = 'IT Operation';
+			// $jabatan = 'Bos Besar';
+			// $tahunMasuk = '2010';
+			// $jumlahPengecekan = '10';
+			$data = array(
+				'NIK' => $NIK,
+				'NamaPIC' => $namaPIC,
+				'Divisi' => $divisi,
+				'Password' => md5($password),
+				'Jabatan' => $jabatan,
+				'TahunMasuk' => $tahunMasuk,
+				'JumlahPengecekan' => $jumlahPengecekan
+			);
 
-		// 	$data = array(
-		// 		'NIK' => $NIK,
-		// 		'Nama PIC' => $namaPIC,
-		// 		'Divisi' => $divisi,
+			$query = $this->mAdmin->tambahPIC('pic', $data, $NIK);
 
-		// 	);	
-		// }
+			if ($query == 1) 
+			{
+				echo "<script type='text/javascript'>
+						alert('Sukses Menambahkan PIC');
+						window.location.href = '" . base_url() . "admin/beranda';
+					</script>";
+			}
+			else
+			{
+				echo "<script type='text/javascript'>
+						alert('NIK PIC Sudah Ada !!!');
+						window.location.href = '" . base_url() . "admin/tambahPIC';
+					</script>";
+			}
+		}
 	}
 
 	public function tambahPIC()
