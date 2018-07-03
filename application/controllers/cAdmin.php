@@ -58,8 +58,6 @@ class cAdmin extends CI_Controller {
 
 	public function validasiTambahPIC()
 	{
-		if (isset($_POST['submit']))
-		{
 			$NIK = $this->input->post('NIK');
 			$namaPIC = $this->input->post('NamaPIC');
 			$password = $this->input->post('Password');
@@ -96,11 +94,11 @@ class cAdmin extends CI_Controller {
 			else
 			{
 				echo "<script type='text/javascript'>
-						alert('PIC Sudah Ada !!!');
-						window.location.href = '" . base_url() . "admin/tambahPIC';
+
+						alert('NIK PIC Sudah Ada !!!');
+						window.location.href = '" . base_url() . "admin/tambahpic';
 					</script>";
 			}
-		}
 	}
 
 	public function tambahPIC()
