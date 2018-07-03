@@ -46,8 +46,9 @@ class cAdmin extends CI_Controller {
 
 	public function beranda()
 	{
-		$this->load->view('vAdmin/template/vHeaderAdmin.php');
-		$this->load->view('vAdmin/template/vFooterAdmin.php');
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$this->load->view('vAdmin/vBerandaAdmin');	
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
 	public function keluar()
