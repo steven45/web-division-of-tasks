@@ -46,7 +46,8 @@ class cAdmin extends CI_Controller {
 
 	public function beranda()
 	{
-		$this->load->view('vAdmin/vBerandaAdmin.php');
+		$this->load->view('vAdmin/template/vHeaderAdmin.php');
+		$this->load->view('vAdmin/template/vFooterAdmin.php');
 	}
 
 	public function keluar()
@@ -95,7 +96,7 @@ class cAdmin extends CI_Controller {
 			else
 			{
 				echo "<script type='text/javascript'>
-						alert('NIK PIC Sudah Ada !!!');
+						alert('PIC Sudah Ada !!!');
 						window.location.href = '" . base_url() . "admin/tambahPIC';
 					</script>";
 			}
@@ -104,6 +105,13 @@ class cAdmin extends CI_Controller {
 
 	public function tambahPIC()
 	{
+		$this->load->view('vAdmin/template/vHeaderAdmin.php');
 		$this->load->view('vAdmin/vTambahPIC');
+		$this->load->view('vAdmin/template/vFooterAdmin.php');
+	}
+
+	public function lihatPIC()
+	{
+		
 	}
 }
