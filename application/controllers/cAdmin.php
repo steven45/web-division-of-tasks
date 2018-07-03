@@ -48,4 +48,29 @@ class cAdmin extends CI_Controller {
 	{
 		$this->load->view('vAdmin/vBerandaAdmin.php');
 	}
+
+	public function keluar()
+	{
+		session_destroy();
+		redirect(base_url("admin"));
+	}
+
+	public function tambahPIC()
+	{
+		// if (isset($_POST['submit']))
+		// {
+		// 	$NIK = $this->input->post('NIK');
+		// 	$namaPIC = $this->input->post('Nama PIC');
+		// 	$password = $this->input->post('Password');
+		// 	$divisi = $this->input->post('Divisi');
+		// 	$jabatan = $this->input->post('Jabatan');
+		// 	$tahunMasuk = $this->input->post('Tahun Masuk');
+		// 	$jumlahPengecekan = 
+		// }
+	}
+
+	public function validasiTambahPIC()
+	{
+		$this->load->view('vAdmin/vTambahPIC');
+	}
 }

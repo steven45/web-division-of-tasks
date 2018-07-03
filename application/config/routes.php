@@ -10,6 +10,9 @@ $route['admin'] = 'cAdmin';
 $route['admin/validation'] = 'cAdmin/validation';
 $route['admin/beranda'] = 'cAdmin/beranda';
 
+$route['admin/keluar'] = 'cAdmin/keluar';
+$route['admin/tambahpic'] = 'cAdmin/tambahPIC';
+
 //Halaman User
 $route['pic'] = 'cUser';
 //$route['admin/validation'] = 'cAdmin/validation';

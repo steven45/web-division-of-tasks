@@ -1,3 +1,6 @@
+<?php if (isset($_SESSION['nama'])) {
+	redirect(base_url("admin/beranda"));
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
