@@ -25,4 +25,3 @@ $route['admin/validasieditchecklist'] = 'cAdmin/validasiEditChecklist';
 
 //Halaman User
 $route['pic'] = 'cUser';
-//$route['admin/validation'] = 'cAdmin/validation';
