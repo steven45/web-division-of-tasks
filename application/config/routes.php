@@ -15,4 +15,3 @@ $route['admin/tambahpic'] = 'cAdmin/tambahPIC';
 
 //Halaman User
 $route['pic'] = 'cUser';
-//$route['admin/validation'] = 'cAdmin/validation';
