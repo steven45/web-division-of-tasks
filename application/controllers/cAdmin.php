@@ -66,13 +66,7 @@ class cAdmin extends CI_Controller {
 			$jabatan = $this->input->post('Jabatan');
 			$tahunMasuk = $this->input->post('TahunMasuk');
 			$jumlahPengecekan = $this->input->post('JumlahPengecekan');
-			// $NIK = '155150200111246';
-			// $namaPIC = 'Vriza Wahyu AA';
-			// $password = 'Haloo';
-			// $divisi = 'IT Operation';
-			// $jabatan = 'Bos Besar';
-			// $tahunMasuk = '2010';
-			// $jumlahPengecekan = '10';
+
 			$data = array(
 				'NIK' => $NIK,
 				'NamaPIC' => $namaPIC,
@@ -111,6 +105,106 @@ class cAdmin extends CI_Controller {
 
 	public function lihatPIC()
 	{
+		$data['pic'] = $this->mAdmin->getPIC();
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$this->load->view('vAdmin/vLihatPIC', $data);
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
+	public function editPIC()
+	{
+		$NIK = $this->input->post('NIK');
+		$data['pic'] = $this->mAdmin->getPIC($NIK);
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$this->load->view('vAdmin/vEditPIC');
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
+	public function validasiEditPIC()
+	{
+		if (isset($_POST['submit'])) 
+		{
+			$NIK = $this->input->post('NIK');
+			$namaPIC = $this->input->post('NamaPIC');
+			$password = $this->input->post('Password');
+			$divisi = $this->input->post('Divisi');
+			$jabatan = $this->input->post('Jabatan');
+			$tahunMasuk = $this->input->post('TahunMasuk');
+			$jumlahPengecekan = $this->input->post('JumlahPengecekan');
+
+			$data = array(
+				'NamaPIC' => $namaPIC,
+				'Divisi' => $divisi,
+				'Password' => md5($password),
+				'Jabatan' => $jabatan,
+				'TahunMasuk' => $tahunMasuk,
+				'JumlahPengecekan' => $jumlahPengecekan
+			);
+
+			$data['pic'] = $this->mAdmin->editPIC('pic', $data, $NIK);
+
+			echo "<script type='text/javascript'>
+						alert('Sukses Mengedit PIC');
+						window.location.href = '" . base_url() . "admin/lihatPIC';
+					</script>";
+		}
+	}
+
+	public function hapusPIC()
+	{
+
+	}
+
+	public function lihatChecklist()
+	{
+		$data['checklist'] = $this->mAdmin->getChecklist();
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$this->load->view('vAdmin/vLihatChecklist', $data);
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
+	public function editChecklist()
+	{
+		$IDChecklist = $this->input->post('IDChecklist');
+		$data['checklist'] = $this->mAdmin->getChecklist($IDChecklist);
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$this->load->view('vAdmin/vEditChecklist');
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
+	public function validasiEditChecklist()
+	{
+		if (isset($_POST['submit'])) 
+		{
+			$IDChecklist = $this->input->post('IDChecklist');
+			$jenisChecklist = $this->input->post('JenisChecklist');
+			$info = $this->input->post('Info');
+			$namaChecklist = $this->input->post('NamaChecklist');
+			$jam = $this->input->post('Jam');
+
+			$data = array(
+				'JenisChecklist' => $jenisChecklist,
+				'Info' => $info,
+				'NamaChecklist' => $namaChecklist,
+				'Jam' => $jam
+			);
+
+			$data['pic'] = $this->mAdmin->editChecklist('checklist', $data, $IDChecklist);
+
+			echo "<script type='text/javascript'>
+						alert('Sukses Mengedit Checklist');
+						window.location.href = '" . base_url() . "admin/checklist';
+					</script>";
+		}
+	}
+
+	public function lihatInfoChecklist($IDChecklist)
+	{
+		$hasil = $this->mAdmin->getInfoChecklist('checklist', $IDChecklist);
 		
+		$data['info'] = $hasil['Info'];
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$this->load->view('checklist/vTampilInfoChecklist', $data);
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 }
