@@ -46,7 +46,9 @@ class cAdmin extends CI_Controller {
 
 	public function beranda()
 	{
-		$this->load->view('vAdmin/vBerandaAdmin.php');
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$this->load->view('vAdmin/vBerandaAdmin');	
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
 	public function keluar()
@@ -55,22 +57,60 @@ class cAdmin extends CI_Controller {
 		redirect(base_url("admin"));
 	}
 
-	public function tambahPIC()
-	{
-		// if (isset($_POST['submit']))
-		// {
-		// 	$NIK = $this->input->post('NIK');
-		// 	$namaPIC = $this->input->post('Nama PIC');
-		// 	$password = $this->input->post('Password');
-		// 	$divisi = $this->input->post('Divisi');
-		// 	$jabatan = $this->input->post('Jabatan');
-		// 	$tahunMasuk = $this->input->post('Tahun Masuk');
-		// 	$jumlahPengecekan = 
-		// }
-	}
-
 	public function validasiTambahPIC()
 	{
+			$NIK = $this->input->post('NIK');
+			$namaPIC = $this->input->post('NamaPIC');
+			$password = $this->input->post('Password');
+			$divisi = $this->input->post('Divisi');
+			$jabatan = $this->input->post('Jabatan');
+			$tahunMasuk = $this->input->post('TahunMasuk');
+			$jumlahPengecekan = $this->input->post('JumlahPengecekan');
+			// $NIK = '155150200111246';
+			// $namaPIC = 'Vriza Wahyu AA';
+			// $password = 'Haloo';
+			// $divisi = 'IT Operation';
+			// $jabatan = 'Bos Besar';
+			// $tahunMasuk = '2010';
+			// $jumlahPengecekan = '10';
+			$data = array(
+				'NIK' => $NIK,
+				'NamaPIC' => $namaPIC,
+				'Divisi' => $divisi,
+				'Password' => md5($password),
+				'Jabatan' => $jabatan,
+				'TahunMasuk' => $tahunMasuk,
+				'JumlahPengecekan' => $jumlahPengecekan
+			);
+
+			$query = $this->mAdmin->tambahPIC('pic', $data, $NIK);
+
+			if ($query == 1) 
+			{
+				echo "<script type='text/javascript'>
+						alert('Sukses Menambahkan PIC');
+						window.location.href = '" . base_url() . "admin/beranda';
+					</script>";
+			}
+			else
+			{
+				echo "<script type='text/javascript'>
+
+						alert('NIK PIC Sudah Ada !!!');
+						window.location.href = '" . base_url() . "admin/tambahpic';
+					</script>";
+			}
+	}
+
+	public function tambahPIC()
+	{
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
 		$this->load->view('vAdmin/vTambahPIC');
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
+	public function lihatPIC()
+	{
+		
 	}
 }
