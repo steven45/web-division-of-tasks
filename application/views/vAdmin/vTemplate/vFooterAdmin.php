@@ -1,10 +1,12 @@
-<footer class="sticky-footer">
+  <div style="position: relative;">
+  <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
           <small>Copyright © Artajasa 2018</small>
         </div>
       </div>
     </footer>
+    </div>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
@@ -41,6 +43,49 @@
     <!-- Custom scripts for this page-->
     <script src="<?php echo base_url('assets/home/js/sb-admin-datatables.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/home/js/sb-admin-charts.min.js'); ?>"></script>
+
+
+
+
+
+
+    <!-- JS punya sarah -->
+
+<!--===============================================================================================-->
+  <script src="<?php echo base_url('assets/formT_PIC/vendor/jquery/jquery-3.2.1.min.js'); ?>"></script>
+<!--===============================================================================================-->
+  <script src="<?php echo base_url('assets/formT_PIC/vendor/animsition/js/animsition.min.js'); ?>"></script>
+<!--===============================================================================================-->
+  <script src="<?php echo base_url('assets/formT_PIC/vendor/bootstrap/js/popper.js'); ?>"></script>
+  <script src="<?php echo base_url('assets/formT_PIC/vendor/bootstrap/js/bootstrap.min.js'); ?>"></script>
+<!--===============================================================================================-->
+  <script src="<?php echo base_url('assets/formT_PIC/vendor/select2/select2.min.js'); ?>"></script>
+<!--===============================================================================================-->
+  <script src="<?php echo base_url('assets/formT_PIC/vendor/daterangepicker/moment.min.js'); ?>"></script>
+  <script src="<?php echo base_url('assets/formT_PIC/vendor/daterangepicker/daterangepicker.js'); ?>"></script>
+<!--===============================================================================================-->
+  <script src="<?php echo base_url('assets/formT_PIC/vendor/countdowntime/countdowntime.js'); ?>"></script>
+<!--===============================================================================================-->
+  <script src="<?php echo base_url('assets/formT_PIC/js/main.js'); ?>"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="<?php echo base_url('https://www.googletagmanager.com/gtag/js?id=UA-23581568-13'); ?>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+
+<!-- penutu JS Sarah -->
+
+
+
+
+
+
   </div>
 </body>
 

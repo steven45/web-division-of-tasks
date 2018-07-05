@@ -21,6 +21,38 @@
   <link href="<?php echo base_url('assets/home/vendor/datatables/dataTables.bootstrap4.css'); ?>" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url('assets/home/css/sb-admin.css'); ?>" rel="stylesheet">
+
+  
+
+
+
+  <!-- punya sarah -->
+    <link rel="icon" type="image/png" href="<?php echo base_url('assets/formT_PIC/images/icons/favicon.ico'); ?>"/>
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/formT_PIC/vendor/bootstrap/css/bootstrap.min.css'); ?>">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/formT_PIC/fonts/font-awesome-4.7.0/css/font-awesome.min.css'); ?>">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/formT_PIC/vendor/animate/animate.css'); ?>">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/formT_PIC/vendor/css-hamburgers/hamburgers.min.css'); ?>">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/formT_PIC/vendor/animsition/css/animsition.min.css'); ?>">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/formT_PIC/vendor/select2/select2.min.css'); ?>">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/formT_PIC/vendor/daterangepicker/daterangepicker.css'); ?>">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/formT_PIC/css/util.css'); ?>">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/formT_PIC/css/main.css'); ?>">
+<!--===============================================================================================-->
+
+<!-- penutup css sarah -->
+
+
+
+
+
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -158,3 +190,4 @@
       </ul>
     </div>
   </nav>
+

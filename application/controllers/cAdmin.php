@@ -214,4 +214,9 @@ class cAdmin extends CI_Controller {
 		$this->load->view('checklist/vTampilInfoChecklist', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
+
+	public function hapusChecklist()
+	{
+		
+	}
 }
