@@ -155,6 +155,13 @@ class cAdmin extends CI_Controller {
 
 	}
 
+	public function tambahChecklist()
+	{
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$this->load->view('vAdmin/vTambahChecklist');
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
 	public function lihatChecklist()
 	{
 		$data['checklist'] = $this->mAdmin->getChecklist();
@@ -168,7 +175,7 @@ class cAdmin extends CI_Controller {
 		$IDChecklist = $this->input->post('IDChecklist');
 		$data['checklist'] = $this->mAdmin->getChecklist($IDChecklist);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
-		$this->load->view('vAdmin/vEditChecklist');
+		$this->load->view('vAdmin/vEditChecklist', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 

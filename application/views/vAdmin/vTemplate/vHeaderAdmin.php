@@ -40,7 +40,7 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Checklist">
-          <a class="nav-link" href="charts.html">
+          <a class="nav-link" href="<?php echo site_url('admin/checklist'); ?>">
             <i class="fa fa-check-square"></i>
             <span class="nav-link-text">Checklist</span>
           </a>

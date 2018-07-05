@@ -9,8 +9,11 @@
 <body>
 
 <header> </header>
-
-<div class="container" style="margin-top: 30px">
+  <div class="content-wrapper">
+    <div class="container-fluid">
+            
+        
+<div class="container-fluid" style="margin-top: 10px">
         <div class="row">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -34,15 +37,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach ($checklist as $checklist) { ?>
                             <tr>
-                                <td>1</td>
-                                <td>Kilgore</td>
-                                <td>Trout</td>
+                                <td><?php echo $checklist['IDChecklist'] ?></td>
+                                <td><?php echo $checklist['NamaChecklist'] ?></td>
+                                <td><?php echo $checklist['JenisChecklist'] ?></td>
                                 <td>
-                                <a href="http://www.website.com/page.html">Lihat</a>
+                                <a href="<?php echo site_url('admin/infochecklist/1'); ?>">Lihat</a>
                                 </td>
-                                <td>kilgore</td>
+                                <td><?php echo $checklist['Jam'] ?></td>
                                 <td>
+                                <form method="POST" action="<?php echo site_url('admin/editchecklist'); ?>">
+                                    <input type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
                                 <div class="container-btn-edit">
                                     <button class="btn btn-primary">
                                     <span>
@@ -51,6 +57,7 @@
                                     </span>
                                     </button>
                                 </div>
+                                </form>
                                 </td>
                                 <td>
                                    <button type="button" class="btn btn-danger">
@@ -59,62 +66,27 @@
                                     </button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Bob</td>
-                                <td>Loblaw</td>
-                                <td>
-                                <a href="http://www.website.com/page.html">Lihat</a>
-                                </td>
-                                <td>kilgore</td>
-                                <td>
-                                <div class="container-btn-edit">
-                                    <button class="btn btn-primary">
-                                    <span>
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                    Edit 
-                                    </span>
-                                    </button>
-                                </div>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    Hapus
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Holden</td>
-                                <td>Caulfield</td>
-                                <td>
-                                <a href="http://www.website.com/page.html">Lihat</a>
-                                </td>
-                                <td>kilgore</td>
-                                <td>
-                                <div class="container-btn-edit">
-                                    <button class="btn btn-primary">
-                                    <span>
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                    Edit
-                                    </span>
-                                    </button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    Hapus
-
-                                    </button>
-                                </td>
-                            </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
             </div>
             
         </div>
+    </div>
+
+    <td>
+    <form method="POST" action="<?php echo site_url('admin/tambahchecklist'); ?>">
+    <div class="container-btn-edit" style="text-align: right; margin-right: 35%">
+        <button class="btn btn-primary" style="background-color: #999; border-color: #777;">
+        <span>
+        <span class="glyphicon glyphicon-person"></span>
+            <span class="glyphicon glyphicon-plus"></span>
+            Tambah Checklist
+        </span>
+    </button>
+    </div>
+    </form>
+    </td>
     </div>
     </body>

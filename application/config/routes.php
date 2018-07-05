@@ -21,6 +21,7 @@ $route['admin/checklist'] = 'cAdmin/lihatChecklist';
 $route['admin/editchecklist'] = 'cAdmin/editChecklist';
 $route['admin/infochecklist/(:any)'] = 'cAdmin/lihatInfoChecklist/$1';
 $route['admin/validasieditchecklist'] = 'cAdmin/validasiEditChecklist';
+$route['admin/tambahchecklist'] = 'cAdmin/tambahChecklist';
 // $route['admin/lihatinfoceklist'] = 'cAdmin/lihatInfoCeklist';
 
 //Halaman User

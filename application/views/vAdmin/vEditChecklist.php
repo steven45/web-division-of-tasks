@@ -31,7 +31,6 @@
 </head>
 <body>
 
-
 	<div class="container-contact100">
 		<div class="wrap-contact100">
 			<form class="contact100-form validate-form">
@@ -39,8 +38,12 @@
 					Edit Jadwal Checklist
 				</span>
 
+				<?php foreach ($checklist as $checklist ) { ?> 
+				<?php foreach ($checklist as $key) {
+					# code...
+				} ?>
 				<div class="wrap-input100 validate-input bg1" data-validate="Masukkan Nama Checklist">
-					<input class="input100" type="text" name="name" placeholder="Nama Checklist">
+					<input class="input100" type="text" name="name" placeholder="Nama Checklist" value="<?php echo $checklist['NamaChecklist'] ?>">
 				</div>
 
 				<div class="wrap-input100 input100-select bg1">
@@ -101,7 +104,7 @@
 							<input class="input100" type="text" name="name" placeholder="Tuliskan Jam (03:00, 07:00, 11:00, dst)" style="font-size: 15px;">
 						</div>
 					</div>
-
+					<?php } ?>
 					<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
 						<span>
