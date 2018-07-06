@@ -31,7 +31,7 @@
 </head>
 <body>
 
-
+<div class="content-wrapper">
 	<div class="container-contact100">
 		<div class="wrap-contact100">
 			<form class="contact100-form validate-form">
@@ -115,7 +115,7 @@
 			</form>
 		</div>
 	</div>				
-			
+</div>
 			
 
 
