@@ -11,7 +11,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <!-- Bootstrap core CSS-->
-
+  <title><?php echo $judul; ?></title>
   <link rel="icon" type="image/png" href= "<?php echo base_url('assets/images/icons/favicon.ico'); ?> "/>
 
   <link href="<?php echo base_url('assets/home/vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">

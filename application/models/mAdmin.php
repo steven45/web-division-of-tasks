@@ -48,7 +48,7 @@ class mAdmin extends CI_Model
         $this->db->update($table, $data);
     }
 
-    public function getChecklist($IDChecklist = null)
+    public function getChecklist($IDChecklist =  false)
     {
         if ($IDChecklist == null) {
             $query = $this->db->get('checklist');
