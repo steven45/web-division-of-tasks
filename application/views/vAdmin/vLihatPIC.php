@@ -1,3 +1,4 @@
+<body>
 <div class="content-wrapper">
   <div class="container-fluid">
 
@@ -35,9 +36,10 @@
                 <td>kilgore</td>
                 <td>kilgore</td>
                 <td>
-
+                  <form method="POST" action="<?php echo site_url('admin/editPIC'); ?>">
                   <button type="button" class="btn btn-primary">
                     <span class="glyphicon glyphicon-pencil"></span>Edit</button>
+                  </form>
                   </td>
                   <td>
                     <button type="button" class="btn btn-danger">
@@ -191,6 +193,6 @@
             </td>
 
           </div>
-      <td>
-    
+</div>
+    </body>
         

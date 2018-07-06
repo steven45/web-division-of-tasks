@@ -16,13 +16,13 @@
 
   <link href="<?php echo base_url('assets/home/vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
   <!-- Custom fonts for this template-->
-  <link href="<?php echo base_url('assets/home/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css'); ?>">
+  <link href="<?php echo base_url('assets/home/vendor/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet" type="text/css'); ?>">
   <!-- Page level plugin CSS-->
   <link href="<?php echo base_url('assets/home/vendor/datatables/dataTables.bootstrap4.css'); ?>" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url('assets/home/css/sb-admin.css'); ?>" rel="stylesheet">
 
-  
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
 
 
@@ -78,7 +78,7 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="PIC">
-          <a class="nav-link" href="<?php echo site_url('admin/tambahpic'); ?>">
+          <a class="nav-link" href="<?php echo site_url('admin/pic'); ?>">
             <i class="fa fa-users"></i>
             <span class="nav-link-text">PIC</span>
           </a>
