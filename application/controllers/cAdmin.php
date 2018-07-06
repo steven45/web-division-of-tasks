@@ -98,21 +98,24 @@ class cAdmin extends CI_Controller {
 
 	public function tambahPIC()
 	{
-		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$data['judul'] = "Tambah PIC";
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vTambahPIC');
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
 	public function lihatPIC()
 	{
+		$data['judul'] = "Lihat PIC";
 		$data['pic'] = $this->mAdmin->getPIC();
-		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vLihatPIC', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
 	public function editPIC()
 	{
+		$data['judul'] = "Edit PIC";
 		$NIK = $this->input->post('NIK');
 		$data['pic'] = $this->mAdmin->getPIC($NIK);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
@@ -157,32 +160,35 @@ class cAdmin extends CI_Controller {
 
 	public function tambahChecklist()
 	{
-		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$data['judul'] = "Tambah Checklist";
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vTambahChecklist');
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
 	public function lihatChecklist()
 	{
+		$data['judul'] = "Lihat Checklist";
 		$data['checklist'] = $this->mAdmin->getChecklist();
-		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vLihatChecklist', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
+	//BELUM SELESAI BACKEND NYA --> VRIZA
 	public function editChecklist()
 	{
 		$IDChecklist = $this->input->post('IDChecklist');
 		$data['checklist'] = $this->mAdmin->getChecklist($IDChecklist);
-		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$data['judul'] = "Edit Checklist";
+
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vEditChecklist', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
 	public function validasiEditChecklist()
 	{
-		if (isset($_POST['submit'])) 
-		{
 			$IDChecklist = $this->input->post('IDChecklist');
 			$jenisChecklist = $this->input->post('JenisChecklist');
 			$info = $this->input->post('Info');
@@ -195,22 +201,21 @@ class cAdmin extends CI_Controller {
 				'NamaChecklist' => $namaChecklist,
 				'Jam' => $jam
 			);
-
+			
 			$data['pic'] = $this->mAdmin->editChecklist('checklist', $data, $IDChecklist);
 
 			echo "<script type='text/javascript'>
 						alert('Sukses Mengedit Checklist');
 						window.location.href = '" . base_url() . "admin/checklist';
 					</script>";
-		}
 	}
 
 	public function lihatInfoChecklist($IDChecklist)
 	{
 		$hasil = $this->mAdmin->getInfoChecklist('checklist', $IDChecklist);
-		
+		$data['judul'] = "Info Checklist";
 		$data['info'] = $hasil['Info'];
-		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('checklist/vTampilInfoChecklist', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
