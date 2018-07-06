@@ -31,7 +31,7 @@
 </head>
 <body>
 
-
+<div class="content-wrapper">
 	<div class="container-contact100">
 		<div class="wrap-contact100">
 			<form class="contact100-form validate-form">
@@ -100,12 +100,12 @@
 						</div>
 
 						<div class="wrap-input100 validate-input bg1" style="padding: 0px 0px 0px 22px;" >
-							<input class="input100" type="text" name="name" placeholder="Tuliskan Jam (03:00, 07:00, 11:00, dst)" style="font-size: 15px;">
+							<input class="input100" type="text" name="name" placeholder="Tuliskan Jam (03:00, 07:00, 11:00, dst)" style="font-size: 15px; top: 1px;">
 						</div>
 					</div>
 
 					<div class="container-contact100-form-btn">
-					<button class="contact100-form-btn">
+					<button class="contact100-form-btn" style="width: 10%;">
 						<span>
 							Simpan
 							<i class="fa fa-file m-l-7" aria-hidden="true"></i>
@@ -115,7 +115,7 @@
 			</form>
 		</div>
 	</div>				
-			
+</div>			
 			
 
 
