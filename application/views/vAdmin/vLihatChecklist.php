@@ -43,12 +43,12 @@
                                 <td><?php echo $checklist['NamaChecklist'] ?></td>
                                 <td><?php echo $checklist['JenisChecklist'] ?></td>
                                 <td>
-                                <a href="<?php echo site_url('admin/infochecklist/1'); ?>">Lihat</a>
+                                <a href="<?php echo site_url('admin/infochecklist/'.$checklist['IDChecklist']); ?>" target="_blank">Lihat</a>
                                 </td>
                                 <td><?php echo $checklist['Jam'] ?></td>
                                 <td>
                                 <form method="POST" action="<?php echo site_url('admin/editchecklist'); ?>">
-                                    <input type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
+                                    <input type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist']; ?>">
                                 <div class="container-btn-edit">
                                     <button class="btn btn-primary">
                                     <span>

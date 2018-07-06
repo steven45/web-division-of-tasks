@@ -33,23 +33,21 @@
 
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form">
+
+			<form class="contact100-form validate-form" method="POST" action="<?php echo base_url('admin/validasieditchecklist'); ?>">
 				<span class="contact100-form-title">
 					Edit Jadwal Checklist
 				</span>
 
-				<?php foreach ($checklist as $checklist ) { ?> 
-				<?php foreach ($checklist as $key) {
-					# code...
-				} ?>
+				<input type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist']; ?>">
 				<div class="wrap-input100 validate-input bg1" data-validate="Masukkan Nama Checklist">
-					<input class="input100" type="text" name="name" placeholder="Nama Checklist" value="<?php echo $checklist['NamaChecklist'] ?>">
+					<input class="input100" type="text" name="NamaChecklist" placeholder="Nama Checklist" value="<?php echo $checklist['NamaChecklist']; ?>">
 				</div>
 
 				<div class="wrap-input100 input100-select bg1">
 					<div>
-						<select class="js-select2" name="service">
-							<option value="" type="tex">Jenis Checklist</option>
+						<select class="js-select2" name="JenisChecklist">
+							<option value="<?php echo $checklist['JenisChecklist']; ?>" type="text"><?php echo $checklist['JenisChecklist']; ?></option>
 							<option value="Checklist PLN">Checklist PLN</option>
 							<option value="Checklist Server PLN">Checklist Server PLN</option>
 							<option value="Checklist ATM B">Chceklist ATM B</option>
@@ -67,8 +65,8 @@
 			
 				<div class="wrap-input100 input100-select bg1">
 					<div>
-						<select class="js-select2" name="service">
-							<option value="" type="tex">Info Checklist</option>
+						<select class="js-select2" name="Info">
+							<option value="<?php echo $checklist['Info']; ?>" type="text"><?php echo $checklist['JenisChecklist']; ?></option>
 							<option value="">Checklist PLN</option>
 							<option value="">Checklist Server PLN</option>
 							<option value="">Chceklist ATM B</option>
@@ -101,10 +99,10 @@
 							</label> 
 						</div>
 						<div class="wrap-input100 validate-input bg1" style="padding: 0px 0px 0px 22px;" >
-							<input class="input100" type="text" name="name" placeholder="Tuliskan Jam (03:00, 07:00, 11:00, dst)" style="font-size: 15px;">
+							<input class="input100" type="text" name="Jam" placeholder="Tuliskan Jam (03:00, 07:00, 11:00, dst)" style="font-size: 15px;" value="<?php echo $checklist['Jam']; ?>">
 						</div>
 					</div>
-					<?php } ?>
+					
 					<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
 						<span>

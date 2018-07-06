@@ -37,7 +37,9 @@ table.excel tbody td {
 </head>
 
 <body>
+  <div class="content-wrapper" style="margin-top: 20px;">
 <?php echo $data->dump(true,true); ?>
+</div>
 </body>
 </html>
 
