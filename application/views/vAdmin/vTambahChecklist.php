@@ -43,23 +43,7 @@
 					<input class="input100" type="text" name="name" placeholder="Nama Checklist">
 				</div>
 
-				<div class="wrap-input100 input100-select bg1">
-					<div>
-						<select class="js-select2" name="service">
-							<option value="" type="tex">Jenis Checklist</option>
-							<option value="Checklist PLN">Checklist PLN</option>
-							<option value="Checklist Server PLN">Checklist Server PLN</option>
-							<option value="Checklist ATM B">Chceklist ATM B</option>
-							<option value="Checklist Tandem">Checklist Tandem</option>
-							<option value="Checklist Bill Payment">Checklist Bill Payment</option>
-							<option value="Checklist Gapura XML">Checklist Gapura XML</option>
-							<option value="Checklist SMS Banking">Checklist SMS Banking</option>
-							<option value="Checklist Reporting Process New">Checklist Reporting Process New</option>
-							<option value="Laporan Kegiatan Rutin">Laporan Kegiatan Rutin</option>
-						</select>
-						<div class="dropDownSelect2"></div>
-					</div>
-				</div>
+			
 
 			
 				<div class="wrap-input100 input100-select bg1">

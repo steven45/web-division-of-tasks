@@ -20,24 +20,27 @@
         
 <div class="container-fluid" style="margin-top: 10px">
             
-        <div style="border: show">
-            <h5>Pilih Tanggal:</h5>
-        <!-- <<?php $tanggal=date()?> -->
-        <input type="date" name="bday" value="<<?php echo $tanggal ?>">
-        </div>
-        
-        <div class="input-append date form_datetime">
-            <input size="16" type="text" value="" readonly>
-            <span class="add-on"><i class="icon-th"></i></span>
-        </div>
- 
+    
+        <h5>Pilih Tanggal:</h5>
 
+ <?php $tanggal=date("20y-d-m"); ?>
+<div class="input-group date" data-provide="datepicker">
+    <input type="date" value="<?php echo $tanggal; ?>">
+    <div class="input-group-addon">
+        <span class="glyphicon glyphicon-th"></span>
+    </div>
+</div>
+
+
+       
+        
+      
              
             
         <div class="row">
-            <div class="panel panel-primary" >
-                    <div class="panel-heading">
-                    <div></div>
+            <div class="panel panel-primary" style="margin-top: 20px" >
+                    <div class="panel-heading" >
+                    
 
                         <h3 class="panel-title" style="text-align: center; font-size: 20px; ">Log</h3>
                         <div class="pull-right">

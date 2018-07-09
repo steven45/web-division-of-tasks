@@ -59,11 +59,14 @@
                                 </div>
                                 </form>
                                 </td>
+                               
                                 <td>
-                                   <button type="button" class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    Hapus
-                                    </button>
+                                    <div class="dropdown" style="font-size: 13px"> 
+                                    <select>
+                                        <option value="" type="tex">Enable</option>
+                                        <option value="Panji Nugroho">Diasable</option>
+                                    </select>
+                                </div>
                                 </td>
                             </tr>
                             <?php } ?>
