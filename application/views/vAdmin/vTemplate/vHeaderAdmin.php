@@ -63,7 +63,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="<?php echo site_url('admin/beranda'); ?>">
             <i class="fa fa-home"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>

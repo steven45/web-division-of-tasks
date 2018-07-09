@@ -30,7 +30,7 @@
 <!--===============================================================================================-->
 </head>
 <body>
-
+ <div class="content-wrapper">
 	<div class="container-contact100">
 		<div class="wrap-contact100">
 
@@ -114,7 +114,7 @@
 			</form>
 		</div>
 	</div>				
-			
+</div>			
 			
 
 
