@@ -31,43 +31,39 @@
 	<div class="container-contact100">
 
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form" method="POST" action="<?php echo site_url('admin/'); ?>">
+			<form class="contact100-form validate-form" method="POST" action="<?php echo site_url('admin/validasieditpic'); ?>">
 				<span class="contact100-form-title">
 					EDIT PIC
 				</span>
-
+					
 				<div class="wrap-input100 validate-input" data-validate="Masukkan Nomor Induk Karyawan">
-					<input class="input100" type="text" name="NIK" placeholder="Nomor Induk Karyawan">
+					<input class="input100" type="text" placeholder="Nomor Induk Karyawan" value="<?php echo $pic['NIK']; ?>" disabled>
+					<input type="hidden" name="NIK" value="<?php echo $pic['NIK']; ?>">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate="Masukkan Nama PIC">
-					<input class="input100" type="text" name="namaPIC" placeholder="Nama PIC">
-					<span class="focus-input100"></span>
-				</div>
-
-				<div class="wrap-input100 validate-input" data-validate = "Masukkan password">
-					<input class="input100" type="text" name="password" placeholder="Password">
+					<input class="input100" type="text" name="NamaPIC" placeholder="Nama PIC" value="<?php echo $pic['NamaPIC']; ?>">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Masukkan Divisi">
-					<input class="input100" type="text" name="divisi" placeholder="Divisi">
+					<input class="input100" type="text" name="Divisi" placeholder="Divisi" value="<?php echo $pic['Divisi']; ?>">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Masukkan Jabatan">
-					<input class="input100" type="text" name="jabatan" placeholder="Jabatan">
+					<input class="input100" type="text" name="Jabatan" placeholder="Jabatan" value="<?php echo $pic['Jabatan']; ?>">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Masukkan Tahun Masuk PIC">
-					<input class="input100" name="tahunMasuk" placeholder="Tahun Masuk PIC">
+					<input class="input100" name="TahunMasuk" placeholder="Tahun Masuk PIC" value="<?php echo $pic['TahunMasuk']; ?>">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Masukkan Jumlah Pengecekan">
-					<input class="input100" name="jmlPengecekan" placeholder="Jumlah Pengecekan">
+					<input class="input100" name="JumlahPengecekan" placeholder="Jumlah Pengecekan" value="<?php echo $pic['JumlahPengecekan']; ?>">
 					<span class="focus-input100"></span>
 				</div>
 

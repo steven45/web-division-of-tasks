@@ -15,7 +15,6 @@
               <tr>
                 <th>NIK</th>
                 <th>Nama PIC</th>
-                <th>Password</th>
                 <th>Divisi</th>
                 <th>Jabatan</th>
                 <th>Tahun Masuk</th>
@@ -25,153 +24,57 @@
               </tr>
             </thead>
             <tbody>
-
-              <tr>
-                <td>1</td>
-                <td>Kilgore</td>
-                <td>Trout</td>
-                <td>kilgore</td>
-                <td>kilgore</td>
-                <td>kilgore</td>
-                <td>kilgore</td>
-                <td>
-
-                  <button type="button" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-pencil"></span>Edit</button>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-danger">
-                      <span class="glyphicon glyphicon-trash"></span>Hapus</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Bob</td>
-                    <td>Loblaw</td>
-                    <td>boblahblah</td>
-                    <td>kilgore</td>
-                    <td>kilgore</td>
-                    <td>kilgore</td>
+            <?php foreach ($pic as $pic) { ?>
+            <?php if ($pic['Status'] == 'Enabled') { ?>
+                <tr>
+                    <td><?php echo $pic['NIK'] ?></td>
+                    <td><?php echo $pic['NamaPIC'] ?></td>
+                    <td><?php echo $pic['Divisi'] ?></td>
+                    <td><?php echo $pic['Jabatan'] ?></td>
+                    <td><?php echo $pic['TahunMasuk'] ?></td>
+                    <td><?php echo $pic['JumlahPengecekan'] ?></td>
                     <td>
+                        <form method="POST" action="<?php echo base_url('admin/editpic'); ?> ">
+                            <input type="hidden" name="NIK" value="<?php echo $pic['NIK'] ?>">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <input type="submit" class="btn btn-primary" value="Edit">
+                        </form>
+                    </td>
 
-                      <button type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-pencil"></span>Edit
-                        </button>
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-danger">
+                    <td>
+                        <form method="POST" action="<?php echo base_url('admin/hapuspic'); ?>">
+
+                        <input type="hidden" name="NIK" value="<?php echo $pic['NIK'];?>">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusModal">
                           <span class="glyphicon glyphicon-trash"></span>Hapus</button>
+
+                        <!-- Hapus Modal -->
+                        <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus PIC??</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">×</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">Jika anda menghapus maka data tidak ditampilkan dalam daftar PIC</div>
+                              <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
+                               
+                                  <input type="submit" name="submit" class="btn btn-danger" value="Hapus">   
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        </form>
                         </td>
-                        </tr>
-                            
-                            <tr>
-                                <td>3</td>
-                                <td>Holden</td>
-                                <td>Caulfield</td>
-                                <td>penceyreject</td>
-                                <td>kilgore</td>
-                                <td>kilgore</td>
-                                <td>kilgore</td>
-                                <td>
-                                <button type="button" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                    Edit
-                                    </button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                        Hapus
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Holden</td>
-                                <td>Caulfield</td>
-                                <td>penceyreject</td>
-                                <td>kilgore</td>
-                                <td>kilgore</td>
-                                <td>kilgore</td>
-                                <td>
-                                <button type="button" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                    Edit
-                                    </button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                        Hapus
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Holden</td>
-                                <td>Caulfield</td>
-                                <td>penceyreject</td>
-                                <td>kilgore</td>
-                                <td>kilgore</td>
-                                <td>kilgore</td>
-                                <td>
-                                <button type="button" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                    Edit
-                                    </button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                        Hapus
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Holden</td>
-                                <td>Caulfield</td>
-                                <td>penceyreject</td>
-                                <td>kilgore</td>
-                                <td>kilgore</td>
-                                <td>kilgore</td>
-                                <td>
-                                <button type="button" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                    Edit
-                                    </button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                        Hapus
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Holden</td>
-                                <td>Caulfield</td>
-                                <td>penceyreject</td>
-                                <td>kilgore</td>
-                                <td>kilgore</td>
-                                <td>kilgore</td>
-                                <td>
-                                <button type="button" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                    Edit
-                                    </button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                        Hapus
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    </tr>
+                <?php } ?>
+                <?php } ?>
+                </tbody>
+            </table>
+        </div>
                 
                 
           </div>
@@ -183,9 +86,9 @@
                 <div class="container-btn-edit" style="text-align: right; margin-right: 35%">
                   <button class="btn btn-dark">
                     <span>
-                  <span class="glyphicon glyphicon-user"></span>Tambah PIC
-                </span>
-              </button>
+                        <span class="glyphicon glyphicon-user"></span>Tambah PIC
+                   </span>
+                  </button>
                 </div>
               </form>
             </td>

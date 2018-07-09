@@ -81,35 +81,46 @@
 					</div>
 				</div>
 
-				
-					<div class="wrap-contact100-form-radio">
-						<span class="label-input100">Jam Pengecekan</span>
-
-						<div class="contact100-form-radio m-t-15">
-							<input class="input-radio100" id="radio1" type="radio" name="type-product" value="physical" checked="checked">
-							<label class="label-radio100" for="radio1">
-								Setiap Jam
-							</label>
-						</div>
-						
-						<div class="contact100-form-radio">
-							<input class="input-radio100" id="radio3" type="radio" name="type-product" value="service">
-							<label class="label-radio100" for="radio3">
-								Lainnya
-							</label> 
-						</div>
-						<div class="wrap-input100 validate-input bg1" style="padding: 0px 0px 0px 22px;" >
-							<input class="input100" type="text" name="Jam" placeholder="Tuliskan Jam (03:00, 07:00, 11:00, dst)" style="font-size: 15px;" value="<?php echo $checklist['Jam']; ?>">
-						</div>
+				<div class="wrap-input100 input100-select bg1">
+					<div>
+						<select class="js-select2" name="Jam">
+							<option value="<?php echo $checklist['Jam']; ?>" type="text"><?php echo $checklist['Jam']; ?></option>
+							<option value="00:00">00:00</option>
+							<option value="01:00">01:00</option>
+							<option value="02:00">02:00</option>
+							<option value="03:00">03:00</option>
+							<option value="04:00">04:00</option>
+							<option value="05:00">05:00</option>
+							<option value="06:00">06:00</option>
+							<option value="07:00">07:00</option>
+							<option value="08:00">08:00</option>
+							<option value="09:00">09:00</option>
+							<option value="10:00">10:00</option>
+							<option value="11:00">11:00</option>
+							<option value="12:00">12:00</option>
+							<option value="13:00">13:00</option>
+							<option value="14:00">14:00</option>
+							<option value="15:00">15:00</option>
+							<option value="16:00">16:00</option>
+							<option value="17:00">17:00</option>
+							<option value="18:00">18:00</option>
+							<option value="19:00">19:00</option>
+							<option value="20:00">20:00</option>
+							<option value="21:00">21:00</option>
+							<option value="22:00">22:00</option>
+							<option value="23:00">23:00</option>
+						</select>
+						<div class="dropDownSelect2"></div>
 					</div>
-					
-					<div class="container-contact100-form-btn">
-					<button class="contact100-form-btn">
-						<span>
-							Simpan
-							<i class="fa fa-file m-l-7" aria-hidden="true"></i>
-						</span>
-					</button>
+				</div>
+				
+				<div class="container-contact100-form-btn">
+				<button class="contact100-form-btn">
+					<span>
+						Simpan
+						<i class="fa fa-file m-l-7" aria-hidden="true"></i>
+					</span>
+				</button>
 				</div>
 			</form>
 		</div>

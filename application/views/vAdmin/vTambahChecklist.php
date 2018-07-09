@@ -34,18 +34,18 @@
 <div class="content-wrapper">
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form">
+			<form class="contact100-form validate-form" method="POST" action="<?php echo site_url('admin/validasitambahchecklist'); ?>">
 				<span class="contact100-form-title">
 					Tambah Jadwal Checklist
 				</span>
 
 				<div class="wrap-input100 validate-input bg1" data-validate="Masukkan Nama Checklist">
-					<input class="input100" type="text" name="name" placeholder="Nama Checklist">
+					<input class="input100" type="text" name="NamaChecklist" placeholder="Nama Checklist">
 				</div>
 
 				<div class="wrap-input100 input100-select bg1">
 					<div>
-						<select class="js-select2" name="service">
+						<select class="js-select2" name="JenisChecklist">
 							<option value="" type="tex">Jenis Checklist</option>
 							<option value="Checklist PLN">Checklist PLN</option>
 							<option value="Checklist Server PLN">Checklist Server PLN</option>
@@ -64,9 +64,9 @@
 			
 				<div class="wrap-input100 input100-select bg1">
 					<div>
-						<select class="js-select2" name="service">
+						<select class="js-select2" name="Info">
 							<option value="" type="tex">Info Checklist</option>
-							<option value="Checklist PLN">Checklist PLN</option>
+							<option value="assets/ceklist/example.xls">Checklist PLN</option>
 							<option value="Checklist Server PLN">Checklist Server PLN</option>
 							<option value="Checklist ATM B">Chceklist ATM B</option>
 							<option value="Checklist Tandem">Checklist Tandem</option>
@@ -85,7 +85,7 @@
 						<span class="label-input100">Jam Pengecekan</span>
 
 						<div class="contact100-form-radio m-t-15">
-							<input class="input-radio100" id="radio1" type="radio" name="type-product" value="physical" checked="checked">
+							<input class="input-radio100" id="radio1" type="radio" name="Jam" value="Setiap Jam" checked="checked">
 							<label class="label-radio100" for="radio1">
 								Setiap Jam
 							</label>
@@ -93,14 +93,14 @@
 
 						
 						<div class="contact100-form-radio">
-							<input class="input-radio100" id="radio3" type="radio" name="type-product" value="service">
-							<label class="label-radio100" for="radio3">
+							<input class="input-radio100" id="radio2" type="radio" name="Jam" value="Lainnya">
+							<label class="label-radio100" for="radio2">
 								Lainnya
 							</label>
 						</div>
 
-						<div class="wrap-input100 validate-input bg1" style="padding: 0px 0px 0px 22px;" >
-							<input class="input100" type="text" name="name" placeholder="Tuliskan Jam (03:00, 07:00, 11:00, dst)" style="font-size: 15px;">
+						<div class="wrap-input100 bg1" style="padding: 0px 0px 0px 22px;" >
+							<input class="input100" type="text" name="Jam1" placeholder="Tuliskan Jam (03:00, 07:00, 11:00, dst)" style="font-size: 15px;">
 						</div>
 					</div>
 

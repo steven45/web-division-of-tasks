@@ -78,7 +78,7 @@
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="PIC">
-          <a class="nav-link" href="<?php echo site_url('admin/tambahpic'); ?>">
+          <a class="nav-link" href="<?php echo site_url('admin/pic'); ?>">
             <i class="fa fa-users"></i>
             <span class="nav-link-text">PIC</span>
           </a>
