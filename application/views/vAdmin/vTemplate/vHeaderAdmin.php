@@ -16,13 +16,13 @@
 
   <link href="<?php echo base_url('assets/home/vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
   <!-- Custom fonts for this template-->
-  <link href="<?php echo base_url('assets/home/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css'); ?>">
+  <link href="<?php echo base_url('assets/home/vendor/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet" type="text/css'); ?>">
   <!-- Page level plugin CSS-->
   <link href="<?php echo base_url('assets/home/vendor/datatables/dataTables.bootstrap4.css'); ?>" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url('assets/home/css/sb-admin.css'); ?>" rel="stylesheet">
 
-  
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
 
 
@@ -50,9 +50,6 @@
 <!-- penutup css sarah -->
 
 
-
-
-
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -66,7 +63,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="<?php echo site_url('admin/beranda'); ?>">
             <i class="fa fa-home"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>

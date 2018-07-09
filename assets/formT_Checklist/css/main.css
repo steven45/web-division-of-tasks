@@ -207,7 +207,7 @@ iframe {
   display: block;
   width: 100%;
   font-family: Montserrat-Black;
-  font-size: 35px;
+  font-size: 30px;
   color: #495057;
   line-height: 1.2;
   text-align: center;
@@ -223,7 +223,7 @@ iframe {
   width: 100%;
   position: relative;
   border: 1px solid #e6e6e6;
-  border-radius: 13px;
+  border-radius: 30px;
   padding: 10px 30px 9px 22px;
   margin-bottom: 20px;
 }
@@ -254,6 +254,7 @@ iframe {
 /*---------------------------------------------*/
 input.input100 {
   height: 40px;
+  padding: 0 2px 0 2px;
 }
 
 
@@ -387,7 +388,7 @@ textarea.input100 {
 .btn-hide-validate {
   font-family: Material-Design-Iconic-Font;
   font-size: 18px;
-  color: #fa4251;
+  color: #f7f7f7;
   cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
@@ -422,7 +423,7 @@ textarea.input100 {
   position: absolute;
   width: 40px;
   height: 40px;
-  top: 35px;
+  top: 12px;
   right: 10px;
 }
 

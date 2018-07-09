@@ -30,7 +30,7 @@
 <!--===============================================================================================-->
 </head>
 <body>
-
+ <div class="content-wrapper">
 	<div class="container-contact100">
 		<div class="wrap-contact100">
 
@@ -80,7 +80,6 @@
 						<div class="dropDownSelect2"></div>
 					</div>
 				</div>
-
 				<div class="wrap-input100 input100-select bg1">
 					<div>
 						<select class="js-select2" name="Jam">
@@ -125,7 +124,7 @@
 			</form>
 		</div>
 	</div>				
-			
+</div>			
 			
 
 

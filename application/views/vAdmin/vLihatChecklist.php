@@ -1,6 +1,6 @@
 <head>
 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
@@ -106,7 +106,7 @@
     <td>
     <form method="POST" action="<?php echo site_url('admin/tambahchecklist'); ?>">
     <div class="container-btn-edit" style="text-align: right; margin-right: 35%">
-        <button class="btn btn-primary" style="background-color: #999; border-color: #777;">
+    <button class="btn btn-primary" style="background-color: #999; border-color: #777; >
         <span>
         <span class="glyphicon glyphicon-person"></span>
             <span class="glyphicon glyphicon-plus"></span>

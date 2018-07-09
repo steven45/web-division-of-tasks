@@ -18,7 +18,7 @@
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Masukkan password">
-					<input class="input100" type="text" name="Password" placeholder="Password">
+					<input class="input100" type="password" name="Password" placeholder="Password">
 					<span class="focus-input100"></span>
 				</div>
 

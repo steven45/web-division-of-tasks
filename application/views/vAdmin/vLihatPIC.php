@@ -1,3 +1,4 @@
+<body>
 <div class="content-wrapper">
   <div class="container-fluid">
 
@@ -94,6 +95,6 @@
             </td>
 
           </div>
-      <td>
-    
+</div>
+    </body>
         
