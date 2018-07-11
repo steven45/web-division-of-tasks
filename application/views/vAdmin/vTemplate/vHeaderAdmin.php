@@ -16,7 +16,7 @@
   <!-- Header -->
     <div class="ui top fixed inverted pointing menu">
       <div class="header item">
-        <img class="ui avatar image" src="img/Artajasa.png">
+        <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
         Artajasa
       </div>
       <a class="item"">
