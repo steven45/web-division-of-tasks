@@ -12,17 +12,26 @@
 
       <div class="ui divider"></div>
 
-<table class="ui compact celled definition grey inverted table">
+<table class="ui sortable compact celled definition grey inverted table">
   <thead class="full-width" style="text-align: center; background-color: #35373c">
     <tr>
-      <th>NIK</th>
-      <th>Nama PIC</th>
-      <th>Divisi</th>
-      <th>Jabatan</th>
-      <th>Tahun Masuk</th>
-      <th>Jumlah Pengecekan</th>
+      <th class="sorted ascending">NIK</th>
+      <th class="">Nama PIC</th>
+      <th class="">Divisi</th>
+      <th class="">Jabatan</th>
+      <th class="">Tahun Masuk</th>
+      <th class="">Jumlah Pengecekan</th>
       <th>Edit</th>
-      <th>Status</th>
+      <th>
+        <a class="ui simple dropdown item" style="color: white;">
+        Status
+          <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item">Enable</div>
+              <div class="item">Disable</div>
+            </div>
+        </a>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -58,6 +67,7 @@
               <option value="<?php echo $pic['Status']; ?>"><?php echo $pic['Status']; ?></option>
               <option value="Enabled">Enabled</option>
             <?php } ?>
+
           </select>
       </td>
     </tr>
