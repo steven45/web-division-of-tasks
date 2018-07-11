@@ -11,7 +11,7 @@
   <form class="ui form">
     <div class="field">
       <label>Nama Checklist</label>
-      <input type="text" name="NIK" placeholder="Nama Checklist">
+      <input type="text" name="NamaChecklist" placeholder="Nama Checklist">
     </div>
     <div class="grouped fields">
     <label for="fruit">Jam Pengecekan:</label>
@@ -34,7 +34,7 @@
 
     <div class="ui small field" >
     <label>Info Checklist</label>
-    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="file" name="In" id="fileToUpload">
     
   </div>
   <div class="ui center aligned basic segment">

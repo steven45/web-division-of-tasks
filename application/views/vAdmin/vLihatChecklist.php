@@ -41,6 +41,7 @@
   <tfoot>
     <tr> <th colspan="6">
     <form method="POST" action="<?php echo site_url('admin/tambahchecklist'); ?>">
+      <div class="ui right aligned basic segment">
       <button class="ui labeled icon button">
       <i class="plus icon"></i>
         Tambah Checklist
@@ -48,5 +49,6 @@
     </th>
   </tr></tfoot>
 </table>
+
 
     
