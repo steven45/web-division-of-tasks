@@ -62,41 +62,42 @@ class cAdmin extends CI_Controller {
 
 	public function validasiTambahPIC()
 	{
-			$NIK = $this->input->post('NIK');
-			$namaPIC = $this->input->post('NamaPIC');
-			$password = $this->input->post('Password');
-			$divisi = $this->input->post('Divisi');
-			$jabatan = $this->input->post('Jabatan');
-			$tahunMasuk = $this->input->post('TahunMasuk');
-			$jumlahPengecekan = $this->input->post('JumlahPengecekan');
+		$NIK = $this->input->post('NIK');
+		$namaPIC = $this->input->post('NamaPIC');
+		$password = $this->input->post('Password');
+		$divisi = $this->input->post('Divisi');
+		$jabatan = $this->input->post('Jabatan');
+		$tahunMasuk = $this->input->post('TahunMasuk');
+		$jumlahPengecekan = $this->input->post('JumlahPengecekan');
 
-			$data = array(
-				'NIK' => $NIK,
-				'NamaPIC' => $namaPIC,
-				'Divisi' => $divisi,
-				'Password' => md5($password),
-				'Jabatan' => $jabatan,
-				'TahunMasuk' => $tahunMasuk,
-				'JumlahPengecekan' => $jumlahPengecekan
-			);
+		$data = array(
+			'NIK' => $NIK,
+			'NamaPIC' => $namaPIC,
+			'Divisi' => $divisi,
+			'Password' => md5($password),
+			'Jabatan' => $jabatan,
+			'TahunMasuk' => $tahunMasuk,
+			'JumlahPengecekan' => $jumlahPengecekan,
+			'Status' => 'Enabled'
+		);
 
-			$query = $this->mAdmin->tambahPIC('pic', $data, $NIK);
+		$query = $this->mAdmin->tambahPIC('pic', $data, $NIK);
 
-			if ($query == 1) 
-			{
-				echo "<script type='text/javascript'>
-						alert('Sukses Menambahkan PIC');
-						window.location.href = '" . base_url() . "admin/beranda';
-					</script>";
-			}
-			else
-			{
-				echo "<script type='text/javascript'>
+		if ($query == 1) 
+		{
+			echo "<script type='text/javascript'>
+					alert('Sukses Menambahkan PIC');
+					window.location.href = '" . base_url() . "admin/pic';
+				</script>";
+		}
+		else
+		{
+			echo "<script type='text/javascript'>
 
-						alert('NIK PIC Sudah Ada !!!');
-						window.location.href = '" . base_url() . "admin/tambahpic';
-					</script>";
-			}
+					alert('NIK PIC Sudah Ada !!!');
+					window.location.href = '" . base_url() . "admin/tambahpic';
+				</script>";
+		}
 	}
 
 	public function tambahPIC()
@@ -121,44 +122,49 @@ class cAdmin extends CI_Controller {
 		$data['judul'] = "Edit PIC";
 		$NIK = $this->input->post('NIK');
 		$data['pic'] = $this->mAdmin->getPIC($NIK);
-		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
-		$this->load->view('vAdmin/vEditPIC');
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		$this->load->view('vAdmin/vEditPIC', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
 	public function validasiEditPIC()
 	{
-		if (isset($_POST['submit'])) 
-		{
-			$NIK = $this->input->post('NIK');
-			$namaPIC = $this->input->post('NamaPIC');
-			$password = $this->input->post('Password');
-			$divisi = $this->input->post('Divisi');
-			$jabatan = $this->input->post('Jabatan');
-			$tahunMasuk = $this->input->post('TahunMasuk');
-			$jumlahPengecekan = $this->input->post('JumlahPengecekan');
+		$NIK = $this->input->post('NIK');
+		$namaPIC = $this->input->post('NamaPIC');
+		$password = $this->input->post('Password');
+		$divisi = $this->input->post('Divisi');
+		$jabatan = $this->input->post('Jabatan');
+		$tahunMasuk = $this->input->post('TahunMasuk');
+		$jumlahPengecekan = $this->input->post('JumlahPengecekan');
 
-			$data = array(
-				'NamaPIC' => $namaPIC,
-				'Divisi' => $divisi,
-				'Password' => md5($password),
-				'Jabatan' => $jabatan,
-				'TahunMasuk' => $tahunMasuk,
-				'JumlahPengecekan' => $jumlahPengecekan
-			);
+		$data = array(
+			'NIK' => $NIK,
+			'NamaPIC' => $namaPIC,
+			'Divisi' => $divisi,
+			'Password' => md5($password),
+			'Jabatan' => $jabatan,
+			'TahunMasuk' => $tahunMasuk,
+			'JumlahPengecekan' => $jumlahPengecekan
+		);
 
-			$data['pic'] = $this->mAdmin->editPIC('pic', $data, $NIK);
+		$data['pic'] = $this->mAdmin->editPIC('pic', $data, $NIK);
 
-			echo "<script type='text/javascript'>
-						alert('Sukses Mengedit PIC');
-						window.location.href = '" . base_url() . "admin/lihatPIC';
-					</script>";
-		}
+		echo "<script type='text/javascript'>
+					alert('Sukses Mengedit PIC');
+					window.location.href = '" . base_url() . "admin/pic';
+				</script>";
 	}
 
 	public function hapusPIC()
 	{
-
+		$NIK = $this->input->post('NIK');
+		$data = array(
+			'Status' => 'Disabled'
+		);
+		$this->mAdmin->hapusPIC('pic', $data, $NIK);	
+		echo "<script type='text/javascript'>
+					window.location.href = '" . base_url() . "admin/pic';
+				</script>";
 	}
 
 	public function tambahChecklist()
@@ -169,16 +175,97 @@ class cAdmin extends CI_Controller {
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
+	public function validasiTambahChecklist()
+	{
+		$jenisChecklist = $this->input->post('JenisChecklist');
+		$info = $this->input->post('Info');
+		$namaChecklist = $this->input->post('NamaChecklist');
+		$jam = $this->input->post('Jam');
+		$jam1 = $this->input->post('Jam1');
+		if ($jam == "Setiap Jam") {
+			for ($i=0; $i < 24 ; $i++) { 
+				if ($i < 10) {
+					$nJam = "0".$i.":00";
+				}
+				else{
+					$nJam = $i.":00";
+				}
+				$data = array(
+				'JenisChecklist' => $jenisChecklist,
+				'Info' => $info,
+				'NamaChecklist' => $namaChecklist,
+				'Jam' => $nJam,
+				'Status' => 'Enabled'
+				);
+				$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, $i);
+				$hasilJam[$i] = $hasil;
+				
+			}
+		}
+		elseif ($jam == "Lainnya") {
+			if ($jam1 == "") {
+				echo "<script type='text/javascript'>
+					alert('Jika memilih lainnya maka jam harus diisi.');
+					window.location.href = '" . base_url() . "admin/tambahchecklist';
+				</script>";
+			}
+			else{
+				$nJam = str_replace(",","",$jam1);
+				$nJam = explode(" ",$nJam);
+				for ($i=0; $i < count($nJam); $i++) { 
+					$data = array(
+					'JenisChecklist' => $jenisChecklist,
+					'Info' => $info,
+					'NamaChecklist' => $namaChecklist,
+					'Jam' => $nJam[$i],
+					'Status' => 'Enabled'
+					);
+					$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, substr($nJam[$i], 0,2));
+					$hasilJam[$i] = $hasil;
+				}
+			}
+		}
+		$tampil1 = "";
+		$tampil2 = "";
+		for ($i=0; $i < count($hasilJam); $i++) { 
+			if (substr($hasilJam[$i], 0,1) == "_") {
+				$tampil1= $tampil1." ".str_replace("_","",$hasilJam[$i]); 
+			}
+			else{
+				$tampil2 = $tampil2." ".$hasilJam[$i];
+			}
+		}
+
+		if ($tampil1 == "") {
+			echo "<script type='text/javascript'>
+				alert('Jam $tampil2 sudah ada.');
+				window.location.href = '" . base_url() . "admin/checklist';
+			</script>";
+		}
+		elseif ($tampil2 == "") {
+			echo "<script type='text/javascript'>
+				alert('Jam $tampil1 sukses ditambahkan.');
+				window.location.href = '" . base_url() . "admin/checklist';
+			</script>";
+		}
+		else{
+			echo "<script type='text/javascript'>
+				alert('Jam $tampil2 sudah ada. Jam $tampil1 sukses ditambahkan');
+				window.location.href = '" . base_url() . "admin/checklist';
+			</script>";
+		}
+	}
+
 	public function lihatChecklist()
 	{
 		$data['judul'] = "Lihat Checklist";
-		$data['checklist'] = $this->mAdmin->getChecklist();
+		$data['checklist']= $this->mAdmin->getChecklist();
+
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vLihatChecklist', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
-	//BELUM SELESAI BACKEND NYA --> VRIZA
 	public function editChecklist()
 	{
 		$IDChecklist = $this->input->post('IDChecklist');
@@ -192,25 +279,33 @@ class cAdmin extends CI_Controller {
 
 	public function validasiEditChecklist()
 	{
-			$IDChecklist = $this->input->post('IDChecklist');
-			$jenisChecklist = $this->input->post('JenisChecklist');
-			$info = $this->input->post('Info');
-			$namaChecklist = $this->input->post('NamaChecklist');
-			$jam = $this->input->post('Jam');
+		$IDChecklist = $this->input->post('IDChecklist');
+		$jenisChecklist = $this->input->post('JenisChecklist');
+		$info = $this->input->post('Info');
+		$namaChecklist = $this->input->post('NamaChecklist');
+		$jam = $this->input->post('Jam');
 
-			$data = array(
-				'JenisChecklist' => $jenisChecklist,
-				'Info' => $info,
-				'NamaChecklist' => $namaChecklist,
-				'Jam' => $jam
-			);
-			
-			$data['pic'] = $this->mAdmin->editChecklist('checklist', $data, $IDChecklist);
+		$data = array(
+			'JenisChecklist' => $jenisChecklist,
+			'Info' => $info,
+			'NamaChecklist' => $namaChecklist,
+			'Jam' => $jam
+		);
 
+		$data= $this->mAdmin->editChecklist('checklist', $data, $IDChecklist, $namaChecklist, $jam);
+		if ($data == 1) {
 			echo "<script type='text/javascript'>
-						alert('Sukses Mengedit Checklist');
-						window.location.href = '" . base_url() . "admin/checklist';
-					</script>";
+					alert('Sukses Mengedit Checklist');
+					window.location.href = '" . base_url() . "admin/checklist';
+				</script>";
+		}
+		else{
+			echo "<script type='text/javascript'>
+					alert('Jam $jam sudah ada');
+					window.location.href = '" . base_url() . "admin/checklist';
+				</script>";
+		}
+		
 	}
 
 	public function lihatInfoChecklist($IDChecklist)
@@ -225,6 +320,96 @@ class cAdmin extends CI_Controller {
 
 	public function hapusChecklist()
 	{
-		
+		$IDChecklist = $this->input->post('IDChecklist');
+		$data = array(
+			'Status' => 'Disabled'
+		);
+		$this->mAdmin->hapusChecklist('checklist', $data, $IDChecklist);	
+		echo "<script type='text/javascript'>
+					window.location.href = '" . base_url() . "admin/checklist';
+				</script>";
+	}
+
+	public function lihatAbsensi()
+	{
+		$data['judul'] = "Lihat Absensi";
+		$data['absensi']= $this->mAdmin->getAbsensi();
+
+		var_dump($data);
+		// $this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		// $this->load->view('vAdmin/vLihatAbsensi', $data);
+		// $this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
+	public function tambahAbsensi()
+	{
+		$data['judul'] = "Tambah Absensi";
+		$data['pic'] = $this->mAdmin->getPIC();
+		$data['jadwal'] = $this->mAdmin->getJadwal();
+
+		var_dump($data);
+		// $this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		// $this->load->view('vAdmin/vLihatAbsensi', $data);
+		// $this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
+	public function validasiTambahAbsensi()
+	{
+		$NIK = $this->input->post('NIK');
+		$IDJadwal = $this->input->post('IDJadwal');
+		$hari = $this->input->post('Hari');
+		$kehadiran = $this->input->post('Kehadiran');
+
+		$data = array(
+			'NIK' => $NIK,
+			'IDJadwal' => $IDJadwal,
+			'Hari' => $hari,
+			'kehadiran' => $kehadiran
+		);
+
+		$query = $this->mAdmin->tambahAbsensi('harian', $data, $NIK, $IDJadwal, $hari);
+
+		var_dump($query);
+		// if ($query == 1) 
+		// {
+		// 	echo "<script type='text/javascript'>
+		// 			alert('Sukses Menambahkan Absensi');
+		// 			window.location.href = '" . base_url() . "admin/pic';
+		// 		</script>";
+		// }
+		// else
+		// {
+		// 	echo "<script type='text/javascript'>
+
+		// 			alert('Absensi sudah ada!!! ');
+		// 			window.location.href = '" . base_url() . "admin/tambahpic';
+		// 		</script>";
+		// }
+	}
+
+	public function hapusAbsensi()
+	{
+		$IDHarian = $this->input->post('IDHarian');
+		$this->mAdmin->hapusAbsensi('harian', $IDHarian);
+	}
+
+	public function editAbsensi()
+	{
+		$IDHarian = $this->input->post('IDHarian');
+		$data['absensi']= $this->mAdmin->getAbsensi($IDHarian);
+		var_dump($data);
+	}
+
+	public function validasiEditAbsensi()
+	{
+		$IDHarian = $this->input->post('IDHarian');
+		$NIK = $this->input->post('NIK');
+		$IDJadwal = $this->input->post('IDJadwal');
+
+		$data = array(
+			'IDJadwal' => $IDJadwal
+		);
+
+		$query = $this->mAdmin->editAbsensi('harian',$IDHarian, $data, $NIK, $IDJadwal);
 	}
 }
