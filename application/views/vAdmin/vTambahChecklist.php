@@ -1,8 +1,3 @@
-<html><head>
-  <title>Tambah Checklist</title>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
-</head>
-<body style="margin: 30px">
 
 <div class="ui two column centered grid">
 <div class="column">
@@ -47,11 +42,9 @@
       <i class="plus icon"></i>
     Tambah
   </button>
+	</div>
   </form>
 </div>
 </div>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
-
-</body></html>
+</div>
