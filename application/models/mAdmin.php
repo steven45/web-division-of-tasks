@@ -48,7 +48,7 @@ class mAdmin extends CI_Model
         $this->db->update($table, $data);
     }
 
-    public function hapusPIC($table, $data, $NIK)
+    public function hapusPIC($table, $NIK, $data)
     {
         $this->db->where('NIK', $NIK);
         $this->db->update($table, $data);
