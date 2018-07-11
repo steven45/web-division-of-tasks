@@ -39,8 +39,7 @@
         </a>
       </td>
       <td>
-          <select name="status" class="ui search selection tiny dropdown">
-            <option value="null"></option>
+          <select name="status" class="ui search selection tiny dropdown" style="min-width: 10em;">
             <option value="0">Enable</option>
             <option value="1">Disable</option>
           </select>
@@ -59,8 +58,7 @@
         </div>
       </td>
       <td>
-          <select name="status" class="ui search selection tiny dropdown">
-            <option value="null"></option>
+          <select name="status" class="ui search selection tiny dropdown" style="min-width: 10em;">
             <option value="0">Enable</option>
             <option value="1">Disable</option>
           </select>
@@ -79,8 +77,7 @@
         </div>
       </td>
       <td>
-          <select name="status" class="ui search selection tiny dropdown">
-            <option value="null"></option>
+          <select name="status" class="ui search selection tiny dropdown" style="min-width: 10em;">
             <option value="0">Enable</option>
             <option value="1">Disable</option>
           </select>
@@ -99,8 +96,7 @@
         </div>
       </td>
       <td>
-          <select name="status" class="ui search selection tiny dropdown">
-            <option value="null"></option>
+          <select name="status" class="ui search selection tiny dropdown" style="min-width: 10em;">
             <option value="0">Enable</option>
             <option value="1">Disable</option>
           </select>
@@ -119,8 +115,7 @@
         </div>
       </td>
       <td>
-          <select name="status" class="ui search selection tiny dropdown">
-            <option value="null"></option>
+          <select name="status" class="ui search selection tiny dropdown" style="min-width: 10em;">
             <option value="0">Enable</option>
             <option value="1">Disable</option>
           </select>
@@ -139,8 +134,7 @@
         </div>
       </td>
       <td>
-          <select name="status" class="ui search selection tiny dropdown">
-            <option value="null"></option>
+          <select name="status" class="ui search selection tiny dropdown" style="min-width: 10em;">
             <option value="0">Enable</option>
             <option value="1">Disable</option>
           </select>
@@ -159,8 +153,7 @@
         </div>
       </td>
       <td>
-          <select name="status" class="ui search selection tiny dropdown">
-            <option value="null"></option>
+          <select name="status" class="ui search selection tiny dropdown" style="min-width: 10em;">
             <option value="0">Enable</option>
             <option value="1">Disable</option>
           </select>
@@ -179,7 +172,7 @@
         </div>
       </td>
       <td>
-          <select name="status" class="ui selection tiny dropdown">
+          <select name="status" class="ui selection tiny dropdown" style="min-width: 10em;">
             <option value="0">Enable</option>
             <option value="1">Disable</option>
           </select>
