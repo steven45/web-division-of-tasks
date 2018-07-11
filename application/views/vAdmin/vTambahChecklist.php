@@ -34,7 +34,7 @@
 <div class="content-wrapper">
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form" method="POST" action="<?php echo site_url('admin/validasitambahchecklist'); ?>">
+			<form class="contact100-form validate-form" method="POST" action="<?php echo site_url('admin/validasitambahchecklist'); ?>" enctype="multipart/form-data">
 				<span class="contact100-form-title">
 					Tambah Jadwal Checklist
 				</span>
@@ -42,27 +42,8 @@
 				<div class="wrap-input100 validate-input bg1" data-validate="Masukkan Nama Checklist">
 					<input class="input100" type="text" name="NamaChecklist" placeholder="Nama Checklist">
 				</div>
-
-				<div class="wrap-input100 input100-select bg1">
-					<div>
-						<select class="js-select2" name="JenisChecklist">
-							<option value="" type="tex">Jenis Checklist</option>
-							<option value="Checklist PLN">Checklist PLN</option>
-							<option value="Checklist Server PLN">Checklist Server PLN</option>
-							<option value="Checklist ATM B">Chceklist ATM B</option>
-							<option value="Checklist Tandem">Checklist Tandem</option>
-							<option value="Checklist Bill Payment">Checklist Bill Payment</option>
-							<option value="Checklist Gapura XML">Checklist Gapura XML</option>
-							<option value="Checklist SMS Banking">Checklist SMS Banking</option>
-							<option value="Checklist Reporting Process New">Checklist Reporting Process New</option>
-							<option value="Laporan Kegiatan Rutin">Laporan Kegiatan Rutin</option>
-						</select>
-						<div class="dropDownSelect2"></div>
-					</div>
-				</div>
-
 			
-				<div class="wrap-input100 input100-select bg1">
+			<!-- 	<div class="wrap-input100 input100-select bg1">
 					<div>
 						<select class="js-select2" name="Info">
 							<option value="" type="tex">Info Checklist</option>
@@ -78,9 +59,8 @@
 						</select>
 						<div class="dropDownSelect2"></div>
 					</div>
-				</div>
+				</div> -->
 
-				
 					<div class="wrap-contact100-form-radio">
 						<span class="label-input100">Jam Pengecekan</span>
 
@@ -97,14 +77,15 @@
 							<label class="label-radio100" for="radio2">
 								Lainnya
 							</label>
-							<div class="wrap-input100 validate-input bg1" style="padding: 0px 0px 0px 22px;" >
-								<input class="input100" type="text" name="name" placeholder="Tuliskan Jam (03:00, 07:00, 11:00, dst)" style="font-size: 15px; top: 1px;">
-							</div>
 						</div>
 
 						<div class="wrap-input100 bg1" style="padding: 0px 0px 0px 22px;" >
 							<input class="input100" type="text" name="Jam1" placeholder="Tuliskan Jam (03:00, 07:00, 11:00, dst)" style="font-size: 15px;">
 						</div>
+					</div>
+
+					<div class="wrap-input100 ">
+						<input class="input100" type="file" name="Info" placeholder="Masukkan info">
 					</div>
 
 					<div class="container-contact100-form-btn">
