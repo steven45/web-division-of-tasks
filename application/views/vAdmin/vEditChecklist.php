@@ -46,42 +46,6 @@
 
 				<div class="wrap-input100 input100-select bg1">
 					<div>
-						<select class="js-select2" name="JenisChecklist">
-							<option value="<?php echo $checklist['JenisChecklist']; ?>" type="text"><?php echo $checklist['JenisChecklist']; ?></option>
-							<option value="Checklist PLN">Checklist PLN</option>
-							<option value="Checklist Server PLN">Checklist Server PLN</option>
-							<option value="Checklist ATM B">Chceklist ATM B</option>
-							<option value="Checklist Tandem">Checklist Tandem</option>
-							<option value="Checklist Bill Payment">Checklist Bill Payment</option>
-							<option value="Checklist Gapura XML">Checklist Gapura XML</option>
-							<option value="Checklist SMS Banking">Checklist SMS Banking</option>
-							<option value="Checklist Reporting Process New">Checklist Reporting Process New</option>
-							<option value="Laporan Kegiatan Rutin">Laporan Kegiatan Rutin</option>
-						</select>
-						<div class="dropDownSelect2"></div>
-					</div>
-				</div>
-
-			
-				<div class="wrap-input100 input100-select bg1">
-					<div>
-						<select class="js-select2" name="Info">
-							<option value="<?php echo $checklist['Info']; ?>" type="text"><?php echo $checklist['JenisChecklist']; ?></option>
-							<option value="">Checklist PLN</option>
-							<option value="">Checklist Server PLN</option>
-							<option value="">Chceklist ATM B</option>
-							<option value="">Checklist Tandem</option>
-							<option value="">Checklist Bill Payment</option>
-							<option value="">Checklist Gapura XML</option>
-							<option value="">Checklist SMS Banking</option>
-							<option value="">Checklist Reporting Process New</option>
-							<option value="">Laporan Kegiatan Rutin</option>
-						</select>
-						<div class="dropDownSelect2"></div>
-					</div>
-				</div>
-				<div class="wrap-input100 input100-select bg1">
-					<div>
 						<select class="js-select2" name="Jam">
 							<option value="<?php echo $checklist['Jam']; ?>" type="text"><?php echo $checklist['Jam']; ?></option>
 							<option value="00:00">00:00</option>
@@ -113,6 +77,7 @@
 					</div>
 				</div>
 				
+				<input type="file" name="Info">
 				<div class="container-contact100-form-btn">
 				<button class="contact100-form-btn">
 					<span>

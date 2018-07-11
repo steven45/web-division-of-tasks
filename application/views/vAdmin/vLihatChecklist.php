@@ -43,7 +43,6 @@
                             <tr>
                                 <td><?php echo $checklist['IDChecklist'] ?></td>
                                 <td><?php echo $checklist['NamaChecklist'] ?></td>
-                                <td><?php echo $checklist['JenisChecklist'] ?></td>
                                 <td>
                                 <a href="<?php echo site_url('admin/infochecklist/'.$checklist['IDChecklist']); ?>" target="_blank">Lihat</a>
                                 </td>
