@@ -1,56 +1,58 @@
-	  <div class="content-wrapper">
-	<div class="container-contact100">
+<div class="ui two column centered grid">
+<div class="column">
+	<div class="ui segment" style="border-radius: 1.285714rem">
+		<h3 style="text-align: center;">
+			<div class="ui icon">
+	  		<i class="user icon"></i>
+			Tambah PIC</div></h3>
+			<div class="ui divider"></div>
 
-		<div class="wrap-contact100">
-			<form class="contact100-form validate-form" method="POST" action="<?php echo site_url('admin/validasitambahpic'); ?>">
-				<span class="contact100-form-title">
-					TAMBAH PIC
-				</span>
-
-				<div class="wrap-input100 validate-input" data-validate="Masukkan Nomor Induk Karyawan">
-					<input class="input100" type="text" name="NIK" placeholder="Nomor Induk Karyawan">
-					<span class="focus-input100"></span>
-				</div>
-
-				<div class="wrap-input100 validate-input" data-validate="Masukkan Nama PIC">
-					<input class="input100" type="text" name="NamaPIC" placeholder="Nama PIC">
-					<span class="focus-input100"></span>
-				</div>
-
-				<div class="wrap-input100 validate-input" data-validate = "Masukkan password">
-					<input class="input100" type="password" name="Password" placeholder="Password">
-					<span class="focus-input100"></span>
-				</div>
-
-				<div class="wrap-input100 validate-input" data-validate = "Masukkan Divisi">
-					<input class="input100" type="text" name="Divisi" placeholder="Divisi">
-					<span class="focus-input100"></span>
-				</div>
-
-				<div class="wrap-input100 validate-input" data-validate = "Masukkan Jabatan">
-					<input class="input100" type="text" name="Jabatan" placeholder="Jabatan">
-					<span class="focus-input100"></span>
-				</div>
-
-				<div class="wrap-input100 validate-input" data-validate = "Masukkan Tahun Masuk PIC">
-					<input class="input100" name="TahunMasuk" placeholder="Tahun Masuk PIC">
-					<span class="focus-input100"></span>
-				</div>
-
-				<div class="wrap-input100 validate-input" data-validate = "Masukkan Jumlah Pengecekan">
-					<input class="input100" name="JumlahPengecekan" placeholder="Jumlah Pengecekan">
-					<span class="focus-input100"></span>
-				</div>
-
-				<div class="container-contact100-form-btn">
-					<button class="contact100-form-btn">
-						<span>
-							<i class="fa fa-plus-square" aria-hidden="true"></i>
-							Tambah
-						</span>
-					</button>
-				</div>
-			</form>
+		<form class="ui form">
+		  <div class="field">
+		    <label>Nomor Induk Karyawan</label>
+		    <input type="text" name="NIK" placeholder="Nomor Induk Karyawan">
+		  </div>
+		  <div class="field">
+		    <label>Nama PIC</label>
+		    <input type="text" name="NamaPIC" placeholder="Nama PIC">
+		  </div>
+		  <div class="field">
+		    <label>Password</label>
+		    <input type="password" name="Password" placeholder="Password">
+		  </div>
+		  <div class="field">
+		    <label>Divisi</label>
+		    <input type="text" name="Divisi" placeholder="Divisi">
 		</div>
-	</div>
+		    <div class="field">
+		    <label>Jabatan</label>
+		    <input type="text" name="Jabatan" placeholder="Jabatan">
+		  </div>
+		  <div class="field">
+		    <label>Tahun Masuk PIC</label>
+		    <input type="text" name="TahunMasuk" placeholder="Tahun Masuk PIC">
+		  </div>
+		  
+	
+		<div class="ui center aligned basic segment">
+		  <div class="ui right vertical blue button" tabindex="0">
+		  	<i class="plus icon"></i>
+			  Tambah
+			</div>
+			</div>
+		</form>
+
+
 </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+

@@ -60,7 +60,16 @@
                                 </div>
                                 </form>
                                 </td>
+                               
                                 <td>
+
+                                    <div class="dropdown" style="font-size: 13px"> 
+                                    <select>
+                                        <option value="" type="tex">Enable</option>
+                                        <option value="Panji Nugroho">Diasable</option>
+                                    </select>
+                                </div>
+
                                      <form method="POST" action="<?php echo base_url('admin/hapuschecklist'); ?>">
 
                                         <input type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist']; ?>">
@@ -90,6 +99,7 @@
                                         </div>
     
                                      </form>
+
                                 </td>
                             </tr>
                             <?php } ?>
