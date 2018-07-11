@@ -46,7 +46,10 @@ class cAdmin extends CI_Controller {
 
 	public function beranda()
 	{
-		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+
+		$data['judul'] = "Beranda Admin";
+		$data['active'] = "active";
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vBerandaAdmin');	
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
