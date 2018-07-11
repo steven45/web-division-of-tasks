@@ -27,8 +27,7 @@
       <td>bodat</td>
       <td>ITO</td>
       <td>
-          <select name="kehadiran" class="ui search selection tiny dropdown">
-            <option value="null"></option>
+          <select name="kehadiran" class="ui search selection tiny dropdown" style="min-width: 10cm">
             <option value="0">Hadir</option>
             <option value="1">Tidak Hadir</option>
           </select>
@@ -40,8 +39,7 @@
       <td>bodat</td>
       <td>ITO</td>
       <td>
-          <select name="kehadiran" class="ui search selection tiny dropdown">
-            <option value="null"></option>
+          <select name="kehadiran" class="ui search selection tiny dropdown" style="min-width: 10em;">
             <option value="0">Hadir</option>
             <option value="1">Tidak Hadir</option>
           </select>
@@ -53,8 +51,7 @@
       <td>bodat</td>
       <td>ITO</td>
       <td>
-          <select name="kehadiran" class="ui search selection tiny dropdown">
-            <option value="null"></option>
+          <select name="kehadiran" class="ui search selection tiny dropdown" style="min-width: 10em;">
             <option value="0">Hadir</option>
             <option value="1">Tidak Hadir</option>
           </select>
@@ -66,8 +63,7 @@
       <td>bodat</td>
       <td>ITO</td>
       <td>
-          <select name="kehadiran" class="ui search selection tiny dropdown">
-            <option value="null"></option>
+          <select name="kehadiran" class="ui search selection tiny dropdown" style="min-width: 10em;">
             <option value="0">Hadir</option>
             <option value="1">Tidak Hadir</option>
           </select>
@@ -79,8 +75,7 @@
       <td>bodat</td>
       <td>ITO</td>
       <td>
-          <select name="kehadiran" class="ui search selection tiny dropdown">
-            <option value="null"></option>
+          <select name="kehadiran" class="ui search selection tiny dropdown" style="min-width: 10em;">
             <option value="0">Hadir</option>
             <option value="1">Tidak Hadir</option>
           </select>
