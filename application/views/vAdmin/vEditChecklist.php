@@ -1,8 +1,6 @@
-<html><head>
-  <title>Edit Checklist</title>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
-</head>
-<body style="margin: 30px">
+
+
+
 
 <div class="ui two column centered grid">
 <div class="column">

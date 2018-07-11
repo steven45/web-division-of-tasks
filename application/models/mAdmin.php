@@ -48,7 +48,7 @@ class mAdmin extends CI_Model
         $this->db->update($table, $data);
     }
 
-    public function hapusPIC($table, $data, $NIK)
+    public function hapusPIC($table, $NIK, $data)
     {
         $this->db->where('NIK', $NIK);
         $this->db->update($table, $data);
@@ -70,6 +70,8 @@ class mAdmin extends CI_Model
     public function getChecklist($IDChecklist =  false)
     {
         if ($IDChecklist == null) {
+            $query = $this->db->order_by('NamaChecklist','ASC');
+            $query = $this->db->order_by('Jam','ASC');
             $query = $this->db->get('checklist');
             return $query->result_array();
         }
@@ -107,6 +109,13 @@ class mAdmin extends CI_Model
     {
         $this->db->where('IDChecklist', $IDChecklist);
         $this->db->update($table, $data);
+    }
+
+    public function lihatLastIDChecklist()
+    {
+        $query ="select * from checklist order by IDChecklist DESC limit 1";
+
+        return $this->db->query($query)->row_array();
     }
 
     public function getAbsensi($IDHarian = FALSE)
@@ -150,14 +159,41 @@ class mAdmin extends CI_Model
 
     }
 
+    public function gantiAbsensi($table, $IDHarian, $data)
+    {
+        $this->db->where('IDHarian', $IDHarian);
+        $this->db->update($table, $data);
+    }
+
+    public function hapusAbsensi($table, $IDHarian)
+    {
+        $this->db->delete('harian', array('IDHarian' => $IDHarian));
+    }
+
     public function getJadwal()
     {
         $query = $this->db->get('jadwal');
         return $query->result_array();
     }
 
-    public function hapusAbsensi($table, $IDHarian)
+    public function getLog($IDLog = FALSE)
     {
-        $this->db->delete('harian', array('IDHarian' => $IDHarian));
+        if ($IDLog == null) {
+            // $query = $this->db->get('log');
+            // return $query->result_array();
+
+            $this->db->select('*');
+             $this->db->from('log l');
+             $this->db->join('pic p','p.NIK=l.NIK');
+             $this->db->join('checklist c','c.IDChecklist=l.IDChecklist');
+             $this->db->join('harian h','h.NIK=p.NIK');
+             $query = $this->db->get();
+             return $query->result_array();
+        }
+        else
+        {
+            $query = "SELECT * FROM `log` WHERE `IDLog` = $IDLog";
+            return $this->db->query($query)->row_array();
+        }
     }
 }

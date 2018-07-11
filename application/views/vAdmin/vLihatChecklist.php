@@ -1,9 +1,4 @@
-<html><head>
-    <meta charset="UTF-8">
-    <title>Lihat Checklist</title>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
-</head>
-<body>
+
     <table class="ui celled table" style="margin-top: 20px; margin-left: 20px; width: 80%">
     <thead>
     <tr>

@@ -7,6 +7,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+  <script type="text/javascript" src="<?php echo base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>
+  <script type="text/javascript" src="<?php echo base_url('assets/js/tablesort.js'); ?>"></script>
+  <script type="text/javascript">
+    $(document).ready(function() 
+    { 
+        $('table').tablesort(); 
+    } 
+    ); 
+  </script>
+
   <title>
     <?php echo $judul; ?>
   </title>
@@ -16,7 +26,7 @@
   <!-- Header -->
     <div class="ui top fixed inverted pointing menu">
       <div class="header item">
-        <img class="ui avatar image" src="img/Artajasa.png">
+        <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
         Artajasa
       </div>
       <a class="item" href="<?php echo site_url('admin/beranda'); ?>">

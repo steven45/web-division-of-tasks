@@ -1,100 +1,124 @@
-<body>
-<div class="content-wrapper">
-  <div class="container-fluid">
+<div class="ui two column centered grid">
+<div class="column" style="width: auto;">
+  <div class="ui segment" style="border-radius: 1.285714rem">
+    <h3 style="text-align: center;">
+      <div class="ui icon">
+        <i class="user icon"></i>
+      Daftar PIC 
+      
+      <a class="ui right floated tiny blue icon button" data-tooltip="Tambah PIC" data-inverted="" data-position="top right" href="<?php echo site_url('admin/tambahpic'); ?>">
+          <i class="add icon"></i>
+        </a></h3>
 
-    <div class="container-fluid" style="margin-top: 30px">
-      <div class="row">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <div></div>
-            <h3 class="panel-title" style="text-align: center;">DAFTAR PIC</h3>
-            <div class="pull-right"> 
+      <div class="ui divider"></div>
+
+<table class="ui sortable compact celled definition grey inverted table">
+  <thead class="full-width" style="text-align: center; background-color: #35373c">
+    <tr>
+      <th class="sorted ascending">NIK</th>
+      <th class="">Nama PIC</th>
+      <th class="">Divisi</th>
+      <th class="">Jabatan</th>
+      <th class="">Tahun Masuk</th>
+      <th class="">Jumlah Pengecekan</th>
+      <th>Edit</th>
+      <th>
+        <a class="ui simple dropdown item" style="color: white;">
+        Status
+          <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item">Enable</div>
+              <div class="item">Disable</div>
             </div>
-          </div>
-          <table class="table table-hover" id="dev-table">
-            <thead>
-              <tr>
-                <th>NIK</th>
-                <th>Nama PIC</th>
-                <th>Divisi</th>
-                <th>Jabatan</th>
-                <th>Tahun Masuk</th>
-                <th>Jumlah Pengecekan</th>
-                <th>Edit</th>
-                <th>Hapus</th>
-              </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($pic as $pic) { ?>
-            <?php if ($pic['Status'] == 'Enabled') { ?>
-                <tr>
-                    <td><?php echo $pic['NIK'] ?></td>
-                    <td><?php echo $pic['NamaPIC'] ?></td>
-                    <td><?php echo $pic['Divisi'] ?></td>
-                    <td><?php echo $pic['Jabatan'] ?></td>
-                    <td><?php echo $pic['TahunMasuk'] ?></td>
-                    <td><?php echo $pic['JumlahPengecekan'] ?></td>
-                    <td>
-                        <form method="POST" action="<?php echo base_url('admin/editpic'); ?> ">
-                            <input type="hidden" name="NIK" value="<?php echo $pic['NIK'] ?>">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <input type="submit" class="btn btn-primary" value="Edit">
-                        </form>
-                    </td>
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <form method="POST" action="<?php echo base_url('admin/hapuspic'); ?>">
+    <?php $nEnabled = 0; $nDisabled = 0; ?>
+    <?php for ($i=0; $i < count($pic) ; $i++) { ?>
+    <?php 'NIK'.$i; ?>
+    <?php if ($status == 'Enabled' AND $pic[$i]['Status'] == 'Enabled') { ?>
+    <?php $nEnabled = $nEnabled +1; ?>
+    <tr>
+      <td><?php echo $pic[$i]['NIK'] ?></td>
+      <td><?php echo $pic[$i]['NamaPIC'] ?></td>
+      <td><?php echo $pic[$i]['Divisi'] ?></td>
+      <td><?php echo $pic[$i]['Jabatan'] ?></td>
+      <td><?php echo $pic[$i]['TahunMasuk'] ?></td>
+      <td><?php echo $pic[$i]['JumlahPengecekan'] ?></td>
+      <td>
+       <!--  <form method="GET" action="<?php echo base_url('admin/editpic'); ?> ">
+            <input type="hidden" name="NIK" value="<?php echo $pic[$i]['NIK'] ?>">
+            <button class="ui small blue button">
+              <i class="edit icon"></i>Edit
+            </button>
+        </form> -->
+      </td>
+      <td>
+          <input type="hidden" name="<?php echo 'NIK'.$i; ?>" value="<?php echo $pic[$i]['NIK']; ?>">
+          <select name="<?php echo 'status'.$i; ?>" class="ui search selection tiny dropdown" style="min-width: 10em;">
+            <?php if ($pic[$i]['Status'] == "Enabled") { ?>
+              <option value="<?php echo $pic[$i]['Status']; ?>"><?php echo $pic[$i]['Status']; ?></option>
+              <option value="Disabled">Disabled</option>
+            <?php } ?>
+            <?php if ($pic['Status'] == "Disabled") { ?>
+              <option value="<?php echo $pic['Status']; ?>"><?php echo $pic['Status']; ?></option>
+              <option value="Enabled">Enabled</option>
+            <?php } ?>
 
-                    <td>
-                        <form method="POST" action="<?php echo base_url('admin/hapuspic'); ?>">
+          </select>
+      </td>
+    </tr>
+    <?php } elseif ($status == 'Disabled' AND $pic[$i]['Status'] == 'Disabled') { ?>
+    <tr>
+      <td><?php echo $pic[$i]['NIK'] ?></td>
+      <td><?php echo $pic[$i]['NamaPIC'] ?></td>
+      <td><?php echo $pic[$i]['Divisi'] ?></td>
+      <td><?php echo $pic[$i]['Jabatan'] ?></td>
+      <td><?php echo $pic[$i]['TahunMasuk'] ?></td>
+      <td><?php echo $pic[$i]['JumlahPengecekan'] ?></td>
+      <td>
+        <form method="POST" action="<?php echo base_url('admin/editpic'); ?> ">
+            <input type="hidden" name="NIK" value="<?php echo $pic[$i]['NIK'] ?>">
+            <button class="ui small blue button">
+              <i class="edit icon"></i>Edit
+            </button>
+        </form>
+      </td>
+      <td>
+          <input type="hidden" name="<?php echo 'NIK'.$i; ?>" value="<?php echo $pic[$i]['NIK']; ?>">
+          <select name="status" class="ui search selection tiny dropdown" style="min-width: 10em;">
+            <?php if ($pic[$i]['Status'] == "Enabled") { ?>
+              <option value="<?php echo $pic['Status']; ?>"><?php echo $pic[$i]['Status']; ?></option>
+              <option value="Disabled">Disabled</option>
+            <?php } ?>
+            <?php if ($pic[$i]['Status'] == "Disabled") { ?>
+              <option value="<?php echo $pic[$i]['Status']; ?>"><?php echo $pic[$i]['Status']; ?></option>
+              <option value="Enabled">Enabled</option>
+            <?php } ?>
+          </select>
+      </td>
+    </tr>
+    <?php } ?>
+    <?php } ?>
+  </tbody>
+  <tfoot class="full-width">
+    <tr>
 
-                        <input type="hidden" name="NIK" value="<?php echo $pic['NIK'];?>">
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusModal">
-                          <span class="glyphicon glyphicon-trash"></span>Hapus</button>
+      <th></th>
+      <th colspan="9">
 
-                        <!-- Hapus Modal -->
-                        <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus PIC??</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">×</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">Jika anda menghapus maka data tidak ditampilkan dalam daftar PIC</div>
-                              <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Kembali</button>
-                               
-                                  <input type="submit" name="submit" class="btn btn-danger" value="Hapus">   
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        </form>
-                        </td>
-                    </tr>
-                <?php } ?>
-                <?php } ?>
-                </tbody>
-            </table>
-        </div>
-                
-                
-          </div>
-
-            
-            </div>
-            <td>
-              <form method="POST" action="<?php echo site_url('admin/tambahpic'); ?>">
-                <div class="container-btn-edit" style="text-align: right; margin-right: 35%">
-                  <button class="btn btn-dark">
-                    <span>
-                        <span class="glyphicon glyphicon-user"></span>Tambah PIC
-                   </span>
-                  </button>
-                </div>
-              </form>
-            </td>
-
-          </div>
+        <input type="hidden" name="nEnabled" value="<?php echo $nEnabled; ?>">
+        <button class="ui right floated blue small button" >
+          <i class="save icon"></i>Simpan
+        </button>
+      </th>
+    </tr>
+  </tfoot>
+  </form>
+</table>
 </div>
-    </body>
-        
+</div>
+</div>
