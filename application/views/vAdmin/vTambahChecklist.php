@@ -14,7 +14,7 @@
       <input type="text" name="NamaChecklist" placeholder="Nama Checklist">
     </div>
     <div class="grouped fields">
-    <label for="fruit">Jam Pengecekan:</label>
+    <label>Jadwal Pengecekan:</label>
     <div class="field">
       <div class="ui radio checkbox">
         <input type="radio" name="Jam" checked="checked" tabindex="0" value="Setiap Jam">

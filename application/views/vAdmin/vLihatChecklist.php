@@ -22,6 +22,7 @@
         <th>Nama PIC</th>
         <th >Nama Checklist</th>
         <th >Info Checklist</th>
+        <th>Jadwal</th>
         <th >Jam Pengecekan</th>
         <th>Edit</th>
         <th>Status</th>
@@ -47,8 +48,11 @@
           </select>
         </td>
         <td>Checklist PLN</td>
-        <td>Cell</td>
-        <td>Cell</td>
+        <td>
+          <a href="" data variation="wide" data-tooltip="Hello. This is a very wide pop-up which allows for lots of content with additional space. You can fit a lot of words here and the paragraphs will be pretty wide." data-position="bottom center">Lihat</a>
+        </td>
+        <td>01:00</td>
+        <td>01:05</td>
         <td>
           <form method="POST" action="<?php echo site_url('admin/editchecklist'); ?>">
             <button class="ui basic blue button">
@@ -66,7 +70,7 @@
       </tr> 
     </tbody>
     <tfoot>
-        <th colspan="7">
+        <th colspan="8">
           <button class="ui right floated blue small button" >
           <i class="save icon"></i>Simpan
         </button>

@@ -29,24 +29,15 @@
         <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
         Artajasa
       </div>
-      <a class="item" href="<?php echo site_url('admin/beranda'); ?>">
+      <a class="item" href="<?php echo site_url('pic/beranda'); ?>">
         <div class="ui icon">
           <i class="home icon"></i>
           Dashboard</div>
       </a>
-      <a class="item" href="<?php echo site_url('admin/checklist'); ?>">
+      <a class="item" href="<?php echo site_url('pic/checklist'); ?>">
         <div class="ui icon">
           <i class="check square icon"></i>
         Checklist</div>
-      </a>
-      <a class="ui simple dropdown item" href="<?php echo site_url('admin/pic'); ?>">
-        <div class="ui icon">
-          <i class="user icon"></i>
-        PIC</div>
-        <i class="dropdown icon"></i>
-          <div class="menu">
-            <div class="item">Absensi PIC</div>
-      </div>
       </a>
         
       <div class="right menu">

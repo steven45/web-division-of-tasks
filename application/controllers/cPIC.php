@@ -57,4 +57,28 @@ class cPIC extends CI_Controller {
 		$this->load->view('vPIC/vBerandaPIC');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
 	}
+
+	public function lihatChecklist()
+	{
+		// // header("Content-type:application/json");
+		$data['judul'] = "Checklist";
+		// // $data['log']= $this->mAdmin->getLog();
+
+		// // echo json_encode($data);
+		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
+		$this->load->view('vPIC/vLihatChecklist');
+		$this->load->view('vPIC/vTemplate/vFooterPIC');
+	}
+
+	public function doChecklist()
+	{
+		// // header("Content-type:application/json");
+		$data['judul'] = "Pengecekan";
+		// // $data['log']= $this->mAdmin->getLog();
+
+		// // echo json_encode($data);
+		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
+		$this->load->view('vPIC/vDoChecklist');
+		$this->load->view('vPIC/vTemplate/vFooterPIC');
+	}
 }
