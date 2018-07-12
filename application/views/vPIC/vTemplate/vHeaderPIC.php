@@ -1,5 +1,5 @@
 <?php if (!isset($_SESSION['nik'])) {
-  redirect(base_url("admin"));
+  redirect(base_url("pic"));
 } ?>
 <!DOCTYPE html>
 <html>

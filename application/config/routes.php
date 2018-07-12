@@ -22,6 +22,7 @@ $route['admin/hapuspic'] = 'cAdmin/hapusPIC';
 
 //CRUD CHECKLIST
 $route['admin/checklist'] = 'cAdmin/lihatChecklist';
+$route['admin/checklist(:any)'] = 'cAdmin/lihatChecklist/$1';
 $route['admin/editchecklist'] = 'cAdmin/editChecklist';
 $route['admin/infochecklist/(:any)'] = 'cAdmin/lihatInfoChecklist/$1';
 $route['admin/validasieditchecklist'] = 'cAdmin/validasiEditChecklist';

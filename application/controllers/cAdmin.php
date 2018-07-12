@@ -212,11 +212,11 @@ class cAdmin extends CI_Controller {
 	public function validasiTambahChecklist()
 	{
 		date_default_timezone_set('Asia/Jakarta');
+		$NIK = $this->input->post('NIK');
 		$namaChecklist = $this->input->post('NamaChecklist');
 		$jam = $this->input->post('Jam');
 		$jam1 = $this->input->post('Jam1');
 
-		var_dump($jam);
 		if ($jam == "Setiap Jam") {
 			for ($i=0; $i < 24 ; $i++) { 
 				if ($i < 10) {
@@ -242,13 +242,15 @@ class cAdmin extends CI_Controller {
 				move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
 
 				$data = array(
+				'NIK' => '155150200111246',
 				'Info' => $target_file,
 				'NamaChecklist' => $namaChecklist,
 				'Jam' => $nJam,
 				'Status' => 'Enabled'
 				);
-				// $hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, $i);
-				// $hasilJam[$i] = $hasil;	
+
+				$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, $i);
+				$hasilJam[$i] = $hasil;	
 			}
 		}
 		elseif ($jam == "Lainnya") {
@@ -262,10 +264,6 @@ class cAdmin extends CI_Controller {
 				$nJam = str_replace(",","",$jam1);
 				$nJam = explode(" ",$nJam);
 				for ($i=0; $i < count($nJam); $i++) { 
-
-					//Mengecek ID Terakhir
-					// $checklist = $this->mAdmin->lihatLastIDChecklist();
-					// $lastID = $checklist['IDChecklist']+1;
 
 					//Menyimpan target direktori
 					$target_dir = "assets/Checklist/";
@@ -293,38 +291,38 @@ class cAdmin extends CI_Controller {
 				}
 			}
 		}
-		// $tampil1 = "";
-		// $tampil2 = "";
-		// for ($i=0; $i < count($hasilJam); $i++) { 
-		// 	if (substr($hasilJam[$i], 0,1) == "_") {
-		// 		$tampil1= $tampil1." ".str_replace("_","",$hasilJam[$i]); 
-		// 	}
-		// 	else{
-		// 		$tampil2 = $tampil2." ".$hasilJam[$i];
-		// 	}
-		// }
+		$tampil1 = "";
+		$tampil2 = "";
+		for ($i=0; $i < count($hasilJam); $i++) { 
+			if (substr($hasilJam[$i], 0,1) == "_") {
+				$tampil1= $tampil1." ".str_replace("_","",$hasilJam[$i]); 
+			}
+			else{
+				$tampil2 = $tampil2." ".$hasilJam[$i];
+			}
+		}
 
-		// if ($tampil1 == "") {
-		// 	echo "<script type='text/javascript'>
-		// 		alert('Jam $tampil2 sudah ada.');
-		// 		window.location.href = '" . base_url() . "admin/checklist';
-		// 	</script>";
-		// }
-		// elseif ($tampil2 == "") {
-		// 	echo "<script type='text/javascript'>
-		// 		alert('Jam $tampil1 sukses ditambahkan.');
-		// 		window.location.href = '" . base_url() . "admin/checklist';
-		// 	</script>";
-		// }
-		// else{
-		// 	echo "<script type='text/javascript'>
-		// 		alert('Jam $tampil2 sudah ada. Jam $tampil1 sukses ditambahkan');
-		// 		window.location.href = '" . base_url() . "admin/checklist';
-		// 	</script>";
-		// }
+		if ($tampil1 == "") {
+			echo "<script type='text/javascript'>
+				alert('Jam $tampil2 sudah ada.');
+				window.location.href = '" . base_url() . "admin/checklist';
+			</script>";
+		}
+		elseif ($tampil2 == "") {
+			echo "<script type='text/javascript'>
+				alert('Jam $tampil1 sukses ditambahkan.');
+				window.location.href = '" . base_url() . "admin/checklist';
+			</script>";
+		}
+		else{
+			echo "<script type='text/javascript'>
+				alert('Jam $tampil2 sudah ada. Jam $tampil1 sukses ditambahkan');
+				window.location.href = '" . base_url() . "admin/checklist';
+			</script>";
+		}
 	}
 
-	public function lihatChecklist()
+	public function lihatChecklist($status = NULL)
 	{
 		$data['judul'] = "Lihat Checklist";
 		$data['checklist']= $this->mAdmin->getChecklist();
@@ -334,6 +332,11 @@ class cAdmin extends CI_Controller {
 		// while(!feof($fh)){
 		// echo fgets($fh)."<br>";
 		// }
+
+		$data['status'] = $status;
+		if ($data['status'] == NULL) {
+			$data['status'] = 'Enabled';
+		}
 
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vLihatChecklist', $data);
@@ -534,8 +537,4 @@ class cAdmin extends CI_Controller {
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
-	public function gantiPICLog()
-	{
-		
-	}
 }

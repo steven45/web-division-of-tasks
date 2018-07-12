@@ -47,7 +47,6 @@ class cPIC extends CI_Controller {
 
 	public function lihatLog()
 	{
-		echo "HALOO";
 		// // header("Content-type:application/json");
 		$data['judul'] = "Beranda PIC";
 		// // $data['log']= $this->mAdmin->getLog();
@@ -57,4 +56,5 @@ class cPIC extends CI_Controller {
 		$this->load->view('vPIC/vBerandaPIC');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
 	}
+
 }
