@@ -16,16 +16,16 @@
             <i class="calendar icon"></i>
             <input type="date" value="<?php echo date('20y-m-d') ?>">
           </div>
-        
-          <div class="ui icon input" style="margin-left: 330px">
+          
+
+          <div class="ui icon input" style="margin-left: 323px">
             <input type="text" placeholder="Search...">
             <i class="circular search link icon"></i>
           </div>
-        
         </div>
       
 
-        <table class="ui celled table" style="margin-top: 20px; margin-left: 20px; width: 95%">
+        <table class="ui sortable celled table" style="margin-top: 20px; margin-left: 20px; width: 95%">
           <thead>
             <tr>
             <th>No</th>

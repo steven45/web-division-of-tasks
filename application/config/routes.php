@@ -45,4 +45,8 @@ $route['admin/gantipiclog'] = 'cAdmin/gantiPICLog';
 $route['pic'] = 'cPIC';
 $route['pic/validation'] = 'cPIC/validation';
 $route['pic/beranda'] = 'cPIC/lihatLog';
+
 $route['pic/keluar'] = 'cPIC/keluar';
+
+$route['pic/checklist'] = 'cPIC/lihatChecklist';
+$route['pic/docheck'] = 'cPIC/doChecklist';

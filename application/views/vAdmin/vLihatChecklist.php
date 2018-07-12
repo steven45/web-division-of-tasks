@@ -22,6 +22,7 @@
         <th>Nama PIC</th>
         <th >Nama Checklist</th>
         <th >Info Checklist</th>
+        <th>Jadwal</th>
         <th >Jam Pengecekan</th>
         <th>Edit</th>
         <th>Status</th>
@@ -54,6 +55,7 @@
         <td><?php echo $checklist['NamaChecklist']; ?></td>
         <td><a href="#">Lihat</a></td>
         <td><?php echo $checklist['Jam']; ?></td>
+
         <td>
           <form method="POST" action="<?php echo site_url('admin/editchecklist'); ?>">
             <button class="ui basic blue button">
@@ -79,7 +81,7 @@
       <?php } ?>
     </tbody>
     <tfoot>
-        <th colspan="7">
+        <th colspan="8">
           <button class="ui right floated blue small button" >
           <i class="save icon"></i>Simpan
         </button>
