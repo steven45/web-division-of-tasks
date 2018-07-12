@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['nama'])) {
+<?php if (!isset($_SESSION['nik'])) {
   redirect(base_url("admin"));
 } ?>
 <!DOCTYPE html>

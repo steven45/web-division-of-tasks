@@ -215,6 +215,8 @@ class cAdmin extends CI_Controller {
 		$namaChecklist = $this->input->post('NamaChecklist');
 		$jam = $this->input->post('Jam');
 		$jam1 = $this->input->post('Jam1');
+
+		var_dump($jam);
 		if ($jam == "Setiap Jam") {
 			for ($i=0; $i < 24 ; $i++) { 
 				if ($i < 10) {
@@ -223,10 +225,6 @@ class cAdmin extends CI_Controller {
 				else{
 					$nJam = $i.":00";
 				}
-
-				//Mengecek ID Terakhir
-				// $checklist = $this->mAdmin->lihatLastIDChecklist();
-				// $lastID = $checklist['IDChecklist']+1;
 
 				//Menyimpan target direktori
 				$target_dir = "assets/Checklist/";
@@ -249,8 +247,8 @@ class cAdmin extends CI_Controller {
 				'Jam' => $nJam,
 				'Status' => 'Enabled'
 				);
-				$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, $i);
-				$hasilJam[$i] = $hasil;	
+				// $hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, $i);
+				// $hasilJam[$i] = $hasil;	
 			}
 		}
 		elseif ($jam == "Lainnya") {
@@ -295,35 +293,35 @@ class cAdmin extends CI_Controller {
 				}
 			}
 		}
-		$tampil1 = "";
-		$tampil2 = "";
-		for ($i=0; $i < count($hasilJam); $i++) { 
-			if (substr($hasilJam[$i], 0,1) == "_") {
-				$tampil1= $tampil1." ".str_replace("_","",$hasilJam[$i]); 
-			}
-			else{
-				$tampil2 = $tampil2." ".$hasilJam[$i];
-			}
-		}
+		// $tampil1 = "";
+		// $tampil2 = "";
+		// for ($i=0; $i < count($hasilJam); $i++) { 
+		// 	if (substr($hasilJam[$i], 0,1) == "_") {
+		// 		$tampil1= $tampil1." ".str_replace("_","",$hasilJam[$i]); 
+		// 	}
+		// 	else{
+		// 		$tampil2 = $tampil2." ".$hasilJam[$i];
+		// 	}
+		// }
 
-		if ($tampil1 == "") {
-			echo "<script type='text/javascript'>
-				alert('Jam $tampil2 sudah ada.');
-				window.location.href = '" . base_url() . "admin/checklist';
-			</script>";
-		}
-		elseif ($tampil2 == "") {
-			echo "<script type='text/javascript'>
-				alert('Jam $tampil1 sukses ditambahkan.');
-				window.location.href = '" . base_url() . "admin/checklist';
-			</script>";
-		}
-		else{
-			echo "<script type='text/javascript'>
-				alert('Jam $tampil2 sudah ada. Jam $tampil1 sukses ditambahkan');
-				window.location.href = '" . base_url() . "admin/checklist';
-			</script>";
-		}
+		// if ($tampil1 == "") {
+		// 	echo "<script type='text/javascript'>
+		// 		alert('Jam $tampil2 sudah ada.');
+		// 		window.location.href = '" . base_url() . "admin/checklist';
+		// 	</script>";
+		// }
+		// elseif ($tampil2 == "") {
+		// 	echo "<script type='text/javascript'>
+		// 		alert('Jam $tampil1 sukses ditambahkan.');
+		// 		window.location.href = '" . base_url() . "admin/checklist';
+		// 	</script>";
+		// }
+		// else{
+		// 	echo "<script type='text/javascript'>
+		// 		alert('Jam $tampil2 sudah ada. Jam $tampil1 sukses ditambahkan');
+		// 		window.location.href = '" . base_url() . "admin/checklist';
+		// 	</script>";
+		// }
 	}
 
 	public function lihatChecklist()

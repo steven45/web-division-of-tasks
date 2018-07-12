@@ -41,4 +41,7 @@ $route['admin/log'] = 'cAdmin/lihatLog';
 $route['admin/gantipiclog'] = 'cAdmin/gantiPICLog';
 
 //Halaman User
-$route['pic'] = 'cUser';
+$route['pic'] = 'cPIC';
+$route['pic/validation'] = 'cPIC/validation';
+$route['pic/beranda'] = 'cPIC/lihatLog';
+$route['pic/keluar'] = 'cPIC/keluar';
