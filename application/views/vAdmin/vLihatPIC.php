@@ -23,20 +23,20 @@
       <th class="">Jumlah Pengecekan</th>
       <th>Edit</th>
       <th>
-        <a class="ui simple dropdown item" style="color: white;">
+        <div class="ui simple dropdown item" style="color: white;">
         Status
           <i class="dropdown icon"></i>
             <div class="menu">
-              <div class="item">Enable</div>
-              <div class="item">Disable</div>
+              <div class="item"><a href="<?php echo site_url('admin/pic/Enabled') ?>">Enabled</a></div>
+              <div class="item"><a href="<?php echo site_url('admin/pic/Disabled') ?>">Disabled</a></div>
             </div>
-        </a>
+        </div>
       </th>
     </tr>
   </thead>
   <tbody>
     <form method="POST" action="<?php echo base_url('admin/hapuspic'); ?>">
-    <?php $nEnabled = 0; $nDisabled = 0; ?>
+    <?php $nEnabled = 0; $nDisabled = 0; $nJumlah = count($pic); ?>
     <?php for ($i=0; $i < count($pic) ; $i++) { ?>
     <?php 'NIK'.$i; ?>
     <?php if ($status == 'Enabled' AND $pic[$i]['Status'] == 'Enabled') { ?>
@@ -55,6 +55,12 @@
               <i class="edit icon"></i>Edit
             </button>
         </form> -->
+        <?php $nNIK = "admin/editpic/".$pic[$i]['NIK']; ?>
+        <a href="<?php echo base_url($nNIK); ?>">
+          <div class="ui small blue button">
+            <i class="edit icon"></i>Edit
+          </div>
+        </a>
       </td>
       <td>
           <input type="hidden" name="<?php echo 'NIK'.$i; ?>" value="<?php echo $pic[$i]['NIK']; ?>">
@@ -72,6 +78,7 @@
       </td>
     </tr>
     <?php } elseif ($status == 'Disabled' AND $pic[$i]['Status'] == 'Disabled') { ?>
+    <?php $nDisabled = $nDisabled +1; ?>
     <tr>
       <td><?php echo $pic[$i]['NIK'] ?></td>
       <td><?php echo $pic[$i]['NamaPIC'] ?></td>
@@ -80,16 +87,16 @@
       <td><?php echo $pic[$i]['TahunMasuk'] ?></td>
       <td><?php echo $pic[$i]['JumlahPengecekan'] ?></td>
       <td>
-        <form method="POST" action="<?php echo base_url('admin/editpic'); ?> ">
+        <!-- <form method="POST" action="<?php echo base_url('admin/editpic'); ?> ">
             <input type="hidden" name="NIK" value="<?php echo $pic[$i]['NIK'] ?>">
             <button class="ui small blue button">
               <i class="edit icon"></i>Edit
             </button>
-        </form>
+        </form> -->
       </td>
       <td>
           <input type="hidden" name="<?php echo 'NIK'.$i; ?>" value="<?php echo $pic[$i]['NIK']; ?>">
-          <select name="status" class="ui search selection tiny dropdown" style="min-width: 10em;">
+          <select  name="<?php echo 'status'.$i;?>" class="ui search selection tiny dropdown" style="min-width: 10em;">
             <?php if ($pic[$i]['Status'] == "Enabled") { ?>
               <option value="<?php echo $pic['Status']; ?>"><?php echo $pic[$i]['Status']; ?></option>
               <option value="Disabled">Disabled</option>
@@ -111,6 +118,8 @@
       <th colspan="9">
 
         <input type="hidden" name="nEnabled" value="<?php echo $nEnabled; ?>">
+        <input type="hidden" name="nDisabled" value="<?php echo $nDisabled; ?>">
+        <input type="hidden" name="nJumlah" value="<?php echo $nJumlah; ?>">
         <button class="ui right floated blue small button" >
           <i class="save icon"></i>Simpan
         </button>

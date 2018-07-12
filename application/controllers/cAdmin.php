@@ -9,6 +9,7 @@ class cAdmin extends CI_Controller {
 		$this->load->model('mAdmin');
 		$this->load->helper('url_helper');
 		$this->load->library('session');
+
 	}
 
 	public function index()
@@ -68,7 +69,6 @@ class cAdmin extends CI_Controller {
 		$divisi = $this->input->post('Divisi');
 		$jabatan = $this->input->post('Jabatan');
 		$tahunMasuk = $this->input->post('TahunMasuk');
-		$jumlahPengecekan = $this->input->post('JumlahPengecekan');
 
 		$data = array(
 			'NIK' => $NIK,
@@ -77,7 +77,7 @@ class cAdmin extends CI_Controller {
 			'Password' => md5($password),
 			'Jabatan' => $jabatan,
 			'TahunMasuk' => $tahunMasuk,
-			'JumlahPengecekan' => $jumlahPengecekan,
+			'JumlahPengecekan' => 0,
 			'Status' => 'Enabled'
 		);
 
@@ -108,12 +108,17 @@ class cAdmin extends CI_Controller {
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
-	public function lihatPIC()
+	public function lihatPIC($status = NULL)
 	{
-		$data['status'] = $this->input->post('status');
+		if (!isset($_SESSION['nama'])) {
+		  redirect(base_url("admin"));
+		}
+
+		$data['status'] = $status;
 		if ($data['status'] == NULL) {
 			$data['status'] = 'Enabled';
 		}
+
 		$data['judul'] = "Lihat PIC";
 		$data['pic'] = $this->mAdmin->getPIC();
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
@@ -121,10 +126,10 @@ class cAdmin extends CI_Controller {
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
-	public function editPIC()
+	public function editPIC($NIK = NULL)
 	{
 		$data['judul'] = "Edit PIC";
-		$NIK = $this->input->post('NIK');
+
 		$data['pic'] = $this->mAdmin->getPIC($NIK);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vEditPIC', $data);
@@ -135,7 +140,6 @@ class cAdmin extends CI_Controller {
 	{
 		$NIK = $this->input->post('NIK');
 		$namaPIC = $this->input->post('NamaPIC');
-		$password = $this->input->post('Password');
 		$divisi = $this->input->post('Divisi');
 		$jabatan = $this->input->post('Jabatan');
 		$tahunMasuk = $this->input->post('TahunMasuk');
@@ -145,10 +149,8 @@ class cAdmin extends CI_Controller {
 			'NIK' => $NIK,
 			'NamaPIC' => $namaPIC,
 			'Divisi' => $divisi,
-			'Password' => md5($password),
 			'Jabatan' => $jabatan,
-			'TahunMasuk' => $tahunMasuk,
-			'JumlahPengecekan' => $jumlahPengecekan
+			'TahunMasuk' => $tahunMasuk
 		);
 
 		$data['pic'] = $this->mAdmin->editPIC('pic', $data, $NIK);
@@ -162,30 +164,41 @@ class cAdmin extends CI_Controller {
 	public function hapusPIC()
 	{
 		$nEnabled = $this->input->post('nEnabled');
+		$nDisabled = $this->input->post('nDisabled');
+		$nJumlah = $this->input->post('nJumlah');
 
-		for ($i=0; $i < $nEnabled; $i++) { 
+		for ($i=0; $i < $nJumlah; $i++) { 
 			$id[$i] = 'NIK'.$i;
 			$nStatus[$i] = 'status'.$i;
 		}
 
-		for ($i=0; $i < $nEnabled; $i++) { 
+		for ($i=0; $i < $nJumlah; $i++) { 
 			$NIK = $this->input->post($id[$i]);
 			$status = $this->input->post($nStatus[$i]);
 
 			$data = array(
 				'Status' => $status
 			);
-			$query = $this->mAdmin->hapusPIC('pic',$NIK, $data);
-		}
+			// var_dump($id[$i]);
+			// var_dump($NIK);
+			// echo "<br>";
+			// var_dump($nStatus[$i]);
+			// var_dump($status);
+			// echo "<br>";
+			if ($NIK != NULL AND $status != NULL) {
+				$query = $this->mAdmin->hapusPIC('pic',$NIK, $data);
+			}
+		}	
 
 		// $NIK = $this->input->post('NIK');
 		// $data = array(
 		// 	'Status' => 'Disabled'
 		// );
 		// $this->mAdmin->hapusPIC('pic', $data, $NIK);	
-		// echo "<script type='text/javascript'>
-		// 			window.location.href = '" . base_url() . "admin/pic';
-		// 		</script>";
+		echo "<script type='text/javascript'>
+					alert('Sukses Menyimpan Status PIC ');
+					window.location.href = '" . base_url() . "admin/pic';
+				</script>";
 	}
 
 	public function tambahChecklist()
