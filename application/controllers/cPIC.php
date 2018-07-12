@@ -53,8 +53,8 @@ class cPIC extends CI_Controller {
 		// // $data['log']= $this->mAdmin->getLog();
 
 		// // echo json_encode($data);
-		$this->load->view('vPIC/vTemplate/vHeaderPIC');
-		$this->load->view('vAdmin/vBerandaPIC');
+		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
+		$this->load->view('vPIC/vBerandaPIC');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
 	}
 }
