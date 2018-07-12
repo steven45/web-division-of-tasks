@@ -16,12 +16,12 @@
             <i class="calendar icon"></i>
             <input type="date" value="<?php echo date('20y-m-d') ?>">
           </div>
-        
-          <div class="ui icon input" style="margin-left: 330px">
+          
+          
+          <div class="ui icon input" style="margin-left: 323px">
             <input type="text" placeholder="Search...">
             <i class="circular search link icon"></i>
           </div>
-        
         </div>
       
 
@@ -51,7 +51,7 @@
               <td>
                 OK
               </td>
-              <td>
+              <td
                 <a href="" data variation="wide" data-tooltip="Hello. This is a very wide pop-up which allows for lots of content with additional space. You can fit a lot of words here and the paragraphs will be pretty wide." data-position="bottom center">Lihat</a>
               </td>
             </tr>
