@@ -16,6 +16,13 @@
     } 
     ); 
   </script>
+  <script type="text/javascript">
+    $(document).ready(function() 
+    { 
+    $('.ui.dropdown').dropdown();
+    } 
+    ); 
+  </script>
 
   <title>
     <?php echo $judul; ?>
@@ -39,24 +46,53 @@
           <i class="check square icon"></i>
         Checklist</div>
       </a>
-      <div class="ui simple dropdown item">
-        <a href="<?php echo site_url('admin/pic'); ?>">
-          <i class="user icon"></i>
-          
-        PIC</a>
+
+      <div class="ui dropdown item">
+      <i class="user icon"></i>
+        PIC
         <i class="dropdown icon"></i>
           <div class="menu">
+            <a class="item" href="<?php echo site_url('admin/pic'); ?>">
+            Daftar PIC</a>
             <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
-
             Absensi PIC</a>
       </div>
       </div>
         
       <div class="right menu">
-      <a class="item">
-        Notifications
-        <div class="ui small label">1</div>
-        </a>
+        <div class="ui pointing dropdown link item">
+          <span class="text">
+
+          Notifications</span>
+          <div class="ui small label">1</div>
+            <div class="menu">
+              <div class="header">
+                <i class= "bell icon"></i>
+              Notifications</div>
+              <div class="ui relaxed divided list" style="margin: auto+10px auto+10px; padding-bottom: 10px;">
+                <div class="item">
+                  <div class="content">
+                    <a class="header">Semantic-Org/Semantic-UI</a>
+                    <div class="description">Updated 10 mins ago</div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="content">
+                    <a class="header">Semantic-Org/Semantic-UI-Docsssss</a>
+                    <div class="description">Updated 22 mins ago</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="header">Notifications</div>
+              <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
+                <div class="label">Nama PIC</div>
+              </a>
+              <a class="item">Cancel</a> -->
+            </div>
+        </div>
+        
+
     <div class="item">
       <div class="ui icon input">
         <input type="text" placeholder="Search...">
