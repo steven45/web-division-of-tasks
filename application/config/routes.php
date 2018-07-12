@@ -13,9 +13,10 @@ $route['admin/keluar'] = 'cAdmin/keluar';
 
 //CRUD PIC
 $route['admin/pic'] = 'cAdmin/lihatPIC';
+$route['admin/pic/(:any)'] = 'cAdmin/lihatPIC/$1';
 $route['admin/tambahpic'] = 'cAdmin/tambahPIC';
 $route['admin/validasitambahpic'] = 'cAdmin/validasiTambahPIC';
-$route['admin/editpic'] = 'cAdmin/editPIC';
+$route['admin/editpic/(:any)'] = 'cAdmin/editPIC/$1';
 $route['admin/validasieditpic'] = 'cAdmin/validasiEditPIC';
 $route['admin/hapuspic'] = 'cAdmin/hapusPIC';
 
@@ -40,4 +41,7 @@ $route['admin/log'] = 'cAdmin/lihatLog';
 $route['admin/gantipiclog'] = 'cAdmin/gantiPICLog';
 
 //Halaman User
-$route['pic'] = 'cUser';
+$route['pic'] = 'cPIC';
+$route['pic/validation'] = 'cPIC/validation';
+$route['pic/beranda'] = 'cPIC/lihatLog';
+$route['pic/keluar'] = 'cPIC/keluar';

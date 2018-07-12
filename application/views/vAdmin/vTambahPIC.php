@@ -7,7 +7,7 @@
 			Tambah PIC</div></h3>
 			<div class="ui divider"></div>
 
-		<form class="ui form">
+		<form class="ui form" method="POST" action="<?php echo site_url('admin/validasitambahpic'); ?>">
 		  <div class="field">
 		    <label>Nomor Induk Karyawan</label>
 		    <input type="text" name="NIK" placeholder="Nomor Induk Karyawan">
@@ -35,10 +35,10 @@
 		  
 	
 		<div class="ui center aligned basic segment">
-		  <div class="ui right vertical blue button" tabindex="0">
+		  <button class="ui right vertical blue button" tabindex="0">
 		  	<i class="plus icon"></i>
 			  Tambah
-			</div>
+			</button>
 			</div>
 		</form>
 
