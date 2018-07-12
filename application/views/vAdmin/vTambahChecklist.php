@@ -1,8 +1,3 @@
-<html><head>
-  <title>Tambah Checklist</title>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
-</head>
-<body style="margin: 30px">
 
 <div class="ui two column centered grid">
 <div class="column">
@@ -16,7 +11,7 @@
   <form class="ui form">
     <div class="field">
       <label>Nama Checklist</label>
-      <input type="text" name="NIK" placeholder="Nama Checklist">
+      <input type="text" name="NamaChecklist" placeholder="Nama Checklist">
     </div>
     <div class="grouped fields">
     <label for="fruit">Jam Pengecekan:</label>
@@ -39,7 +34,7 @@
 
     <div class="ui small field" >
     <label>Info Checklist</label>
-    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="file" name="In" id="fileToUpload">
     
   </div>
   <div class="ui center aligned basic segment">
@@ -47,11 +42,9 @@
       <i class="plus icon"></i>
     Tambah
   </button>
+	</div>
   </form>
 </div>
 </div>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
-
-</body></html>
+</div>

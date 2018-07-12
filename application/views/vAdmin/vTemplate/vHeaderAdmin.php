@@ -29,7 +29,7 @@
         <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
         Artajasa
       </div>
-      <a class="item"">
+      <a class="item" href="<?php echo site_url('admin/beranda'); ?>">
         <div class="ui icon">
           <i class="home icon"></i>
           Dashboard</div>
