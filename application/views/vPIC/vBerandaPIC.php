@@ -17,7 +17,7 @@
             <input type="date" value="<?php echo date('20y-m-d') ?>">
           </div>
           
-
+          
           <div class="ui icon input" style="margin-left: 323px">
             <input type="text" placeholder="Search...">
             <i class="circular search link icon"></i>
@@ -59,11 +59,6 @@
           <tfoot>
             <tr> 
             <th colspan="8">
-              <button class="ui right floated blue small button" >
-                <i class="save icon"></i>Simpan
-              </button>
-
-
             </th> 
             </tr>
           </tfoot>
@@ -71,10 +66,3 @@
     </div>
   </div>
 </div>
-
-  
-
-
-   
-
-    

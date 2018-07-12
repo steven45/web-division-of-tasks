@@ -70,10 +70,17 @@ class mAdmin extends CI_Model
     public function getChecklist($IDChecklist =  false)
     {
         if ($IDChecklist == null) {
-            $query = $this->db->order_by('NamaChecklist','ASC');
-            $query = $this->db->order_by('Jam','ASC');
-            $query = $this->db->get('checklist');
-            return $query->result_array();
+            // $query = $this->db->order_by('NamaChecklist','ASC');
+            // $query = $this->db->order_by('Jam','ASC');
+            // $query = $this->db->get('checklist');
+            // return $query->result_array();
+            $query = $this->db->order_by('c.NamaChecklist','ASC');
+            $query = $this->db->order_by('c.Jam','ASC');
+            $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status');
+             $query = $this->db->from('checklist c');
+             $query = $this->db->join('pic p','p.NIK=c.NIK');
+             $query = $this->db->get();
+             return $query->result_array();
         }
         else
         {

@@ -13,14 +13,16 @@ $route['admin/keluar'] = 'cAdmin/keluar';
 
 //CRUD PIC
 $route['admin/pic'] = 'cAdmin/lihatPIC';
+$route['admin/pic/(:any)'] = 'cAdmin/lihatPIC/$1';
 $route['admin/tambahpic'] = 'cAdmin/tambahPIC';
 $route['admin/validasitambahpic'] = 'cAdmin/validasiTambahPIC';
-$route['admin/editpic'] = 'cAdmin/editPIC';
+$route['admin/editpic/(:any)'] = 'cAdmin/editPIC/$1';
 $route['admin/validasieditpic'] = 'cAdmin/validasiEditPIC';
 $route['admin/hapuspic'] = 'cAdmin/hapusPIC';
 
 //CRUD CHECKLIST
 $route['admin/checklist'] = 'cAdmin/lihatChecklist';
+$route['admin/checklist(:any)'] = 'cAdmin/lihatChecklist/$1';
 $route['admin/editchecklist'] = 'cAdmin/editChecklist';
 $route['admin/infochecklist/(:any)'] = 'cAdmin/lihatInfoChecklist/$1';
 $route['admin/validasieditchecklist'] = 'cAdmin/validasiEditChecklist';
@@ -40,4 +42,11 @@ $route['admin/log'] = 'cAdmin/lihatLog';
 $route['admin/gantipiclog'] = 'cAdmin/gantiPICLog';
 
 //Halaman User
-$route['pic'] = 'cUser';
+$route['pic'] = 'cPIC';
+$route['pic/validation'] = 'cPIC/validation';
+$route['pic/beranda'] = 'cPIC/lihatLog';
+
+$route['pic/keluar'] = 'cPIC/keluar';
+
+$route['pic/checklist'] = 'cPIC/lihatChecklist';
+$route['pic/docheck'] = 'cPIC/doChecklist';

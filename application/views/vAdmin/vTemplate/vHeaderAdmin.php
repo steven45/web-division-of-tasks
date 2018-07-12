@@ -99,12 +99,13 @@
         <i class="search icon"></i>
       </div>
     </div>
-      
+      <a href="<?php echo site_url('admin/keluar'); ?>" style="color: white;">
       <div class="item">
           <div class="ui teal button">
-            <i class="sign out alternate icon" icon"></i>
-          Log Out</div>
+            <i class="sign out alternate icon" icon"></i>Log Out
+          </div>
       </div>
+      </a>
     </div>
     </div>
 <br><br><br><br><br>

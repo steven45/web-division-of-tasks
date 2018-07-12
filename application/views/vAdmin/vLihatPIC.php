@@ -119,7 +119,8 @@
 
         <input type="hidden" name="nEnabled" value="<?php echo $nEnabled; ?>">
         <button class="ui right floated blue small button" >
-          <i class="save icon"></i>Simpan
+          <i class="save icon"></i>
+          Simpan
         </button>
       </th>
     </tr>

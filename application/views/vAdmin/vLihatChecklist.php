@@ -22,16 +22,22 @@
         <th>Nama PIC</th>
         <th >Nama Checklist</th>
         <th >Info Checklist</th>
+        <th>Jadwal</th>
         <th >Jam Pengecekan</th>
         <th>Edit</th>
         <th>Status</th>
       </tr>
     </thead>
     <tbody>
+      <?php $tempEnabled = 1;  ?>
+      <?php foreach ($checklist as $checklist) { ?>
+      <?php if ($checklist['Status'] == 'Enabled') { ?>
+
       <tr>
-        <td>1</td>
+        <td><?php echo $tempEnabled; $tempEnabled = $tempEnabled+1; ?></td>
         <td>
           <select class="ui dropdown">
+            <option value="<?php echo $checklist['NamaPIC']; ?>"><?php echo $checklist['NamaPIC']; ?></option>
             <option value="Panji Nugroho">Panji Nugroho</option>
             <option value="Rudi Prima Mandala">Rudi Prima Mandala</option>
             <option value="Hashfi Arya Persada">Hashfi Arya Persada</option>
@@ -46,9 +52,10 @@
             <option value="Surya Setiawan">Surya Setiawan</option>
           </select>
         </td>
-        <td>Checklist PLN</td>
-        <td>Cell</td>
-        <td>Cell</td>
+        <td><?php echo $checklist['NamaChecklist']; ?></td>
+        <td><a href="#">Lihat</a></td>
+        <td><?php echo $checklist['Jam']; ?></td>
+
         <td>
           <form method="POST" action="<?php echo site_url('admin/editchecklist'); ?>">
             <button class="ui basic blue button">
@@ -59,14 +66,22 @@
         </td>
         <td>
           <select class="ui selection tiny dropdown" style="min-width: 1em;"">
-              <option value="1">Enable</option>
-              <option value="0">Diasable</option>
+              <?php if ($status == "Enabled") { ?>
+              <option value="<?php echo $checklist['Status']; ?>"><?php echo $checklist['Status']; ?></option>
+              <option value="Disabled">Disabled</option>
+            <?php } ?>
+            <?php if ($status == "Disabled") { ?>
+              <option value="<?php echo $checklist['Status']; ?>"><?php echo $checklist['Status']; ?></option>
+              <option value="Enabled">Enabled</option>
+            <?php } ?>
           </select>
         </td>
       </tr> 
+      <?php } ?>
+      <?php } ?>
     </tbody>
     <tfoot>
-        <th colspan="7">
+        <th colspan="8">
           <button class="ui right floated blue small button" >
           <i class="save icon"></i>Simpan
         </button>
