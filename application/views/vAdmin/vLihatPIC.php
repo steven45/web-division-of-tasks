@@ -1,14 +1,21 @@
 <div class="ui two column centered grid">
 <div class="column" style="width: auto;">
   <div class="ui segment" style="border-radius: 1.285714rem">
-    <h3 style="text-align: center;">
+    
+          <div class="segment">
+            <div class="ui icon input" style="margin-left: 0px">
+            <input type="text" placeholder="Search...">
+            <i class="circular search link icon"></i>
+          </div>
+      <h3 style="text-align: center; margin-top: -30px;">
       <div class="ui icon">
         <i class="user icon"></i>
       Daftar PIC 
-      
-      <a class="ui right floated tiny blue icon button" data-tooltip="Tambah PIC" data-inverted="" data-position="top right" href="<?php echo site_url('admin/tambahpic'); ?>">
+      </h3>
+      <a class="ui right floated tiny blue icon button" data-tooltip="Tambah PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahpic'); ?>">
           <i class="add icon"></i>
-        </a></h3>
+        </a>
+      </div>
 
       <div class="ui divider"></div>
 

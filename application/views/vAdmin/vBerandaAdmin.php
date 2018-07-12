@@ -17,7 +17,7 @@
             <input type="date" value="<?php echo date('20y-m-d') ?>">
           </div>
         
-          <div class="ui icon input" style="margin-left: 265px">
+          <div class="ui icon input" style="margin-left: 330px">
             <input type="text" placeholder="Search...">
             <i class="circular search link icon"></i>
           </div>
@@ -32,6 +32,7 @@
             <th>Nama PIC</th>
             <th>Nama Checklist</th>
             <th>Info Pengecekan</th>
+            <th>Jadwal</th>
             <th>Jam Pengecekan</th>
             <th>Status</th>
             <th>Keterangan</th>
@@ -43,24 +44,26 @@
               <td>Panji Nugroho</td>
               <td>Checklist PLN</td>
               <td>
-                <a href="" data-tooltip="Add users to your feed Add users to your feed Add users to your feed Add users to your feed Add users to your feed Add users to your feed Add users to your feed Add users to your feed Add users to your feed Add users to your feed " data variation="basic" data-position="bottom center">Lihat</i>
-                
+                <a href="" data variation="wide" data-tooltip="Hello. This is a very wide pop-up which allows for lots of content with additional space. You can fit a lot of words here and the paragraphs will be pretty wide." data-position="bottom center">Lihat</a>
               </td>
               <td>01:00</td>
+              <td>01:05</td>
               <td>
                 OK
               </td>
               <td>
-                aku lagi rindu
+                <a href="" data variation="wide" data-tooltip="Hello. This is a very wide pop-up which allows for lots of content with additional space. You can fit a lot of words here and the paragraphs will be pretty wide." data-position="bottom center">Lihat</a>
               </td>
             </tr>
           </tbody>
           <tfoot>
             <tr> 
-            <th colspan="7">
+            <th colspan="8">
               <button class="ui right floated blue small button" >
                 <i class="save icon"></i>Simpan
               </button>
+
+
             </th> 
             </tr>
           </tfoot>
