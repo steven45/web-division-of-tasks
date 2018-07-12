@@ -1,7 +1,3 @@
-
-
-
-
 <div class="ui two column centered grid">
 <div class="column">
  <div class="ui segment">
