@@ -36,7 +36,7 @@
     <div class="ui top fixed inverted pointing menu">
       <div class="header item">
         <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
-        Artajasa
+        <?php echo $_SESSION['NamaPIC']; ?>
       </div>
       <a class="item" href="<?php echo site_url('pic/beranda'); ?>">
         <div class="ui icon">

@@ -128,7 +128,7 @@ class mAdmin extends CI_Model
     public function getAbsensi($IDHarian = FALSE)
     {
         if ($IDHarian == NULL) {
-            $this->db->select('h.IDHarian, h.NIK, h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam');
+            $this->db->select('h.IDHarian, h.NIK, h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam, p.Status');
              $this->db->from('harian h');
              $this->db->join('pic p','p.NIK=h.NIK');
              $this->db->join('jadwal j','j.IDJadwal=h.IDJadwal');

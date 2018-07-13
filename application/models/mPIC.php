@@ -6,8 +6,9 @@ class mPIC extends CI_Model
         $this->load->database();
     }
 
-    public function getPIC($table, $where)
+    public function getPIC($NIK, $password)
     {
-    	return $this->db->get_where($table,$where);
+    	$query = "SELECT * FROM `pic` WHERE `NIK` = $NIK AND `Password` = '$password'";
+        return $this->db->query($query)->row_array();
     }
 }
