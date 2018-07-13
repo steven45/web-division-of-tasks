@@ -23,7 +23,6 @@
         <th >Nama Checklist</th>
         <th >Info Checklist</th>
         <th>Jadwal</th>
-        <th >Jam Pengecekan</th>
         <th>Edit</th>
         <th>Status</th>
       </tr>
