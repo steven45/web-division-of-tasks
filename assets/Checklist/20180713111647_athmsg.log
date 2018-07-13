@@ -1,0 +1,26 @@
+2018-07-13 10:18:19.862 => ath_dev_attach: devid 0x36
+
+2018-07-13 10:18:19.918 => ar9300_fill_capability_info: (MCI) MCI support = 1
+
+2018-07-13 10:18:32.554 => ath_chan_set: 1 (2412 MHz) 0xa0 -> 1 (2412 MHz) 0xa0
+
+2018-07-13 10:31:59.411 => ar9300_load_nf: *** TIMEOUT while waiting for nf to load: AR_PHY_AGC_CONTROL=0x50d1a ***
+
+2018-07-13 10:32:30.082 => ar9300_load_nf: *** TIMEOUT while waiting for nf to load: AR_PHY_AGC_CONTROL=0x50d1a ***
+
+2018-07-13 10:38:07.460 => ar9300_load_nf: *** TIMEOUT while waiting for nf to load: AR_PHY_AGC_CONTROL=0x50d1a ***
+
+2018-07-13 10:41:44.503 => ar9300_load_nf: *** TIMEOUT while waiting for nf to load: AR_PHY_AGC_CONTROL=0x50d1a ***
+
+2018-07-13 10:50:56.577 => ar9300_load_nf: *** TIMEOUT while waiting for nf to load: AR_PHY_AGC_CONTROL=0x50d1a ***
+
+2018-07-13 10:50:56.577 => ar9300_start_nf_cal: WARNING: previous operation is not finished!!! SKIP START NF CAL THIS TIME !!! ***
+
+2018-07-13 11:05:17.733 => ar9300_load_nf: *** TIMEOUT while waiting for nf to load: AR_PHY_AGC_CONTROL=0x50d1a ***
+
+2018-07-13 11:05:17.733 => ar9300_start_nf_cal: WARNING: previous operation is not finished!!! SKIP START NF CAL THIS TIME !!! ***
+
+2018-07-13 11:06:49.744 => ar9300_load_nf: *** TIMEOUT while waiting for nf to load: AR_PHY_AGC_CONTROL=0x50d1a ***
+
+2018-07-13 11:13:30.812 => ar9300_load_nf: *** TIMEOUT while waiting for nf to load: AR_PHY_AGC_CONTROL=0x50d1a ***
+

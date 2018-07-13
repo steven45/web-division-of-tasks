@@ -24,23 +24,34 @@
     <div class="field" style="width: 100%">
       <div class="ui radio checkbox">
         <input type="radio" name="Jam" tabindex="0" value="Lainnya">
-        <label>Lainnya</label>
-        
+        <label>Lainnya</label>      
       </div>
       <div class="field" style="margin-left: 25px">
         <input type="text" name="Jam1" placeholder="Tulis Jam disini (03:00, 07:00, 11:00, dst)">
     </div>
     </div>
-
     <div class="ui small field" >
-    <label>Info Checklist</label>
-    <input type="file" name="Info" id="fileToUpload">
+      <label>Info Checklist</label>
+      <input type="file" name="Info" id="fileToUpload">
+    </div>   
+    <label>Batas Pengecekan</label>
+    <div class="field">
+      <select class="ui dropdown">
+        <option value="">Batas Waktu Pengecekan</option>
+        <option value="10">10 Menit</option>
+        <option value="20">20 Menit</option>
+        <option value="30">30 Menit</option>
+        <option value="40">40 Menit</option>
+        <option value="50">50 Menit</option>
+        <option value="60">60 Menit</option>
+      </select>
+    </div>
     
-  </div>
+
   <div class="ui center aligned basic segment">
     <button class="ui blue button" type="submit">
-      <i class="plus icon"></i>
-    Tambah
+      <i class="save icon"></i>
+    Simpan
   </button>
 	</div>
   </form>
