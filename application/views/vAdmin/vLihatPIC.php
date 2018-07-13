@@ -116,8 +116,7 @@
   </tbody>
   <tfoot class="full-width">
     <tr>
-      <th></th>
-      <th colspan="9">
+      <th colspan="8">
         <input type="hidden" name="nJumlah" value="<?php echo $nJumlah; ?>">
         <input type="hidden" name="nDisabled" value="<?php echo $nDisabled; ?>">
         <input type="hidden" name="nEnabled" value="<?php echo $nEnabled; ?>">
@@ -125,6 +124,18 @@
           <i class="save icon"></i>
           Simpan
         </button>
+        <div class="ui left floated pagination menu">
+        <a class="icon item">
+          <i class="left chevron icon"></i>
+        </a>
+        <a class="active item">1</a>
+        <a class="item">2</a>
+        <a class="item">3</a>
+        <a class="item">4</a>
+        <a class="icon item">
+          <i class="right chevron icon"></i>
+        </a>
+      </div>
       </th>
     </tr>
   </tfoot>

@@ -29,7 +29,7 @@
   </title>
 </head>
 
-<body style="background-color: #c7eae9">
+<body style="background-color: #bcd8d7">
   <!-- Header -->
     <div class="ui top fixed inverted pointing menu">
       <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
@@ -78,8 +78,10 @@
                 </div>
                 <div class="item">
                   <div class="content">
-                    <a class="header">Semantic-Org/Semantic-UI-Docsssss</a>
-                    <div class="description">Updated 22 mins ago</div>
+                    <a class="header">Semantic-Org/Semantic-UI-Docsssss
+                    </a>
+                    <div class="description">Updated 22 mins ago sjjsak
+              </div>
                   </div>
                 </div>
               </div>
