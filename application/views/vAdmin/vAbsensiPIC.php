@@ -12,7 +12,7 @@
       Absensi PIC 
       
       </h3>
-      <a class="ui right floated tiny blue icon button" data-tooltip="Tambah PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahabsensi'); ?>">
+      <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Absensi PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahabsensi'); ?>">
           <i class="add icon"></i>
         </a>
     </div>
@@ -52,7 +52,7 @@
               <i class="edit icon"></i>Edit
             </button>
         </form> -->
-        <?php $edit = 'admin/editabsensi/'.$pic[$i]['NIK'] ?>
+        <?php $edit = 'admin/editabsensi/'.$absensi['IDHarian'] ?>
         <a href="<?php echo site_url($edit) ;?>" class="ui small blue button">
             <i class="edit icon"></i>Edit
         </a>
@@ -76,7 +76,7 @@
   <tfoot class="full-width">
     <tr>
       
-      <th colspan="6">
+      <th colspan="7">
         
         <button class="ui right floated blue small button" style="margin-top: 5px;">
           <i class="save icon"></i>Simpan

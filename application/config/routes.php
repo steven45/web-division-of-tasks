@@ -35,7 +35,8 @@ $route['admin/absensi'] = 'cAdmin/lihatAbsensi';
 $route['admin/tambahabsensi'] = 'cAdmin/tambahAbsensi';
 $route['admin/validasitambahabsensi'] = 'cAdmin/validasiTambahAbsensi';
 $route['admin/hapusabsensi'] = 'cAdmin/hapusAbsensi';
-$route['admin/editabsensi'] = 'cAdmin/editAbsensi';
+$route['admin/editabsensi/(:any)'] = 'cAdmin/editAbsensi/$1';
+$route['admin/validasieditabsensi'] = 'cAdmin/validasiEditAbsensi';
 $route['admin/gantiabsensi'] = 'cAdmin/gantiAbsensi';
 
 $route['admin/log'] = 'cAdmin/lihatLog';

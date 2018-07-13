@@ -70,10 +70,6 @@ class mAdmin extends CI_Model
     public function getChecklist($IDChecklist =  false)
     {
         if ($IDChecklist == null) {
-            // $query = $this->db->order_by('NamaChecklist','ASC');
-            // $query = $this->db->order_by('Jam','ASC');
-            // $query = $this->db->get('checklist');
-            // return $query->result_array();
             $query = $this->db->order_by('c.NamaChecklist','ASC');
             $query = $this->db->order_by('c.Jam','ASC');
             $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status');
@@ -128,6 +124,7 @@ class mAdmin extends CI_Model
     public function getAbsensi($IDHarian = FALSE)
     {
         if ($IDHarian == NULL) {
+            $query = $this->db->order_by('h.Hari','ASC');
             $this->db->select('h.IDHarian, h.NIK, h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam, p.Status');
              $this->db->from('harian h');
              $this->db->join('pic p','p.NIK=h.NIK');
@@ -161,9 +158,19 @@ class mAdmin extends CI_Model
         }
     }
 
-    public function editAbsensi($table, $IDHarian, $data, $NIK, $IDJadwal)
+    public function editAbsensi($table, $IDHarian, $data,$NIK, $IDJadwal, $hari)
     {
-
+        $query = "SELECT * FROM $table WHERE `NIK` = '$NIK' AND `IDJadwal` = $IDJadwal AND `hari` = '$hari'";
+        $hasil =  $this->db->query($query)->row_array();
+        if ($hasil == NULL) {
+            $this->db->where('IDHarian', $IDHarian);
+            $this->db->update($table, $data);
+            return "1";
+        }
+        else{
+            return "0";
+        }
+        
     }
 
     public function gantiAbsensi($table, $IDHarian, $data)

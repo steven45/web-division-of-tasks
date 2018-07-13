@@ -9,7 +9,7 @@ class cAdmin extends CI_Controller {
 		$this->load->model('mAdmin');
 		$this->load->helper('url_helper');
 		$this->load->library('session');
-
+		date_default_timezone_set("Asia/Bangkok");
 	}
 
 	public function index()
@@ -321,6 +321,10 @@ class cAdmin extends CI_Controller {
 	{
 		$data['judul'] = "Lihat Checklist";
 		$data['checklist']= $this->mAdmin->getChecklist();
+		$data['absensi'] = $this->mAdmin->getAbsensi();
+		// header("Content-type:application/json");
+
+		// echo json_encode($data['checklist']);
 
 		// $myFile = $data['checklist'][3]['Info'];
 		// $fh = fopen($myFile, 'r');
@@ -333,6 +337,34 @@ class cAdmin extends CI_Controller {
 			$data['status'] = 'Enabled';
 		}
 
+		$date = date("N");
+		switch ($date) {
+			case '1':
+				$hari = 'Senin';
+				break;
+			case '2':
+				$hari = 'Selasa';
+				break;
+			case '3':
+				$hari = 'Rabu';
+				break;
+			case '4':
+				$hari = 'Kamis';
+				break;
+			case '5':
+				$hari = 'Jumat';
+				break;
+			break;
+			case '6':
+				$hari = 'Sabtu';
+				break;
+			break;
+			case '7':
+				$hari = 'Minggu';
+				break;
+			break;
+		}
+		$data['hari'] = $hari;
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vLihatChecklist', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
@@ -421,6 +453,7 @@ class cAdmin extends CI_Controller {
 		$data['judul'] = "Lihat Absensi";
 		$data['absensi']= $this->mAdmin->getAbsensi();
 
+		// var_dump($data);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vAbsensiPIC', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
@@ -431,8 +464,7 @@ class cAdmin extends CI_Controller {
 		$data['judul'] = "Tambah Absensi";
 		$data['pic'] = $this->mAdmin->getPIC();
 		$data['jadwal'] = $this->mAdmin->getJadwal();
-
-		// var_dump($data);
+		// var_dump($data['pic']);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vTambahAbsensiPIC', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
@@ -443,33 +475,31 @@ class cAdmin extends CI_Controller {
 		$NIK = $this->input->post('NIK');
 		$IDJadwal = $this->input->post('IDJadwal');
 		$hari = $this->input->post('Hari');
-		$kehadiran = $this->input->post('Kehadiran');
 
 		$data = array(
 			'NIK' => $NIK,
 			'IDJadwal' => $IDJadwal,
 			'Hari' => $hari,
-			'kehadiran' => $kehadiran
+			'kehadiran' => 'Hadir'
 		);
 
 		$query = $this->mAdmin->tambahAbsensi('harian', $data, $NIK, $IDJadwal, $hari);
 
-		var_dump($query);
-		// if ($query == 1) 
-		// {
-		// 	echo "<script type='text/javascript'>
-		// 			alert('Sukses Menambahkan Absensi');
-		// 			window.location.href = '" . base_url() . "admin/pic';
-		// 		</script>";
-		// }
-		// else
-		// {
-		// 	echo "<script type='text/javascript'>
+		if ($query == 1) 
+		{
+			echo "<script type='text/javascript'>
+					alert('Sukses Menambahkan Absensi');
+					window.location.href = '" . base_url() . "admin/absensi';
+				</script>";
+		}
+		else
+		{
+			echo "<script type='text/javascript'>
 
-		// 			alert('Absensi sudah ada!!! ');
-		// 			window.location.href = '" . base_url() . "admin/tambahpic';
-		// 		</script>";
-		// }
+					alert('Absensi sudah ada!!! ');
+					window.location.href = '" . base_url() . "admin/tambahabsensi';
+				</script>";
+		}
 	}
 
 	public function hapusAbsensi()
@@ -478,15 +508,13 @@ class cAdmin extends CI_Controller {
 		$this->mAdmin->hapusAbsensi('harian', $IDHarian);
 	}
 
-	public function editAbsensi()
+	public function editAbsensi($IDHarian= NULL)
 	{
-		$IDHarian = $this->input->post('IDHarian');
+		$IDHarian = $IDHarian;
 		$data['absensi']= $this->mAdmin->getAbsensi($IDHarian);
-		// var_dump($data);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
-		$this->load->view('vAdmin/vTambahAbsensi', $data);
-		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
-
+		$this->load->view('vAdmin/vEditAbsensiPIC', $data);
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');		
 	}
 
 	public function validasiEditAbsensi()
@@ -494,12 +522,26 @@ class cAdmin extends CI_Controller {
 		$IDHarian = $this->input->post('IDHarian');
 		$NIK = $this->input->post('NIK');
 		$IDJadwal = $this->input->post('IDJadwal');
+		$hari = $this->input->post('Hari');
 
 		$data = array(
-			'IDJadwal' => $IDJadwal
+			'IDJadwal' => $IDJadwal,
+			'Hari' => $hari
 		);
 
-		$query = $this->mAdmin->editAbsensi('harian',$IDHarian, $data, $NIK, $IDJadwal);
+		$query = $this->mAdmin->editAbsensi('harian',$IDHarian, $data, $NIK, $IDJadwal, $hari);
+		if ($query == '1') {
+			echo "<script type='text/javascript'>
+				alert('Sukses mengedit absensi. ');
+				window.location.href = '" . base_url() . "admin/absensi';
+			</script>";
+		}
+		else{
+			echo "<script type='text/javascript'>
+				alert('Jadwal sudah ada !!!. ');
+				window.location.href = '" . base_url() . "admin/absensi';
+			</script>";
+		}
 	}
 
 	public function gantiAbsensi()

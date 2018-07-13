@@ -37,18 +37,11 @@
         <td>
           <select class="ui dropdown">
             <option value="<?php echo $checklist['NamaPIC']; ?>"><?php echo $checklist['NamaPIC']; ?></option>
-            <option value="Panji Nugroho">Panji Nugroho</option>
-            <option value="Rudi Prima Mandala">Rudi Prima Mandala</option>
-            <option value="Hashfi Arya Persada">Hashfi Arya Persada</option>
-            <option value="Muhamad Imron">Muhamad Imron</option>
-            <option value="Januar Hagai">Januar Hagai</option>
-            <option value="Deni Sabilah">Deni Sabilah</option>
-            <option value="Muchamad Ichsan">Muchamad Ichsan</option>
-            <option value="Reza Adi Putra">Reza Adi Putra</option>
-            <option value="Fandy Prasetyo">Fandy Prasetyo</option>
-            <option value="Erfian Wibawanto">Erfian Wibawanto</option>
-            <option value="Donny Sulistyawan">Donny Sulistyawan</option>
-            <option value="Surya Setiawan">Surya Setiawan</option>
+            <!-- <?php if ($hari == $checklist['Hari']): ?>
+              <?php foreach ($checklist as $checklist): ?>
+                <option value="ss"><?php echo $checklist['NamaPIC']; ?></option>
+              <?php endforeach ?>
+            <?php endif ?> -->
           </select>
         </td>
         <td><?php echo $checklist['NamaChecklist']; ?></td>
