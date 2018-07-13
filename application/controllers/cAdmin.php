@@ -434,7 +434,7 @@ class cAdmin extends CI_Controller {
 
 		// var_dump($data);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
-		$this->load->view('vAdmin/vTambahAbsensi', $data);
+		$this->load->view('vAdmin/vTambahAbsensiPIC', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 

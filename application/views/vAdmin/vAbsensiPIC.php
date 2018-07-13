@@ -12,6 +12,9 @@
       Absensi PIC 
       
       </h3>
+      <a class="ui right floated tiny blue icon button" data-tooltip="Tambah PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahabsensi'); ?>">
+          <i class="add icon"></i>
+        </a>
     </div>
 
       <div class="ui divider"></div>
@@ -24,6 +27,7 @@
       <th class="">Shift</th>
       <th class="">Jam</th>
       <th class="">Hari</th>
+      <th class="">Edit</th>
       <th class="">Kehadiran</th>
     </tr>
   </thead>
@@ -41,6 +45,18 @@
       <td><?php echo $absensi['Shift'] ?></td>
       <td><?php echo $absensi['Jam'] ?></td>
       <td><?php echo $absensi['Hari'] ?></td>
+      <td>
+       <!--  <form method="GET" action="<?php echo base_url('admin/editpic'); ?> ">
+            <input type="hidden" name="NIK" value="<?php echo $pic[$i]['NIK'] ?>">
+            <button class="ui small blue button">
+              <i class="edit icon"></i>Edit
+            </button>
+        </form> -->
+        <?php $edit = 'admin/editabsensi/'.$pic[$i]['NIK'] ?>
+        <a href="<?php echo site_url($edit) ;?>" class="ui small blue button">
+            <i class="edit icon"></i>Edit
+        </a>
+      </td>
       <td>
           <select style="min-width: 10em;" name="<?php echo 'Kehadiran'.$i ?>">
             <?php if ($absensi['Kehadiran'] == "Hadir") { ?>
