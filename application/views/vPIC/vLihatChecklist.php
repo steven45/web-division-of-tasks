@@ -2,13 +2,18 @@
   <div class="column" style="width: auto;">
   <div class="ui segment" style="border-radius: 1.285714rem">
 
-    <h3 style="text-align: center;">
-
+    <div class="segment">
+      <div class="ui icon input" style="margin-left: 0px">
+        <input type="text" placeholder="Search...">
+        <i class="circular search link icon"></i>
+      </div>
+      <h3 style="text-align: center; margin-top: -30px;">
       <div class="ui icon">
         <i class="tasks icon"></i>
-      Daftar Checklist   
+      Daftar Checklist 
+      </h3>
+      
       </div>
-    </h3>
 
   <div class="ui divider"></div>
 
@@ -16,36 +21,52 @@
     <thead>
       <tr style="text-align: center">
         <th class="sorted ascending">No</th>
-        <th>Nama PIC</th>
-        <th >Nama Checklist</th>
-        <th >Info Checklist</th>
         <th >Jadwal</th>
+        <th>Batas Pengecekan</th>
+        <th >Nama Checklist</th>
+        <th>Nama PIC</th>
+        <th >Info Checklist</th>
         <th >Status</th>
         <th >Keterangan</th>
-        <th >Check</th>
         
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>1</td>
-        <td>Panji Nugroho</td>
-        <td>Checklist PLN</td>
-        <td>
-          <a href="" data variation="wide" data-tooltip="Hello. This is a very wide pop-up which allows for lots of content with additional space. You can fit a lot of words here and the paragraphs will be pretty wide." data-position="bottom center">Lihat</a>
-        </td>
         <td>01:00</td>
-        <td>OK</td>
+        <td>10 Menit</td>
+        <td>Checklist PLN</td>
+        <td>Panji Nugroho</td>      
         <td>
           <a href="" data variation="wide" data-tooltip="Hello. This is a very wide pop-up which allows for lots of content with additional space. You can fit a lot of words here and the paragraphs will be pretty wide." data-position="bottom center">Lihat</a>
         </td>
         <td>
-          <a class="ui tiny blue basic button" href="<?php echo site_url('pic/docheck'); ?>">Check</a>
+          <select class="ui selection dropdown">
+            <option value="1">OK</option>
+            <option value="0">Bad</option>
+          </select>
+        </td>
+        <td>
+          <a href="" data variation="wide" data-tooltip="Hello. This is a very wide pop-up which allows for lots of content with additional space. You can fit a lot of words here and the paragraphs will be pretty wide." data-position="bottom center">Lihat</a>
         </td>
       </tr> 
     </tbody>
     <tfoot>
         <th colspan="8">
+           <div class="ui left floated pagination menu">
+        <a class="icon item">
+          <i class="left chevron icon"></i>
+        </a>
+        <a class="active item">1</a>
+        <a class="item">2</a>
+        <a class="item">3</a>
+        <a class="item">4</a>
+        <a class="icon item">
+          <i class="right chevron icon"></i>
+        </a>
+      </div>
+
         </th>
     </tfoot>
   </table>
