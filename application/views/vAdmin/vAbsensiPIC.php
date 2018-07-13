@@ -33,6 +33,7 @@
     <?php $jumlah = count($absensi); ?>
     <input type="hidden" name="jumlahAbsensi" value="<?php echo $jumlah ?>"> 
     <?php foreach ($absensi as $absensi) { ?>
+    <?php if ($absensi['Status'] == 'Enabled') { ?>
     <input type="hidden" name="<?php echo 'IDHarian'.$i; ?>" value ="<?php echo $absensi['IDHarian']; ?>">
     <tr>
       <td><?php echo $absensi['NIK'] ?></td>
@@ -52,6 +53,7 @@
           </select>
       </td>
     </tr>
+    <?php } ?>
     <?php $i = $i+1; ?>
     <?php } ?>
   </tbody>
