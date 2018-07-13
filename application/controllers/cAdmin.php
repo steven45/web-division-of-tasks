@@ -170,6 +170,7 @@ class cAdmin extends CI_Controller {
 		for ($i=0; $i < $nJumlah; $i++) { 
 			$id[$i] = 'NIK'.$i;
 			$nStatus[$i] = 'status'.$i;
+
 		}
 
 		for ($i=0; $i < $nJumlah; $i++) { 
@@ -179,12 +180,6 @@ class cAdmin extends CI_Controller {
 			$data = array(
 				'Status' => $status
 			);
-			// var_dump($id[$i]);
-			// var_dump($NIK);
-			// echo "<br>";
-			// var_dump($nStatus[$i]);
-			// var_dump($status);
-			// echo "<br>";
 			if ($NIK != NULL AND $status != NULL) {
 				$query = $this->mAdmin->hapusPIC('pic',$NIK, $data);
 			}
@@ -510,6 +505,7 @@ class cAdmin extends CI_Controller {
 		for ($i=0; $i < $jumlahAbsensi; $i++) { 
 			$id[$i] = 'IDHarian'.$i;
 			$hadir[$i] = 'Kehadiran'.$i;
+
 		}
 
 		for ($i=0; $i < $jumlahAbsensi; $i++) { 
@@ -522,6 +518,11 @@ class cAdmin extends CI_Controller {
 
 			$query = $this->mAdmin->gantiAbsensi('harian',$IDHarian, $data);
 		}
+		echo "<script type='text/javascript'>
+
+				alert('Sukses menyimpan kehadiran. ');
+				window.location.href = '" . base_url() . "admin/absensi';
+			</script>";
 	}
 
 	public function lihatLog()

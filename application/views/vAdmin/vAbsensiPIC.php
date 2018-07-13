@@ -3,7 +3,7 @@
   <div class="ui segment" style="border-radius: 1.285714rem">
    <div class="segment">
             <div class="ui icon input" style="margin-left: 0px">
-            <input type="text" placeholder="Search...">
+            <input type="text" placeholder="Search..." id="pencarian">
             <i class="circular search link icon"></i>
           </div>
     <h3 style="text-align: center; margin-top: -30px;">
@@ -27,69 +27,43 @@
       <th class="">Kehadiran</th>
     </tr>
   </thead>
-  <tbody>
+  <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
+  <tbody id="hasil">
+    <?php $i = 0; ?>
+    <?php $jumlah = count($absensi); ?>
+    <input type="hidden" name="jumlahAbsensi" value="<?php echo $jumlah ?>"> 
+    <?php foreach ($absensi as $absensi) { ?>
+    <input type="hidden" name="<?php echo 'IDHarian'.$i; ?>" value ="<?php echo $absensi['IDHarian']; ?>">
     <tr>
-      <td>155150200</td>
-      <td>Sarah</td>
-      <td>1</td>
-      <td>23.00</td>
-      <td>ITO</td>
+      <td><?php echo $absensi['NIK'] ?></td>
+      <td><?php echo $absensi['NamaPIC'] ?></td>
+      <td><?php echo $absensi['Shift'] ?></td>
+      <td><?php echo $absensi['Jam'] ?></td>
+      <td><?php echo $absensi['Hari'] ?></td>
       <td>
-          <select name="kehadiran" class="ui selection dropdown">
-            <option value="0">Hadir</option>
-            <option value="1">Tidak Hadir</option>
+          <select style="min-width: 10em;" name="<?php echo 'Kehadiran'.$i ?>">
+            <?php if ($absensi['Kehadiran'] == "Hadir") { ?>
+              <option value="<?php echo $absensi['Kehadiran']; ?>"><?php echo $absensi['Kehadiran']; ?></option>
+              <option value="Tidak Hadir">Tidak Hadir</option>
+            <?php } else if ($absensi['Kehadiran'] == "Tidak Hadir") { ?>
+              <option value="Tidak Hadir"><?php echo $absensi['Kehadiran']; ?></option>
+              <option value="Hadir">Hadir</option>
+            <?php } ?>
           </select>
       </td>
     </tr>
-    <tr>
-      <td>155150200</td>
-      <td>Sarah</td>
-      <td>1</td>
-      <td>23.00</td>
-      <td>ITO</td>
-      <td>
-          <select name="kehadiran" class="ui selection dropdown">
-            <option value="0">Hadir</option>
-            <option value="1">Tidak Hadir</option>
-          </select>
-      </td>
-    </tr>
-    <tr>
-      <td>155150200</td>
-      <td>Sarah</td>
-      <td>1</td>
-      <td>23.00</td>
-      <td>ITO</td>
-      <td>
-          <select name="kehadiran" class="ui selection dropdown">
-            <option value="0">Hadir</option>
-            <option value="1">Tidak Hadir</option>
-          </select>
-      </td>
-    </tr>
-    <tr>
-      <td>155150200</td>
-      <td>Sarah</td>
-      <td>2</td>
-      <td>23.00</td>
-      <td>ITO</td>
-      <td>
-          <select name="kehadiran" class="ui selection dropdown">
-            <option value="0">Hadir</option>
-            <option value="1">Tidak Hadir</option>
-          </select>
-      </td>
-    </tr>
-    
+    <?php $i = $i+1; ?>
+    <?php } ?>
   </tbody>
   <tfoot class="full-width">
     <tr>
       
       <th colspan="6">
         
-        <div class="ui right floated blue small button" style="margin-top: 5px;">
+        <button class="ui right floated blue small button" style="margin-top: 5px;">
           <i class="save icon"></i>Simpan
-        </div>
+        </button>
+
         <div class="ui left floated pagination menu">
         <a class="icon item">
           <i class="left chevron icon"></i>
@@ -106,9 +80,8 @@
       </th>
 
     </tr>
-
   </tfoot>
-
+  </form>
 </table>
 </div>
 

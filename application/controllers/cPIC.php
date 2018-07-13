@@ -21,16 +21,13 @@ class cPIC extends CI_Controller {
 	public function validation()
 	{
 		$NIK = $this->input->post('NIK');
-		$password = $this->input->post('password');
+		$password = md5($this->input->post('Password'));
 
-		$where = array(
-			'NIK' => $NIK,
-			'Password' => md5($password)
-			);
-		$cek = $this->mPIC->getPIC("pic",$where)->num_rows();
+		$cek = $this->mPIC->getPIC($NIK, $password);
 
-		if($cek > 0){
+		if($cek !=NULL){
 			$data_session = array(
+				'NamaPIC' => $cek['NamaPIC'],
 				'nik' => $NIK,
 				'status' => "login"
 				);
