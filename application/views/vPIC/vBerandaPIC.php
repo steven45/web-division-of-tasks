@@ -25,7 +25,7 @@
   
       <div class="ui divider"></div>
     
-        <table class="ui sortable celled table" style="margin-top: 20px; margin-left: 20px; width: 95%">
+        <table class="ui sortable celled table" id="example" style="margin-top: 20px; margin-left: 20px; width: 95%">
           <thead>
             <tr>
             <th>No</th>
