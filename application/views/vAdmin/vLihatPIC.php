@@ -20,7 +20,7 @@
 
       <div class="ui divider"></div>
 
-<table class="ui sortable compact celled definition grey inverted table" id="example">
+<table class="ui sortable compact celled definition grey inverted table" id="example" class="display">
   <thead class="full-width" style="text-align: center; background-color: #35373c">
     <tr>
       <th class="sorted ascending">NIK</th>
@@ -35,8 +35,8 @@
         Status
           <i class="dropdown icon"></i>
             <div class="menu">
-              <a class="item" href="<?php echo site_url('admin/pic/Enabled') ?>">Enable</a>
-              <a class="item" href="<?php echo site_url('admin/pic/Disabled') ?>">Disable</a>
+              <a class="item" href="<?php echo site_url('admin/pic/Enabled') ?>">Enabled</a>
+              <a class="item" href="<?php echo site_url('admin/pic/Disabled') ?>">Disabled</a>
             </div>
         </div>
       </th>

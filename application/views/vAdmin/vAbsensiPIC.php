@@ -54,7 +54,7 @@
         </form> -->
         <?php $edit = 'admin/editabsensi/'.$absensi['IDHarian'] ?>
         <a href="<?php echo site_url($edit) ;?>" class="ui small blue button">
-            <i class="edit icon"></i>Edit
+            Edit
         </a>
       </td>
       <td>
@@ -81,19 +81,6 @@
         <button class="ui right floated blue small button" style="margin-top: 5px;">
           <i class="save icon"></i>Simpan
         </button>
-
-        <div class="ui left floated pagination menu">
-        <a class="icon item">
-          <i class="left chevron icon"></i>
-        </a>
-        <a class="active item">1</a>
-        <a class="item">2</a>
-        <a class="item">3</a>
-        <a class="item">4</a>
-        <a class="icon item">
-          <i class="right chevron icon"></i>
-        </a>
-      </div>
         
       </th>
 
@@ -101,6 +88,7 @@
   </tfoot>
   </form>
 </table>
+<br><br>
 </div>
 
 

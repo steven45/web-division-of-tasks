@@ -10,7 +10,8 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/Semantic-UI/data-paginate.css'); ?>">
   <script type="text/javascript" src="<?php echo base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/tablesort.js'); ?>"></script>
-  <script src="<?php echo base_url('assets/Semantic-UI/data-paging.js'); ?>"></script>
+  <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/data-paging.js'); ?>"></script>
+
     <script type="text/javascript">
       $(document).ready(function() {
         $('#example').DataTable( {
@@ -18,21 +19,13 @@
           } );
         } );
     </script>
+
   <script type="text/javascript">
     $(document).ready(function() 
     { 
         $('table').tablesort(); 
     } 
     ); 
-  </script>
-
-  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#example').DataTable( {
-                "pagingType": "full_numbers"
-            } );
-        } );
   </script>
 
   <script type="text/javascript">
