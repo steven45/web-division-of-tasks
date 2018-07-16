@@ -19,8 +19,8 @@
 
       <div class="ui divider"></div>
 
-<table class="ui sortable compact celled definition grey inverted table" id="example">
-  <thead class="full-width" style="text-align: center; background-color: #35373c">
+<table class="ui sortable compact celled definition table" id="example">
+  <thead class="full-width" style="text-align: center; background-color: #dbedff">
     <tr>
       <th class="sorted ascending">NIK</th>
       <th class="">Nama PIC</th>
@@ -47,7 +47,7 @@
       <td><?php echo $absensi['Jam'] ?></td>
       <td><?php echo $absensi['Hari'] ?></td>
       <td>
-          <select style="min-width: 10em;" name="<?php echo 'Kehadiran'.$i ?>">
+          <select class="ui selection dropdown" style="min-width: 10em;" name="<?php echo 'Kehadiran'.$i ?>">
             <?php if ($absensi['Kehadiran'] == "Hadir") { ?>
               <option value="<?php echo $absensi['Kehadiran']; ?>"><?php echo $absensi['Kehadiran']; ?></option>
               <option value="Tidak Hadir">Tidak Hadir</option>

@@ -1,14 +1,13 @@
 .dataTables_wrapper .dataTables_info {
   clear:both;
-  float:left;
-  padding-top:-0.5em;
+  float:right;
+  padding-top:-0.5em
   }
 
   .dataTables_wrapper .dataTables_paginate {
-  clear:both;
   float:left;
-  text-align:left;
-  padding-top:0.25em;
+  text-align:right;
+  padding-top:-20.25em;
   margin-left: -23px;
   }
 

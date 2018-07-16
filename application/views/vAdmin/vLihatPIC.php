@@ -20,8 +20,8 @@
 
       <div class="ui divider"></div>
 
-<table class="ui sortable compact celled definition grey inverted table" id="example" class="display">
-  <thead class="full-width" style="text-align: center; background-color: #35373c">
+<table class="ui sortable compact celled definition white table" id="example" class="display" style="text-align: center;">
+  <thead class="full-width" style="text-align: center; background-color: #dbedff">
     <tr>
       <th class="sorted ascending">NIK</th>
       <th class="">Nama PIC</th>
@@ -31,7 +31,7 @@
       <th class="">Jumlah Pengecekan</th>
       <th>Edit</th>
       <th>
-        <div class="ui simple dropdown item" style="color: white;">
+        <div class="ui simple dropdown item" style="color: black;">
         Status
           <i class="dropdown icon"></i>
             <div class="menu">
@@ -70,7 +70,7 @@
       </td>
       <td>
           <input type="hidden" name="<?php echo 'NIK'.$i; ?>" value="<?php echo $pic[$i]['NIK']; ?>">
-          <select  name="<?php echo 'status'.$i; ?>"  style="min-width: 10em;">
+          <select class="ui selection dropdown"> name="<?php echo 'status'.$i; ?>"  style="min-width: 10em;">
             <?php if ($pic[$i]['Status'] == "Enabled") { ?>
               <option value="<?php echo $pic[$i]['Status']; ?>"><?php echo $pic[$i]['Status']; ?></option>
               <option value="Disabled">Disabled</option>
@@ -100,7 +100,7 @@
       </td>
       <td>
           <input type="hidden" name="<?php echo 'NIK'.$i; ?>" value="<?php echo $pic[$i]['NIK']; ?>">
-          <select name="<?php echo 'status'.$i; ?>"  style="min-width: 10em;">
+          <select class="ui selection dropdown" name="<?php echo 'status'.$i; ?>"  style="min-width: 10em;">
             <?php if ($pic[$i]['Status'] == "Enabled") { ?>
               <option value="<?php echo $pic['Status']; ?>"><?php echo $pic[$i]['Status']; ?></option>
               <option value="Disabled">Disabled</option>
@@ -130,7 +130,7 @@
   </tfoot>
   </form>
 </table>
-<br><br><br>
+<br><br>
 </div>
 </div>
 </div>
