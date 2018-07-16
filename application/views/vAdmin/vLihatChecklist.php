@@ -12,10 +12,12 @@
         <i class="tasks icon"></i>
       Daftar Checklist 
       </h3>
+
       <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Checklist" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahchecklist'); ?>">
           <i class="add icon"></i>
       </a>
       </div>
+
   <form method="POST" action="<?php echo site_url('admin/gantichecklist'); ?>">
   <table class="ui sortable celled table" style=" width: auto;">
     <thead>
@@ -59,13 +61,13 @@
           </select>
         </td>
         <td>
-          <?php 
+          <!-- <?php 
             $myFile = $checklist['Info'];
             $fh = fopen($myFile, 'r');
             while(!feof($fh)){
             echo fgets($fh)."<br>";
             }
-           ?>
+           ?> -->
           <a href="#" data variation="wide" title="Hello. This is a very wide pop-up which allows for lots of content with additional space. &#013 You can fit a lot of words here and the paragraphs will be pretty wide. " data-position="bottom center" data-html="true" >Lihat</a>
         </td>
         
@@ -96,10 +98,12 @@
       <?php } ?>
     </tbody>
     <tfoot>
+      <tr>
         <th colspan="8">
           <button class="ui right floated blue small button" >
           <i class="save icon"></i>Simpan
         </button>
+
   </form>
        <div class="pagination">
   <a href="#">&laquo;</a>
@@ -111,10 +115,17 @@
   <a href="#">6</a>
   <a href="#">&raquo;</a>
 </div>
+
         </th>
+        </tr>
     </tfoot>
   </table>
+  <br>
+  <br>
+  <br>
+</div>
   </div>
+
   </div>
 </div>
 

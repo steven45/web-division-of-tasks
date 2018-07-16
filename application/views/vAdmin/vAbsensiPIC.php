@@ -19,16 +19,17 @@
 
       <div class="ui divider"></div>
 
-<table class="ui sortable compact celled definition grey inverted table">
-  <thead class="full-width" style="text-align: center; background-color: #35373c">
+<table class="ui sortable compact celled definition table" id="example">
+  <thead class="full-width" style="text-align: center; background-color: #dbedff">
     <tr>
       <th class="sorted ascending">NIK</th>
       <th class="">Nama PIC</th>
       <th class="">Shift</th>
       <th class="">Jam</th>
       <th class="">Hari</th>
-      <th class="">Edit</th>
       <th class="">Kehadiran</th>
+      <th class="">Edit</th>
+      <th class="">Hapus</th>
     </tr>
   </thead>
   <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
@@ -46,19 +47,7 @@
       <td><?php echo $absensi['Jam'] ?></td>
       <td><?php echo $absensi['Hari'] ?></td>
       <td>
-       <!--  <form method="GET" action="<?php echo base_url('admin/editpic'); ?> ">
-            <input type="hidden" name="NIK" value="<?php echo $pic[$i]['NIK'] ?>">
-            <button class="ui small blue button">
-              <i class="edit icon"></i>Edit
-            </button>
-        </form> -->
-        <?php $edit = 'admin/editabsensi/'.$absensi['IDHarian'] ?>
-        <a href="<?php echo site_url($edit) ;?>" class="ui small blue button">
-            <i class="edit icon"></i>Edit
-        </a>
-      </td>
-      <td>
-          <select style="min-width: 10em;" name="<?php echo 'Kehadiran'.$i ?>">
+          <select class="ui selection dropdown" style="min-width: 10em;" name="<?php echo 'Kehadiran'.$i ?>">
             <?php if ($absensi['Kehadiran'] == "Hadir") { ?>
               <option value="<?php echo $absensi['Kehadiran']; ?>"><?php echo $absensi['Kehadiran']; ?></option>
               <option value="Tidak Hadir">Tidak Hadir</option>
@@ -68,6 +57,25 @@
             <?php } ?>
           </select>
       </td>
+
+      <td>
+       <!--  <form method="GET" action="<?php echo base_url('admin/editpic'); ?> ">
+            <input type="hidden" name="NIK" value="<?php echo $pic[$i]['NIK'] ?>">
+            <button class="ui small blue button">
+              <i class="edit icon"></i>Edit
+            </button>
+        </form> -->
+        <?php $edit = 'admin/editabsensi/'.$absensi['IDHarian'] ?>
+        <a href="<?php echo site_url($edit) ;?>" class="ui small blue button">
+            Edit
+        </a>
+      </td>
+      <td>
+        <a href="<?php echo site_url($edit) ;?>" class="ui small red button">
+            Hapus
+        </a>
+      </td>
+      
     </tr>
     <?php } ?>
     <?php $i = $i+1; ?>
@@ -76,24 +84,11 @@
   <tfoot class="full-width">
     <tr>
       
-      <th colspan="7">
+      <th colspan="8">
         
         <button class="ui right floated blue small button" style="margin-top: 5px;">
           <i class="save icon"></i>Simpan
         </button>
-
-        <div class="ui left floated pagination menu">
-        <a class="icon item">
-          <i class="left chevron icon"></i>
-        </a>
-        <a class="active item">1</a>
-        <a class="item">2</a>
-        <a class="item">3</a>
-        <a class="item">4</a>
-        <a class="icon item">
-          <i class="right chevron icon"></i>
-        </a>
-      </div>
         
       </th>
 
@@ -101,6 +96,7 @@
   </tfoot>
   </form>
 </table>
+<br><br>
 </div>
 
 

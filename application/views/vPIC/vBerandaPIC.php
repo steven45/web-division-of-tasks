@@ -25,7 +25,7 @@
   
       <div class="ui divider"></div>
     
-        <table class="ui sortable celled table" style="margin-top: 20px; margin-left: 20px; width: 95%">
+        <table class="ui sortable celled table" id="example" style="margin-top: 20px; margin-left: 20px; width: 95%">
           <thead>
             <tr>
             <th>No</th>
@@ -59,23 +59,13 @@
           <tfoot>
             <tr> 
             <th colspan="8">
-               <div class="ui left floated pagination menu">
-        <a class="icon item">
-          <i class="left chevron icon"></i>
-        </a>
-        <a class="active item" href="#">1</a>
-        <a class="item" href="#">2</a>
-        <a class="item" href="#">3</a>
-        <a class="item" href="#">4</a>
-        <a class="icon item" href="#">
-          <i class="right chevron icon"></i>
-        </a>
-      </div>
-
             </th> 
             </tr>
           </tfoot>
         </table>
+        <br>
+        <br>
+        <br>
     </div>
   </div>
 </div>

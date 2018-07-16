@@ -7,8 +7,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/Semantic-UI/semantic.min.css'); ?>">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/Semantic-UI/data-paginate.css'); ?>">
   <script type="text/javascript" src="<?php echo base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/tablesort.js'); ?>"></script>
+  <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/data-paging.js'); ?>"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#example').DataTable( {
+            "pagingType": "full_numbers"
+          } );
+        } );
+    </script>
+
   <script type="text/javascript">
     $(document).ready(function() 
     { 
@@ -16,6 +27,7 @@
     } 
     ); 
   </script>
+
   <script type="text/javascript">
     $(document).ready(function() 
     { 
@@ -24,10 +36,14 @@
     ); 
   </script>
 
+
+
   <title>
     <?php echo $judul; ?>
   </title>
+  
 </head>
+
 
 <body style="background-color: #bcd8d7">
   <!-- Header -->
@@ -56,6 +72,8 @@
             Daftar PIC</a>
             <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
             Absensi PIC</a>
+            <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
+            Statistic PIC</a>
       </div>
       </div>
         
