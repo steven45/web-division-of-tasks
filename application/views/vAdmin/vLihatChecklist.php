@@ -4,7 +4,7 @@
     
     <div class="segment">
       <div class="ui icon input" style="margin-left: 0px">
-        <input type="text" placeholder="Search...">
+        <input type="text" placeholder="Search..." id="pencarian">
         <i class="circular search link icon"></i>
       </div>
       <h3 style="text-align: center; margin-top: -30px;">
@@ -16,10 +16,7 @@
           <i class="add icon"></i>
       </a>
       </div>
-    
-
-  <div class="ui divider"></div>
-
+  <form method="POST" action="<?php echo site_url('admin/gantichecklist'); ?>">
   <table class="ui sortable celled table" style=" width: auto;">
     <thead>
       <tr style="text-align: center">
@@ -30,42 +27,59 @@
         <th>Nama PIC</th>
         <th >Info Checklist</th>
         <th>Edit</th>
-        <th>Status</th>
+        <th>
+          <div class="ui simple dropdown item" style="color: black;">
+        Status
+          <i class="dropdown icon"></i>
+            <div class="menu">
+              <a class="item" href="<?php echo site_url('admin/checklist/Enabled') ?>">Enable</a>
+              <a class="item" href="<?php echo site_url('admin/checklist/Disabled') ?>">Disable</a>
+            </div>
+          </div>
+        </th>
       </tr>
     </thead>
-    <tbody>
-      <?php $tempEnabled = 1;  ?>
+    <tbody id="hasil">
+      <?php $temp = 0; $no = 1; ?>
+      <input type="hidden" name="nJumlah" value="<?php echo count($checklist); ?>">
       <?php foreach ($checklist as $checklist) { ?>
-      <?php if ($checklist['Status'] == 'Enabled') { ?>
-
-      <tr>
-        <td><?php echo $tempEnabled; $tempEnabled = $tempEnabled+1; ?></td>
+      <?php if ($checklist['Status'] == $status) { ?>
+      <input type="hidden" name="<?php echo 'IDChecklist'.$temp ?>" value="<?php echo $checklist['IDChecklist']; ?>">
+      <tr >
+        <td><?php echo $no; $no = $no+1; ?></td>
         <td><?php echo $checklist['Jam']; ?></td>
-        <td>10 Menit</td>
+        <td><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
         <td><?php echo $checklist['NamaChecklist']; ?></td>
         <td>
-          <select class="ui search dropdown">
-            <option value="<?php echo $checklist['NamaPIC']; ?>"><?php echo $checklist['NamaPIC']; ?></option>
-            <!-- <?php if ($hari == $checklist['Hari']): ?>
-              <?php foreach ($checklist as $checklist): ?>
-                <option value="ss"><?php echo $checklist['NamaPIC']; ?></option>
-              <?php endforeach ?>
-            <?php endif ?> -->
+          <select class="ui search dropdown" name="<?php echo 'NIK'.$temp ?>">
+            <option value="<?php echo $checklist['NIK']; ?>"><?php echo $checklist['NamaPIC']; ?></option>
+            <?php for ($i=0; $i < count($pic[$checklist['Jam']]); $i++) { ?>
+              <option value="<?php echo $pic[$checklist['Jam']][$i]['NIK'] ?>"><?php echo $pic[$checklist['Jam']][$i]['NamaPIC']; ?></option>
+            <?php } ?>
           </select>
         </td>
-        <td><a href="#">Lihat</a></td>
+        <td>
+          <?php 
+            $myFile = $checklist['Info'];
+            $fh = fopen($myFile, 'r');
+            while(!feof($fh)){
+            echo fgets($fh)."<br>";
+            }
+           ?>
+          <a href="#" data variation="wide" title="Hello. This is a very wide pop-up which allows for lots of content with additional space. &#013 You can fit a lot of words here and the paragraphs will be pretty wide. " data-position="bottom center" data-html="true" >Lihat</a>
+        </td>
         
 
         <td>
           <form method="POST" action="<?php echo site_url('admin/editchecklist'); ?>">
-            <button class="ui basic blue button">
+            <a class="ui basic blue button" href="<?php echo site_url('admin/editchecklist/'.$checklist['IDChecklist']); ?>">
               <i class="icon edit"></i>
                   Edit
-            </button>
+            </a>
           </form>
         </td>
         <td>
-          <select class="ui selection tiny dropdown">
+          <select class="ui selection tiny dropdown" name="<?php echo 'Status'.$temp ?>">
               <?php if ($status == "Enabled") { ?>
               <option value="<?php echo $checklist['Status']; ?>"><?php echo $checklist['Status']; ?></option>
               <option value="Disabled">Disabled</option>
@@ -77,6 +91,7 @@
           </select>
         </td>
       </tr> 
+      <?php $temp = $temp + 1; ?>
       <?php } ?>
       <?php } ?>
     </tbody>
@@ -85,7 +100,7 @@
           <button class="ui right floated blue small button" >
           <i class="save icon"></i>Simpan
         </button>
-
+  </form>
        <div class="pagination">
   <a href="#">&laquo;</a>
   <a href="#">1</a>

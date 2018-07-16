@@ -48,7 +48,8 @@
           </select>
         </td>
         <td>
-          <a href="" data variation="wide" data-tooltip="Hello. This is a very wide pop-up which allows for lots of content with additional space. You can fit a lot of words here and the paragraphs will be pretty wide." data-position="bottom center">Lihat</a>
+          <a href="#" data variation="wide" title="Hello. This is a very wide pop-up which allows for lots of content with additional space. &#013 You can fit a lot of words here and the paragraphs will be pretty wide. " data-position="bottom center" data-html="true" >Lihat</a>
+          <!-- <a href="#" title="Some long text <br/> &#013 Second line text \n Third line text" data-html="true">Hover me</a> -->
         </td>
       </tr> 
     </tbody>

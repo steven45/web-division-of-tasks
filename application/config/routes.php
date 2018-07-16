@@ -22,13 +22,13 @@ $route['admin/hapuspic'] = 'cAdmin/hapusPIC';
 
 //CRUD CHECKLIST
 $route['admin/checklist'] = 'cAdmin/lihatChecklist';
-$route['admin/checklist(:any)'] = 'cAdmin/lihatChecklist/$1';
-$route['admin/editchecklist'] = 'cAdmin/editChecklist';
+$route['admin/checklist/(:any)'] = 'cAdmin/lihatChecklist/$1';
+$route['admin/editchecklist/(:any)'] = 'cAdmin/editChecklist/$1';
 $route['admin/infochecklist/(:any)'] = 'cAdmin/lihatInfoChecklist/$1';
 $route['admin/validasieditchecklist'] = 'cAdmin/validasiEditChecklist';
 $route['admin/tambahchecklist'] = 'cAdmin/tambahChecklist';
 $route['admin/validasitambahchecklist'] = 'cAdmin/validasiTambahChecklist';
-$route['admin/hapuschecklist'] = 'cAdmin/hapusChecklist';
+$route['admin/gantichecklist'] = 'cAdmin/gantiChecklist';
 
 //CRUD ABSENSI
 $route['admin/absensi'] = 'cAdmin/lihatAbsensi';

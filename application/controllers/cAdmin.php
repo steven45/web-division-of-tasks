@@ -211,6 +211,7 @@ class cAdmin extends CI_Controller {
 		$namaChecklist = $this->input->post('NamaChecklist');
 		$jam = $this->input->post('Jam');
 		$jam1 = $this->input->post('Jam1');
+		$batasPengecekan = $this->input->post('BatasPengecekan');
 
 		if ($jam == "Setiap Jam") {
 			for ($i=0; $i < 24 ; $i++) { 
@@ -237,11 +238,12 @@ class cAdmin extends CI_Controller {
 				move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
 
 				$data = array(
-				'NIK' => '155150200111246',
+				'NIK' => '123456',
 				'Info' => $target_file,
 				'NamaChecklist' => $namaChecklist,
 				'Jam' => $nJam,
-				'Status' => 'Enabled'
+				'Status' => 'Enabled',
+				'BatasPengecekan' => $batasPengecekan
 				);
 
 				$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, $i);
@@ -276,10 +278,12 @@ class cAdmin extends CI_Controller {
 					move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
 
 					$data = array(
+					'NIK' => '123456',
 					'Info' => $target_file,
 					'NamaChecklist' => $namaChecklist,
 					'Jam' => $nJam[$i],
-					'Status' => 'Enabled'
+					'Status' => 'Enabled',
+					'BatasPengecekan' => $batasPengecekan
 					);
 					$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, substr($nJam[$i], 0,2));
 					$hasilJam[$i] = $hasil;
@@ -326,11 +330,7 @@ class cAdmin extends CI_Controller {
 
 		// echo json_encode($data['checklist']);
 
-		// $myFile = $data['checklist'][3]['Info'];
-		// $fh = fopen($myFile, 'r');
-		// while(!feof($fh)){
-		// echo fgets($fh)."<br>";
-		// }
+		
 
 		$data['status'] = $status;
 		if ($data['status'] == NULL) {
@@ -365,14 +365,43 @@ class cAdmin extends CI_Controller {
 			break;
 		}
 		$data['hari'] = $hari;
+
+		$pic = NULL;
+		foreach ($data['checklist'] as $checklist) {
+			$temp = 0;
+			foreach ($data['absensi'] as $absensi) {
+				if (($checklist['Jam'] == '00:00' OR $checklist['Jam'] == '01:00' OR $checklist['Jam'] == '02:00' OR $checklist['Jam'] == '03:00' OR $checklist['Jam'] == '04:00' OR $checklist['Jam'] == '05:00' OR $checklist['Jam'] == '06:00' OR $checklist['Jam'] == '07:00' OR $checklist['Jam'] == '08:00') AND $absensi['Shift'] == '1' AND $hari == $absensi['Hari'] AND $absensi['Kehadiran'] == 'Hadir' AND $absensi['Status'] == 'Enabled') {
+					$pic[$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
+					$pic[$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
+					$temp = $temp+1;
+				}
+				else if (($checklist['Jam'] == '09:00' OR $checklist['Jam'] == '10:00' OR $checklist['Jam'] == '11:00' OR $checklist['Jam'] == '12:00' OR $checklist['Jam'] == '13:00' OR $checklist['Jam'] == '14:00' OR $checklist['Jam'] == '15:00' OR $checklist['Jam'] == '16:00') AND $absensi['Shift'] == '2' AND $hari == $absensi['Hari'] AND $absensi['Kehadiran'] == 'Hadir' AND $absensi['Status'] == 'Enabled') {
+					$pic[$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
+					$pic[$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
+					$temp = $temp+1;
+				}
+				else if (( $checklist['Jam'] == '17:00' OR $checklist['Jam'] == '18:00' OR $checklist['Jam'] == '19:00' OR $checklist['Jam'] == '20:00' OR $checklist['Jam'] == '21:00' OR $checklist['Jam'] == '22:00' OR $checklist['Jam'] == '23:00') AND $absensi['Shift'] == '3' AND $hari == $absensi['Hari'] AND $absensi['Kehadiran'] == 'Hadir' AND $absensi['Status'] == 'Enabled') {
+					$pic[$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
+					$pic[$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
+					$temp = $temp+1;
+				}
+			}
+		}
+		// header("Content-type:application/json");
+		$data['pic'] = $pic;
+		// echo json_encode($data['pic']);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vLihatChecklist', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
-	public function editChecklist()
+	public function editChecklist($IDChecklist = NULL)
 	{
-		$IDChecklist = $this->input->post('IDChecklist');
+		if (!isset($_SESSION['nama'])) {
+		  redirect(base_url("admin"));
+		}
+
+		$IDChecklist = $IDChecklist;
 		$data['checklist'] = $this->mAdmin->getChecklist($IDChecklist);
 		$data['judul'] = "Edit Checklist";
 
@@ -388,41 +417,56 @@ class cAdmin extends CI_Controller {
 		$IDChecklist = $this->input->post('IDChecklist');
 		$namaChecklist = $this->input->post('NamaChecklist');
 		$jam = $this->input->post('Jam');
+		$batasPengecekan = $this->input->post('BatasPengecekan');
 
-		$target_dir = "assets/Checklist/";
-		$target_file = $target_dir .date('Ymdhis').'_'. basename($_FILES["Info"]["name"]);
+		if (basename($_FILES["Info"]["name"] == NULL)) {
+			$data = array(
+				'BatasPengecekan' => $batasPengecekan,
+				'NamaChecklist' => $namaChecklist,
+				'Jam' => $jam.':00'
+			);
+			$data= $this->mAdmin->editChecklist('checklist', $data, $IDChecklist, $namaChecklist, $jam);
+		}
+		else{
+			$target_dir = "assets/Checklist/";
+			$target_file = $target_dir .date('Ymdhis').'_'. basename($_FILES["Info"]["name"]);
+			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-		var_dump($target_file);
-		// if ($imageFileType != 'txt') {
-		// 	echo "<script type='text/javascript'>
+			if ($imageFileType != 'txt') {
+				echo "<script type='text/javascript'>
 
-		// 			alert('File yang anda masukkan bukan txt!!!');
-		// 			window.location.href = '" . base_url() . "admin/vLihatChecklist';
-		// 		</script>";
-		// }
+					alert('File yang anda masukkan bukan txt!!!');
+					window.location.href = '" . base_url() . "admin/checklist';
+				</script>";
+			}
+			else{
+				$data = array(
+				'BatasPengecekan' => $batasPengecekan,
+				'Info' => $target_file,
+				'NamaChecklist' => $namaChecklist,
+				'Jam' => $jam.':00'
+				);
 
-		// move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
+				$data= $this->mAdmin->editChecklist('checklist', $data, $IDChecklist, $namaChecklist, $jam);
 
-		// $data = array(
-		// 	'Info' => $target_file,
-		// 	'NamaChecklist' => $namaChecklist,
-		// 	'Jam' => $jam
-		// );
-
-		// $data= $this->mAdmin->editChecklist('checklist', $data, $IDChecklist, $namaChecklist, $jam);
-		// if ($data == 1) {
-		// 	echo "<script type='text/javascript'>
-		// 			alert('Sukses Mengedit Checklist');
-		// 			window.location.href = '" . base_url() . "admin/checklist';
-		// 		</script>";
-		// }
-		// else{
-		// 	echo "<script type='text/javascript'>
-		// 			alert('Jam $jam sudah ada');
-		// 			window.location.href = '" . base_url() . "admin/checklist';
-		// 		</script>";
-		// }
+				if ($data == 1) {
+					move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
+				}
+			}
+		}
+		
+		if ($data == 1) {
+			echo "<script type='text/javascript'>
+					alert('Sukses Mengedit Checklist');
+					window.location.href = '" . base_url() . "admin/checklist';
+				</script>";
+		}
+		else{
+			echo "<script type='text/javascript'>
+					alert('Jam $jam:00 sudah ada');
+					window.location.href = '" . base_url() . "admin/checklist';
+				</script>";
+		}
 		
 	}
 
@@ -436,14 +480,47 @@ class cAdmin extends CI_Controller {
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
-	public function hapusChecklist()
+	public function gantiChecklist()
 	{
-		$IDChecklist = $this->input->post('IDChecklist');
-		$data = array(
-			'Status' => 'Disabled'
-		);
-		$this->mAdmin->hapusChecklist('checklist', $data, $IDChecklist);	
+		$nJumlah = $this->input->post('nJumlah');
+		for ($i=0; $i < $nJumlah; $i++) { 
+			$nNIK[$i] = 'NIK'.$i;
+			$id[$i] = 'IDChecklist'.$i;
+			$nStatus[$i] = 'Status'.$i;
+			// echo $id[$i]. ' '. $nStatus[$i].' '.$NIK[$i];
+			// echo '<div>';
+			// echo $nNIK[$i];
+			// echo '<br>';
+		}
+
+		for ($i=0; $i < $nJumlah; $i++) { 
+			$IDChecklist = $this->input->post($id[$i]);
+			$status = $this->input->post($nStatus[$i]);
+			$NIK = $this->input->post($nNIK[$i]);
+
+			$data = array(
+				'Status' => $status,
+				'NIK' => $NIK
+			);
+
+			// echo $id[$i]. ' = '. $IDChecklist.'<br> ';
+			// echo $nNIK[$i]. ' = '. $NIK.'<br> ';
+			// echo $nStatus[$i]. ' = '. $status .'<br> '	;
+			// echo '<br>';
+			// echo '<br>';
+			if ($IDChecklist != NULL AND $status != NULL AND $NIK != NULL) {
+				$query = $this->mAdmin->gantiChecklist('checklist',$IDChecklist, $data);
+			}
+		}
+
+
+		// $IDChecklist = $this->input->post('IDChecklist');
+		// $data = array(
+		// 	'Status' => 'Disabled'
+		// );
+		// $this->mAdmin->hapusChecklist('checklist', $data, $IDChecklist);	
 		echo "<script type='text/javascript'>
+					alert('Sukses mengganti PIC dan Status');
 					window.location.href = '" . base_url() . "admin/checklist';
 				</script>";
 	}
@@ -510,6 +587,7 @@ class cAdmin extends CI_Controller {
 
 	public function editAbsensi($IDHarian= NULL)
 	{
+		$data['judul'] = 'Edit Absensi';
 		$IDHarian = $IDHarian;
 		$data['absensi']= $this->mAdmin->getAbsensi($IDHarian);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
