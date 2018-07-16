@@ -64,6 +64,7 @@
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
   color:#333 !important;
   border:1px solid #979797;
+  margin-left: 0px;
   background-color:white;
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #dcdcdc));
   background:-webkit-linear-gradient(top, #fff 0%, #dcdcdc 100%);
