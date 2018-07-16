@@ -17,7 +17,7 @@
 
   <div class="ui divider"></div>
 
-  <table class="ui sortable celled table" style=" width: auto;">
+  <table class="ui sortable celled table" style=" width: auto;" id="example" class="display">
     <thead>
       <tr style="text-align: center">
         <th class="sorted ascending">No</th>
@@ -58,10 +58,11 @@
         <a class="icon item">
           <i class="left chevron icon"></i>
         </a>
-        <a class="active item">1</a>
-        <a class="item">2</a>
-        <a class="item">3</a>
-        <a class="item">4</a>
+        <a class="active item" aria-controls="example" data-dt-idx="2" tabindex="0">1</a>
+        <a class="item" aria-controls="example" data-dt-idx="3" tabindex="0">2</a>
+        <a class="item" aria-controls="example" data-dt-idx="4" tabindex="0">3</a>
+        <a class="item" aria-controls="example" data-dt-idx="5" tabindex="0">4</a>
+        <a class="item" aria-controls="example" data-dt-idx="6" tabindex="0">5</a>
         <a class="icon item">
           <i class="right chevron icon"></i>
         </a>
