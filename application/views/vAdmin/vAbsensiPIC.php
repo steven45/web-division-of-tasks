@@ -19,7 +19,7 @@
 
       <div class="ui divider"></div>
 
-<table class="ui sortable compact celled definition grey inverted table">
+<table class="ui sortable compact celled definition grey inverted table" id="example">
   <thead class="full-width" style="text-align: center; background-color: #35373c">
     <tr>
       <th class="sorted ascending">NIK</th>

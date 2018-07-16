@@ -20,7 +20,7 @@
 
       <div class="ui divider"></div>
 
-<table class="ui sortable compact celled definition grey inverted table" id="example" class="display">
+<table class="ui sortable compact celled definition grey inverted table" id="example">
   <thead class="full-width" style="text-align: center; background-color: #35373c">
     <tr>
       <th class="sorted ascending">NIK</th>
@@ -65,7 +65,7 @@
         </form> -->
         <?php $edit = 'admin/editpic/'.$pic[$i]['NIK'] ?>
         <a href="<?php echo site_url($edit) ;?>" class="ui small blue button">
-            <i class="edit icon"></i>Edit
+            Edit
         </a>
       </td>
       <td>
@@ -95,7 +95,7 @@
 
         <?php $edit = 'admin/editpic/'.$pic[$i]['NIK'] ?>
         <a href="<?php echo site_url($edit) ;?>" class="ui small blue button">
-            <i class="edit icon"></i>Edit
+          Edit
         </a>
       </td>
       <td>
@@ -125,23 +125,12 @@
           <i class="save icon"></i>
           Simpan
         </button>
-        <div class="ui left floated pagination menu">
-        <a class="icon item">
-          <i class="left chevron icon"></i>
-        </a>
-        <a class="active item">1</a>
-        <a class="item">2</a>
-        <a class="item">3</a>
-        <a class="item">4</a>
-        <a class="icon item">
-          <i class="right chevron icon"></i>
-        </a>
-      </div>
       </th>
     </tr>
   </tfoot>
   </form>
 </table>
+<br><br>
 </div>
 </div>
 </div>
