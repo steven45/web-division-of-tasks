@@ -86,7 +86,7 @@
           <i class="save icon"></i>Simpan
         </button>
 
-    <div class="ui left floated pagination menu" id="example_paginate">
+    <div class="dataTables_paginate paging_full_numbers" id="example_paginate">
   <a class="paginate_button first disabled" aria-controls="example" data-dt-idx="0" tabindex="0" id="example_first"> First</a>
   <a class="paginate_button previous disabled" aria-controls="example" data-dt-idx="1" tabindex="0" id="example_previous">Previous</a>
   <span>
