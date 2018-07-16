@@ -35,8 +35,8 @@
         Status
           <i class="dropdown icon"></i>
             <div class="menu">
-              <a class="item" href="<?php echo site_url('admin/pic/Enabled') ?>">Enable</a>
-              <a class="item" href="<?php echo site_url('admin/pic/Disabled') ?>">Disable</a>
+              <a class="item" href="<?php echo site_url('admin/pic/Enabled') ?>">Enabled</a>
+              <a class="item" href="<?php echo site_url('admin/pic/Disabled') ?>">Disabled</a>
             </div>
         </div>
       </th>
@@ -65,7 +65,7 @@
         </form> -->
         <?php $edit = 'admin/editpic/'.$pic[$i]['NIK'] ?>
         <a href="<?php echo site_url($edit) ;?>" class="ui small blue button">
-            <i class="edit icon"></i>Edit
+            Edit
         </a>
       </td>
       <td>
@@ -95,7 +95,7 @@
 
         <?php $edit = 'admin/editpic/'.$pic[$i]['NIK'] ?>
         <a href="<?php echo site_url($edit) ;?>" class="ui small blue button">
-            <i class="edit icon"></i>Edit
+          Edit
         </a>
       </td>
       <td>
@@ -125,23 +125,12 @@
           <i class="save icon"></i>
           Simpan
         </button>
-        <div class="ui left floated pagination menu">
-        <a class="icon item">
-          <i class="left chevron icon"></i>
-        </a>
-        <a class="active item">1</a>
-        <a class="item">2</a>
-        <a class="item">3</a>
-        <a class="item">4</a>
-        <a class="icon item">
-          <i class="right chevron icon"></i>
-        </a>
-      </div>
       </th>
     </tr>
   </tfoot>
   </form>
 </table>
+<br><br>
 </div>
 </div>
 </div>

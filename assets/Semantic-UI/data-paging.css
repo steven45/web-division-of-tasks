@@ -254,7 +254,9 @@ table.dataTable,table.dataTable th,table.dataTable td {
 
 .dataTables_wrapper {
 	position:relative;
-	clear:both;*zoom:1;zoom:1
+	clear:both;
+	*zoom:1;
+	zoom:1
 	}
 
 .dataTables_wrapper .dataTables_length {
