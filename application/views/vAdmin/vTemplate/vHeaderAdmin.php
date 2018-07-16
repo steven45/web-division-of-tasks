@@ -72,6 +72,8 @@
             Daftar PIC</a>
             <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
             Absensi PIC</a>
+            <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
+            Statistic PIC</a>
       </div>
       </div>
         
