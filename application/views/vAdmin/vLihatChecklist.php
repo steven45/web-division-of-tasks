@@ -20,7 +20,7 @@
 
   <div class="ui divider"></div>
 
-  <table class="ui sortable celled table" style=" width: auto;">
+  <table class="ui sortable celled table" style=" width: auto;" id="example" >
     <thead>
       <tr style="text-align: center">
         <th class="sorted ascending">No</th>
@@ -86,16 +86,20 @@
           <i class="save icon"></i>Simpan
         </button>
 
-       <div class="pagination">
-  <a href="#">&laquo;</a>
-  <a href="#">1</a>
-  <a class="active" href="#">2</a>
-  <a href="#">3</a>
-  <a href="#">4</a>
-  <a href="#">5</a>
-  <a href="#">6</a>
-  <a href="#">&raquo;</a>
+    <div class="dataTables_paginate paging_full_numbers" id="example_paginate">
+  <a class="paginate_button first disabled" aria-controls="example" data-dt-idx="0" tabindex="0" id="example_first"> First</a>
+  <a class="paginate_button previous disabled" aria-controls="example" data-dt-idx="1" tabindex="0" id="example_previous">Previous</a>
+  <span>
+    <a class="paginate_button current" aria-controls="example" data-dt-idx="2" tabindex="0">1</a>
+    <a class="paginate_button " aria-controls="example" data-dt-idx="3" tabindex="0">2</a>
+    <a class="paginate_button " aria-controls="example" data-dt-idx="4" tabindex="0">3</a>
+    <a class="paginate_button " aria-controls="example" data-dt-idx="5" tabindex="0">4</a>
+    <a class="paginate_button " aria-controls="example" data-dt-idx="6" tabindex="0">5</a>
+  </span>
+  <a class="paginate_button next" aria-controls="example" data-dt-idx="7" tabindex="0" id="example_next">Next</a>
+  <a class="paginate_button last" aria-controls="example" data-dt-idx="8" tabindex="0" id="example_last">Last</a>
 </div>
+
         </th>
     </tfoot>
   </table>
