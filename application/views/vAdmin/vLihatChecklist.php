@@ -12,15 +12,31 @@
         <i class="tasks icon"></i>
       Daftar Checklist 
       </h3>
+
       <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Checklist" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahchecklist'); ?>">
           <i class="add icon"></i>
       </a>
       </div>
     
-
   <div class="ui divider"></div>
+  <div class="field" style="margin-left: 1000px">
+  
+  <select class="ui right selection tiny dropdown item">
+              
+              <option value="Senin">Senin</option>
+              <option value="Selasa">Selasa</option>
+              <option value="Rabu">Rabu</option>
+              <option value="Kamis">Kamis</option>
+              <option value="Jumat">Jumat</option>
+              <option value="Sabtu">Sabtu</option>
+              <option value="Minggu">Minggu</option>
+           
+          </select>
 
-  <table class="ui sortable celled table" style=" width: auto;" id="example" >
+</div>
+    
+  
+  <table class="ui sortable celled table"  id="example">
     <thead>
       <tr style="text-align: center">
         <th class="sorted ascending">No</th>
@@ -59,7 +75,6 @@
         <td>
           <form method="POST" action="<?php echo site_url('admin/editchecklist'); ?>">
             <button class="ui basic blue button">
-              <i class="icon edit"></i>
                   Edit
             </button>
           </form>
@@ -81,29 +96,22 @@
       <?php } ?>
     </tbody>
     <tfoot>
+      <tr>
         <th colspan="8">
           <button class="ui right floated blue small button" >
           <i class="save icon"></i>Simpan
         </button>
 
-    <div class="dataTables_paginate paging_full_numbers" id="example_paginate">
-  <a class="paginate_button first disabled" aria-controls="example" data-dt-idx="0" tabindex="0" id="example_first"> First</a>
-  <a class="paginate_button previous disabled" aria-controls="example" data-dt-idx="1" tabindex="0" id="example_previous">Previous</a>
-  <span>
-    <a class="paginate_button current" aria-controls="example" data-dt-idx="2" tabindex="0">1</a>
-    <a class="paginate_button " aria-controls="example" data-dt-idx="3" tabindex="0">2</a>
-    <a class="paginate_button " aria-controls="example" data-dt-idx="4" tabindex="0">3</a>
-    <a class="paginate_button " aria-controls="example" data-dt-idx="5" tabindex="0">4</a>
-    <a class="paginate_button " aria-controls="example" data-dt-idx="6" tabindex="0">5</a>
-  </span>
-  <a class="paginate_button next" aria-controls="example" data-dt-idx="7" tabindex="0" id="example_next">Next</a>
-  <a class="paginate_button last" aria-controls="example" data-dt-idx="8" tabindex="0" id="example_last">Last</a>
-</div>
-
         </th>
+        </tr>
     </tfoot>
   </table>
+  <br>
+  <br>
+  <br>
+</div>
   </div>
+
   </div>
 </div>
 

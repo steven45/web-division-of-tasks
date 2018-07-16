@@ -27,7 +27,7 @@
         
       
 
-        <table class="ui sortable celled table" style="margin-top: 20px; margin-left: 20px; width: 95%">
+        <table class="ui sortable celled table" id="example" style="margin-top: 20px; margin-left: 20px; width: 95%">
           <thead>
             <tr>
             <th>No</th>
@@ -66,25 +66,15 @@
             <th colspan="8">
               <button class="ui right floated blue small button" >
                 <i class="save icon"></i>Simpan
-              </button>
-               <div class="ui left floated pagination menu">
-        <a class="icon item">
-          <i class="left chevron icon"></i>
-        </a>
-        <a class="active item">1</a>
-        <a class="item">2</a>
-        <a class="item">3</a>
-        <a class="item">4</a>
-        <a class="icon item">
-          <i class="right chevron icon"></i>
-        </a>
-      </div>
 
 
             </th> 
             </tr>
           </tfoot>
         </table>
+        <br>
+        <br>
+        <br>
     </div>
   </div>
 </div>
