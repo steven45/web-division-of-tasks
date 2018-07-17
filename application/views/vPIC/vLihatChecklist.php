@@ -26,7 +26,7 @@
         <th >Nama Checklist</th>
         <th>Nama PIC</th>
         <th >Info Checklist</th>
-        <th >Status</th>
+       
         <th >Keterangan</th>
         
       </tr>
@@ -41,37 +41,41 @@
         <td>
           <a href="" data variation="wide" data-tooltip="Hello. This is a very wide pop-up which allows for lots of content with additional space. You can fit a lot of words here and the paragraphs will be pretty wide." data-position="bottom center">Lihat</a>
         </td>
+     
         <td>
-          <select class="ui selection dropdown">
-            <option value="1">OK</option>
-            <option value="0">Bad</option>
-          </select>
-        </td>
-        <td>
-          <a href="#" data variation="wide" title="Hello. This is a very wide pop-up which allows for lots of content with additional space. &#013 You can fit a lot of words here and the paragraphs will be pretty wide. " data-position="bottom center" data-html="true" >Lihat</a>
-          <!-- <a href="#" title="Some long text <br/> &#013 Second line text \n Third line text" data-html="true">Hover me</a> -->
+          <a href="#" data-featherlight="#bio-name">Klik Disini</a>
+            <div style="display:none;">
+              <div id="bio-name">
+                <h3>Status</h3>
+                <div class="ui form">
+                <select >
+                  <option style="">OK</option>
+                  <option>Bad</option>
+                </select>
+                </div>
+                <h3>Keterangan</h3>
+                  <div class="ui form">
+                    <div class="field">
+                       <textarea></textarea>
+                    </div>
+                  </div>
+                  <br>
+                  <button class="ui right floated blue small button" >
+                    <i class="save icon"></i>Simpan
+                  </button>
+              </div>
+            </div>
         </td>
       </tr> 
     </tbody>
     <tfoot>
         <th colspan="8">
-           <div class="ui left floated pagination menu">
-        <a class="icon item">
-          <i class="left chevron icon"></i>
-        </a>
-        <a class="active item" aria-controls="example" data-dt-idx="2" tabindex="0">1</a>
-        <a class="item" aria-controls="example" data-dt-idx="3" tabindex="0">2</a>
-        <a class="item" aria-controls="example" data-dt-idx="4" tabindex="0">3</a>
-        <a class="item" aria-controls="example" data-dt-idx="5" tabindex="0">4</a>
-        <a class="item" aria-controls="example" data-dt-idx="6" tabindex="0">5</a>
-        <a class="icon item">
-          <i class="right chevron icon"></i>
-        </a>
-      </div>
 
         </th>
     </tfoot>
   </table>
+  <br>
+  <br>
   </div>
   </div>
 </div>

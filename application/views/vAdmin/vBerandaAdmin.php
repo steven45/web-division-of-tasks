@@ -49,7 +49,17 @@
               <td>Checklist PLN</td>
               <td>Panji Nugroho</td>
               <td>
-                <a href="" data variation="wide" data-tooltip="Hello. This is a very wide pop-up which allows for lots of content with additional space. You can fit a lot of words here and the paragraphs will be pretty wide." data-position="bottom center">Lihat</a>
+                <a href="#" data-featherlight="#bio-name">Klik Disini</a>
+                  <div style="display:none;">
+                    <div id="bio-name">
+                      <h3>Info Checklist</h3>
+                      <div class="ui segment">
+                        Checklist ini adalah checklist yang paling penting. 
+                        1. ChecklistPLN
+                        2. Checklist ATM B
+                      </div>
+                    </div>
+            </div>
               </td>
               
               
@@ -57,7 +67,17 @@
                 OK
               </td>
               <td>
-                <a href="" data variation="wide" data-tooltip="Hello. This is a very wide pop-up which allows for lots of content with additional space. You can fit a lot of words here and the paragraphs will be pretty wide." data-position="bottom center">Lihat</a>
+                <a href="#" data-featherlight="#bio-name">Klik Disini</a>
+                <div style="display:none;">
+                  <div id="bio-name">
+                    <h3>Info Checklist</h3>
+                    <div class="ui segment">
+                      Checklist ini adalah checklist yang paling penting. 
+                      1. ChecklistPLN
+                      2. Checklist ATM B
+                </div>
+              </div>
+            </div>
               </td>
             </tr>
           </tbody>

@@ -76,10 +76,17 @@
           </select>
         </td>
         <td>
-          <a href="#" data variation="wide" title="Hello. This is a very wide pop-up which allows for lots of content with additional space. &#013 You can fit a lot of words here and the paragraphs will be pretty wide. " data-position="bottom center" data-html="true" >Lihat</a>
-        </td>
-        
-
+          <a href="#" data-featherlight="#bio-name">Klik Disini</a>
+            <div style="display:none;">
+              <div id="bio-name">
+                <h3>Info Checklist</h3>
+                <div class="ui segment">
+                  Checklist ini adalah checklist yang paling penting. 
+                  1. ChecklistPLN
+                  2. Checklist ATM B
+                </div>
+              </div>
+            </div>
         <td>
           <form method="POST" action="<?php echo site_url('admin/editchecklist'); ?>">
             <a class="ui basic blue button" href="<?php echo site_url('admin/editchecklist/'.$checklist['IDChecklist']); ?>">
@@ -107,7 +114,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <th colspan="8">
+        <th colspan="9">
           <button class="ui right floated blue small button" >
           <i class="save icon"></i>Simpan
         </button>
