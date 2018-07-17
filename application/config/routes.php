@@ -38,6 +38,7 @@ $route['admin/hapusabsensi'] = 'cAdmin/hapusAbsensi';
 $route['admin/editabsensi/(:any)'] = 'cAdmin/editAbsensi/$1';
 $route['admin/validasieditabsensi'] = 'cAdmin/validasiEditAbsensi';
 $route['admin/gantiabsensi'] = 'cAdmin/gantiAbsensi';
+$route['admin/ranking'] = 'cAdmin/ranking';
 
 $route['admin/log'] = 'cAdmin/lihatLog';
 $route['admin/gantipiclog'] = 'cAdmin/gantiPICLog';
@@ -46,8 +47,9 @@ $route['admin/gantipiclog'] = 'cAdmin/gantiPICLog';
 $route['pic'] = 'cPIC';
 $route['pic/validation'] = 'cPIC/validation';
 $route['pic/beranda'] = 'cPIC/lihatLog';
-
 $route['pic/keluar'] = 'cPIC/keluar';
-
 $route['pic/checklist'] = 'cPIC/lihatChecklist';
 $route['pic/docheck'] = 'cPIC/doChecklist';
+$route['pic/daftarPIC'] = 'cPIC/daftarPIC';
+$route['pic/absensi'] = 'cPIC/lihatAbsensi';
+$route['pic/ranking'] = 'cPIC/ranking';

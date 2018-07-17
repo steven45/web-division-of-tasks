@@ -119,7 +119,7 @@ class cAdmin extends CI_Controller {
 			$data['status'] = 'Enabled';
 		}
 
-		$data['judul'] = "Lihat PIC";
+		$data['judul'] = "Daftar PIC";
 		$data['pic'] = $this->mAdmin->getPIC();
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vLihatPIC', $data);
@@ -667,4 +667,11 @@ class cAdmin extends CI_Controller {
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
+	public function ranking()
+	{
+		$data['judul'] = "Ranking PIC";
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		$this->load->view('vAdmin/vRankingPIC');
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
 }
