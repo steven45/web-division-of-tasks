@@ -88,9 +88,13 @@
     </div>
       
       <div class="item">
+          <a href="<?php echo site_url('pic/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
+      <div class="item">
           <div class="ui teal button">
-            <i class="sign out alternate icon" icon"></i>
-          Log Out</div>
+            <i class="sign out alternate icon" icon"></i>Log Out
+          </div>
+      </div>
+      </a>
       </div>
     </div>
     </div>

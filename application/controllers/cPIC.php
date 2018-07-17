@@ -42,6 +42,12 @@ class cPIC extends CI_Controller {
 		}
 	}
 
+	public function keluar()
+	{
+		session_destroy();
+		redirect(base_url("pic"));
+	}
+
 	public function lihatLog()
 	{
 		// // header("Content-type:application/json");
