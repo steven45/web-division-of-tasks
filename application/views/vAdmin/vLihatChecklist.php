@@ -77,22 +77,18 @@
         <td>
           <?php 
             $nInfo = NULL;
-            $temp = 0;
+            $k = 0;
             $fh = fopen($checklist['Info'], 'r');
             while(!feof($fh)){
-             $nInfo[$temp] = fgets($fh);
-             $temp = $temp +1;
+             $nInfo[$k] = fgets($fh);
+             $k = $k +1;
             }
-
-            // foreach ($nInfo as $info) {
-            //   echo $info;
-            // }
             
           ?>
 
-          <a href="#" data-featherlight="#bio-name">Klik Disini</a>
+          <a href="#" data-featherlight=" <?php echo '#bio-name'.$temp ?>">Lihat</a>
             <div style="display:none;">
-              <div id="bio-name">
+              <div id="<?php echo 'bio-name'.$temp ?>">
                 <h3>Info Checklist</h3>
                 <div class="ui segment">
                  <?php foreach ($nInfo as $info) {
@@ -112,7 +108,6 @@
         </td>
         <td>
           <select class="ui selection tiny dropdown" name="<?php echo 'Status'.$temp ?>">
-            <option><?php echo 'Status'.$temp ?></option>
               <?php if ($status == "Enabled") { ?>
               <option value="<?php echo $checklist['Status']; ?>"><?php echo $checklist['Status']; ?></option>
               <option value="Disabled">Disabled</option>
