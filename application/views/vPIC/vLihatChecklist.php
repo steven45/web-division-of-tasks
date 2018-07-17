@@ -17,7 +17,19 @@
 
   <div class="ui divider"></div>
 
-  <table class="ui sortable celled table" style=" width: auto;" id="example" class="display">
+  <div class="field" style="margin-left: 600px">
+  <select class="ui right selection tiny dropdown item" id="Hari">        
+      <option value="Senin">Senin</option>
+      <option value="Selasa">Selasa</option>
+      <option value="Rabu">Rabu</option>
+      <option value="Kamis">Kamis</option>
+      <option value="Jumat">Jumat</option>
+      <option value="Sabtu">Sabtu</option>
+      <option value="Minggu">Minggu</option>
+    </select>
+  </div>
+
+  <table class="ui sortable celled table" id="example" class="display">
     <thead>
       <tr style="text-align: center">
         <th class="sorted ascending">No</th>

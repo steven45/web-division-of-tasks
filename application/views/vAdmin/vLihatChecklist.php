@@ -19,7 +19,7 @@
       </div>
   <form method="POST" action="<?php echo site_url('admin/gantichecklist'); ?>">    
   <div class="ui divider"></div>
-  <div class="field" style="margin-left: 1000px">
+  <div class="field" style="margin-left: 900px">
   <select class="ui right selection tiny dropdown item" id="Hari">        
       <option value="Senin">Senin</option>
       <option value="Selasa">Selasa</option>
@@ -28,8 +28,8 @@
       <option value="Jumat">Jumat</option>
       <option value="Sabtu">Sabtu</option>
       <option value="Minggu">Minggu</option>
-  </select>
-</div>
+    </select>
+  </div>
   
   <table class="ui sortable celled table"  id="example">
     <thead>

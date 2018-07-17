@@ -94,8 +94,10 @@ class cPIC extends CI_Controller {
 		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
 		$this->load->view('vPIC/vLihatPIC');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
+
 	}
 
+	
 	public function lihatAbsensi()
 	{
 		$data['judul'] = "Lihat Absensi";
@@ -103,6 +105,7 @@ class cPIC extends CI_Controller {
 		$this->load->view('vPIC/vAbsensiPIC');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
 	}
+
 
 	public function ranking()
 	{
