@@ -11,4 +11,9 @@ class mPIC extends CI_Model
     	$query = "SELECT * FROM `pic` WHERE `NIK` = $NIK AND `Password` = '$password'";
         return $this->db->query($query)->row_array();
     }
+
+    public function getChecklist()
+    {
+    	
+    }
 }
