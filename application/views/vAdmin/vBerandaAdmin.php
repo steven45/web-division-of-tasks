@@ -36,7 +36,6 @@
             <th>Nama Checklist</th>
             <th>Nama PIC</th>
             <th>Info Pengecekan</th>
-            
             <th>Status</th>
             <th>Keterangan</th>
             </tr>
@@ -59,7 +58,7 @@
                         2. Checklist ATM B
                       </div>
                     </div>
-            </div>
+                  </div>
               </td>
               
               
@@ -67,9 +66,9 @@
                 OK
               </td>
               <td>
-                <a href="#" data-featherlight="#bio-name">Klik Disini</a>
+                <a href="#" data-featherlight="#bio-name1">Klik Disini</a>
                 <div style="display:none;">
-                  <div id="bio-name">
+                  <div id="bio-name1">
                     <h3>Info Checklist</h3>
                     <div class="ui segment">
                       Checklist ini adalah checklist yang paling penting. 
@@ -84,10 +83,6 @@
           <tfoot>
             <tr> 
             <th colspan="8">
-              <button class="ui right floated blue small button" >
-                <i class="save icon"></i>Simpan
-
-
             </th> 
             </tr>
           </tfoot>

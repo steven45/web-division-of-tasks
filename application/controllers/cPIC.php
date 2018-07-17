@@ -87,11 +87,17 @@ class cPIC extends CI_Controller {
 	public function daftarPIC()
 	{
 		$data['judul'] = "Daftar PIC";
+		$data['pic'] = $this->mPIC->getDaftarPIC();
+
+		// header("Content-type:application/json");
+		// echo json_encode($data);
 		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
 		$this->load->view('vPIC/vLihatPIC');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
+
 	}
 
+	
 	public function lihatAbsensi()
 	{
 		$data['judul'] = "Lihat Absensi";
@@ -99,6 +105,7 @@ class cPIC extends CI_Controller {
 		$this->load->view('vPIC/vAbsensiPIC');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
 	}
+
 
 	public function ranking()
 	{

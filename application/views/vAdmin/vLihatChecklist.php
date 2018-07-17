@@ -19,7 +19,7 @@
       </div>
   <form method="POST" action="<?php echo site_url('admin/gantichecklist'); ?>">    
   <div class="ui divider"></div>
-  <div class="field" style="margin-left: 1000px">
+  <div class="field" style="margin-left: 900px">
   <select class="ui right selection tiny dropdown item" id="Hari">        
       <option value="Senin">Senin</option>
       <option value="Selasa">Selasa</option>
@@ -28,8 +28,8 @@
       <option value="Jumat">Jumat</option>
       <option value="Sabtu">Sabtu</option>
       <option value="Minggu">Minggu</option>
-  </select>
-</div>
+    </select>
+  </div>
   
   <table class="ui sortable celled table"  id="example">
     <thead>
@@ -75,25 +75,12 @@
           </select>
         </td>
         <td>
-
-          <a href="#" data-featherlight="#bio-name">Klik Disini</a>
-            <div style="display:none;">
-              <div id="bio-name">
-                <h3>Info Checklist</h3>
-                <div class="ui segment">
-                  Checklist ini adalah checklist yang paling penting. 
-                  1. ChecklistPLN
-                  2. Checklist ATM B
-                </div>
-              </div>
-            </div>
-
           <?php 
             $nInfo = NULL;
             $temp = 0;
             $fh = fopen($checklist['Info'], 'r');
             while(!feof($fh)){
-             $nInfo[$temp] = fgets($fh)." &#013 ";
+             $nInfo[$temp] = fgets($fh);
              $temp = $temp +1;
             }
 
@@ -103,12 +90,17 @@
             
           ?>
 
-<!--           <a href="#" data variation="wide" title="<?php foreach ($nInfo as $info) {
-              echo $info;
-            } ?>" data-position="bottom center" data-html="true" >Lihat</a>
-        </td>  -->
-        
-
+          <a href="#" data-featherlight="#bio-name">Klik Disini</a>
+            <div style="display:none;">
+              <div id="bio-name">
+                <h3>Info Checklist</h3>
+                <div class="ui segment">
+                 <?php foreach ($nInfo as $info) {
+                    echo '<p>'.$info.'</p>';
+                  } ?> 
+                </div>
+              </div>
+            </div>
 
         <td>
           <form method="POST" action="<?php echo site_url('admin/editchecklist'); ?>">
@@ -120,6 +112,7 @@
         </td>
         <td>
           <select class="ui selection tiny dropdown" name="<?php echo 'Status'.$temp ?>">
+            <option><?php echo 'Status'.$temp ?></option>
               <?php if ($status == "Enabled") { ?>
               <option value="<?php echo $checklist['Status']; ?>"><?php echo $checklist['Status']; ?></option>
               <option value="Disabled">Disabled</option>
