@@ -75,6 +75,19 @@
           </select>
         </td>
         <td>
+
+          <a href="#" data-featherlight="#bio-name">Klik Disini</a>
+            <div style="display:none;">
+              <div id="bio-name">
+                <h3>Info Checklist</h3>
+                <div class="ui segment">
+                  Checklist ini adalah checklist yang paling penting. 
+                  1. ChecklistPLN
+                  2. Checklist ATM B
+                </div>
+              </div>
+            </div>
+
           <?php 
             $nInfo = NULL;
             $temp = 0;
@@ -90,11 +103,12 @@
             
           ?>
 
-          <a href="#" data variation="wide" title="<?php foreach ($nInfo as $info) {
+<!--           <a href="#" data variation="wide" title="<?php foreach ($nInfo as $info) {
               echo $info;
             } ?>" data-position="bottom center" data-html="true" >Lihat</a>
-        </td> 
+        </td>  -->
         
+
 
         <td>
           <form method="POST" action="<?php echo site_url('admin/editchecklist'); ?>">
@@ -123,7 +137,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <th colspan="8">
+        <th colspan="9">
           <button class="ui right floated blue small button" >
           <i class="save icon"></i>Simpan
         </button>
