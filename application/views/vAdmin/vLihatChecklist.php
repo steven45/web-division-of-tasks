@@ -30,7 +30,6 @@
       <option value="Minggu">Minggu</option>
   </select>
 </div>
-    
   
   <table class="ui sortable celled table"  id="example">
     <thead>
@@ -62,7 +61,7 @@
       <?php if ($checklist['Status'] == $status) { ?>
       <input type="hidden" name="<?php echo 'IDChecklist'.$temp ?>" value="<?php echo $checklist['IDChecklist']; ?>">
       <tr >
-        <td><?php echo $no; $no = $no+1; ?></td>
+        <td> <?php echo $no; $no = $no+1; ?> <!-- <?php echo count($pic[$checklist['Hari']][$checklist['Jam']]) ?> <?php echo $pic[$checklist['Hari']][$checklist['Jam']][0]['NamaPIC']; ?> -->  </td>
         <td><?php echo $checklist['Hari']; ?></td>
         <td><?php echo $checklist['Jam']; ?></td>
         <td><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
@@ -70,14 +69,31 @@
         <td>
           <select class="ui search dropdown" name="<?php echo 'NIK'.$temp ?>">
             <option value="<?php echo $checklist['NIK']; ?>"><?php echo $checklist['NamaPIC']; ?></option>
-            <?php for ($i=0; $i < count($pic[$checklist['Hari']][$checklist['Jam']]); $i++) { ?>
-              <option value="<?php echo $pic[$checklist['Hari']][$checklist['Jam']][$i]['NIK'] ?>"><?php echo $pic[$checklist['Jam']][$i]['NamaPIC']; ?></option>
+            <?php for ($i=0; $i < count($pic[$checklist['Hari']][$checklist['Jam']]) ;$i++) { ?>
+              <option value="<?php echo $pic[$checklist['Hari']][$checklist['Jam']][$i]['NIK'] ?>"><?php echo $pic[$checklist['Hari']][$checklist['Jam']][$i]['NamaPIC']; ?></option>
             <?php } ?>
           </select>
         </td>
         <td>
-          <a href="#" data variation="wide" title="Hello. This is a very wide pop-up which allows for lots of content with additional space. &#013 You can fit a lot of words here and the paragraphs will be pretty wide. " data-position="bottom center" data-html="true" >Lihat</a>
-        </td>
+          <?php 
+            $nInfo = NULL;
+            $temp = 0;
+            $fh = fopen($checklist['Info'], 'r');
+            while(!feof($fh)){
+             $nInfo[$temp] = fgets($fh)." &#013 ";
+             $temp = $temp +1;
+            }
+
+            // foreach ($nInfo as $info) {
+            //   echo $info;
+            // }
+            
+          ?>
+
+          <a href="#" data variation="wide" title="<?php foreach ($nInfo as $info) {
+              echo $info;
+            } ?>" data-position="bottom center" data-html="true" >Lihat</a>
+        </td> 
         
 
         <td>

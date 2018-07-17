@@ -1,0 +1,4 @@
+Pengecekan :
+1. Pengecekan Z
+2. Pengecekan X
+3. Pengecekan W
