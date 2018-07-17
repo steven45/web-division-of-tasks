@@ -63,7 +63,6 @@
           <i class="check square icon"></i>
         Checklist</div>
       </a>
-
       <div class="ui dropdown item">
       <i class="user icon"></i>
         PIC
@@ -73,7 +72,7 @@
             Daftar PIC</a>
             <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
             Absensi PIC</a>
-            <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
+            <a class="item" href="<?php echo site_url('admin/ranking'); ?>">
             Ranking PIC</a>
       </div>
       </div>
@@ -104,12 +103,7 @@
                   </div>
                 </div>
               </div>
-
-              <!-- <div class="header">Notifications</div>
-              <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
-                <div class="label">Nama PIC</div>
-              </a>
-              <a class="item">Cancel</a> -->
+              
             </div>
         </div>
         
