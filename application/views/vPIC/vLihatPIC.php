@@ -29,14 +29,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <?php foreach ($pic as $pic) { ?>
+       <tr>
+      <td> <?php echo $pic['NIK'] ?> </td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
-      
+    </tr>
+     <?php } ?>
+    
   </tbody>
   <tfoot class="full-width">
     <tr>
@@ -49,3 +52,13 @@
 </div>
 </div>
 </div>
+
+
+<!-- <?php 
+  foreach ($pic as $pic) {
+    echo $pic['NIK'];
+    echo '<br>';
+    echo $pic['NamaPIC'];
+    echo '<br>';
+  }
+?> -->

@@ -14,6 +14,17 @@ class mPIC extends CI_Model
 
     public function getChecklist()
     {
-    	
+
+    }
+
+    public function getDaftarPIC($NIK = false)
+    {
+    	if ($NIK == FALSE) {
+    		$query = "SELECT * FROM `pic`";
+    		return $this->db->query($query)->result_array();
+    	}
+    	else{
+
+    	}
     }
 }
