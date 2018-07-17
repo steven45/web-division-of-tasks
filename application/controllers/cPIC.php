@@ -101,6 +101,9 @@ class cPIC extends CI_Controller {
 	public function lihatAbsensi()
 	{
 		$data['judul'] = "Lihat Absensi";
+		$data['absensi'] = $this->mPIC->getAbsensiPIC();
+
+
 		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
 		$this->load->view('vPIC/vAbsensiPIC');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
@@ -112,6 +115,12 @@ class cPIC extends CI_Controller {
 		$data['judul'] = "Ranking PIC";
 		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
 		$this->load->view('vPIC/vRankingPIC');
+		$this->load->view('vPIC/vTemplate/vFooterPIC');
+	}
+	public function ubahPassword(){
+		$data['judul'] = "Ubah Password";
+		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
+		$this->load->view('vPIC/vUbahPassword');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
 	}
 }

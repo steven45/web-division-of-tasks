@@ -29,12 +29,14 @@
     </tr>
   </thead>
   <tbody>
+    <?php foreach ($absensi as $absensi ) { ?>
+     
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td> <?php echo $absensi['NIK'] ?> </td>
+      <td> <?php echo $absensi['NamaPIC'] ?> </td>
+      <td> <?php echo $absensi['Shift'] ?> </td>
+      <td> <?php echo $absensi['Jam'] ?> </td>
+      <td> <?php echo $absensi['Hari'] ?> </td>
       <td>
           <select class="ui selection dropdown" style="min-width: 10em;" name="<?php echo 'Kehadiran'.$i ?>">
             <?php if ($absensi['Kehadiran'] == "Hadir") { ?>
@@ -47,6 +49,9 @@
           </select>
       </td>
     </tr>
+
+    <?php } ?>
+    
   </tbody>
   <tfoot class="full-width">
     <tr>

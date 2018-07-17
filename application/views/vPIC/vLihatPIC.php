@@ -32,11 +32,11 @@
     <?php foreach ($pic as $pic) { ?>
        <tr>
       <td> <?php echo $pic['NIK'] ?> </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td> <?php echo $pic['NamaPIC'] ?> </td>
+      <td> <?php echo $pic['Divisi'] ?> </td>
+      <td> <?php  echo $pic['Jabatan'] ?> </td>
+      <td> <?php echo $pic['TahunMasuk'] ?> </td>
+      <td> <?php echo $pic['JumlahPengecekan'] ?> </td>
     </tr>
      <?php } ?>
     

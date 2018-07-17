@@ -13,13 +13,13 @@
   <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/tablesort.js'); ?>"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/data-paging.js'); ?>"></script>
   
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
       $(document).ready(function() {
         $('#example').DataTable( {
             "pagingType": "full_numbers"
           } );
         } );
-    </script>
+    </script> -->
   <script type="text/javascript">
     $(document).ready(function() 
     { 
@@ -69,17 +69,18 @@
         PIC
         <i class="dropdown icon"></i>
           <div class="menu">
-            <a class="item" href="<?php echo site_url('pic/daftarPIC'); ?>">
+            <a class="item" href="<?php echo site_url('pic/pic'); ?>">
             Daftar PIC</a>
             <a class="item" href="<?php echo site_url('pic/absensi'); ?>">
             Absensi PIC</a>
-            <a class="item" href="<?php echo site_url('pic/ranking'); ?>">
+            <a class="item" href="<?php echo site_url('pic/absensi'); ?>">
             Ranking PIC</a>
       </div>
       </div>
 
         
       <div class="right menu">
+
         <div class="ui pointing dropdown link item">
           <span class="text">
 
@@ -109,10 +110,13 @@
             </div>
         </div>
       
-        <a class="item" href="">
+        <a class="item" href="<?php echo site_url('pic/ubahPassword'); ?>">
         <i class="cog icon"></i>Setting
       </a>
+
     </div>
+      
+      <div class="item">
           <a href="<?php echo site_url('pic/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
       <div class="item">
           <div class="ui teal button">
