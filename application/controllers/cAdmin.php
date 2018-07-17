@@ -213,41 +213,44 @@ class cAdmin extends CI_Controller {
 		$jam1 = $this->input->post('Jam1');
 		$batasPengecekan = $this->input->post('BatasPengecekan');
 
+		$hari = array('Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu');
 		if ($jam == "Setiap Jam") {
-			for ($i=0; $i < 24 ; $i++) { 
-				if ($i < 10) {
-					$nJam = "0".$i.":00";
+			//Menyimpan target direktori
+			$target_dir = "assets/Checklist/";
+			$target_file = $target_dir .date('YmdHis').'_'. basename($_FILES["Info"]["name"]);
+
+			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+			if ($imageFileType != 'txt') {
+				echo "<script type='text/javascript'>
+
+						alert('File yang anda masukkan bukan txt!!!');
+						window.location.href = '" . base_url() . "admin/tambahchecklist';
+					</script>";
+			}
+
+			move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
+			for ($j=0; $j < 7; $j++) { 
+				for ($i=0; $i < 24 ; $i++) { 
+					if ($i < 10) {
+						$nJam = "0".$i.":00";
+					}
+					else{
+						$nJam = $i.":00";
+					}
+
+					$data = array(
+					'NIK' => '123456',
+					'Hari' => $hari[$j],
+					'Info' => $target_file,
+					'NamaChecklist' => $namaChecklist,
+					'Jam' => $nJam,
+					'Status' => 'Enabled',
+					'BatasPengecekan' => $batasPengecekan
+					);
+
+					$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, $i, $hari[$j]);
+					$hasilJam[$i] = $hasil;		
 				}
-				else{
-					$nJam = $i.":00";
-				}
-
-				//Menyimpan target direktori
-				$target_dir = "assets/Checklist/";
-				$target_file = $target_dir .date('YmdHis').'_'. basename($_FILES["Info"]["name"]);
-
-				$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-				if ($imageFileType != 'txt') {
-					echo "<script type='text/javascript'>
-
-							alert('File yang anda masukkan bukan txt!!!');
-							window.location.href = '" . base_url() . "admin/tambahchecklist';
-						</script>";
-				}
-
-				move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
-
-				$data = array(
-				'NIK' => '123456',
-				'Info' => $target_file,
-				'NamaChecklist' => $namaChecklist,
-				'Jam' => $nJam,
-				'Status' => 'Enabled',
-				'BatasPengecekan' => $batasPengecekan
-				);
-
-				$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, $i);
-				$hasilJam[$i] = $hasil;	
 			}
 		}
 		elseif ($jam == "Lainnya") {
@@ -260,33 +263,35 @@ class cAdmin extends CI_Controller {
 			else{
 				$nJam = str_replace(",","",$jam1);
 				$nJam = explode(" ",$nJam);
-				for ($i=0; $i < count($nJam); $i++) { 
+				//Menyimpan target direktori
+				$target_dir = "assets/Checklist/";
+				$target_file = $target_dir .date('Ymdhis').'_'. basename($_FILES["Info"]["name"]);
 
-					//Menyimpan target direktori
-					$target_dir = "assets/Checklist/";
-					$target_file = $target_dir .date('Ymdhis').'_'. basename($_FILES["Info"]["name"]);
+				$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+				if ($imageFileType != 'txt') {
+					echo "<script type='text/javascript'>
 
-					$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-					if ($imageFileType != 'txt') {
-						echo "<script type='text/javascript'>
+							alert('File yang anda masukkan bukan txt!!!');
+							window.location.href = '" . base_url() . "admin/tambahchecklist';
+						</script>";
+				}
 
-								alert('File yang anda masukkan bukan txt!!!');
-								window.location.href = '" . base_url() . "admin/tambahchecklist';
-							</script>";
+				move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
+
+				for ($j=0; $j < 7; $j++) { 
+					for ($i=0; $i < count($nJam); $i++) { 
+						$data = array(
+						'NIK' => '123456',
+						'Hari' => $hari[$j],
+						'Info' => $target_file,
+						'NamaChecklist' => $namaChecklist,
+						'Jam' => $nJam[$i],
+						'Status' => 'Enabled',
+						'BatasPengecekan' => $batasPengecekan
+						);
+						$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, substr($nJam[$i], 0,2), $hari[$j]);
+						$hasilJam[$i] = $hasil;
 					}
-
-					move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
-
-					$data = array(
-					'NIK' => '123456',
-					'Info' => $target_file,
-					'NamaChecklist' => $namaChecklist,
-					'Jam' => $nJam[$i],
-					'Status' => 'Enabled',
-					'BatasPengecekan' => $batasPengecekan
-					);
-					$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, substr($nJam[$i], 0,2));
-					$hasilJam[$i] = $hasil;
 				}
 			}
 		}
@@ -328,7 +333,7 @@ class cAdmin extends CI_Controller {
 		$data['absensi'] = $this->mAdmin->getAbsensi();
 		// header("Content-type:application/json");
 
-		// echo json_encode($data['checklist']);
+		// echo json_encode($data['absensi']);
 
 		
 
@@ -370,19 +375,19 @@ class cAdmin extends CI_Controller {
 		foreach ($data['checklist'] as $checklist) {
 			$temp = 0;
 			foreach ($data['absensi'] as $absensi) {
-				if (($checklist['Jam'] == '00:00' OR $checklist['Jam'] == '01:00' OR $checklist['Jam'] == '02:00' OR $checklist['Jam'] == '03:00' OR $checklist['Jam'] == '04:00' OR $checklist['Jam'] == '05:00' OR $checklist['Jam'] == '06:00' OR $checklist['Jam'] == '07:00' OR $checklist['Jam'] == '08:00') AND $absensi['Shift'] == '1' AND $hari == $absensi['Hari'] AND $absensi['Kehadiran'] == 'Hadir' AND $absensi['Status'] == 'Enabled') {
-					$pic[$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
-					$pic[$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
+				if (($checklist['Jam'] == '00:00' OR $checklist['Jam'] == '01:00' OR $checklist['Jam'] == '02:00' OR $checklist['Jam'] == '03:00' OR $checklist['Jam'] == '04:00' OR $checklist['Jam'] == '05:00' OR $checklist['Jam'] == '06:00' OR $checklist['Jam'] == '07:00' OR $checklist['Jam'] == '08:00') AND $absensi['Shift'] == '1' AND $checklist['Hari'] == $absensi['Hari'] AND $absensi['Kehadiran'] == 'Hadir' AND $absensi['Status'] == 'Enabled') {
+					$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
+					$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
 					$temp = $temp+1;
 				}
-				else if (($checklist['Jam'] == '09:00' OR $checklist['Jam'] == '10:00' OR $checklist['Jam'] == '11:00' OR $checklist['Jam'] == '12:00' OR $checklist['Jam'] == '13:00' OR $checklist['Jam'] == '14:00' OR $checklist['Jam'] == '15:00' OR $checklist['Jam'] == '16:00') AND $absensi['Shift'] == '2' AND $hari == $absensi['Hari'] AND $absensi['Kehadiran'] == 'Hadir' AND $absensi['Status'] == 'Enabled') {
-					$pic[$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
-					$pic[$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
+				else if (($checklist['Jam'] == '09:00' OR $checklist['Jam'] == '10:00' OR $checklist['Jam'] == '11:00' OR $checklist['Jam'] == '12:00' OR $checklist['Jam'] == '13:00' OR $checklist['Jam'] == '14:00' OR $checklist['Jam'] == '15:00' OR $checklist['Jam'] == '16:00') AND $absensi['Shift'] == '2' AND $checklist['Hari'] == $absensi['Hari'] AND $absensi['Kehadiran'] == 'Hadir' AND $absensi['Status'] == 'Enabled') {
+					$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
+					$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
 					$temp = $temp+1;
 				}
-				else if (( $checklist['Jam'] == '17:00' OR $checklist['Jam'] == '18:00' OR $checklist['Jam'] == '19:00' OR $checklist['Jam'] == '20:00' OR $checklist['Jam'] == '21:00' OR $checklist['Jam'] == '22:00' OR $checklist['Jam'] == '23:00') AND $absensi['Shift'] == '3' AND $hari == $absensi['Hari'] AND $absensi['Kehadiran'] == 'Hadir' AND $absensi['Status'] == 'Enabled') {
-					$pic[$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
-					$pic[$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
+				else if (( $checklist['Jam'] == '17:00' OR $checklist['Jam'] == '18:00' OR $checklist['Jam'] == '19:00' OR $checklist['Jam'] == '20:00' OR $checklist['Jam'] == '21:00' OR $checklist['Jam'] == '22:00' OR $checklist['Jam'] == '23:00') AND $absensi['Shift'] == '3' AND $checklist['Hari'] == $absensi['Hari'] AND $absensi['Kehadiran'] == 'Hadir' AND $absensi['Status'] == 'Enabled') {
+					$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
+					$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
 					$temp = $temp+1;
 				}
 			}

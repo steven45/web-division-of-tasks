@@ -54,9 +54,9 @@ class mAdmin extends CI_Model
         $this->db->update($table, $data);
     }
 
-    public function tambahChecklist($table, $data, $namaChecklist, $jam)
+    public function tambahChecklist($table, $data, $namaChecklist, $jam, $hari)
     {
-        $query = "SELECT * FROM `checklist` WHERE `NamaChecklist` = '$namaChecklist' AND `Jam` = $jam";
+        $query = "SELECT * FROM `checklist` WHERE `NamaChecklist` = '$namaChecklist' AND `Jam` = $jam AND `Hari` = '$hari'";
         $hasil =  $this->db->query($query)->row_array();
         if ($hasil == NULL) {
             $query = $this->db->insert($table,$data); 
@@ -70,9 +70,10 @@ class mAdmin extends CI_Model
     public function getChecklist($IDChecklist =  false)
     {
         if ($IDChecklist == null) {
+            $query = $this->db->order_by('c.Hari','ASC');
             $query = $this->db->order_by('c.NamaChecklist','ASC');
             $query = $this->db->order_by('c.Jam','ASC');
-            $query = $this->db->select('p.NamaPIC,c.IDChecklist, c.IDChecklist, c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status, c.BatasPengecekan');
+            $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.Hari,c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status, c.BatasPengecekan');
              $query = $this->db->from('checklist c');
              $query = $this->db->join('pic p','p.NIK=c.NIK');
              $query = $this->db->get();

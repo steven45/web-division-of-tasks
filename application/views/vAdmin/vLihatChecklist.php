@@ -17,12 +17,26 @@
           <i class="add icon"></i>
       </a>
       </div>
-
-  <form method="POST" action="<?php echo site_url('admin/gantichecklist'); ?>">
-  <table class="ui sortable celled table" style=" width: auto;">
+  <form method="POST" action="<?php echo site_url('admin/gantichecklist'); ?>">    
+  <div class="ui divider"></div>
+  <div class="field" style="margin-left: 1000px">
+  <select class="ui right selection tiny dropdown item" id="Hari">        
+      <option value="Senin">Senin</option>
+      <option value="Selasa">Selasa</option>
+      <option value="Rabu">Rabu</option>
+      <option value="Kamis">Kamis</option>
+      <option value="Jumat">Jumat</option>
+      <option value="Sabtu">Sabtu</option>
+      <option value="Minggu">Minggu</option>
+  </select>
+</div>
+    
+  
+  <table class="ui sortable celled table"  id="example">
     <thead>
       <tr style="text-align: center">
         <th class="sorted ascending">No</th>
+        <th>Hari</th>
         <th>Jadwal</th>
         <th>Batas Waktu</th>
         <th >Nama Checklist</th>
@@ -49,25 +63,19 @@
       <input type="hidden" name="<?php echo 'IDChecklist'.$temp ?>" value="<?php echo $checklist['IDChecklist']; ?>">
       <tr >
         <td><?php echo $no; $no = $no+1; ?></td>
+        <td><?php echo $checklist['Hari']; ?></td>
         <td><?php echo $checklist['Jam']; ?></td>
         <td><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
         <td><?php echo $checklist['NamaChecklist']; ?></td>
         <td>
           <select class="ui search dropdown" name="<?php echo 'NIK'.$temp ?>">
             <option value="<?php echo $checklist['NIK']; ?>"><?php echo $checklist['NamaPIC']; ?></option>
-            <?php for ($i=0; $i < count($pic[$checklist['Jam']]); $i++) { ?>
-              <option value="<?php echo $pic[$checklist['Jam']][$i]['NIK'] ?>"><?php echo $pic[$checklist['Jam']][$i]['NamaPIC']; ?></option>
+            <?php for ($i=0; $i < count($pic[$checklist['Hari']][$checklist['Jam']]); $i++) { ?>
+              <option value="<?php echo $pic[$checklist['Hari']][$checklist['Jam']][$i]['NIK'] ?>"><?php echo $pic[$checklist['Jam']][$i]['NamaPIC']; ?></option>
             <?php } ?>
           </select>
         </td>
         <td>
-          <!-- <?php 
-            $myFile = $checklist['Info'];
-            $fh = fopen($myFile, 'r');
-            while(!feof($fh)){
-            echo fgets($fh)."<br>";
-            }
-           ?> -->
           <a href="#" data variation="wide" title="Hello. This is a very wide pop-up which allows for lots of content with additional space. &#013 You can fit a lot of words here and the paragraphs will be pretty wide. " data-position="bottom center" data-html="true" >Lihat</a>
         </td>
         
@@ -103,19 +111,6 @@
           <button class="ui right floated blue small button" >
           <i class="save icon"></i>Simpan
         </button>
-
-  </form>
-       <div class="pagination">
-  <a href="#">&laquo;</a>
-  <a href="#">1</a>
-  <a class="active" href="#">2</a>
-  <a href="#">3</a>
-  <a href="#">4</a>
-  <a href="#">5</a>
-  <a href="#">6</a>
-  <a href="#">&raquo;</a>
-</div>
-
         </th>
         </tr>
     </tfoot>
