@@ -109,7 +109,7 @@
             </div>
         </div>
       
-        <a class="item" href="">
+        <a class="item" href="<?php echo site_url('pic/ubahPassword'); ?>">
         <i class="cog icon"></i>Setting
       </a>
     </div>

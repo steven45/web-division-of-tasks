@@ -107,4 +107,10 @@ class cPIC extends CI_Controller {
 		$this->load->view('vPIC/vRankingPIC');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
 	}
+	public function ubahPassword(){
+		$data['judul'] = "Ubah Password";
+		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
+		$this->load->view('vPIC/vUbahPassword');
+		$this->load->view('vPIC/vTemplate/vFooterPIC');
+	}
 }

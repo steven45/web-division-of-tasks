@@ -53,3 +53,4 @@ $route['pic/docheck'] = 'cPIC/doChecklist';
 $route['pic/daftarPIC'] = 'cPIC/daftarPIC';
 $route['pic/absensi'] = 'cPIC/lihatAbsensi';
 $route['pic/ranking'] = 'cPIC/ranking';
+$route['pic/ubahPassword'] = 'cPIC/ubahPassword';
