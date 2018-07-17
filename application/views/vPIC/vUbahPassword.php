@@ -4,30 +4,29 @@
 		<h3 style="text-align: center;">
 			<div class="ui icon">
 	  		<i class="user icon"></i>
-			</h3>
+			Ubah Password</h3>
 			<div class="ui divider"></div>
 
 		<form class="ui form" method="POST" action="<?php echo site_url('admin/validasieditpic'); ?>">
 		  <div class="field">
 		    <label>Nomor Induk Karyawan</label>
-		    <input type="text" name="" placeholder="Nomor Induk Karyawan" value="<?php echo $pic['NIK'] ?>" disabled>
-		    <input type="hidden" name="NIK" placeholder="Nomor Induk Karyawan" value="<?php echo $pic['NIK'] ?>" >
+		    <input type="text" name="NIK" placeholder="Nomor Induk Karyawan" value="" disabled>
 		  </div>
 		  <div class="field">
 		    <label>Nama PIC</label>
-		    <input type="text" name="NamaPIC" placeholder="Nama PIC" value="<?php echo $pic['NamaPIC'] ?>">
+		    <input type="text" name="NamaPIC" placeholder="Nama PIC" value="" disabled>
 		  </div>
 		  <div class="field">
-		    <label>Divisi</label>
-		    <input type="text" name="Divisi" placeholder="Divisi" value="<?php echo $pic['Divisi'] ?>">
+		    <label>Password Lama</label>
+		    <input type="password" name="Password" placeholder="Password Lama" value="">
 		</div>
 		    <div class="field">
-		    <label>Jabatan</label>
-		    <input type="text" name="Jabatan" placeholder="Jabatan" value="<?php echo $pic['Jabatan'] ?>">
+		    <label>Password Baru</label>
+		    <input type="password" name="Password" placeholder="Password Baru" value="">
 		  </div>
 		  <div class="field">
-		    <label>Tahun Masuk PIC</label>
-		    <input type="text" name="TahunMasuk" placeholder="Tahun Masuk PIC" value="<?php echo $pic['TahunMasuk'] ?>">
+		    <label>Confirm Password Baru</label>
+		    <input type="password" name="Password" placeholder="Confirm Passowrd Baru" value="">
 		  </div>
 		  
 	
@@ -40,8 +39,5 @@
 		</form>
 
 </div>
-
-
-
 </div>
 </div>

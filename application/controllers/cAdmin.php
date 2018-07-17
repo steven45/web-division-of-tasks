@@ -673,4 +673,11 @@ class cAdmin extends CI_Controller {
 		$this->load->view('vAdmin/vRankingPIC');
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
+
+	public function ubahPassword(){
+		$data['judul'] = "Ubah Password";
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		$this->load->view('vAdmin/vUbahPassword');
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
 }

@@ -80,15 +80,40 @@
 
         
       <div class="right menu">
-      <a class="item">
-        Notifications
-        <div class="ui small label">1</div>
-        </a>
-    <div class="item">
-      <div class="ui icon input">
-        <input type="text" placeholder="Search...">
-        <i class="search icon"></i>
-      </div>
+
+        <div class="ui pointing dropdown link item">
+          <span class="text">
+
+          Notifications</span>
+          <div class="ui small label">1</div>
+            <div class="menu">
+              <div class="header">
+                <i class= "bell icon"></i>
+              Notifications</div>
+              <div class="ui relaxed divided list" style="margin: auto+10px auto+10px; padding-bottom: 10px;">
+                <div class="item">
+                  <div class="content">
+                    <a class="header">Semantic-Org/Semantic-UI</a>
+                    <div class="description">Updated 10 mins ago</div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="content">
+                    <a class="header">Semantic-Org/Semantic-UI-Docsssss
+                    </a>
+                    <div class="description">Updated 22 mins ago sjjsak
+              </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+        </div>
+      
+        <a class="item" href="<?php echo site_url('pic/ubahPassword'); ?>">
+        <i class="cog icon"></i>Setting
+      </a>
+
     </div>
       
       <div class="item">
