@@ -40,7 +40,9 @@
                 },
                 title: {
                 	display: true,
-                	text:'Ranking PIC'
+                	text:'Ranking PIC',
+                    fontSize: 18,
+                    fontColor: '#000'
                 }
             },
         });
