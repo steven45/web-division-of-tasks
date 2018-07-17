@@ -7,7 +7,7 @@
 			Ubah Password</h3>
 			<div class="ui divider"></div>
 
-		<form class="ui form" method="POST" action="<?php echo site_url('admin/validasieditpic'); ?>">
+		<form class="ui form" method="POST" action="" id="form">
 		  <div class="field">
 		    <label>Nomor Induk Karyawan</label>
 		    <input type="text" name="NIK" placeholder="Nomor Induk Karyawan" value="" disabled>
@@ -22,11 +22,11 @@
 		</div>
 		    <div class="field">
 		    <label>Password Baru</label>
-		    <input type="password" name="Password" placeholder="Password Baru" value="">
+		    <input type="password" name="password" placeholder="Password Baru" value="">
 		  </div>
 		  <div class="field">
 		    <label>Confirm Password Baru</label>
-		    <input type="password" name="Password" placeholder="Confirm Passowrd Baru" value="">
+		    <input type="password" name="confirmpassword" placeholder="Confirm Passowrd Baru" value="">
 		  </div>
 		  
 	
@@ -41,3 +41,33 @@
 </div>
 </div>
 </div>
+<script>
+
+$('.ui.form')
+            .form({
+              on: 'blur',
+              inline : true,
+              fields: {
+                password: {
+                  identifier  : 'password',
+                  rules: [
+                    {
+                      type   : 'minLength[6]',
+                      prompt : 'Your password must be at least 6 characters'
+                    },
+                ]
+              },
+              confirmpassword: {
+                  identifier  : 'confirmpassword',
+                  rules: [
+                    {
+                      type   : 'match[password]',
+                      prompt : "Your password doesn't match"
+                    },
+                ]
+              },
+          }
+      }
+    );
+
+</script>
