@@ -101,6 +101,9 @@ class cPIC extends CI_Controller {
 	public function lihatAbsensi()
 	{
 		$data['judul'] = "Lihat Absensi";
+		$data['absensi'] = $this->mPIC->getAbsensiPIC();
+
+
 		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
 		$this->load->view('vPIC/vAbsensiPIC');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');

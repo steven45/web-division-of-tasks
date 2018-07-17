@@ -13,13 +13,13 @@
   <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/tablesort.js'); ?>"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/data-paging.js'); ?>"></script>
   
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
       $(document).ready(function() {
         $('#example').DataTable( {
             "pagingType": "full_numbers"
           } );
         } );
-    </script>
+    </script> -->
   <script type="text/javascript">
     $(document).ready(function() 
     { 
@@ -69,50 +69,29 @@
         PIC
         <i class="dropdown icon"></i>
           <div class="menu">
-            <a class="item" href="<?php echo site_url('pic/daftarPIC'); ?>">
+            <a class="item" href="<?php echo site_url('pic/pic'); ?>">
             Daftar PIC</a>
             <a class="item" href="<?php echo site_url('pic/absensi'); ?>">
             Absensi PIC</a>
-            <a class="item" href="<?php echo site_url('pic/ranking'); ?>">
+            <a class="item" href="<?php echo site_url('pic/absensi'); ?>">
             Ranking PIC</a>
       </div>
       </div>
 
         
       <div class="right menu">
-        <div class="ui pointing dropdown link item">
-          <span class="text">
-
-          Notifications</span>
-          <div class="ui small label">1</div>
-            <div class="menu">
-              <div class="header">
-                <i class= "bell icon"></i>
-              Notifications</div>
-              <div class="ui relaxed divided list" style="margin: auto+10px auto+10px; padding-bottom: 10px;">
-                <div class="item">
-                  <div class="content">
-                    <a class="header">Semantic-Org/Semantic-UI</a>
-                    <div class="description">Updated 10 mins ago</div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="content">
-                    <a class="header">Semantic-Org/Semantic-UI-Docsssss
-                    </a>
-                    <div class="description">Updated 22 mins ago sjjsak
-              </div>
-                  </div>
-                </div>
-              </div>
-              
-            </div>
-        </div>
-      
-        <a class="item" href="">
-        <i class="cog icon"></i>Setting
-      </a>
+      <a class="item">
+        Notifications
+        <div class="ui small label">1</div>
+        </a>
+    <div class="item">
+      <div class="ui icon input">
+        <input type="text" placeholder="Search...">
+        <i class="search icon"></i>
+      </div>
     </div>
+      
+      <div class="item">
           <a href="<?php echo site_url('pic/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
       <div class="item">
           <div class="ui teal button">
