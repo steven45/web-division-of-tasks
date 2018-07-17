@@ -70,7 +70,7 @@
             <a class="item" href="<?php echo site_url('pic/absensi'); ?>">
             Absensi PIC</a>
             <a class="item" href="<?php echo site_url('pic/absensi'); ?>">
-            Statistic PIC</a>
+            Ranking PIC</a>
       </div>
       </div>
 
