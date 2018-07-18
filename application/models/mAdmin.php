@@ -11,6 +11,12 @@ class mAdmin extends CI_Model
     	return $this->db->get_where($table,$where);
     }
 
+    public function getNotifikasi()
+    {
+        $query = $this->db->get('notifikasi');
+        return $query->result_array();
+    }
+
     public function tambahPIC($table, $data, $NIK)
     {
     	$query = "SELECT * FROM `pic` WHERE `NIK` = $NIK";
@@ -199,9 +205,6 @@ class mAdmin extends CI_Model
 
             $this->db->select('*');
              $this->db->from('log l');
-             $this->db->join('pic p','p.NIK=l.NIK');
-             $this->db->join('checklist c','c.IDChecklist=l.IDChecklist');
-             $this->db->join('harian h','h.NIK=p.NIK');
              $query = $this->db->get();
              return $query->result_array();
         }

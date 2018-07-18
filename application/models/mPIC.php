@@ -12,9 +12,23 @@ class mPIC extends CI_Model
         return $this->db->query($query)->row_array();
     }
 
-    public function getChecklist()
+    public function getChecklist($IDChecklist =  false)
     {
-
+        if ($IDChecklist == null) {
+            $query = $this->db->order_by('c.Hari','ASC');
+            $query = $this->db->order_by('c.NamaChecklist','ASC');
+            $query = $this->db->order_by('c.Jam','ASC');
+            $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.Hari,c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status, c.BatasPengecekan');
+             $query = $this->db->from('checklist c');
+             $query = $this->db->join('pic p','p.NIK=c.NIK');
+             $query = $this->db->get();
+             return $query->result_array();
+        }
+        else
+        {
+            $query = "SELECT * FROM `checklist` WHERE `IDChecklist` = $IDChecklist";
+            return $this->db->query($query)->row_array();
+        }
     }
 
     public function getDaftarPIC($NIK = false)
@@ -31,6 +45,7 @@ class mPIC extends CI_Model
     public function getAbsensiPIC($IDHarian = false)
     {
         if ($IDHarian == NULL) {
+            $query = $this->db->order_by('j.Shift','ASC');
             $query = $this->db->order_by('h.Hari','ASC');
             $this->db->select('h.IDHarian, h.NIK, h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam, p.Status');
              $this->db->from('harian h');
@@ -40,6 +55,7 @@ class mPIC extends CI_Model
              return $query->result_array();
         }
         else{
+            $query = $this->db->order_by('j.Shift','ASC');
             $this->db->select('h.IDHarian, h.NIK, h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam');
              $this->db->from('harian h');
              $this->db->join('pic p','p.NIK=h.NIK');
@@ -48,5 +64,45 @@ class mPIC extends CI_Model
              $query = $this->db->get();
              return $query->result_array();
         }
+    }
+
+    public function doChecklist($table, $data, $hari, $namaChecklist, $jam, $namaPIC)
+    {
+        $nJam = substr($jam, 0,2);
+        $query = "SELECT * FROM $table WHERE `Hari` = '$hari' AND `NamaChecklist` = '$namaChecklist' AND `NamaPIC` = '$namaPIC'  AND `Jam` = $nJam ";
+        $hasil =  $this->db->query($query)->row_array();
+
+        if ($hasil == NULL) {
+            $this->db->insert($table,$data);
+            return "1";
+        }
+        else{
+            $this->db->where('IDLog', $hasil['IDLog']);
+            $this->db->update($table, $data);
+            return "0";
+        }
+    }
+
+    public function getLog($IDLog = FALSE)
+    {
+        if ($IDLog == null) {
+            // $query = $this->db->get('log');
+            // return $query->result_array();
+
+            $this->db->select('*');
+             $this->db->from('log l');
+             $query = $this->db->get();
+             return $query->result_array();
+        }
+        else
+        {
+            $query = "SELECT * FROM `log` WHERE `IDLog` = $IDLog";
+            return $this->db->query($query)->row_array();
+        }
+    }
+
+    public function notifikasi($table, $data)
+    {
+        $this->db->insert($table,$data);
     }
 }

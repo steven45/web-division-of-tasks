@@ -9,11 +9,11 @@ class cPIC extends CI_Controller {
 		$this->load->model('mPIC');
 		$this->load->helper('url_helper');
 		$this->load->library('session');
+
 	}
 
 	public function index()
 	{
-
 		$this->load->view('vPIC/vHomePIC');
 		$this->load->view('vPIC/vFooterHomePIC');
 	}
@@ -52,6 +52,8 @@ class cPIC extends CI_Controller {
 	{
 		// // header("Content-type:application/json");
 		$data['judul'] = "Beranda PIC";
+		$data['judul'] = "Log Checklist";
+		$data['log']= $this->mPIC->getLog();
 		// // $data['log']= $this->mAdmin->getLog();
 
 		// // echo json_encode($data);
@@ -60,13 +62,20 @@ class cPIC extends CI_Controller {
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
 	}
 
-	public function lihatChecklist()
+	public function lihatChecklist($status = NULL)
 	{
 		// // header("Content-type:application/json");
-		$data['judul'] = "Checklist";
 		// // $data['log']= $this->mAdmin->getLog();
-
 		// // echo json_encode($data);
+
+		$data['judul'] = "Checklist";
+		$data['checklist']= $this->mPIC->getChecklist();
+
+		$data['status'] = $status;
+		if ($data['status'] == NULL) {
+			$data['status'] = 'Enabled';
+		}
+
 		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
 		$this->load->view('vPIC/vLihatChecklist');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
@@ -75,13 +84,52 @@ class cPIC extends CI_Controller {
 	public function doChecklist()
 	{
 		// // header("Content-type:application/json");
-		$data['judul'] = "Pengecekan";
 		// // $data['log']= $this->mAdmin->getLog();
-
 		// // echo json_encode($data);
-		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
-		$this->load->view('vPIC/vDoChecklist');
-		$this->load->view('vPIC/vTemplate/vFooterPIC');
+
+		date_default_timezone_set('Asia/Jakarta');
+
+		$namaPIC = $this->input->post('NamaPIC');
+		$namaChecklist = $this->input->post('NamaChecklist');
+		$namaChecklistSebenarnya = $this->input->post('NamaChecklistSebenarnya');
+		$jam = $this->input->post('Jam');
+		$info = $this->input->post('Info');
+		$status = $this->input->post('Status');
+		$keterangan = $this->input->post('Keterangan');
+		$hari = $this->input->post('Hari');
+
+		$data = array(
+			'NamaPIC' => $namaPIC,
+			'NamaChecklist' => $namaChecklist,
+			'PICCek' => $namaChecklistSebenarnya,
+			'Jam' => $jam,
+			'Info' => $info,
+			'Status' => $status,
+			'Keterangan' => $keterangan,
+			'Hari' => $hari
+		);
+		$data = $this->mPIC->doChecklist('log', $data, $hari, $namaChecklist, $jam, $namaPIC);
+
+		$notif = array(
+			'ForN' => 'admin',
+			'Waktu' => date("l, d-m-Y h:i:s a"),
+			'Isi' => $namaChecklistSebenarnya .' telah mengecek ' . $namaChecklist,
+			'Status' => 'Belum'
+		);
+		$this->mPIC->notifikasi('notifikasi', $notif);
+
+		if ($data == 1) {
+			echo "<script type='text/javascript'>
+					alert('Sukses Melakukan Pengecekan.');
+					window.location.href = '" . base_url() . "pic/checklist';
+				</script>";
+		}
+		else{
+			echo "<script type='text/javascript'>
+					alert('Sukses Mengupdate Pengecekan. ');
+					window.location.href = '" . base_url() . "pic/checklist';
+				</script>";
+		}
 	}
 
 	public function daftarPIC()

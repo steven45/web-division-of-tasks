@@ -70,7 +70,27 @@
       </td>
       <td>
           <input type="hidden" name="<?php echo 'NIK'.$i; ?>" value="<?php echo $pic[$i]['NIK']; ?>">
-          <select class="ui selection dropdown"> name="<?php echo 'status'.$i; ?>"  style="min-width: 10em;">
+          <select name="<?php echo 'status'.$i; ?>"  style="min-width: 10em;cursor: pointer;
+                                                                                    word-wrap: break-word;
+                                                                                    line-height: 1em;
+                                                                                    white-space: normal;
+                                                                                    outline: 0;
+                                                                                    -webkit-transform: rotateZ(0deg);
+                                                                                    transform: rotateZ(0deg);
+                                                                                    min-width: 14em;
+                                                                                    min-height: 2.71428571em;
+                                                                                    background: #FFFFFF;
+                                                                                    display: inline-block;
+                                                                                    padding: 0.78571429em 2.1em 0.78571429em 1em;
+                                                                                    color: rgba(0, 0, 0, 0.87);
+                                                                                    -webkit-box-shadow: none;
+                                                                                    box-shadow: none;
+                                                                                    border: 1px solid rgba(34, 36, 38, 0.15);
+                                                                                    border-radius: 0.28571429rem;
+                                                                                    -webkit-transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
+                                                                                    transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
+                                                                                    transition: box-shadow 0.1s ease, width 0.1s ease;
+                                                                                    transition: box-shadow 0.1s ease, width 0.1s ease, -webkit-box-shadow 0.1s ease;">
             <?php if ($pic[$i]['Status'] == "Enabled") { ?>
               <option value="<?php echo $pic[$i]['Status']; ?>"><?php echo $pic[$i]['Status']; ?></option>
               <option value="Disabled">Disabled</option>

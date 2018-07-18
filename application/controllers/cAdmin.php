@@ -488,6 +488,10 @@ class cAdmin extends CI_Controller {
 	public function gantiChecklist()
 	{
 		$nJumlah = $this->input->post('nJumlah');
+		$data['checklist']= $this->mAdmin->getChecklist();
+		echo count($data['checklist']);
+		echo '<br>';
+		echo $nJumlah;
 		for ($i=0; $i < $nJumlah; $i++) { 
 			$nNIK[$i] = 'NIK'.$i;
 			$id[$i] = 'IDChecklist'.$i;
@@ -512,9 +516,9 @@ class cAdmin extends CI_Controller {
 			// echo $nStatus[$i]. ' = '. $status .'<br> '	;
 			// echo '<br>';
 			// echo '<br>';
-			if ($IDChecklist != NULL AND $status != NULL AND $NIK != NULL) {
-				$query = $this->mAdmin->gantiChecklist('checklist',$IDChecklist, $data);
-			}
+			// if ($IDChecklist != NULL AND $status != NULL AND $NIK != NULL) {
+			// 	$query = $this->mAdmin->gantiChecklist('checklist',$IDChecklist, $data);
+			// }
 		}
 
 
@@ -523,10 +527,10 @@ class cAdmin extends CI_Controller {
 		// 	'Status' => 'Disabled'
 		// );
 		// $this->mAdmin->hapusChecklist('checklist', $data, $IDChecklist);	
-		echo "<script type='text/javascript'>
-					alert('Sukses mengganti PIC dan Status');
-					window.location.href = '" . base_url() . "admin/checklist';
-				</script>";
+		// echo "<script type='text/javascript'>
+		// 			alert('Sukses mengganti PIC dan Status');
+		// 			window.location.href = '" . base_url() . "admin/checklist';
+		// 		</script>";
 	}
 
 	public function lihatAbsensi()
@@ -643,7 +647,10 @@ class cAdmin extends CI_Controller {
 			$data = array(
 				'Kehadiran' => $Kehadiran
 			);
-
+			// echo $id[$i]. ' = '. $IDHarian;
+			// echo "<br>";
+			// echo $hadir[$i].' = '. $Kehadiran;
+			// echo "<br>";
 			$query = $this->mAdmin->gantiAbsensi('harian',$IDHarian, $data);
 		}
 		echo "<script type='text/javascript'>
@@ -652,15 +659,27 @@ class cAdmin extends CI_Controller {
 				window.location.href = '" . base_url() . "admin/absensi';
 			</script>";
 	}
+	public function notifikasi()
+	{
+		$data['notifikasi'] = $this->mAdmin->getNotifikasi();
+		$temp = 0;
+		foreach ($data['notifikasi'] as $notifikasi) {
+			if ($notifikasi['Status'] == 'Belum') {
+				$temp = $temp +1;
+			}
+		}
+		return $data['temp'] = $temp;
+	}
 
 	public function lihatLog()
 	{
 		// header("Content-type:application/json");
 		$data['judul'] = "Log Checklist";
 		$data['log']= $this->mAdmin->getLog();
-
+		
+		$data['notifikasi'] = $this->mAdmin->getNotifikasi();
+		$data['temp'] = $this->notifikasi();
 		// echo json_encode($data);
-
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vBerandaAdmin', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
