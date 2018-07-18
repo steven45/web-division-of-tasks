@@ -65,19 +65,11 @@
           <i class="check square icon"></i>
         Checklist</div>
       </a>
-      <div class="ui dropdown item">
-      <i class="user icon"></i>
-        PIC
-        <i class="dropdown icon"></i>
-          <div class="menu">
-            <a class="item" href="<?php echo site_url('pic/daftarPIC'); ?>">
-            Daftar PIC</a>
-            <a class="item" href="<?php echo site_url('pic/absensi'); ?>">
-            Absensi PIC</a>
-            <a class="item" href="<?php echo site_url('pic/ranking'); ?>">
-            Ranking PIC</a>
-      </div>
-      </div>
+      <a class="item" href="<?php echo site_url('pic/absensi'); ?>">
+        <div class="ui icon">
+          <i class="user icon"></i>    
+            Absensi PIC</div>
+          </a>
 
         
       <div class="right menu">

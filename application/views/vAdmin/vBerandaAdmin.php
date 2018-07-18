@@ -5,7 +5,7 @@
       
       <div class="segment">
       <div class="ui icon input" style="margin-left: 0px">
-        <input type="text" placeholder="Search...">
+        <input type="text" placeholder="Search..." id="pencarian">
         <i class="circular search link icon"></i>
       </div>
       
@@ -29,7 +29,7 @@
 
         <table class="ui sortable celled table" id="example" style="margin-top: 20px; margin-left: 20px; width: 95%">
           <thead>
-            <tr>
+            <tr style="text-align: center">
             <th>No</th>
             <th>Jadwal</th>
             <th>Jam Pengecekan</th>
@@ -41,7 +41,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr style="text-align: center">
               <td>1</td>
               <td>01:00</td>
               <td>01:05</td>

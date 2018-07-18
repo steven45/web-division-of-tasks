@@ -39,7 +39,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr style="text-align: center">
               <td>1</td>
               <td>01:00</td>
               <td>01:05</td>
