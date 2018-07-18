@@ -82,27 +82,30 @@
           <span class="text">
 
           Notifications</span>
-          <div class="ui small label">1</div>
+          <div class="ui small label" style="background-color: red;"><!-- <?php echo $temp; ?> -->2</div>
             <div class="menu">
               <div class="header">
                 <i class= "bell icon"></i>
               Notifications</div>
-              <div class="ui relaxed divided list" style="margin: auto+10px auto+10px; padding-bottom: 10px;">
-                <div class="item">
+
+              <!-- <div class="ui relaxed divided list" style="margin: auto+10px auto+10px; padding-bottom: 10px;">
+              <?php foreach ($notifikasi as $notifikasi): ?>
+                <a href="<?php echo site_url('admin/beranda'); ?>">
+                <?php if ($notifikasi['Status'] == 'Belum'): ?>
+                  <div class="item" style="background-color: #e2f8ff; padding: 10px; ">
+                <?php endif ?>
+                <?php if ($notifikasi['Status'] == 'Sudah'): ?>
+                  <div class="item" style="background-color: white; padding: 10px; ">
+                <?php endif ?>
                   <div class="content">
-                    <a class="header">Semantic-Org/Semantic-UI</a>
-                    <div class="description">Updated 10 mins ago</div>
+                    <p class="header" style="margin-bottom: 5px; color: blue;"><?php echo $notifikasi['Isi'] ?></p>
+                    <div class="description" style="font-size: 12px; color: black;">Updated <?php echo $notifikasi['Waktu'] ?></div>
                   </div>
-                </div>
-                <div class="item">
-                  <div class="content">
-                    <a class="header">Semantic-Org/Semantic-UI-Docsssss
-                    </a>
-                    <div class="description">Updated 22 mins ago sjjsak
-              </div>
-                  </div>
-                </div>
-              </div>
+                </div>  
+                </a>
+                <br>
+              <?php endforeach ?>
+              </div> -->
               
             </div>
         </div>

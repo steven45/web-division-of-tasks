@@ -28,9 +28,9 @@
       <th class="">Kehadiran</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="hasil">
     <?php foreach ($absensi as $absensi ) { ?>
-     
+     <?php if ($absensi['Status'] == 'Enabled' AND $absensi['NIK'] == $_SESSION['nik']) { ?>
     <tr>
       <td> <?php echo $absensi['NIK'] ?> </td>
       <td> <?php echo $absensi['NamaPIC'] ?> </td>
@@ -49,7 +49,7 @@
           </select>
       </td>
     </tr>
-
+    <?php } ?>
     <?php } ?>
     
   </tbody>

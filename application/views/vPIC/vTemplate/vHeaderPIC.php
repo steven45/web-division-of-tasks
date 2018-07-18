@@ -14,13 +14,13 @@
   <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/tablesort.js'); ?>"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/data-paging.js'); ?>"></script>
   
-  <script type="text/javascript">
+ <!--  <script type="text/javascript">
       $(document).ready(function() {
         $('#example').DataTable( {
             "pagingType": "full_numbers"
           } );
         } );
-    </script>
+    </script> -->
   <script type="text/javascript">
     $(document).ready(function() 
     { 
