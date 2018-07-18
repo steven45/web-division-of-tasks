@@ -71,6 +71,7 @@
                             } ?> 
                           </div>
                         </div>
+
                       </div>
                   </td>
                   <?php if ($log['Status'] == 'OK') {?>

@@ -114,7 +114,7 @@
       <td>
 
         <?php $edit = 'admin/editpic/'.$pic[$i]['NIK'] ?>
-        <a href="<?php echo site_url($edit) ;?>" class="ui small blue button">
+        <a href="<?php echo site_url($edit) ;?>" class="ui basic small blue button">
           Edit
         </a>
       </td>

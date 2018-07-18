@@ -99,6 +99,7 @@
                 </div>
               </div>
             </div>
+
         </td>
         <?php if ($checklist['NamaPIC'] == $_SESSION['NamaPIC'] AND $checklist['StatusCheck'] == '0') {?>
           <td>

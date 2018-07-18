@@ -74,6 +74,8 @@
             Absensi PIC</a>
             <a class="item" href="<?php echo site_url('admin/ranking'); ?>">
             Ranking PIC</a>
+            <a class="item" href="<?php echo site_url('admin/pergantian'); ?>">
+            Pergantian PIC</a>
       </div>
       </div>
         
@@ -111,13 +113,7 @@
         </div>
         
 
-    <div class="item">
-      <div class="ui icon input">
-        <input type="text" placeholder="Search...">
-        <i class="search icon"></i>
-      </div>
-    </div>
-      <a href="<?php echo site_url('admin/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
+          <a href="<?php echo site_url('admin/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
       <div class="item">
           <div class="ui teal button">
             <i class="sign out alternate icon" icon"></i>Log Out

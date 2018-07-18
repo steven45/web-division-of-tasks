@@ -28,7 +28,9 @@
       <th class="">Kehadiran</th>
     </tr>
   </thead>
+
   <tbody id="hasil">
+
     <?php foreach ($absensi as $absensi ) { ?>
      <?php if ($absensi['Status'] == 'Enabled' AND $absensi['NIK'] == $_SESSION['nik']) { ?>
     <tr>
@@ -37,17 +39,7 @@
       <td> <?php echo $absensi['Shift'] ?> </td>
       <td> <?php echo $absensi['Jam'] ?> </td>
       <td> <?php echo $absensi['Hari'] ?> </td>
-      <td>
-          <select class="ui selection dropdown" style="min-width: 10em;" name="<?php echo 'Kehadiran'.$i ?>">
-            <?php if ($absensi['Kehadiran'] == "Hadir") { ?>
-              <option value="<?php echo $absensi['Kehadiran']; ?>"><?php echo $absensi['Kehadiran']; ?></option>
-              <option value="Tidak Hadir">Tidak Hadir</option>
-            <?php } else if ($absensi['Kehadiran'] == "Tidak Hadir") { ?>
-              <option value="Tidak Hadir"><?php echo $absensi['Kehadiran']; ?></option>
-              <option value="Hadir">Hadir</option>
-            <?php } ?>
-          </select>
-      </td>
+      <td> <?php echo $absensi['Kehadiran'] ?></td>
     </tr>
     <?php } ?>
     <?php } ?>
@@ -55,23 +47,12 @@
   </tbody>
   <tfoot class="full-width">
     <tr>
-      
-      <th colspan="8">
-        
-        <button class="ui right floated blue small button" style="margin-top: 5px;">
-          <i class="save icon"></i>Simpan
-        </button>
-        
-      </th>
-
+      <th colspan="8"></th>
     </tr>
   </tfoot>
   </form>
 </table>
 <br><br>
 </div>
-
-
-
 </div>
 </div>
