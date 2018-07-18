@@ -73,13 +73,16 @@
                         </div>
                       </div>
                   </td>
-                  <td>
-                    OK
+                  <?php if ($log['Status'] == 'OK') {?>
+                    <td style="background-color: green;"><b>OK</b></td>                    
+                  <?php } else if($log['Status'] == 'Bad') {?>
+                    <td style="background-color: orange;"><b>Bad</b></td>
+                  <?php } ?>
                   </td>
                   <td>
-                     <a href="#" data-featherlight="#bio-name">Lihat</a>
+                     <a href="#" data-featherlight="<?php echo '#lihatKet'.$temp ?>">Lihat</a>
                       <div style="display:none;">
-                        <div id="bio-name">
+                        <div id="<?php echo 'lihatKet'.$temp ?>">
                           <h3>Keterangan</h3>
                           <div class="ui segment">
                             <?php echo $log['Keterangan'] ?>

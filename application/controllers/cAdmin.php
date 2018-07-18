@@ -245,7 +245,8 @@ class cAdmin extends CI_Controller {
 					'NamaChecklist' => $namaChecklist,
 					'Jam' => $nJam,
 					'Status' => 'Enabled',
-					'BatasPengecekan' => $batasPengecekan
+					'BatasPengecekan' => $batasPengecekan,
+					'StatusCheck' => '0'
 					);
 
 					$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, $i, $hari[$j]);
@@ -287,7 +288,8 @@ class cAdmin extends CI_Controller {
 						'NamaChecklist' => $namaChecklist,
 						'Jam' => $nJam[$i],
 						'Status' => 'Enabled',
-						'BatasPengecekan' => $batasPengecekan
+						'BatasPengecekan' => $batasPengecekan,
+						'StatusCheck'
 						);
 						$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, substr($nJam[$i], 0,2), $hari[$j]);
 						$hasilJam[$i] = $hasil;
@@ -488,10 +490,10 @@ class cAdmin extends CI_Controller {
 	public function gantiChecklist()
 	{
 		$nJumlah = $this->input->post('nJumlah');
-		$data['checklist']= $this->mAdmin->getChecklist();
-		echo count($data['checklist']);
-		echo '<br>';
-		echo $nJumlah;
+		$checklist= $this->mAdmin->getChecklist();
+		// echo count($data['checklist']);
+		// echo '<br>';
+		// echo $nJumlah;
 		for ($i=0; $i < $nJumlah; $i++) { 
 			$nNIK[$i] = 'NIK'.$i;
 			$id[$i] = 'IDChecklist'.$i;
@@ -516,21 +518,42 @@ class cAdmin extends CI_Controller {
 			// echo $nStatus[$i]. ' = '. $status .'<br> '	;
 			// echo '<br>';
 			// echo '<br>';
-			// if ($IDChecklist != NULL AND $status != NULL AND $NIK != NULL) {
-			// 	$query = $this->mAdmin->gantiChecklist('checklist',$IDChecklist, $data);
-			// }
+
+			for ($j=0; $j < count($checklist); $j++) { 
+				if ($checklist[$j]['IDChecklist'] == $IDChecklist) {
+					if ($checklist[$j]['NIK'] != $NIK) {
+						// echo $checklist[$j]['NIK'].' = '. $NIK;
+						// echo '<br>';
+
+						$picS = $this->mAdmin->getPIC($checklist[$j]['NIK']);
+						$picP = $this->mAdmin->getPIC($NIK);
+
+						$pengganti = array(
+							'IDChecklist' => $IDChecklist,
+							'NamaPICS' => $picS['NamaPIC'],
+							'NamaPICP' => $picP['NamaPIC']
+						);
+						// var_dump($data);
+						$this->mAdmin->penggantiPIC('penggantipic', $pengganti);
+					}
+				}
+			}
+			// echo '<br>';
+			if ($IDChecklist != NULL AND $status != NULL AND $NIK != NULL) {
+				$query = $this->mAdmin->gantiChecklist('checklist',$IDChecklist, $data);
+			}
 		}
 
 
-		// $IDChecklist = $this->input->post('IDChecklist');
-		// $data = array(
-		// 	'Status' => 'Disabled'
-		// );
+		$IDChecklist = $this->input->post('IDChecklist');
+		$data = array(
+			'Status' => 'Disabled'
+		);
 		// $this->mAdmin->hapusChecklist('checklist', $data, $IDChecklist);	
-		// echo "<script type='text/javascript'>
-		// 			alert('Sukses mengganti PIC dan Status');
-		// 			window.location.href = '" . base_url() . "admin/checklist';
-		// 		</script>";
+		echo "<script type='text/javascript'>
+					alert('Sukses mengganti PIC dan Status');
+					window.location.href = '" . base_url() . "admin/checklist';
+				</script>";
 	}
 
 	public function lihatAbsensi()

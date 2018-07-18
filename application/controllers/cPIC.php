@@ -71,6 +71,7 @@ class cPIC extends CI_Controller {
 		$data['judul'] = "Checklist";
 		$data['checklist']= $this->mPIC->getChecklist();
 
+		// var_dump($data['checklist']);
 		$data['status'] = $status;
 		if ($data['status'] == NULL) {
 			$data['status'] = 'Enabled';
@@ -89,6 +90,7 @@ class cPIC extends CI_Controller {
 
 		date_default_timezone_set('Asia/Jakarta');
 
+		$IDChecklist = $this->input->post('IDChecklist');
 		$namaPIC = $this->input->post('NamaPIC');
 		$namaChecklist = $this->input->post('NamaChecklist');
 		$namaChecklistSebenarnya = $this->input->post('NamaChecklistSebenarnya');
@@ -108,8 +110,10 @@ class cPIC extends CI_Controller {
 			'Keterangan' => $keterangan,
 			'Hari' => $hari
 		);
-		$data = $this->mPIC->doChecklist('log', $data, $hari, $namaChecklist, $jam, $namaPIC);
+		$hasil = $this->mPIC->doChecklist('log', $data);
 
+		// var_dump($IDChecklist);
+		$this->mPIC->ubahStatusCheck($IDChecklist);
 		$notif = array(
 			'ForN' => 'admin',
 			'Waktu' => date("l, d-m-Y h:i:s a"),
@@ -118,7 +122,7 @@ class cPIC extends CI_Controller {
 		);
 		$this->mPIC->notifikasi('notifikasi', $notif);
 
-		if ($data == 1) {
+		if ($hasil == 1) {
 			echo "<script type='text/javascript'>
 					alert('Sukses Melakukan Pengecekan.');
 					window.location.href = '" . base_url() . "pic/checklist';
