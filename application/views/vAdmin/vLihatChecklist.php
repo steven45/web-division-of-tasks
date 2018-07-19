@@ -60,7 +60,7 @@
       <?php foreach ($checklist as $checklist) { ?>
       <?php if ($checklist['Status'] == $status) { ?>
       <input type="hidden" name="<?php echo 'IDChecklist'.$temp ?>" value="<?php echo $checklist['IDChecklist']; ?>">
-      <tr >
+      <tr style="text-align: center">
         <td> <?php echo $no; $no = $no+1; ?> <!-- <?php echo count($pic[$checklist['Hari']][$checklist['Jam']]) ?> <?php echo $pic[$checklist['Hari']][$checklist['Jam']][0]['NamaPIC']; ?> -->  </td>
         <td><?php echo $checklist['Hari']; ?></td>
         <td><?php echo $checklist['Jam']; ?></td>

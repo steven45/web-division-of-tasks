@@ -38,7 +38,7 @@
     <?php $jumlah = count($absensi); ?>
     <input type="hidden" name="jumlahAbsensi" value="<?php echo $jumlah ?>"> 
     <?php foreach ($absensi as $absensi) { ?>
-    <?php if ($absensi['Status'] == 'Enabled') { ?>
+    <?php if ($absensi['Status'] == 'Enabled' ) { ?>
     <input type="hidden" name="<?php echo 'IDHarian'.$i; ?>" value ="<?php echo $absensi['IDHarian']; ?>">
     <tr>
       <td><?php echo $absensi['NIK'] ?></td>
@@ -47,7 +47,28 @@
       <td><?php echo $absensi['Jam'] ?></td>
       <td><?php echo $absensi['Hari'] ?></td>
       <td>
-          <select class="ui selection dropdown" style="min-width: 10em;" name="<?php echo 'Kehadiran'.$i ?>">
+         
+          <select   name="<?php echo 'Kehadiran'.$i ?>" style="min-width: 10em; cursor: pointer;
+                                                                word-wrap: break-word;
+                                                                line-height: 1em;
+                                                                white-space: normal;
+                                                                outline: 0;
+                                                                -webkit-transform: rotateZ(0deg);
+                                                                transform: rotateZ(0deg);
+                                                                min-width: 14em;
+                                                                min-height: 2.71428571em;
+                                                                background: #FFFFFF;
+                                                                display: inline-block;
+                                                                padding: 0.78571429em 2.1em 0.78571429em 1em;
+                                                                color: rgba(0, 0, 0, 0.87);
+                                                                -webkit-box-shadow: none;
+                                                                box-shadow: none;
+                                                                border: 1px solid rgba(34, 36, 38, 0.15);
+                                                                border-radius: 0.28571429rem;
+                                                                -webkit-transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
+                                                                transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
+                                                                transition: box-shadow 0.1s ease, width 0.1s ease;
+                                                                transition: box-shadow 0.1s ease, width 0.1s ease, -webkit-box-shadow 0.1s ease;">
             <?php if ($absensi['Kehadiran'] == "Hadir") { ?>
               <option value="<?php echo $absensi['Kehadiran']; ?>"><?php echo $absensi['Kehadiran']; ?></option>
               <option value="Tidak Hadir">Tidak Hadir</option>

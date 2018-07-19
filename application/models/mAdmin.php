@@ -11,6 +11,12 @@ class mAdmin extends CI_Model
     	return $this->db->get_where($table,$where);
     }
 
+    public function getNotifikasi()
+    {
+        $query = $this->db->get('notifikasi');
+        return $query->result_array();
+    }
+
     public function tambahPIC($table, $data, $NIK)
     {
     	$query = "SELECT * FROM `pic` WHERE `NIK` = $NIK";
@@ -73,7 +79,7 @@ class mAdmin extends CI_Model
             $query = $this->db->order_by('c.Hari','ASC');
             $query = $this->db->order_by('c.NamaChecklist','ASC');
             $query = $this->db->order_by('c.Jam','ASC');
-            $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.Hari,c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status, c.BatasPengecekan');
+            $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.Hari,c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status, c.BatasPengecekan, c.StatusCheck');
              $query = $this->db->from('checklist c');
              $query = $this->db->join('pic p','p.NIK=c.NIK');
              $query = $this->db->get();
@@ -199,9 +205,6 @@ class mAdmin extends CI_Model
 
             $this->db->select('*');
              $this->db->from('log l');
-             $this->db->join('pic p','p.NIK=l.NIK');
-             $this->db->join('checklist c','c.IDChecklist=l.IDChecklist');
-             $this->db->join('harian h','h.NIK=p.NIK');
              $query = $this->db->get();
              return $query->result_array();
         }
@@ -210,5 +213,10 @@ class mAdmin extends CI_Model
             $query = "SELECT * FROM `log` WHERE `IDLog` = $IDLog";
             return $this->db->query($query)->row_array();
         }
+    }
+
+    public function penggantiPIC($table, $data)
+    {
+        $this->db->insert($table,$data);
     }
 }

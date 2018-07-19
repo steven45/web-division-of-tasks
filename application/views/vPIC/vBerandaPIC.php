@@ -6,7 +6,7 @@
       
     <div class="segment">
       <div class="ui icon input" style="margin-left: 0px">
-        <input type="text" placeholder="Search...">
+        <input type="text" placeholder="Search..." id="pencarian">
         <i class="circular search link icon"></i>
       </div>
       
@@ -33,52 +33,70 @@
             <th>Jam Pengecekan</th>
             <th>Nama Checklist</th>
             <th>Nama PIC</th>
+            <th>PIC Yang Mengecek</th>
             <th>Info Pengecekan</th>
             <th>Status</th>
             <th>Keterangan</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>01:00</td>
-              <td>01:05</td>
-              <td>Checklist PLN</td>
-              <td>Panji Nugroho</td>
-              <td>
-                 <a href="#" data-featherlight="#bio-name">Klik Disini</a>
-                  <div style="display:none;">
-                    <div id="bio-name">
-                      <h3>Info Checklist</h3>
-                      <div class="ui segment">
-                        Checklist ini adalah checklist yang paling penting. 
-                        1. ChecklistPLN
-                        2. Checklist ATM B
+          <tbody id="hasil">
+            <?php $temp = 1; ?>
+            <?php foreach ($log as $log): ?>
+                <tr>
+                  <td><?php echo $temp; $temp = $temp +1; ?></td>
+                  <td><?php echo $log['Jam'] ?></td>
+                  <td><?php echo $log['Waktu'] ?></td>
+                  <td><?php echo $log['NamaChecklist'] ?></td>
+                  <td><?php echo $log['NamaPIC'] ?></td>
+                  <td><?php echo $log['PICCek'] ?></td>
+                  <td>
+                     <?php 
+                      $nInfo = NULL;
+                      $k = 0;
+                      $fh = fopen($log['Info'], 'r');
+                      while(!feof($fh)){
+                       $nInfo[$k] = fgets($fh);
+                       $k = $k +1;
+                      }
+                      
+                    ?>
+
+                    <a href="#" data-featherlight=" <?php echo '#bio-name'.$temp ?>">Lihat</a>
+                      <div style="display:none;">
+                        <div id="<?php echo 'bio-name'.$temp ?>">
+                          <h3>Info Checklist</h3>
+                          <div class="ui segment">
+                           <?php foreach ($nInfo as $info) {
+                              echo '<p>'.$info.'</p>';
+                            } ?> 
+                          </div>
+                        </div>
+
                       </div>
-                    </div>
-                  </div>
-              </td>
-              <td>
-                OK
-              </td>
-              <td>
-                 <a href="#" data-featherlight="#bio-name1">Klik Disini</a>
-                  <div style="display:none;">
-                    <div id="bio-name1">
-                      <h3>Keterangan</h3>
-                      <div class="ui segment">
-                        Checklist ini adalah checklist yang paling penting. 
-                        1. ChecklistPLN
-                        2. Checklist ATM B
+                  </td>
+                  <?php if ($log['Status'] == 'OK') {?>
+                    <td style="background-color: green;"><b>OK</b></td>                    
+                  <?php } else if($log['Status'] == 'Bad') {?>
+                    <td style="background-color: orange;"><b>Bad</b></td>
+                  <?php } ?>
+                  </td>
+                  <td>
+                     <a href="#" data-featherlight="<?php echo '#lihatKet'.$temp ?>">Lihat</a>
+                      <div style="display:none;">
+                        <div id="<?php echo 'lihatKet'.$temp ?>">
+                          <h3>Keterangan</h3>
+                          <div class="ui segment">
+                            <?php echo $log['Keterangan'] ?>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-              </td>
-            </tr>
+                  </td>
+                </tr>
+            <?php endforeach ?>
           </tbody>
           <tfoot>
             <tr> 
-            <th colspan="8">
+            <th colspan="9">
             </th> 
             </tr>
           </tfoot>
