@@ -7,7 +7,8 @@
 </div>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+
+
     <script type="text/javascript">
       $(document).ready(function(){
         $("#pencarian").on("keyup", function() {
@@ -18,6 +19,7 @@
         }); 
       });
   </script>
+
   
   
 </body>
