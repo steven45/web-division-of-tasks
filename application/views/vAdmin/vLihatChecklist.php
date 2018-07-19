@@ -20,7 +20,8 @@
   <form method="POST" action="<?php echo site_url('admin/gantichecklist'); ?>">    
   <div class="ui divider"></div>
   <div class="field" style="margin-left: 900px">
-  <select class="ui right selection tiny dropdown item" id="Hari">        
+  <select class="ui right selection tiny dropdown item" id="hari">  
+      <option value="<?php echo $hari ?>"><?php echo $hari ?></option>      
       <option value="Senin">Senin</option>
       <option value="Selasa">Selasa</option>
       <option value="Rabu">Rabu</option>

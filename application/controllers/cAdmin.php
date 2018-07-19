@@ -245,7 +245,8 @@ class cAdmin extends CI_Controller {
 					'NamaChecklist' => $namaChecklist,
 					'Jam' => $nJam,
 					'Status' => 'Enabled',
-					'BatasPengecekan' => $batasPengecekan
+					'BatasPengecekan' => $batasPengecekan,
+					'StatusCheck' => '0'
 					);
 
 					$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, $i, $hari[$j]);
@@ -287,7 +288,8 @@ class cAdmin extends CI_Controller {
 						'NamaChecklist' => $namaChecklist,
 						'Jam' => $nJam[$i],
 						'Status' => 'Enabled',
-						'BatasPengecekan' => $batasPengecekan
+						'BatasPengecekan' => $batasPengecekan,
+						'StatusCheck'
 						);
 						$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, substr($nJam[$i], 0,2), $hari[$j]);
 						$hasilJam[$i] = $hasil;
@@ -335,8 +337,6 @@ class cAdmin extends CI_Controller {
 
 		// echo json_encode($data['absensi']);
 
-		
-
 		$data['status'] = $status;
 		if ($data['status'] == NULL) {
 			$data['status'] = 'Enabled';
@@ -370,6 +370,29 @@ class cAdmin extends CI_Controller {
 			break;
 		}
 		$data['hari'] = $hari;
+
+		// Menyimpan Nomor Per Hari
+		foreach ($data['checklist'] as $checklist) {
+			$nJumlah[$checklist['Hari']] = 0;
+		}
+		$key = array_keys($nJumlah);
+		foreach ($data['checklist'] as $checklist ) {
+			for ($i=0; $i < count($key); $i++) { 
+				if ($checklist['Hari'] == $key[$i]) {
+					$nJumlah[$checklist['Hari']] = $nJumlah[$checklist['Hari']] +1;
+				}
+			}	
+		}
+
+		$temp = 0;
+		foreach ($nJumlah as $jumlah) {
+			for ($i=1; $i <= $jumlah; $i++) { 
+				$nomor[$temp] = $i;
+				$temp = $temp +1;
+			}
+		}
+
+		$data['nomor'] = $nomor;
 
 		$pic = NULL;
 		foreach ($data['checklist'] as $checklist) {
@@ -488,10 +511,10 @@ class cAdmin extends CI_Controller {
 	public function gantiChecklist()
 	{
 		$nJumlah = $this->input->post('nJumlah');
-		$data['checklist']= $this->mAdmin->getChecklist();
-		echo count($data['checklist']);
-		echo '<br>';
-		echo $nJumlah;
+		$checklist= $this->mAdmin->getChecklist();
+		// echo count($data['checklist']);
+		// echo '<br>';
+		// echo $nJumlah;
 		for ($i=0; $i < $nJumlah; $i++) { 
 			$nNIK[$i] = 'NIK'.$i;
 			$id[$i] = 'IDChecklist'.$i;
@@ -516,21 +539,42 @@ class cAdmin extends CI_Controller {
 			// echo $nStatus[$i]. ' = '. $status .'<br> '	;
 			// echo '<br>';
 			// echo '<br>';
-			// if ($IDChecklist != NULL AND $status != NULL AND $NIK != NULL) {
-			// 	$query = $this->mAdmin->gantiChecklist('checklist',$IDChecklist, $data);
-			// }
+
+			for ($j=0; $j < count($checklist); $j++) { 
+				if ($checklist[$j]['IDChecklist'] == $IDChecklist) {
+					if ($checklist[$j]['NIK'] != $NIK) {
+						// echo $checklist[$j]['NIK'].' = '. $NIK;
+						// echo '<br>';
+
+						$picS = $this->mAdmin->getPIC($checklist[$j]['NIK']);
+						$picP = $this->mAdmin->getPIC($NIK);
+
+						$pengganti = array(
+							'IDChecklist' => $IDChecklist,
+							'NamaPICS' => $picS['NamaPIC'],
+							'NamaPICP' => $picP['NamaPIC']
+						);
+						// var_dump($data);
+						$this->mAdmin->penggantiPIC('penggantipic', $pengganti);
+					}
+				}
+			}
+			// echo '<br>';
+			if ($IDChecklist != NULL AND $status != NULL AND $NIK != NULL) {
+				$query = $this->mAdmin->gantiChecklist('checklist',$IDChecklist, $data);
+			}
 		}
 
 
-		// $IDChecklist = $this->input->post('IDChecklist');
-		// $data = array(
-		// 	'Status' => 'Disabled'
-		// );
+		$IDChecklist = $this->input->post('IDChecklist');
+		$data = array(
+			'Status' => 'Disabled'
+		);
 		// $this->mAdmin->hapusChecklist('checklist', $data, $IDChecklist);	
-		// echo "<script type='text/javascript'>
-		// 			alert('Sukses mengganti PIC dan Status');
-		// 			window.location.href = '" . base_url() . "admin/checklist';
-		// 		</script>";
+		echo "<script type='text/javascript'>
+					alert('Sukses mengganti PIC dan Status');
+					window.location.href = '" . base_url() . "admin/checklist';
+				</script>";
 	}
 
 	public function lihatAbsensi()
@@ -651,7 +695,9 @@ class cAdmin extends CI_Controller {
 			// echo "<br>";
 			// echo $hadir[$i].' = '. $Kehadiran;
 			// echo "<br>";
-			$query = $this->mAdmin->gantiAbsensi('harian',$IDHarian, $data);
+			if ($IDHarian != NULL AND $Kehadiran != NULL) {	
+				$query = $this->mAdmin->gantiAbsensi('harian',$IDHarian, $data);
+			}
 		}
 		echo "<script type='text/javascript'>
 
@@ -696,6 +742,9 @@ class cAdmin extends CI_Controller {
 	public function pergantian()
 	{
 		$data['judul'] = "Pergantian PIC";
+
+		$data['penggantiPIC'] = $this->mAdmin->getPenggantiPIC();
+		// var_dump($data['penggantiPIC']);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vPergantianPIC');
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');

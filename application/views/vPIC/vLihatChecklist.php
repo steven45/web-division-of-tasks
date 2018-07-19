@@ -14,11 +14,12 @@
       </h3>
       
       </div>
-
   <div class="ui divider"></div>
 
   <div class="field" style="margin-left: 600px">
-  <select class="ui right selection tiny dropdown item" id="Hari">        
+  <select class="ui right selection tiny dropdown item" id="hari" >
+      <!-- <option value="<?php echo $hari; ?>"><?php echo $hari; ?></option>         -->
+      <option value="<?php echo $hari ?>"><?php echo $hari ?></option>
       <option value="Senin">Senin</option>
       <option value="Selasa">Selasa</option>
       <option value="Rabu">Rabu</option>
@@ -39,21 +40,38 @@
         <th >Nama Checklist</th>
         <th>Nama PIC</th>
         <th >Info Checklist</th>
-
-        <th >Keterangan</th>
+        <th >Check</th>
         
       </tr>
     </thead>
     <tbody id="hasil">
-      <?php $temp = 0; $no = 1; ?>
+      <?php $temp = 0; $no = 0; ?>
       <?php foreach ($checklist as $checklist) { ?>
-      <?php if ($checklist['Status'] == $status) { ?>
-      <?php if ($checklist['NamaPIC'] == $_SESSION['NamaPIC']) { ?>
+<!--       <?php if ($checklist['Status'] == $status) { ?>
+      <?php if ($checklist['NamaPIC'] == $_SESSION['NamaPIC'] AND $checklist['StatusCheck'] == '1') { ?>
+        <tr style="background-color: #75e2f2;">
+      <?php } elseif( $checklist['StatusCheck'] != '1') { ?>
         <tr style="background-color: #95f080;">
-      <?php } else { ?>
-        <tr>
-      <?php } ?>
-        <td><?php echo $no; $no = $no+1; ?></td>
+      <?php } ?> -->
+
+      <?php  
+        if ($checklist['Status'] == $status) {
+          if ($checklist['NamaPIC'] == $_SESSION['NamaPIC']) {
+            if ($checklist['StatusCheck'] == '1') {
+              echo '<tr style="background-color: #75e2f2;">';
+            }
+            else{
+              echo '<tr style="background-color:  #e6ee6d; ">';
+            }
+          }
+          else{
+            if ($checklist['StatusCheck'] == '1') {
+              echo '<tr style="background-color: #75e2f2;">';
+            }
+          }
+        }
+      ?>
+        <td><?php echo $nomor[$temp] ; $no = $no+1;?></td>
          <td><?php echo $checklist['Hari']; ?></td>
         <td><?php echo $checklist['Jam']; ?></td>
         <td><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
@@ -84,13 +102,14 @@
             </div>
 
         </td>
-        <?php if ($checklist['NamaPIC'] == $_SESSION['NamaPIC']) {?>
+        <?php if ($checklist['NamaPIC'] == $_SESSION['NamaPIC'] AND $checklist['StatusCheck'] == '0' AND $checklist['Hari'] == $hari) {?>
           <td>
-          <a href="#" data-featherlight="#bio-name">Check</a>
+          <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
             <div style="display:none;">
-              <div id="bio-name">
+              <div id="<?php echo 'tampilKet'.$temp ?>">
 
               <form method="POST" action="<?php echo site_url('pic/docheck'); ?>">  
+              <input type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
               <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
               <input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">
               <input type="hidden" name="NamaChecklistSebenarnya" value="<?php echo $_SESSION['NamaPIC'] ?>">
@@ -118,13 +137,14 @@
               </div>
             </div>
           </td>
-        <?php } else{?>
+        <?php } else if($checklist['NamaPIC'] != $_SESSION['NamaPIC'] AND $checklist['StatusCheck'] == '0' AND $checklist['Hari'] == $hari){?>
           <td>
-          <a href="#" data-featherlight="#bio-namez">Check</a>
+          <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
             <div style="display:none;">
-              <div id="bio-namez">
+              <div id="<?php echo 'tampilKet'.$temp ?>">
 
               <form method="POST" action="<?php echo site_url('pic/docheck'); ?>">  
+              <input type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
               <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
               <input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">
               <input type="hidden" name="NamaChecklistSebenarnya" value="<?php echo $_SESSION['NamaPIC'] ?>">
@@ -152,6 +172,8 @@
               </div>
             </div>
           </td>
+        <?php } else{ ?>
+          <td>Disabled</td>
         <?php } ?>
       </tr> 
       <?php $temp = $temp + 1; ?>

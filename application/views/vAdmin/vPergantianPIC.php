@@ -17,10 +17,6 @@
       </div>
 
       <div class="ui divider"></div>
-      
-        
-      
-
         <table class="ui sortable celled table" id="example" style="margin-top: 20px; margin-left: 20px; width: 95%">
           <thead>
             <tr style="text-align: center">
@@ -34,15 +30,20 @@
             </tr>
           </thead>
           <tbody>
-            <tr style="text-align: center">
-              <td>1</td>
-              <td>Kamis</td>
-              <td>3</td>
-              <td>Checklist PLN</td>
-              <td>Panji Nugroho</td>
-              <td>Vriza Wahyu Saputra</td>
-              <td>12:08</td>
+            <?php $temp = 1; ?>
+            <?php foreach ($penggantiPIC as $pic): ?>
+              <tr style="text-align: center">
+              <td><?php echo $temp; ?></td>
+              <td><?php echo $pic['Jam']; ?></td>
+              <td ><?php echo $pic['Hari']; ?></td>
+              <td><?php echo $pic['NamaChecklist']; ?></td>
+              <td><?php echo $pic['NamaPICS']; ?></td>
+              <td><?php echo $pic['NamaPICP'] ?></td>
+              <td><?php echo $pic['Waktu'] ?></td>
+
             </tr>
+            <?php $temp = $temp+1; ?>
+            <?php endforeach ?>
           </tbody>
           <tfoot>
             <tr> 
@@ -51,9 +52,6 @@
             </tr>
           </tfoot>
         </table>
-        <br>
-        <br>
-        <br>
     </div>
   </div>
 </div>

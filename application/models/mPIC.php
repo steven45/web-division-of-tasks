@@ -18,7 +18,7 @@ class mPIC extends CI_Model
             $query = $this->db->order_by('c.Hari','ASC');
             $query = $this->db->order_by('c.NamaChecklist','ASC');
             $query = $this->db->order_by('c.Jam','ASC');
-            $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.Hari,c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status, c.BatasPengecekan');
+            $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.Hari,c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status, c.BatasPengecekan, c.StatusCheck');
              $query = $this->db->from('checklist c');
              $query = $this->db->join('pic p','p.NIK=c.NIK');
              $query = $this->db->get();
@@ -66,21 +66,23 @@ class mPIC extends CI_Model
         }
     }
 
-    public function doChecklist($table, $data, $hari, $namaChecklist, $jam, $namaPIC)
+    public function doChecklist($table, $data)
     {
-        $nJam = substr($jam, 0,2);
-        $query = "SELECT * FROM $table WHERE `Hari` = '$hari' AND `NamaChecklist` = '$namaChecklist' AND `NamaPIC` = '$namaPIC'  AND `Jam` = $nJam ";
-        $hasil =  $this->db->query($query)->row_array();
-
-        if ($hasil == NULL) {
+        // $nJam = substr($jam, 0,2);
+        // $query = "SELECT * FROM $table WHERE `Hari` = '$hari' AND `NamaChecklist` = '$namaChecklist' AND `NamaPIC` = '$namaPIC'  AND `Jam` = $nJam ";
+        // $hasil =  $this->db->query($query)->row_array();
             $this->db->insert($table,$data);
-            return "1";
-        }
-        else{
-            $this->db->where('IDLog', $hasil['IDLog']);
-            $this->db->update($table, $data);
-            return "0";
-        }
+            return '1';
+    }
+
+    public function ubahStatusCheck($IDChecklist)
+    {
+        $statusCheck = array(
+                'StatusCheck' => '1'
+            );
+            
+        $query = "UPDATE `checklist` SET `StatusCheck` = '1' WHERE `checklist`.`IDChecklist` = $IDChecklist;";
+        $this->db->query($query);
     }
 
     public function getLog($IDLog = FALSE)
