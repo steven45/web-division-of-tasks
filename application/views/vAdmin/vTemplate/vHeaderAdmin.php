@@ -37,6 +37,25 @@
     ); 
   </script>
 
+  <script>
+  $(document).ready(function(){
+
+    var day = $("#hari option:selected").val().toLowerCase();
+    $("#hasil tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(day) > -1);
+
+    });
+    $("select#hari").change(function(){
+      var hari = $("#hari option:selected").val().toLowerCase();
+      var jumlah = document.getElementById("hasil").getElementsByTagName("tr").length;
+
+      $("#hasil tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(hari) > -1)
+      });
+    });
+  });
+  </script>
+  
 <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" /><script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
   <title>

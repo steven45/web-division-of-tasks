@@ -219,4 +219,16 @@ class mAdmin extends CI_Model
     {
         $this->db->insert($table,$data);
     }
+
+    public function getPenggantiPIC()
+    {
+        $query = $this->db->order_by('c.Hari','ASC');
+        $query = $this->db->order_by('c.Jam','ASC');
+        $query = $this->db->order_by('c.NamaChecklist','ASC');
+        $query = $this->db->select('c.Jam, c.Hari, c.NamaChecklist, p.NamaPICS, p.NamaPICP, p.Waktu');
+         $query = $this->db->from('penggantipic p');
+         $query = $this->db->join('checklist c','c.IDChecklist=p.IDChecklist');
+         $query = $this->db->get();
+         return $query->result_array();
+    }
 }

@@ -39,9 +39,26 @@
     ); 
   </script>
 
+  <!-- Javascript Untuk Filter Hari -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+  <script>
+  $(document).ready(function(){
 
+    var day = $("#hari option:selected").val().toLowerCase();
+    $("#hasil tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(day) > -1);
 
+    });
+    $("select#hari").change(function(){
+      var hari = $("#hari option:selected").val().toLowerCase();
+      var jumlah = document.getElementById("hasil").getElementsByTagName("tr").length;
 
+      $("#hasil tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(hari) > -1)
+      });
+    });
+  });
+  </script>
 
   <title>
     <?php echo $judul; ?>

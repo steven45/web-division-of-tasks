@@ -10,6 +10,7 @@ class cPIC extends CI_Controller {
 		$this->load->helper('url_helper');
 		$this->load->library('session');
 
+		date_default_timezone_set("Asia/Bangkok");
 	}
 
 	public function index()
@@ -69,7 +70,7 @@ class cPIC extends CI_Controller {
 		// // echo json_encode($data);
 
 		$data['judul'] = "Checklist";
-		$data['checklist']= $this->mPIC->getChecklist();
+		$data['checklist'] = $this->mPIC->getChecklist();
 
 		// var_dump($data['checklist']);
 		$data['status'] = $status;
@@ -77,6 +78,58 @@ class cPIC extends CI_Controller {
 			$data['status'] = 'Enabled';
 		}
 
+		$date = date("N");
+		switch ($date) {
+			case '1':
+				$hari = 'Senin';
+				break;
+			case '2':
+				$hari = 'Selasa';
+				break;
+			case '3':
+				$hari = 'Rabu';
+				break;
+			case '4':
+				$hari = 'Kamis';
+				break;
+			case '5':
+				$hari = 'Jumat';
+				break;
+			break;
+			case '6':
+				$hari = 'Sabtu';
+				break;
+			break;
+			case '7':
+				$hari = 'Minggu';
+				break;
+			break;
+		}
+		$data['hari'] = $hari;
+
+		// Menyimpan Nomor Per Hari
+		foreach ($data['checklist'] as $checklist) {
+			$nJumlah[$checklist['Hari']] = 0;
+		}
+		$key = array_keys($nJumlah);
+		foreach ($data['checklist'] as $checklist ) {
+			for ($i=0; $i < count($key); $i++) { 
+				if ($checklist['Hari'] == $key[$i]) {
+					$nJumlah[$checklist['Hari']] = $nJumlah[$checklist['Hari']] +1;
+				}
+			}	
+		}
+
+		$temp = 0;
+		foreach ($nJumlah as $jumlah) {
+			for ($i=1; $i <= $jumlah; $i++) { 
+				$nomor[$temp] = $i;
+				$temp = $temp +1;
+			}
+		}
+
+		$data['nomor'] = $nomor;
+		// $data['nomor'] = $nJumlah;
 		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
 		$this->load->view('vPIC/vLihatChecklist');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
