@@ -11,7 +11,7 @@
       
       <h3 style="text-align: center; margin-top: -30px;">
       <div class="ui icon">
-        <i class="user icon"></i>
+        <i class="users icon"></i>
         Pergantian PIC
       </h3>
       </div>
@@ -25,8 +25,8 @@
           <thead>
             <tr style="text-align: center">
               <th>No</th>
-              <th>Jadwal</th>
               <th>Hari</th>
+              <th>Shift</th>
               <th>Nama Checklist</th>
               <th>Nama PIC Terjadwal</th>
               <th>Nama PIC Pengganti</th>
@@ -36,8 +36,8 @@
           <tbody>
             <tr style="text-align: center">
               <td>1</td>
-              <td>01:00</td>
               <td>Kamis</td>
+              <td>3</td>
               <td>Checklist PLN</td>
               <td>Panji Nugroho</td>
               <td>Vriza Wahyu Saputra</td>

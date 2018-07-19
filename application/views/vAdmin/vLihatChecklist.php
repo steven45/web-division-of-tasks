@@ -100,7 +100,7 @@
 
         <td>
           <form method="POST" action="<?php echo site_url('admin/editchecklist'); ?>">
-            <a class="ui basic blue button" href="<?php echo site_url('admin/editchecklist/'.$checklist['IDChecklist']); ?>">
+            <a class="ui basic blue small button" href="<?php echo site_url('admin/editchecklist/'.$checklist['IDChecklist']); ?>">
               <i class="icon edit"></i>
                   Edit
             </a>

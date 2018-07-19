@@ -87,12 +87,14 @@
             </button>
         </form> -->
         <?php $edit = 'admin/editabsensi/'.$absensi['IDHarian'] ?>
-        <a href="<?php echo site_url($edit) ;?>" class="ui small blue button">
+        <a href="<?php echo site_url($edit) ;?>" class="ui basic small blue button">
+          <i class="icon edit"></i>
             Edit
         </a>
       </td>
       <td>
-        <a href="<?php echo site_url($edit) ;?>" class="ui small red button">
+        <a href="<?php echo site_url($edit) ;?>" class="ui basic small red button">
+          <i class="icon trash"></i>
             Hapus
         </a>
       </td>

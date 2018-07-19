@@ -10,15 +10,15 @@
         <form class="ui form" method="POST" action="" id="form">
           <div class="field">
             <label>Nomor Induk Karyawan</label>
-            <input type="text" name="NIK" placeholder="Nomor Induk Karyawan" value="" disabled>
+            <input type="text" name="NIK" placeholder="Nomor Induk Karyawan" value="<?php echo($pic['NIK']) ?>" disabled>
           </div>
           <div class="field">
             <label>Nama PIC</label>
-            <input type="text" name="NamaPIC" placeholder="Nama PIC" value="" disabled>
+            <input type="text" name="NamaPIC" placeholder="Nama PIC" value="<?php echo($pic['NamaPIC']) ?>" disabled>
           </div>
           <div class="field">
-            <label>Password Lama</label>
-            <input type="password" name="Password" placeholder="Password Lama" value="">
+            <label>Password Lama <?php echo($pic['Password']) ?></label>
+            <input type="password" name="Password" placeholder="Password Lama" value="<?php echo($pic['Password']) ?>">
         </div>
             <div class="field">
             <label>Password Baru</label>

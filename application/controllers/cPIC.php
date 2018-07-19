@@ -167,6 +167,9 @@ class cPIC extends CI_Controller {
 	}
 	public function ubahPassword(){
 		$data['judul'] = "Ubah Password";
+		$NIK = $this->input->post('NIK');
+		$data['pic'] = $this->mPIC->ubahPassword('pic', $NIK);
+
 		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
 		$this->load->view('vPIC/vUbahPassword');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');

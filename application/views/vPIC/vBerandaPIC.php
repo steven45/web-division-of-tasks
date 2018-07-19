@@ -5,7 +5,7 @@
       
       
     <div class="segment">
-      <div class="ui icon input" style="margin-left: 0px">
+      <div class="ui icon input" style="margin-left: 20px">
         <input type="text" placeholder="Search..." id="pencarian">
         <i class="circular search link icon"></i>
       </div>
@@ -15,7 +15,7 @@
         <i class="clock icon"></i>
         L O G 
       </h3>
-        <div class="ui calendar" style="margin-left: 600px; margin-top: -45px">
+        <div class="ui right calendar" style="margin-left: 765px; margin-top: -45px">
           <div class="ui input left icon">
             <i class="calendar icon"></i>
             <input type="date" value="<?php echo date('20y-m-d') ?>">

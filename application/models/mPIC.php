@@ -105,4 +105,10 @@ class mPIC extends CI_Model
     {
         $this->db->insert($table,$data);
     }
+
+    public function ubahPassword($table, $NIK){
+        $query = "SELECT * FROM $table WHERE `NIK` = $NIK";
+        return $this->db->query($query)->row_array();
+    }
+
 }

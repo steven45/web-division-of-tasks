@@ -102,8 +102,17 @@
             </div>
         </div>
       
-        <a class="item" href="<?php echo site_url('pic/ubahPassword'); ?>">
-        <i class="cog icon"></i>Setting
+        <!-- <a class="item" href="<?php echo site_url('pic/ubahPassword'); ?>">
+        <i class="cog icon"></i>Setting -->
+        <form method="POST" action="<?php echo site_url('pic/ubahPassword'); ?>">
+          <input type="hidden" name="NIK" value="<?php echo($_SESSION['nik']) ?>">
+          <div class="item">
+            <button class="ui basic button">
+              <i class="cog icon"></i>
+              Setting
+            </button>
+          </div>
+        </form>
       </a>
     </div>
           <a href="<?php echo site_url('pic/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
