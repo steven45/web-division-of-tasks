@@ -109,6 +109,7 @@
               <div id="<?php echo 'tampilKet'.$temp ?>">
 
               <form method="POST" action="<?php echo site_url('pic/docheck'); ?>">  
+              <input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>">
               <input type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
               <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
               <input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">
@@ -143,7 +144,8 @@
             <div style="display:none;">
               <div id="<?php echo 'tampilKet'.$temp ?>">
 
-              <form method="POST" action="<?php echo site_url('pic/docheck'); ?>">  
+              <form method="POST" action="<?php echo site_url('pic/docheck'); ?>"> 
+              <input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>"> 
               <input type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
               <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
               <input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">
