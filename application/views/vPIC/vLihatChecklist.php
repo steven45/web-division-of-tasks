@@ -15,6 +15,18 @@
       
       </div>
   <div class="ui divider"></div>
+  <!-- <div class= "ui field">
+        <select name="state" id="maxRows" class="form-control" style="width:150px;">
+                        <option value="5000">Show All</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="75">75</option>
+                        <option value="100">100</option>
+                    </select>
+                  </div> -->
 
   <div class="field" style="margin-left: 600px">
   <select class="ui right selection tiny dropdown item" id="hari" >
@@ -30,7 +42,7 @@
     </select>
   </div>
 
-  <table class="ui sortable celled table" id="example" class="display">
+  <table class="ui sortable celled table" id="mytable" class="display">
     <thead>
       <tr style="text-align: center">
         <th class="sorted ascending">No</th>
@@ -186,6 +198,11 @@
         </th>
     </tfoot>
   </table>
+  <div class="pagination-container">
+            <nav>
+                <ul class="pagination"></ul>
+            </nav>
+        </div>
   <br>
   <br>
   </div>
@@ -209,7 +226,7 @@
   console.log('duration in minutes', duration.asMinutes());
   console.log(moment().format());
 
-  var row = document.querySelectorAll("table#example>tbody#hasil>tr");
+  var row = document.querySelectorAll("table#mytable>tbody#hasil>tr");
   var blink = document.getElementById('hasil');
   var time = [];
   var selisih = [];
@@ -278,6 +295,48 @@
 
 
 </script>
+
+
+  <script>
+    var table = '#mytable'
+    $('#maxRows').on('change', function(){
+        $('.pagination').html('')
+        var trnum = 0
+        var maxRows = parseInt($(this).val())
+        var totalRows = $(table+' tbody tr').length
+        $(table+' tr:gt(0)').each(function(){
+            trnum++
+            if(trnum > maxRows){
+                $(this).hide()
+            }
+            if(trnum <= maxRows){
+                $(this).show()
+            }
+        })
+        if(totalRows > maxRows){
+            var pagenum = Math.ceil(totalRows/maxRows)
+            for(var i=1;i<=pagenum;){
+                $('.pagination').append('<li data-page="'+i+'">\<span>'+ i++ +'<span class="sr-only">(current)</span></span>\</li>').show()
+            }
+        }
+        $('.pagination li:first-child').addClass('active')
+        $('.pagination li').on('click',function(){
+            var pageNum = $(this).attr('data-page')
+            var trIndex = 0;
+            $('.pagination li').removeClass('active')
+            $(this).addClass('active')
+            $(table+' tr:gt(0)').each(function(){
+                trIndex++
+                if(trIndex > (maxRows*pageNum) || trIndex <= ((maxRows*pageNum)-maxRows)){
+                    $(this).hide()
+                } else{
+                    $(this).show()
+                }
+            })
+        })
+    })
+    </script>
+
 
 
 

@@ -13,14 +13,27 @@
         <i class="user icon"></i>
       Daftar PIC 
       </h3>
+      
       <a class="ui right floated tiny blue icon button" data-tooltip="Tambah PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahpic'); ?>">
           <i class="add icon"></i>
       </a>
       </div>
 
       <div class="ui divider"></div>
+      <div class= "ui field">
+        <select name="state" id="maxRows" class="form-control" style="width:150px;">
+                        <option value="5000">Show All</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="75">75</option>
+                        <option value="100">100</option>
+                    </select>
+                  </div>
 
-<table class="ui sortable compact celled definition white table" id="example" class="display" style="text-align: center;">
+<table class="ui sortable compact celled definition white table" id="mytable" class="display" style="text-align: center;">
   <thead class="full-width" style="text-align: center; background-color: #dbedff">
     <tr>
       <th class="sorted ascending">NIK</th>
@@ -159,22 +172,72 @@
   <tfoot class="full-width">
     <tr>
       <th colspan="8">
-        <input type="hidden" name="nJumlah" value="<?php echo $nJumlah; ?>">
+        
+      </th>
+    </tr>
+  </tfoot>
+
+</table>
+<input type="hidden" name="nJumlah" value="<?php echo $nJumlah; ?>">
         <input type="hidden" name="nDisabled" value="<?php echo $nDisabled; ?>">
         <input type="hidden" name="nEnabled" value="<?php echo $nEnabled; ?>">
         <button class="ui right floated blue small button" >
           <i class="save icon"></i>
           Simpan
         </button>
-      </th>
-    </tr>
-  </tfoot>
-  </form>
-</table>
+      </form>
+    
+    <div class="pagination-container">
+      <nav>
+        <ul class="pagination"></ul>
+      </nav>
+    </div>
 <br><br>
 </div>
 </div>
 </div>
+
+
+<script>
+    var table = '#mytable'
+    $('#maxRows').on('change', function(){
+        $('.pagination').html('')
+        var trnum = 0
+        var maxRows = parseInt($(this).val())
+        var totalRows = $(table+' tbody tr').length
+        $(table+' tr:gt(0)').each(function(){
+            trnum++
+            if(trnum > maxRows){
+                $(this).hide()
+            }
+            if(trnum <= maxRows){
+                $(this).show()
+            }
+        })
+        console.log(trnum);
+        if(totalRows > maxRows){
+            var pagenum = Math.ceil(totalRows/maxRows)
+            for(var i=1;i<=pagenum;){
+                $('.pagination').append('<li data-page="'+i+'">\<span>'+ i++ +'<span class="sr-only">(current)</span></span>\</li>').show()
+            }
+        }
+        $('.pagination li:first-child').addClass('active')
+        $('.pagination li').on('click',function(){
+            var pageNum = $(this).attr('data-page')
+            var trIndex = 0;
+            $('.pagination li').removeClass('active')
+            $(this).addClass('active')
+            $(table+' tr:gt(0)').each(function(){
+                trIndex++
+                if(trIndex > (maxRows*pageNum) || trIndex <= ((maxRows*pageNum)-maxRows)){
+                    $(this).hide()
+                } else{
+                    $(this).show()
+                }
+            })
+        })
+    })
+    </script>
 
 
 
