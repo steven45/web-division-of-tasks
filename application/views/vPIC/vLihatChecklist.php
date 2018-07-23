@@ -58,23 +58,23 @@
         if ($checklist['Status'] == $status) {
           if ($checklist['NamaPIC'] == $_SESSION['NamaPIC']) {
             if ($checklist['StatusCheck'] == '1') {
-              echo '<tr style="background-color: #75e2f2;">';
+              echo '<tr style="background-color: #75e2f2" id="hasilku">';
             }
             else{
-              echo '<tr style="background-color:  #e6ee6d; ">';
+              echo '<tr style="background-color: #e6ee6d" id="hasilku">';
             }
           }
           else{
             if ($checklist['StatusCheck'] == '1') {
-              echo '<tr style="background-color: #75e2f2;">';
+              echo '<tr style="background-color: #75e2f2" id="hasilku">';
             }
           }
         }
       ?>
         <td><?php echo $nomor[$temp] ; $no = $no+1;?></td>
-         <td><?php echo $checklist['Hari']; ?></td>
-        <td><?php echo $checklist['Jam']; ?></td>
-        <td><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
+         <td class="hari"><?php echo $checklist['Hari']; ?></td>
+        <td class="time"><?php echo $checklist['Jam']; ?></td>
+        <td class="batasP"><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
         <td><?php echo $checklist['NamaChecklist']; ?></td>
         <td><?php echo $checklist['NamaPIC'] ?> </td> 
         <td>
@@ -109,6 +109,7 @@
               <div id="<?php echo 'tampilKet'.$temp ?>">
 
               <form method="POST" action="<?php echo site_url('pic/docheck'); ?>">  
+              <input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>">
               <input type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
               <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
               <input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">
@@ -143,7 +144,8 @@
             <div style="display:none;">
               <div id="<?php echo 'tampilKet'.$temp ?>">
 
-              <form method="POST" action="<?php echo site_url('pic/docheck'); ?>">  
+              <form method="POST" action="<?php echo site_url('pic/docheck'); ?>"> 
+              <input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>"> 
               <input type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
               <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
               <input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">
@@ -191,6 +193,93 @@
   </div>
   </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+<script type="text/javascript">
+  
+  moment.locale();
+
+  var nowTime = moment();
+  var nowDay = moment().format('dddd');
+  var checkTime = moment('13:00', 'hh:mm');
+  var duration = moment.duration(checkTime.diff(nowTime));
+
+  console.log('now time', nowTime);
+  console.log('now day', nowDay);
+  console.log('check time', checkTime);
+  console.log('duration in hours', duration.asHours());
+  console.log('duration in minutes', duration.asMinutes());
+  console.log(moment().format());
+
+  var row = document.querySelectorAll("table#example>tbody#hasil>tr");
+  var blink = document.getElementById('hasil');
+  var time = [];
+  var selisih = [];
+  var batasP = [];
+  // if (hari = "Senin"){
+  //   day = "Sunday";
+  //   else if (hari = "Selasa"){
+  //     day = "Tuesday";
+  //     else if (hari = "Rabu"){
+  //       day = "Wednesday";
+  //       else if (hari = "Kamis"){
+  //         day = "Thursday";
+  //         else if (hari = "Jumat"){
+  //           day = "Friday";
+  //           else if (hari = "Sabtu"){
+  //             day = "Saturday";
+  //             else if (hari = "Minggu"){
+  //               day = "Sunday";
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  var hari = [];
+
+
+  var x = document.getElementsByClassName("time");
+  for(var j = 0; j < x.length; j++){
+    time[j] =  document.getElementsByClassName("time")[j].innerHTML;
+    hari[j] =  document.getElementsByClassName("hari")[j].innerHTML;
+    batasP[j] = parseInt(document.getElementsByClassName("batasP")[j].innerHTML.substring(0,2));
+    selisih[j] =  moment.duration(moment(time[j], 'hh:mm').diff(nowTime)).asMinutes();
+  }
+  
+//   window.onload = function blink(){
+//   var f = document.getElementById('hasil');
+//    console.log(f);
+//    setInterval(function() {
+//       f.style.backgroundColor = (f.style.backgroundColor == 'red' ? '' : 'red');
+//    }, 1000);
+// }
+  console.log(row);
+  console.log(time);
+  console.log(selisih);
+  console.log(batasP);
+  for (var i = 0; i < row.length; i++) {
+    // console.log(selisih[i]*(-1));
+    if ((selisih[i]*(-1)) > batasP[i]) {
+      // row[i].style.backgroundColor = "red";
+      // window.onload = function blink(){
+      // setInterval(function() {
+      // blink.style.backgroundColor = (blink.style.backgroundColor == 'green' ? '' : 'green');
+      // }, 1000);}
+
+      window.onload = function blink(){
+        var f = document.getElementById('hasilku');
+         console.log(f);
+         setInterval(function() {
+            f.style.backgroundColor = (f.style.backgroundColor == 'red' ? '' : 'red');
+         }, 1000);
+      }
+    }
+  }
+
+
+</script>
 
 
 

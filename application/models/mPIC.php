@@ -113,4 +113,14 @@ class mPIC extends CI_Model
         return $this->db->query($query)->row_array();
     }
 
+    public function tambahJumlah($NIK)
+    {
+        $query = "SELECT * FROM `pic` WHERE `NIK` = $NIK";
+        $hasil = $this->db->query($query)->row_array();
+
+        $jumlah = $hasil['JumlahPengecekan'] + 1;
+        $query1 = "UPDATE `pic` SET `JumlahPengecekan` = $jumlah WHERE `pic`.`NIK` = $NIK;";
+        $this->db->query($query1);
+    }
+
 }
