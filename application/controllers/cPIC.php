@@ -143,6 +143,7 @@ class cPIC extends CI_Controller {
 
 		date_default_timezone_set('Asia/Jakarta');
 
+		$NIK = $this->input->post('NIK');
 		$IDChecklist = $this->input->post('IDChecklist');
 		$namaPIC = $this->input->post('NamaPIC');
 		$namaChecklist = $this->input->post('NamaChecklist');
@@ -166,7 +167,10 @@ class cPIC extends CI_Controller {
 		$hasil = $this->mPIC->doChecklist('log', $data);
 
 		// var_dump($IDChecklist);
+		//mengubah status checklist menjadi 1 supaya tidak bisa mengecek ulang
 		$this->mPIC->ubahStatusCheck($IDChecklist);
+		
+		//Menyimpan di notifikasi
 		$notif = array(
 			'ForN' => 'admin',
 			'Waktu' => date("l, d-m-Y h:i:s a"),
@@ -174,6 +178,9 @@ class cPIC extends CI_Controller {
 			'Status' => 'Belum'
 		);
 		$this->mPIC->notifikasi('notifikasi', $notif);
+
+		//Menambahkan jumlah pengecekan pada PIC
+		$this->mPIC->tambahJumlah($NIK);
 
 		if ($hasil == 1) {
 			echo "<script type='text/javascript'>

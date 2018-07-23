@@ -14,19 +14,18 @@
         <i class="clock icon"></i>
         L O G 
       </h3>
-        <div class="ui calendar" style="margin-left: 600px; margin-top: -45px">
+        <div class="ui calendar" style="margin-left: 75%; margin-top: -45px">
           <div class="ui input left icon">
             <i class="calendar icon"></i>
-            <input type="date" value="<?php echo date('20y-m-d') ?>">
+            <input type="date" value="<?php echo date('20y-m-d') ?>" id="kalender">
           </div>
       </div>
       </div>
 
+      <p id="getDate"></p>
+      <p id="hehe"></p>
+      <p id="haha"></p>
       <div class="ui divider"></div>
-      
-        
-      
-
         <table class="ui sortable celled table" id="example" style="margin-top: 20px; margin-left: 20px; width: 95%">
           <thead>
             <tr style="text-align: center">
@@ -35,56 +34,13 @@
             <th>Jam Pengecekan</th>
             <th>Nama Checklist</th>
             <th>Nama PIC</th>
+            <th>PIC Yang Mengecek</th>
             <th>Info Pengecekan</th>
             <th>Status</th>
             <th>Keterangan</th>
             </tr>
           </thead>
-          <tbody>
-            <tr style="text-align: center">
-              <td>1</td>
-              <td>01:00</td>
-              <td>01:05</td>
-              <td>Checklist PLN</td>
-              <td>Panji Nugroho</td>
-              <td>
-                <a href="#" data-featherlight="#bio-name">Klik Disini</a>
-                  <div style="display:none;">
-                    <div id="bio-name">
-                      <h3>Info Checklist</h3>
-                      <div class="ui segment">
-                        Checklist ini adalah checklist yang paling penting. 
-                        1. ChecklistPLN
-                        2. Checklist ATM B
-                      </div>
-                    </div>
-                  </div>
-              </td>
-              
-              
-              <td>
-                OK
-              </td>
-              <td>
-                <a href="#" data-featherlight="#bio-name1">Klik Disini</a>
-                <div style="display:none;">
-                  <div id="bio-name1">
-                    <h3>Info Checklist</h3>
-                    <div class="ui segment">
-                      Checklist ini adalah checklist yang paling penting. 
-                      1. ChecklistPLN
-                      2. Checklist ATM B
-                </div>
-              </div>
-            </div>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr> 
-            <th colspan="8">
-            </th> 
-            </tr>
+          <tbody id="hasilLog">
           </tfoot>
         </table>
         <br>

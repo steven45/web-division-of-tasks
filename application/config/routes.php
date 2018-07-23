@@ -42,6 +42,7 @@ $route['admin/ranking'] = 'cAdmin/ranking';
 $route['admin/pergantian'] = 'cAdmin/pergantian';
 
 $route['admin/log'] = 'cAdmin/lihatLog';
+$route['admin/jLog'] = 'cAdmin/jLihatLog';
 $route['admin/gantipiclog'] = 'cAdmin/gantiPICLog';
 
 //Halaman User

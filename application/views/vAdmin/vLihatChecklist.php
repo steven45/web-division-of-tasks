@@ -59,21 +59,35 @@
       <?php $temp = 0; $no = 1; ?>
       <input type="hidden" name="nJumlah" value="<?php echo count($checklist); ?>">
       <?php foreach ($checklist as $checklist) { ?>
-      <?php if ($checklist['Status'] == $status) { ?>
       <input type="hidden" name="<?php echo 'IDChecklist'.$temp ?>" value="<?php echo $checklist['IDChecklist']; ?>">
-      <tr style="text-align: center">
-        <td> <?php echo $no; $no = $no+1; ?> <!-- <?php echo count($pic[$checklist['Hari']][$checklist['Jam']]) ?> <?php echo $pic[$checklist['Hari']][$checklist['Jam']][0]['NamaPIC']; ?> -->  </td>
+
+      <?php  
+        if ($checklist['Status'] == $status) {
+            if ($checklist['StatusCheck'] == '1') {
+              echo '<tr style="background-color: #75e2f2; text-align:center;">';
+            }
+            else{
+              echo '<tr style="text-align:center;">';
+            }
+
+      ?>
+        <td> <?php echo $nomor[$temp] ; $no = $no+1;?> </td>
         <td><?php echo $checklist['Hari']; ?></td>
         <td><?php echo $checklist['Jam']; ?></td>
         <td><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
         <td><?php echo $checklist['NamaChecklist']; ?></td>
         <td>
+          <?php if ($checklist['StatusCheck'] != '1') { ?>
           <select class="ui search dropdown" name="<?php echo 'NIK'.$temp ?>">
             <option value="<?php echo $checklist['NIK']; ?>"><?php echo $checklist['NamaPIC']; ?></option>
             <?php for ($i=0; $i < count($pic[$checklist['Hari']][$checklist['Jam']]) ;$i++) { ?>
               <option value="<?php echo $pic[$checklist['Hari']][$checklist['Jam']][$i]['NIK'] ?>"><?php echo $pic[$checklist['Hari']][$checklist['Jam']][$i]['NamaPIC']; ?></option>
             <?php } ?>
           </select>
+          <?php } else { ?>
+          <input type="hidden" name="<?php echo 'NIK'.$temp ?>" value="<?php echo $checklist['NIK']; ?>">
+            <p><?php echo $checklist['NamaPIC']; ?></p>
+          <?php } ?>
         </td>
         <td>
           <?php 
@@ -100,12 +114,10 @@
             </div>
 
         <td>
-          <form method="POST" action="<?php echo site_url('admin/editchecklist'); ?>">
             <a class="ui basic blue small button" href="<?php echo site_url('admin/editchecklist/'.$checklist['IDChecklist']); ?>">
               <i class="icon edit"></i>
                   Edit
             </a>
-          </form>
         </td>
         <td>
           <select class="ui selection tiny dropdown" name="<?php echo 'Status'.$temp ?>">
@@ -120,29 +132,17 @@
           </select>
         </td>
       </tr> 
+
       <?php $temp = $temp + 1; ?>
       <?php } ?>
       <?php } ?>
     </tbody>
     <tfoot>
-      <tr>
         <th colspan="9">
           <button class="ui right floated blue small button" >
           <i class="save icon"></i>Simpan
         </button>
         </th>
-        </tr>
     </tfoot>
   </table>
-  <br>
-  <br>
-  <br>
-</div>
-  </div>
-
-  </div>
-</div>
-
-
-
-    
+</form>

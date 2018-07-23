@@ -57,6 +57,69 @@
   });
   </script>
   
+<!--   <script >
+    $(document).ready(function(){
+        $.getJSON("<?php echo site_url('admin/jLog'); ?>", function(result){
+            $.each(result, function(i, field){
+                $("#vriza").append(field + " ");
+                });
+            });
+        });
+  </script> -->
+
+  <script type="text/javascript">
+  $(document).ready(function(){
+    var txt= "";
+    var kalender = $("#kalender").val();
+
+    $.getJSON("<?php echo site_url('admin/jLog'); ?>", function(result){
+      $.each(result, function(i, field){  
+        for (var i = 0; i < field.length; i++) {
+
+        //   var fs = require("fs");
+
+        // console.log("Going to get file info!");
+        //   fs.stat(field[i]["Info"], function (err, stats) {
+        //      if (err) {
+        //          return console.error(err);
+        //      }
+        //      console.log(stats);
+        //      console.log("Got file info successfully!");
+             
+        //      // Check file type
+        //      console.log("isFile ? " + stats.isFile());
+        //      console.log("isDirectory ? " + stats.isDirectory());    
+        //   });
+
+          txt += "<tr>";
+          txt += "<td>" + (i+1) + "</td>" +
+                  "<td>" + field[i]["Jam"] + "</td>" +
+                  "<td class='waktu'>" + field[i]["Waktu"] + "</td>" +
+                  "<td>" + field[i]["NamaChecklist"] + "</td>" +
+                  "<td>" + field[i]["NamaPIC"] + "</td>" +
+                  "<td>" + field[i]["PICCek"] + "</td>" +
+                  "<td>" + field[i]["Info"] + "</td>" +
+                  "<td>" + field[i]["Status"] + "</td>" +
+                  "<td>" + field[i]["Keterangan"] + "</td>" ;
+          txt += "</tr>";
+        }
+        document.getElementById("hasilLog").innerHTML = txt;
+        $("#hasilLog tr").filter(function() {
+          $(this).toggle($(this).text().indexOf(kalender) > -1);
+        });
+      });
+    });  
+
+    $('#kalender').on("change",function(){
+      kalender =  $('#kalender').val();
+      // $('#getDate').html($('#kalender').val());
+      $("#hasilLog tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(kalender) > -1);
+      });
+    }); 
+  }); 
+  </script>
+
 <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" /><script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
   <title>
@@ -96,7 +159,7 @@
             Ranking PIC</a>
             <a class="item" href="<?php echo site_url('admin/pergantian'); ?>">
             Pergantian PIC</a>
-      </div>
+          </div>
       </div>
         
       <div class="right menu">
