@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/Semantic-UI/semantic.min.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/Semantic-UI/data-paginate.css'); ?>">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/pagination.min.css'); ?>">
   <script type="text/javascript" src="<?php echo base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
@@ -121,19 +122,21 @@
       
         <!-- <a class="item" href="<?php echo site_url('pic/ubahPassword'); ?>">
         <i class="cog icon"></i>Setting -->
-        <form method="POST" action="<?php echo site_url('pic/ubahPassword'); ?>">
+     
+    </div>
+
+       <form method="POST" action="<?php echo site_url('pic/ubahPassword'); ?>">
           <input type="hidden" name="NIK" value="<?php echo($_SESSION['nik']) ?>">
-          <div class="item">
-            <button class="ui basic button">
-              <i class="cog icon"></i>
+          <div class="item" style="align-items: center; margin-top: 3px ">
+            <button class="ui grey button">
+              <i class="setting icon"></i>
               Setting
             </button>
           </div>
         </form>
-      </a>
-    </div>
+     
           <a href="<?php echo site_url('pic/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
-      <div class="item">
+      <div class="item" style="margin-top: 3px ">
           <div class="ui teal button">
             <i class="sign out alternate icon" icon"></i>Log Out
           </div>

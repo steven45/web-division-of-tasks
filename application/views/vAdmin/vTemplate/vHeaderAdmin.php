@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/Semantic-UI/semantic.min.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/Semantic-UI/data-paginate.css'); ?>">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/pagination.min.css'); ?>">
   <script type="text/javascript" src="<?php echo base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/tablesort.js'); ?>"></script>
@@ -110,6 +111,7 @@
         $(this).toggle($(this).text().toLowerCase().indexOf(kalender) > -1);
       });
     }); 
+<<<<<<< HEAD
         }); 
       </script>
 
@@ -132,6 +134,31 @@
         <a class="item" href="<?php echo site_url('admin/beranda'); ?>">
           <div class="ui icon">
             <i class="home icon"></i>
+=======
+  }); 
+  </script>
+
+
+
+<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" /><script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+  <title>
+    <?php echo $judul; ?>
+  </title>
+  
+</head>
+
+
+<body style="background-image: url(<?php echo base_url('assets/images/blue.png'); ?>);">
+  <!-- Header -->
+    <div class="ui top fixed inverted pointing menu">
+      <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
+        <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
+        Artajasa
+      </a>
+      <a class="item" href="<?php echo site_url('admin/beranda'); ?>">
+        <div class="ui icon">
+          <i class="home icon"></i>
           Dashboard</div>
         </a>
         <a class="item" href="<?php echo site_url('admin/checklist'); ?>">
@@ -154,6 +181,7 @@
             Pergantian PIC</a>
           </div>
         </div>
+      </div>
         
         <div class="right menu">
           <div class="ui pointing dropdown link item">

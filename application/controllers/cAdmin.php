@@ -289,7 +289,7 @@ class cAdmin extends CI_Controller {
 						'Jam' => $nJam[$i],
 						'Status' => 'Enabled',
 						'BatasPengecekan' => $batasPengecekan,
-						'StatusCheck'=> '0'
+						'StatusCheck' => '0'
 						);
 						$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, substr($nJam[$i], 0,2), $hari[$j]);
 						$hasilJam[$i] = $hasil;
@@ -542,7 +542,7 @@ class cAdmin extends CI_Controller {
 
 			for ($j=0; $j < count($checklist); $j++) { 
 				if ($checklist[$j]['IDChecklist'] == $IDChecklist) {
-					if ($NIK != NULL AND $checklist[$j]['NIK'] != $NIK) {
+					if ($checklist[$j]['NIK'] != $NIK) {
 						// echo $checklist[$j]['NIK'].' = '. $NIK;
 						// echo '<br>';
 
@@ -554,6 +554,7 @@ class cAdmin extends CI_Controller {
 							'NamaPICS' => $picS['NamaPIC'],
 							'NamaPICP' => $picP['NamaPIC']
 						);
+						// var_dump($data);
 						$this->mAdmin->penggantiPIC('penggantipic', $pengganti);
 					}
 				}
@@ -564,10 +565,11 @@ class cAdmin extends CI_Controller {
 			}
 		}
 
-		// $IDChecklist = $this->input->post('IDChecklist');
-		// $data = array(
-		// 	'Status' => 'Disabled'
-		// );
+
+		$IDChecklist = $this->input->post('IDChecklist');
+		$data = array(
+			'Status' => 'Disabled'
+		);
 		// $this->mAdmin->hapusChecklist('checklist', $data, $IDChecklist);	
 		echo "<script type='text/javascript'>
 					alert('Sukses mengganti PIC dan Status');
@@ -719,6 +721,7 @@ class cAdmin extends CI_Controller {
 	{
 		// header("Content-type:application/json");
 		$data['judul'] = "Log Checklist";
+		$data['log']= $this->mAdmin->getLog();
 		
 		$data['notifikasi'] = $this->mAdmin->getNotifikasi();
 		$data['temp'] = $this->notifikasi();
@@ -726,13 +729,6 @@ class cAdmin extends CI_Controller {
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vBerandaAdmin', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
-	}
-
-	public function jLihatLog()
-	{
-		$data['log']= $this->mAdmin->getLog();
-		header("Content-type:application/json");
-		echo json_encode($data);
 	}
 
 	public function ranking()
