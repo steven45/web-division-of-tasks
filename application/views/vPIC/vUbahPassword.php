@@ -7,22 +7,24 @@
             Ubah Password</h3>
             <div class="ui divider"></div>
 
-        <form class="ui form" method="POST" action="" id="form">
+        <form class="ui form" method="POST" action="<?php echo site_url('pic/validasiubahpassword'); ?>" id="form">
           <div class="field">
             <label>Nomor Induk Karyawan</label>
-            <input type="text" name="NIK" placeholder="Nomor Induk Karyawan" value="<?php echo($pic['NIK']) ?>" disabled>
+            <input type="text" placeholder="Nomor Induk Karyawan" value="<?php echo($pic['NIK']) ?>" disabled>
+            <input type="hidden" name="NIK" placeholder="Nomor Induk Karyawan" value="<?php echo($pic['NIK']) ?>" >
           </div>
           <div class="field">
             <label>Nama PIC</label>
             <input type="text" name="NamaPIC" placeholder="Nama PIC" value="<?php echo($pic['NamaPIC']) ?>" disabled>
           </div>
           <div class="field">
-            <label>Password Lama <?php echo($pic['Password']) ?></label>
-            <input type="password" name="Password" placeholder="Password Lama" value="<?php echo($pic['Password']) ?>">
+            <label>Password Lama</label>
+            <input type="hidden" name="passwordL2" id="passwordL2" value="<?php echo($pic['Password']) ?>">
+            <input type="password" name="passwordL1" id="passwordL1" placeholder="Password Lama (password akan terenkripsi)" onchange="enkripsi();">
         </div>
             <div class="field">
             <label>Password Baru</label>
-            <input type="password" name="password" placeholder="Password Baru" value="">
+            <input type="password" name="password" id="password"  placeholder="Passowrd Baru">
           </div>
           <div class="field">
             <label>Confirm Password Baru</label>
@@ -42,6 +44,15 @@
 </div>
 </div>
 <script>
+
+
+
+function enkripsi(){
+  var pass = $('#passwordL1').val();
+  var passL1 = md5(pass);
+  console.log(passL1);
+  document.getElementById("passwordL1").value = passL1;
+}
 
 $('.ui.form')
             .form({
@@ -66,8 +77,16 @@ $('.ui.form')
                     },
                 ]
               },
+              passwordlama : {
+                identifier : 'passwordL1',
+                rules : [
+                  {
+                    type : 'match[passwordL2]',
+                    prompt : "Your old password wrong"
+                  },
+                ]
+              },
           }
       }
     );
-
 </script>

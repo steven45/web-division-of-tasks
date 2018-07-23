@@ -259,10 +259,12 @@
   console.log(time);
   console.log(selisih);
   console.log(batasP);
+
+  var f = [];
   for (var i = 0; i < row.length; i++) {
     // console.log(selisih[i]*(-1));
     if ((selisih[i]*(-1)) > batasP[i]) {
-      // row[i].style.backgroundColor = "red";
+      row[i].style.backgroundColor = "red";
       // window.onload = function blink(){
       // setInterval(function() {
       // blink.style.backgroundColor = (blink.style.backgroundColor == 'green' ? '' : 'green');
@@ -272,8 +274,9 @@
         var f = document.getElementById('hasilku');
          console.log(f);
          setInterval(function() {
-            f.style.backgroundColor = (f.style.backgroundColor == 'red' ? '' : 'red');
-         }, 1000);
+          alert("hehe");
+         //    f.style.backgroundColor = (f.style.backgroundColor == 'red' ? '' : 'red');
+         // }, 1000);
       }
     }
   }
