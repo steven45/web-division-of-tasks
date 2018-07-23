@@ -120,6 +120,8 @@
   }); 
   </script>
 
+
+
 <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" /><script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
   <title>
@@ -129,7 +131,7 @@
 </head>
 
 
-<body style="background-color: #bcd8d7">
+<body style="background-image: url(<?php echo base_url('assets/images/blue.png'); ?>);">
   <!-- Header -->
     <div class="ui top fixed inverted pointing menu">
       <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">

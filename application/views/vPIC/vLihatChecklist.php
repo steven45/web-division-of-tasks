@@ -210,8 +210,7 @@
                 <ul class="pagination"></ul>
             </nav>
         </div>
-  <br>
-  <br>
+ 
   </div>
   </div>
 </div>
