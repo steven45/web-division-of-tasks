@@ -214,7 +214,6 @@
                 $(this).show()
             }
         })
-        console.log(trnum);
         if(totalRows > maxRows){
             var pagenum = Math.ceil(totalRows/maxRows)
             for(var i=1;i<=pagenum;){
