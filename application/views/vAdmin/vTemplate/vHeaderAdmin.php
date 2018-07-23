@@ -95,7 +95,7 @@
             Ranking PIC</a>
             <a class="item" href="<?php echo site_url('admin/pergantian'); ?>">
             Pergantian PIC</a>
-      </div>
+          </div>
       </div>
         
       <div class="right menu">

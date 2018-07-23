@@ -289,7 +289,7 @@ class cAdmin extends CI_Controller {
 						'Jam' => $nJam[$i],
 						'Status' => 'Enabled',
 						'BatasPengecekan' => $batasPengecekan,
-						'StatusCheck'
+						'StatusCheck' => '0'
 						);
 						$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, substr($nJam[$i], 0,2), $hari[$j]);
 						$hasilJam[$i] = $hasil;

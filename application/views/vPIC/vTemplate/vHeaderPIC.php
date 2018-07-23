@@ -121,19 +121,21 @@
       
         <!-- <a class="item" href="<?php echo site_url('pic/ubahPassword'); ?>">
         <i class="cog icon"></i>Setting -->
-        <form method="POST" action="<?php echo site_url('pic/ubahPassword'); ?>">
+     
+    </div>
+
+       <form method="POST" action="<?php echo site_url('pic/ubahPassword'); ?>">
           <input type="hidden" name="NIK" value="<?php echo($_SESSION['nik']) ?>">
-          <div class="item">
-            <button class="ui basic button">
-              <i class="cog icon"></i>
+          <div class="item" style="align-items: center; margin-top: 3px ">
+            <button class="ui grey button">
+              <i class="setting icon"></i>
               Setting
             </button>
           </div>
         </form>
-      </a>
-    </div>
+     
           <a href="<?php echo site_url('pic/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
-      <div class="item">
+      <div class="item" style="margin-top: 3px ">
           <div class="ui teal button">
             <i class="sign out alternate icon" icon"></i>Log Out
           </div>
