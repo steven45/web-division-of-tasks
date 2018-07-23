@@ -32,7 +32,7 @@
     </select>
   </div>
   
-  <table class="ui sortable celled table"  id="example">
+  <table class="ui sortable celled table"  id="demo">
     <thead>
       <tr style="text-align: center">
         <th class="sorted ascending">No</th>
@@ -137,7 +137,7 @@
       <?php } ?>
       <?php } ?>
     </tbody>
-    <tfoot>
+    <tfoot id="demo">
         <th colspan="9">
           <button class="ui right floated blue small button" >
           <i class="save icon"></i>Simpan
