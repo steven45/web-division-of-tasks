@@ -75,9 +75,10 @@
                       </div>
                   </td>
                   <?php if ($log['Status'] == 'OK') {?>
-                    <td style="background-color: green;"><b>OK</b></td>                    
+                  <td><font style="color: black;"><b>OK</b></font></td>
+                                        
                   <?php } else if($log['Status'] == 'Bad') {?>
-                    <td style="background-color: orange;"><b>Bad</b></td>
+                    <td><font style="color: red;"><b>Bad</b></font></td>
                   <?php } ?>
                   </td>
                   <td>

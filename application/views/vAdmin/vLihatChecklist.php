@@ -137,7 +137,7 @@
       <?php } ?>
       <?php } ?>
     </tbody>
-    <tfoot id="demo">
+    <tfoot>
         <th colspan="9">
           <button class="ui right floated blue small button" >
           <i class="save icon"></i>Simpan

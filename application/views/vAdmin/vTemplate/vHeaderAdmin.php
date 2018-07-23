@@ -131,7 +131,7 @@
 </head>
 
 
-<body style="background-image: url(<?php echo base_url('assets/images/grha.jpg'); ?>);">
+<body style="background-image: url(<?php echo base_url('assets/images/blue.png'); ?>);">
   <!-- Header -->
     <div class="ui top fixed inverted pointing menu">
       <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
