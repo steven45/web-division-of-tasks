@@ -111,30 +111,6 @@
         $(this).toggle($(this).text().toLowerCase().indexOf(kalender) > -1);
       });
     }); 
-<<<<<<< HEAD
-        }); 
-      </script>
-
-      <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" /><script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-
-      <title>
-        <?php echo $judul; ?>
-      </title>
-
-    </head>
-
-
-    <body style="background-color: #bcd8d7">
-      <!-- Header -->
-      <div class="ui top fixed inverted pointing menu">
-        <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
-          <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
-          Artajasa
-        </a>
-        <a class="item" href="<?php echo site_url('admin/beranda'); ?>">
-          <div class="ui icon">
-            <i class="home icon"></i>
-=======
   }); 
   </script>
 
@@ -181,7 +157,7 @@
             Pergantian PIC</a>
           </div>
         </div>
-      </div>
+      
         
         <div class="right menu">
           <div class="ui pointing dropdown link item">
