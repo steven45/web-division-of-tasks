@@ -111,7 +111,12 @@
         $(this).toggle($(this).text().toLowerCase().indexOf(kalender) > -1);
       });
     }); 
+
   }); 
+
+
+
+
   </script>
 
 
@@ -194,13 +199,15 @@
         
 
         <a href="<?php echo site_url('admin/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
-          <div class="item">
+          <div class="item" style="margin-top: 3px ">
             <div class="ui teal button">
               <i class="sign out alternate icon" icon"></i>Log Out
             </div>
           </div>
         </a>
       </div>
+    </div>
+    </body>
     </div>
     <br><br><br><br><br>
 
