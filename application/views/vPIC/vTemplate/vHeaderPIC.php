@@ -30,7 +30,20 @@
         ); 
       </script>
 
-      <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" /><script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+  <!-- <script>
+    $(document).ready(function()
+    {
+    $('form').transition('zoom');
+    }
+    );
+  
+  </script> -->
+
+  <script>
+    
+  </script>
+
+ <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" /><script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
       <script type="text/javascript">
         $(document).ready(function() 
@@ -42,40 +55,39 @@
 
       <!-- Javascript Untuk Filter Hari -->
       <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-     <!--  <script>
+      <script>
         $(document).ready(function(){
 
           var day = $("#hari option:selected").val().toLowerCase();
-          $("#hasilCheck tr").filter(function() {
+          $("#hasil tr").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(day) > -1);
 
           });
           $("select#hari").change(function(){
             var hari = $("#hari option:selected").val().toLowerCase();
-            var jumlah = document.getElementById("hasilCheck").getElementsByTagName("tr").length;
+            var jumlah = document.getElementById("hasil").getElementsByTagName("tr").length;
 
-            $("#hasilCheck tr").filter(function() {
+            $("#hasil tr").filter(function() {
               $(this).toggle($(this).text().toLowerCase().indexOf(hari) > -1)
             });
           });
         });
-      </script> -->
+      </script>
 
       <title>
         <?php echo $judul; ?>
       </title>
     </head>
 
-    <body style="background-color: #c7eae9">
-      <!-- Header -->
-      <div class="ui top fixed inverted pointing menu">
-        <div class="header item">
-          <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
-          <?php echo $_SESSION['NamaPIC']; ?>
-        </div>
-        <a class="item" href="<?php echo site_url('pic/beranda'); ?>">
-          <div class="ui icon">
-            <i class="home icon"></i>
+<body style="background-color: #B0E0E6">
+    <div class="ui top fixed inverted pointing menu">
+      <div class="header item">
+        <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
+        <?php echo $_SESSION['NamaPIC']; ?>
+      </div>
+      <a class="item" href="<?php echo site_url('pic/beranda'); ?>">
+        <div class="ui icon">
+          <i class="home icon"></i>
           Dashboard</div>
         </a>
         <a class="item" href="<?php echo site_url('pic/checklist'); ?>">
@@ -134,15 +146,16 @@
             </button>
           </div>
         </form>
-
-        <a href="<?php echo site_url('pic/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
+     
+          <a href="<?php echo site_url('pic/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
           <div class="item" style="margin-top: 3px ">
-            <div class="ui teal button">
-              <i class="sign out alternate icon" icon"></i>Log Out
-            </div>
+              <div class="ui teal button">
+                <i class="sign out alternate icon" icon"></i>Log Out
+              </div>
           </div>
-        </a>
+          </a>
       </div>
+    </div>
     </div>
   </div>
   <br><br><br><br><br>
