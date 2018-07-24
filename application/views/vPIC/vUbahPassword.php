@@ -6,8 +6,7 @@
             <i class="user icon"></i>
             Ubah Password</h3>
             <div class="ui divider"></div>
-
-        <form class="ui form" method="POST" action="<?php echo site_url('pic/validasiubahpassword'); ?>" id="form">
+        <form class="ui form" method="POST" action="<?php echo site_url('pic/validasiubahpassword'); ?>" id="form" >
           <div class="field">
             <label>Nomor Induk Karyawan</label>
             <input type="text" placeholder="Nomor Induk Karyawan" value="<?php echo($pic['NIK']) ?>" disabled>
@@ -34,7 +33,7 @@
     
         <div class="ui center aligned basic segment">
           <button class="ui right vertical blue button" tabindex="0">
-            <i class="check icon"></i>
+            <i class="save icon"></i>
               Simpan
             </button>
             </div>
@@ -64,7 +63,7 @@ $('.ui.form')
                   rules: [
                     {
                       type   : 'minLength[6]',
-                      prompt : 'Your password must be at least 6 characters'
+                      prompt : 'Password setidaknya 6 karakter'
                     },
                 ]
               },
@@ -73,7 +72,7 @@ $('.ui.form')
                   rules: [
                     {
                       type   : 'match[password]',
-                      prompt : "Your password doesn't match"
+                      prompt : "Password Anda tidak"
                     },
                 ]
               },
@@ -82,7 +81,7 @@ $('.ui.form')
                 rules : [
                   {
                     type : 'match[passwordL2]',
-                    prompt : "Your old password wrong"
+                    prompt : "Password lama Anda salah"
                   },
                 ]
               },
