@@ -14,7 +14,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/tablesort.js'); ?>"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/data-paging.js'); ?>"></script>
-  
+  <script type="text/javascript" src="<?php echo base_url('assets/js/md5.js'); ?>"></script>
  <!--  <script type="text/javascript">
       $(document).ready(function() {
         $('#example').DataTable( {
@@ -28,6 +28,19 @@
         $('table').tablesort(); 
     } 
     ); 
+  </script>
+
+  <!-- <script>
+    $(document).ready(function()
+    {
+    $('form').transition('zoom');
+    }
+    );
+  
+  </script> -->
+
+  <script>
+    
   </script>
 
  <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" /><script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>

@@ -71,14 +71,15 @@
                             } ?> 
                           </div>
                         </div>
-
+ 
                       </div>
                   </td>
                   <?php if ($log['Status'] == 'OK') {?>
-                  <td><font style="color: black;"><b>OK</b></font></td>
+                  <td style="background-color: #90EE90 ;"><b>OK</b></td>
+                  
                                         
                   <?php } else if($log['Status'] == 'Bad') {?>
-                    <td><font style="color: red;"><b>Bad</b></font></td>
+                    <td style="background-color: tomato;"><b>Bad</b></td>
                   <?php } ?>
                   </td>
                   <td>

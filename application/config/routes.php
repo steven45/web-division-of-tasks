@@ -45,7 +45,9 @@ $route['admin/log'] = 'cAdmin/lihatLog';
 $route['admin/jLog'] = 'cAdmin/jLihatLog';
 $route['admin/gantipiclog'] = 'cAdmin/gantiPICLog';
 
-//Halaman User
+
+
+//<-- HALAMAN PIC -->
 $route['pic'] = 'cPIC';
 $route['pic/validation'] = 'cPIC/validation';
 $route['pic/beranda'] = 'cPIC/lihatLog';
@@ -56,3 +58,4 @@ $route['pic/daftarPIC'] = 'cPIC/daftarPIC';
 $route['pic/absensi'] = 'cPIC/lihatAbsensi';
 $route['pic/ranking'] = 'cPIC/ranking';
 $route['pic/ubahPassword'] = 'cPIC/ubahPassword';
+$route['pic/validasiubahpassword'] = 'cPIC/validasiUbahPassword';

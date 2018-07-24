@@ -6,13 +6,11 @@
   </div>
 </div>
 
-
-
-
     <script type="text/javascript">
       $(document).ready(function(){
         $("#pencarian").on("keyup", function() {
           var value = $(this).val().toLowerCase();
+          var hari = $('#hari').val();
           $("#hasil tr").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
           });

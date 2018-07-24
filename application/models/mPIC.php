@@ -113,6 +113,11 @@ class mPIC extends CI_Model
         return $this->db->query($query)->row_array();
     }
 
+    public function validasiUbahPassword($table, $data, $NIK){
+        $this->db->where('NIK', $NIK);
+        $this->db->update($table, $data);
+    }
+
     public function tambahJumlah($NIK)
     {
         $query = "SELECT * FROM `pic` WHERE `NIK` = $NIK";

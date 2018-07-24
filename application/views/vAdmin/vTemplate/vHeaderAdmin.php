@@ -20,43 +20,43 @@
             "pagingType": "full_numbers"
           } );
         } );
-    </script> -->
+      </script> -->
 
-  <script type="text/javascript">
-    $(document).ready(function() 
-    { 
-        $('table').tablesort(); 
-    } 
-    ); 
-  </script>
+      <script type="text/javascript">
+        $(document).ready(function() 
+        { 
+          $('table').tablesort(); 
+        } 
+        ); 
+      </script>
 
-  <script type="text/javascript">
-    $(document).ready(function() 
-    { 
-    $('.ui.dropdown').dropdown();
-    } 
-    ); 
-  </script>
+      <script type="text/javascript">
+        $(document).ready(function() 
+        { 
+          $('.ui.dropdown').dropdown();
+        } 
+        ); 
+      </script>
 
-  <script>
-  $(document).ready(function(){
+      <script>
+        $(document).ready(function(){
 
-    var day = $("#hari option:selected").val().toLowerCase();
-    $("#hasil tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(day) > -1);
+          var day = $("#hari option:selected").val().toLowerCase();
+          $("#hasil tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(day) > -1);
 
-    });
-    $("select#hari").change(function(){
-      var hari = $("#hari option:selected").val().toLowerCase();
-      var jumlah = document.getElementById("hasil").getElementsByTagName("tr").length;
+          });
+          $("select#hari").change(function(){
+            var hari = $("#hari option:selected").val().toLowerCase();
+            var jumlah = document.getElementById("hasil").getElementsByTagName("tr").length;
 
-      $("#hasil tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(hari) > -1)
-      });
-    });
-  });
-  </script>
-  
+            $("#hasil tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(hari) > -1)
+            });
+          });
+        });
+      </script>
+
 <!--   <script >
     $(document).ready(function(){
         $.getJSON("<?php echo site_url('admin/jLog'); ?>", function(result){
@@ -65,58 +65,76 @@
                 });
             });
         });
-  </script> -->
+      </script> -->
 
-  <script type="text/javascript">
-  $(document).ready(function(){
-    var txt= "";
-    var kalender = $("#kalender").val();
+      <script type="text/javascript">
+        $(document).ready(function(){
+          var txt= ""; var a = "";
+          var kalender = $("#kalender").val();
+          var info ="";
+          $.getJSON("<?php echo site_url('admin/jLog'); ?>", function(result){
+            $.each(result, function(i, field){  
 
-    $.getJSON("<?php echo site_url('admin/jLog'); ?>", function(result){
-      $.each(result, function(i, field){  
-        for (var i = 0; i < field.length; i++) {
+              for (var i = 0; i < field.length; i++) {
+                info =  field[i]["Info"];
 
-        //   var fs = require("fs");
-
-        // console.log("Going to get file info!");
-        //   fs.stat(field[i]["Info"], function (err, stats) {
-        //      if (err) {
-        //          return console.error(err);
-        //      }
-        //      console.log(stats);
-        //      console.log("Got file info successfully!");
-             
-        //      // Check file type
-        //      console.log("isFile ? " + stats.isFile());
-        //      console.log("isDirectory ? " + stats.isDirectory());    
-        //   });
-
-          txt += "<tr>";
-          txt += "<td>" + (i+1) + "</td>" +
+                jQuery.get("<?php echo site_url() ?>"+info, function(data) {
+                  txt += "<tr>";
+                  txt += "<td>" + (i+1) + "</td>" +
                   "<td>" + field[i]["Jam"] + "</td>" +
                   "<td class='waktu'>" + field[i]["Waktu"] + "</td>" +
                   "<td>" + field[i]["NamaChecklist"] + "</td>" +
                   "<td>" + field[i]["NamaPIC"] + "</td>" +
-                  "<td>" + field[i]["PICCek"] + "</td>" +
-                  "<td>" + field[i]["Info"] + "</td>" +
-                  "<td>" + field[i]["Status"] + "</td>" +
+                  "<td>" + field[i]["PICCek"] + "</td>" ;          
+                  console.log(data);
+                  txt+= "<td>"+ data +"</td>";
+                  txt +=  "<td>" + field[i]["Status"] + "</td>" +
                   "<td>" + field[i]["Keterangan"] + "</td>" ;
-          txt += "</tr>";
-        }
-        document.getElementById("hasilLog").innerHTML = txt;
-        $("#hasilLog tr").filter(function() {
-          $(this).toggle($(this).text().indexOf(kalender) > -1);
-        });
-      });
-    });  
+                  txt += "</tr>";
+                });
+              } 
+              
+              document.getElementById("hasilLog").innerHTML = txt;
+              for (var i = 0; i < field.length; i++) {
+                document.getElementById("hasilLog").innerHTML = txt;
+              }
+              $("#hasilLog tr").filter(function() {
+                $(this).toggle($(this).text().indexOf(kalender) > -1);
+              });
+            });
+          });  
 
-    $('#kalender').on("change",function(){
-      kalender =  $('#kalender').val();
+          $('#kalender').on("change",function(){
+            kalender =  $('#kalender').val();
       // $('#getDate').html($('#kalender').val());
       $("#hasilLog tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(kalender) > -1);
+        $(this).toggle($(this).text().toLowerCase().indexOf(kalender) > -1);
       });
     }); 
+<<<<<<< HEAD
+        }); 
+      </script>
+
+      <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" /><script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+      <title>
+        <?php echo $judul; ?>
+      </title>
+
+    </head>
+
+
+    <body style="background-color: #bcd8d7">
+      <!-- Header -->
+      <div class="ui top fixed inverted pointing menu">
+        <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
+          <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
+          Artajasa
+        </a>
+        <a class="item" href="<?php echo site_url('admin/beranda'); ?>">
+          <div class="ui icon">
+            <i class="home icon"></i>
+=======
   }); 
   </script>
 
@@ -142,16 +160,16 @@
         <div class="ui icon">
           <i class="home icon"></i>
           Dashboard</div>
-      </a>
-      <a class="item" href="<?php echo site_url('admin/checklist'); ?>">
-        <div class="ui icon">
-          <i class="check square icon"></i>
-        Checklist</div>
-      </a>
-      <div class="ui dropdown item">
-      <i class="user icon"></i>
-        PIC
-        <i class="dropdown icon"></i>
+        </a>
+        <a class="item" href="<?php echo site_url('admin/checklist'); ?>">
+          <div class="ui icon">
+            <i class="check square icon"></i>
+          Checklist</div>
+        </a>
+        <div class="ui dropdown item">
+          <i class="user icon"></i>
+          PIC
+          <i class="dropdown icon"></i>
           <div class="menu">
             <a class="item" href="<?php echo site_url('admin/pic'); ?>">
             Daftar PIC</a>
@@ -162,14 +180,15 @@
             <a class="item" href="<?php echo site_url('admin/pergantian'); ?>">
             Pergantian PIC</a>
           </div>
+        </div>
       </div>
         
-      <div class="right menu">
-        <div class="ui pointing dropdown link item">
-          <span class="text">
+        <div class="right menu">
+          <div class="ui pointing dropdown link item">
+            <span class="text">
 
-          Notifications</span>
-          <div class="ui small label" style="background-color: red;"><!-- <?php echo $temp; ?> -->2</div>
+            Notifications</span>
+            <div class="ui small label" style="background-color: red;"><!-- <?php echo $temp; ?> -->2</div>
             <div class="menu">
               <div class="header">
                 <i class= "bell icon"></i>
@@ -192,22 +211,22 @@
                 </a>
                 <br>
               <?php endforeach ?>
-              </div> -->
-              
-            </div>
+            </div> -->
+
+          </div>
         </div>
         
 
-          <a href="<?php echo site_url('admin/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
-      <div class="item">
-          <div class="ui teal button">
-            <i class="sign out alternate icon" icon"></i>Log Out
+        <a href="<?php echo site_url('admin/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
+          <div class="item">
+            <div class="ui teal button">
+              <i class="sign out alternate icon" icon"></i>Log Out
+            </div>
           </div>
+        </a>
       </div>
-      </a>
     </div>
-    </div>
-<br><br><br><br><br>
+    <br><br><br><br><br>
 
 
 

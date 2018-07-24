@@ -229,6 +229,7 @@ class cPIC extends CI_Controller {
 		$this->load->view('vPIC/vRankingPIC');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
 	}
+
 	public function ubahPassword(){
 		$data['judul'] = "Ubah Password";
 		$NIK = $this->input->post('NIK');
@@ -237,5 +238,19 @@ class cPIC extends CI_Controller {
 		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
 		$this->load->view('vPIC/vUbahPassword');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
+	}
+
+	public function validasiUbahPassword(){
+		$NIK = $this->input->post('NIK');
+		$password = $this->input->post('password');
+		$data = array(
+			'password' => md5($password)
+		);
+		$this->mPIC->validasiUbahPassword('pic', $data, $NIK);
+
+		echo "<script type='text/javascript'>
+					alert('Sukses Mengubah Password');
+					window.location.href = '" . base_url() . "pic/beranda';
+				</script>";
 	}
 }

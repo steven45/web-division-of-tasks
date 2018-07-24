@@ -43,6 +43,7 @@
           <tbody id="hasilLog">
           </tfoot>
         </table>
+        <p id="halo"></p>
         <br>
         <br>
         <br>
