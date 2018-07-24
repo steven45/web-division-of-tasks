@@ -28,7 +28,7 @@
                     </select>
                   </div>
 
-  <div class="field" style="margin-left: 600px">
+  <div class="field" style="margin-left: 600px; margin-top: -35px" >
   <select class="ui right selection tiny dropdown item" id="hari" >
       <!-- <option value="<?php echo $hari; ?>"><?php echo $hari; ?></option>         -->
       <option value="<?php echo $hari ?>"><?php echo $hari ?></option>

@@ -79,7 +79,7 @@
   </title>
 </head>
 
-<body style="background-color: #c7eae9">
+<body style="background-color: #B0E0E6">
   <!-- Header -->
     <div class="ui top fixed inverted pointing menu">
       <div class="header item">
@@ -149,12 +149,12 @@
         </form>
      
           <a href="<?php echo site_url('pic/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
-      <div class="item" style="margin-top: 3px ">
-          <div class="ui teal button">
-            <i class="sign out alternate icon" icon"></i>Log Out
+          <div class="item" style="margin-top: 3px ">
+              <div class="ui teal button">
+                <i class="sign out alternate icon" icon"></i>Log Out
+              </div>
           </div>
-      </div>
-      </a>
+          </a>
       </div>
     </div>
     </div>

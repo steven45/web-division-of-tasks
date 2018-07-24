@@ -203,7 +203,7 @@
     $('#maxRows').on('change', function(){
         $('.pagination').html('')
         var trnum = 0
-        var maxRows = parseInt($(this).val())
+        var maxRows = parseInt(6)
         var totalRows = $(table+' tbody tr').length
         $(table+' tr:gt(0)').each(function(){
             trnum++
@@ -236,7 +236,7 @@
             })
         })
     })
-    </script>
+</script>
 
 
 

@@ -72,7 +72,7 @@ $('.ui.form')
                   rules: [
                     {
                       type   : 'match[password]',
-                      prompt : "Password Anda tidak"
+                      prompt : "Password Anda tidak cocok"
                     },
                 ]
               },
