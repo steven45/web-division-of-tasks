@@ -26,17 +26,17 @@ class cAdmin extends CI_Controller {
 		$where = array(
 			'username' => $username,
 			'password' => md5($password)
-			);
+		);
 		$cek = $this->mAdmin->getAdmin("admin",$where)->num_rows();
 
 		if($cek > 0){
 			$data_session = array(
 				'nama' => $username,
 				'status' => "login"
-				);
+			);
 
 			$this->session->set_userdata($data_session);
-		 	redirect(site_url("admin/beranda"));
+			redirect(site_url("admin/beranda"));
 		}
 		else{
 			$this->load->view('vAdmin/vHomeAdmin.php');
@@ -86,17 +86,17 @@ class cAdmin extends CI_Controller {
 		if ($query == 1) 
 		{
 			echo "<script type='text/javascript'>
-					alert('Sukses Menambahkan PIC');
-					window.location.href = '" . base_url() . "admin/pic';
-				</script>";
+			alert('Sukses Menambahkan PIC');
+			window.location.href = '" . base_url() . "admin/pic';
+			</script>";
 		}
 		else
 		{
 			echo "<script type='text/javascript'>
 
-					alert('NIK PIC Sudah Ada !!!');
-					window.location.href = '" . base_url() . "admin/tambahpic';
-				</script>";
+			alert('NIK PIC Sudah Ada !!!');
+			window.location.href = '" . base_url() . "admin/tambahpic';
+			</script>";
 		}
 	}
 
@@ -111,7 +111,7 @@ class cAdmin extends CI_Controller {
 	public function lihatPIC($status = NULL)
 	{
 		if (!isset($_SESSION['nama'])) {
-		  redirect(base_url("admin"));
+			redirect(base_url("admin"));
 		}
 
 		$data['status'] = $status;
@@ -156,9 +156,9 @@ class cAdmin extends CI_Controller {
 		$data['pic'] = $this->mAdmin->editPIC('pic', $data, $NIK);
 
 		echo "<script type='text/javascript'>
-					alert('Sukses Mengedit PIC');
-					window.location.href = '" . base_url() . "admin/pic';
-				</script>";
+		alert('Sukses Mengedit PIC');
+		window.location.href = '" . base_url() . "admin/pic';
+		</script>";
 	}
 
 	public function hapusPIC()
@@ -191,9 +191,9 @@ class cAdmin extends CI_Controller {
 		// );
 		// $this->mAdmin->hapusPIC('pic', $data, $NIK);	
 		echo "<script type='text/javascript'>
-					alert('Sukses Menyimpan Status PIC ');
-					window.location.href = '" . base_url() . "admin/pic';
-				</script>";
+		alert('Sukses Menyimpan Status PIC ');
+		window.location.href = '" . base_url() . "admin/pic';
+		</script>";
 	}
 
 	public function tambahChecklist()
@@ -223,9 +223,9 @@ class cAdmin extends CI_Controller {
 			if ($imageFileType != 'txt') {
 				echo "<script type='text/javascript'>
 
-						alert('File yang anda masukkan bukan txt!!!');
-						window.location.href = '" . base_url() . "admin/tambahchecklist';
-					</script>";
+				alert('File yang anda masukkan bukan txt!!!');
+				window.location.href = '" . base_url() . "admin/tambahchecklist';
+				</script>";
 			}
 
 			move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
@@ -239,14 +239,14 @@ class cAdmin extends CI_Controller {
 					}
 
 					$data = array(
-					'NIK' => '123456',
-					'Hari' => $hari[$j],
-					'Info' => $target_file,
-					'NamaChecklist' => $namaChecklist,
-					'Jam' => $nJam,
-					'Status' => 'Enabled',
-					'BatasPengecekan' => $batasPengecekan,
-					'StatusCheck' => '0'
+						'NIK' => '123456',
+						'Hari' => $hari[$j],
+						'Info' => $target_file,
+						'NamaChecklist' => $namaChecklist,
+						'Jam' => $nJam,
+						'Status' => 'Enabled',
+						'BatasPengecekan' => $batasPengecekan,
+						'StatusCheck' => '0'
 					);
 
 					$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, $i, $hari[$j]);
@@ -257,8 +257,8 @@ class cAdmin extends CI_Controller {
 		elseif ($jam == "Lainnya") {
 			if ($jam1 == "") {
 				echo "<script type='text/javascript'>
-					alert('Jika memilih lainnya maka jam harus diisi.');
-					window.location.href = '" . base_url() . "admin/tambahchecklist';
+				alert('Jika memilih lainnya maka jam harus diisi.');
+				window.location.href = '" . base_url() . "admin/tambahchecklist';
 				</script>";
 			}
 			else{
@@ -272,9 +272,9 @@ class cAdmin extends CI_Controller {
 				if ($imageFileType != 'txt') {
 					echo "<script type='text/javascript'>
 
-							alert('File yang anda masukkan bukan txt!!!');
-							window.location.href = '" . base_url() . "admin/tambahchecklist';
-						</script>";
+					alert('File yang anda masukkan bukan txt!!!');
+					window.location.href = '" . base_url() . "admin/tambahchecklist';
+					</script>";
 				}
 
 				move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
@@ -282,14 +282,14 @@ class cAdmin extends CI_Controller {
 				for ($j=0; $j < 7; $j++) { 
 					for ($i=0; $i < count($nJam); $i++) { 
 						$data = array(
-						'NIK' => '123456',
-						'Hari' => $hari[$j],
-						'Info' => $target_file,
-						'NamaChecklist' => $namaChecklist,
-						'Jam' => $nJam[$i],
-						'Status' => 'Enabled',
-						'BatasPengecekan' => $batasPengecekan,
-						'StatusCheck' => '0'
+							'NIK' => '123456',
+							'Hari' => $hari[$j],
+							'Info' => $target_file,
+							'NamaChecklist' => $namaChecklist,
+							'Jam' => $nJam[$i],
+							'Status' => 'Enabled',
+							'BatasPengecekan' => $batasPengecekan,
+							'StatusCheck' => '0'
 						);
 						$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, substr($nJam[$i], 0,2), $hari[$j]);
 						$hasilJam[$i] = $hasil;
@@ -310,20 +310,20 @@ class cAdmin extends CI_Controller {
 
 		if ($tampil1 == "") {
 			echo "<script type='text/javascript'>
-				alert('Jam $tampil2 sudah ada.');
-				window.location.href = '" . base_url() . "admin/checklist';
+			alert('Jam $tampil2 sudah ada.');
+			window.location.href = '" . base_url() . "admin/checklist';
 			</script>";
 		}
 		elseif ($tampil2 == "") {
 			echo "<script type='text/javascript'>
-				alert('Jam $tampil1 sukses ditambahkan.');
-				window.location.href = '" . base_url() . "admin/checklist';
+			alert('Jam $tampil1 sukses ditambahkan.');
+			window.location.href = '" . base_url() . "admin/checklist';
 			</script>";
 		}
 		else{
 			echo "<script type='text/javascript'>
-				alert('Jam $tampil2 sudah ada. Jam $tampil1 sukses ditambahkan');
-				window.location.href = '" . base_url() . "admin/checklist';
+			alert('Jam $tampil2 sudah ada. Jam $tampil1 sukses ditambahkan');
+			window.location.href = '" . base_url() . "admin/checklist';
 			</script>";
 		}
 	}
@@ -334,7 +334,6 @@ class cAdmin extends CI_Controller {
 		$data['checklist']= $this->mAdmin->getChecklist();
 		$data['absensi'] = $this->mAdmin->getAbsensi();
 		// header("Content-type:application/json");
-
 		// echo json_encode($data['absensi']);
 
 		$data['status'] = $status;
@@ -345,28 +344,28 @@ class cAdmin extends CI_Controller {
 		$date = date("N");
 		switch ($date) {
 			case '1':
-				$hari = 'Senin';
-				break;
+			$hari = 'Senin';
+			break;
 			case '2':
-				$hari = 'Selasa';
-				break;
+			$hari = 'Selasa';
+			break;
 			case '3':
-				$hari = 'Rabu';
-				break;
+			$hari = 'Rabu';
+			break;
 			case '4':
-				$hari = 'Kamis';
-				break;
+			$hari = 'Kamis';
+			break;
 			case '5':
-				$hari = 'Jumat';
-				break;
+			$hari = 'Jumat';
+			break;
 			break;
 			case '6':
-				$hari = 'Sabtu';
-				break;
+			$hari = 'Sabtu';
+			break;
 			break;
 			case '7':
-				$hari = 'Minggu';
-				break;
+			$hari = 'Minggu';
+			break;
 			break;
 		}
 		$data['hari'] = $hari;
@@ -392,31 +391,104 @@ class cAdmin extends CI_Controller {
 			}
 		}
 
-		$data['nomor'] = $nomor;
+		$data['nomor'] = $nomor; //Akhir Menyimpan Nomor
 
+		//Menampilkan select pergantian PIC sesuai dengan jadwal
 		$pic = NULL;
 		foreach ($data['checklist'] as $checklist) {
 			$temp = 0;
 			foreach ($data['absensi'] as $absensi) {
-				if (($checklist['Jam'] == '00:00' OR $checklist['Jam'] == '01:00' OR $checklist['Jam'] == '02:00' OR $checklist['Jam'] == '03:00' OR $checklist['Jam'] == '04:00' OR $checklist['Jam'] == '05:00' OR $checklist['Jam'] == '06:00' OR $checklist['Jam'] == '07:00' OR $checklist['Jam'] == '08:00') AND $absensi['Shift'] == '1' AND $checklist['Hari'] == $absensi['Hari'] AND $absensi['Kehadiran'] == 'Hadir' AND $absensi['Status'] == 'Enabled') {
-					$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
-					$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
-					$temp = $temp+1;
+				if ($absensi['Shift'] == '3') {
+					$hariNext = NULL;
+					switch ($absensi['Hari']) {
+						case 'Senin':
+						$hariNext = 'Selasa';
+						break;
+						case 'Selasa':
+						$hariNext = 'Rabu';
+						break;
+						case 'Rabu':
+						$hariNext = 'Kamis';
+						break;
+						case 'Kamis':
+						$hariNext = 'Jumat';
+						break;
+						case 'Jumat':
+						$hariNext = 'Sabtu';
+						break;
+						case 'Sabtu':
+						$hariNext = 'Minggu';
+						break;
+						case 'Minggu':
+						$hariNext = 'Senin';
+						break;
+					}
+
+					if (( $checklist['Jam']   == '22:00' OR 
+						$checklist['Jam']     == '23:00') AND 
+						$checklist['Hari']    == $absensi['Hari'] AND 
+						$absensi['Kehadiran'] == 'Hadir' AND 
+						$absensi['Status']    == 'Enabled') {
+						$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
+						$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
+						$temp = $temp+1;
+					}
+					else if (( $checklist['Jam']   == '00:00' OR 
+						$checklist['Jam']     == '01:00'OR 
+						$checklist['Jam']     == '02:00'OR 
+						$checklist['Jam']     == '03:00'OR 
+						$checklist['Jam']     == '04:00'OR 
+						$checklist['Jam']     == '05:00'OR 
+						$checklist['Jam']     == '06:00') AND 
+						$checklist['Hari']    == $hariNext AND 
+						$absensi['Kehadiran'] == 'Hadir' AND 
+						$absensi['Status']    == 'Enabled') {
+						$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
+						$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
+						$temp = $temp+1;
+					}
 				}
-				else if (($checklist['Jam'] == '09:00' OR $checklist['Jam'] == '10:00' OR $checklist['Jam'] == '11:00' OR $checklist['Jam'] == '12:00' OR $checklist['Jam'] == '13:00' OR $checklist['Jam'] == '14:00' OR $checklist['Jam'] == '15:00' OR $checklist['Jam'] == '16:00') AND $absensi['Shift'] == '2' AND $checklist['Hari'] == $absensi['Hari'] AND $absensi['Kehadiran'] == 'Hadir' AND $absensi['Status'] == 'Enabled') {
-					$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
-					$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
-					$temp = $temp+1;
-				}
-				else if (( $checklist['Jam'] == '17:00' OR $checklist['Jam'] == '18:00' OR $checklist['Jam'] == '19:00' OR $checklist['Jam'] == '20:00' OR $checklist['Jam'] == '21:00' OR $checklist['Jam'] == '22:00' OR $checklist['Jam'] == '23:00') AND $absensi['Shift'] == '3' AND $checklist['Hari'] == $absensi['Hari'] AND $absensi['Kehadiran'] == 'Hadir' AND $absensi['Status'] == 'Enabled') {
-					$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
-					$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
-					$temp = $temp+1;
+				else{
+					if (($checklist['Jam']    == '07:00' OR 
+						$checklist['Jam']     == '08:00' OR 
+						$checklist['Jam']     == '09:00' OR 
+						$checklist['Jam']     == '10:00' OR 
+						$checklist['Jam']     == '11:00' OR 
+						$checklist['Jam']     == '12:00' OR 
+						$checklist['Jam']     == '13:00' OR 
+						$checklist['Jam']     == '14:00' OR 
+						$checklist['Jam']     == '15:00' OR
+						$checklist['Jam']     == '16:00') AND 
+						$absensi['Shift']     == '1' AND 
+						$checklist['Hari']    == $absensi['Hari'] AND 
+						$absensi['Kehadiran'] == 'Hadir' AND 
+						$absensi['Status']    == 'Enabled') {
+						$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
+						$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
+						$temp = $temp+1;
+					}
+					else if (($checklist['Jam'] == '13:00' OR 
+						$checklist['Jam']     == '14:00' OR 
+						$checklist['Jam']     == '15:00' OR 
+						$checklist['Jam']     == '16:00' OR 
+						$checklist['Jam']     == '17:00' OR 
+						$checklist['Jam']     == '18:00' OR 
+						$checklist['Jam']     == '19:00' OR 
+						$checklist['Jam']     == '20:00'OR 
+						$checklist['Jam']     == '21:00') AND 
+						$absensi['Shift']     == '2' AND 
+						$checklist['Hari']    == $absensi['Hari'] AND 
+						$absensi['Kehadiran'] == 'Hadir' AND 
+						$absensi['Status']    == 'Enabled') {
+						$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NamaPIC'] = $absensi['NamaPIC'];
+						$pic[$checklist['Hari']][$checklist['Jam']][$temp]['NIK'] = $absensi['NIK'];
+						$temp = $temp+1;
+					}
 				}
 			}
 		}
 		// header("Content-type:application/json");
-		$data['pic'] = $pic;
+		$data['pic'] = $pic; //Akhir Menampilkan select pergantian PIC sesuai dengan jadwal
 		// echo json_encode($data['pic']);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vLihatChecklist', $data);
@@ -426,7 +498,7 @@ class cAdmin extends CI_Controller {
 	public function editChecklist($IDChecklist = NULL)
 	{
 		if (!isset($_SESSION['nama'])) {
-		  redirect(base_url("admin"));
+			redirect(base_url("admin"));
 		}
 
 		$IDChecklist = $IDChecklist;
@@ -463,16 +535,16 @@ class cAdmin extends CI_Controller {
 			if ($imageFileType != 'txt') {
 				echo "<script type='text/javascript'>
 
-					alert('File yang anda masukkan bukan txt!!!');
-					window.location.href = '" . base_url() . "admin/checklist';
+				alert('File yang anda masukkan bukan txt!!!');
+				window.location.href = '" . base_url() . "admin/checklist';
 				</script>";
 			}
 			else{
 				$data = array(
-				'BatasPengecekan' => $batasPengecekan,
-				'Info' => $target_file,
-				'NamaChecklist' => $namaChecklist,
-				'Jam' => $jam.':00'
+					'BatasPengecekan' => $batasPengecekan,
+					'Info' => $target_file,
+					'NamaChecklist' => $namaChecklist,
+					'Jam' => $jam.':00'
 				);
 
 				$data= $this->mAdmin->editChecklist('checklist', $data, $IDChecklist, $namaChecklist, $jam);
@@ -485,15 +557,15 @@ class cAdmin extends CI_Controller {
 		
 		if ($data == 1) {
 			echo "<script type='text/javascript'>
-					alert('Sukses Mengedit Checklist');
-					window.location.href = '" . base_url() . "admin/checklist';
-				</script>";
+			alert('Sukses Mengedit Checklist');
+			window.location.href = '" . base_url() . "admin/checklist';
+			</script>";
 		}
 		else{
 			echo "<script type='text/javascript'>
-					alert('Jam $jam:00 sudah ada');
-					window.location.href = '" . base_url() . "admin/checklist';
-				</script>";
+			alert('Jam $jam:00 sudah ada');
+			window.location.href = '" . base_url() . "admin/checklist';
+			</script>";
 		}
 		
 	}
@@ -526,12 +598,12 @@ class cAdmin extends CI_Controller {
 
 		for ($i=0; $i < $nJumlah; $i++) { 
 			$IDChecklist = $this->input->post($id[$i]);
-			$status = $this->input->post($nStatus[$i]);
-			$NIK = $this->input->post($nNIK[$i]);
+			$status      = $this->input->post($nStatus[$i]);
+			$NIK         = $this->input->post($nNIK[$i]);
 
 			$data = array(
 				'Status' => $status,
-				'NIK' => $NIK
+				'NIK'    => $NIK
 			);
 
 			// echo $id[$i]. ' = '. $IDChecklist.'<br> ';
@@ -542,7 +614,7 @@ class cAdmin extends CI_Controller {
 
 			for ($j=0; $j < count($checklist); $j++) { 
 				if ($checklist[$j]['IDChecklist'] == $IDChecklist) {
-					if ($checklist[$j]['NIK'] != $NIK) {
+					if ($checklist[$j]['NIK'] != $NIK AND $IDChecklist != NULL AND $status != NULL AND $NIK != NULL) {
 						// echo $checklist[$j]['NIK'].' = '. $NIK;
 						// echo '<br>';
 
@@ -554,8 +626,8 @@ class cAdmin extends CI_Controller {
 							'NamaPICS' => $picS['NamaPIC'],
 							'NamaPICP' => $picP['NamaPIC']
 						);
-						// var_dump($data);
 						$this->mAdmin->penggantiPIC('penggantipic', $pengganti);
+						// var_dump($picP);
 					}
 				}
 			}
@@ -566,15 +638,15 @@ class cAdmin extends CI_Controller {
 		}
 
 
-		$IDChecklist = $this->input->post('IDChecklist');
-		$data = array(
-			'Status' => 'Disabled'
-		);
+		// $IDChecklist = $this->input->post('IDChecklist');
+		// $data = array(
+		// 	'Status' => 'Disabled'
+		// );
 		// $this->mAdmin->hapusChecklist('checklist', $data, $IDChecklist);	
 		echo "<script type='text/javascript'>
-					alert('Sukses mengganti PIC dan Status');
-					window.location.href = '" . base_url() . "admin/checklist';
-				</script>";
+		alert('Sukses mengganti PIC dan Status');
+		window.location.href = '" . base_url() . "admin/checklist';
+		</script>";
 	}
 
 	public function lihatAbsensi()
@@ -582,7 +654,24 @@ class cAdmin extends CI_Controller {
 		$data['judul'] = "Lihat Absensi";
 		$data['absensi']= $this->mAdmin->getAbsensi();
 
-		// var_dump($data);
+		$pic = NULL;
+		$temp1 = 0;
+		foreach ($data['absensi'] as $absensi) {
+			$temp2 = 0;
+			foreach ($data['absensi'] as $cek) {
+				if ($absensi['Hari'] == $cek['Hari'] AND $absensi['Shift'] == $cek['Shift'] AND $absensi['NIK'] != $cek['NIK']) {
+					$pic[$temp1][$temp2]['NIK'] = $cek['NIK'];
+					$pic[$temp1][$temp2]['NamaPIC'] = $cek['NamaPIC'];	
+					$temp2 = $temp2 +1;
+				}
+			}
+			$temp1 = $temp1 +1;
+		}
+
+		// header("Content-type:application/json");
+		// echo json_encode($pic);
+
+		$data['pic'] = $pic;
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vAbsensiPIC', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
@@ -617,24 +706,30 @@ class cAdmin extends CI_Controller {
 		if ($query == 1) 
 		{
 			echo "<script type='text/javascript'>
-					alert('Sukses Menambahkan Absensi');
-					window.location.href = '" . base_url() . "admin/absensi';
-				</script>";
+			alert('Sukses Menambahkan Absensi');
+			window.location.href = '" . base_url() . "admin/absensi';
+			</script>";
 		}
 		else
 		{
 			echo "<script type='text/javascript'>
 
-					alert('Absensi sudah ada!!! ');
-					window.location.href = '" . base_url() . "admin/tambahabsensi';
-				</script>";
+			alert('Absensi sudah ada!!! ');
+			window.location.href = '" . base_url() . "admin/tambahabsensi';
+			</script>";
 		}
 	}
 
-	public function hapusAbsensi()
+	public function hapusAbsensi($IDHarian)
 	{
-		$IDHarian = $this->input->post('IDHarian');
+		if (!isset($_SESSION['nama'])) {
+			redirect(base_url("admin"));
+		}
 		$this->mAdmin->hapusAbsensi('harian', $IDHarian);
+		echo "<script type='text/javascript'>
+		alert('Sukses menghapus absensi ');
+		window.location.href = '" . base_url() . "admin/absensi';
+		</script>";
 	}
 
 	public function editAbsensi($IDHarian= NULL)
@@ -662,14 +757,14 @@ class cAdmin extends CI_Controller {
 		$query = $this->mAdmin->editAbsensi('harian',$IDHarian, $data, $NIK, $IDJadwal, $hari);
 		if ($query == '1') {
 			echo "<script type='text/javascript'>
-				alert('Sukses mengedit absensi. ');
-				window.location.href = '" . base_url() . "admin/absensi';
+			alert('Sukses mengedit absensi. ');
+			window.location.href = '" . base_url() . "admin/absensi';
 			</script>";
 		}
 		else{
 			echo "<script type='text/javascript'>
-				alert('Jadwal sudah ada !!!. ');
-				window.location.href = '" . base_url() . "admin/absensi';
+			alert('Jadwal sudah ada !!!. ');
+			window.location.href = '" . base_url() . "admin/absensi';
 			</script>";
 		}
 	}
@@ -679,31 +774,62 @@ class cAdmin extends CI_Controller {
 		$jumlahAbsensi= $this->input->post('jumlahAbsensi');
 
 		for ($i=0; $i < $jumlahAbsensi; $i++) { 
-			$id[$i] = 'IDHarian'.$i;
+			$id[$i]    = 'IDHarian'.$i;
 			$hadir[$i] = 'Kehadiran'.$i;
+			$NIKP[$i]  = 'NIKPengganti'.$i;
+			$NIKS[$i]  = 'NIKSebenarnya'.$i;
 
+			// echo $id[$i];
+			// echo $hadir[$i];
+			// echo $NIKP[$i];
+			// echo $NIKS[$i];
+			// echo "<br>";
 		}
 
 		for ($i=0; $i < $jumlahAbsensi; $i++) { 
-			$IDHarian = $this->input->post($id[$i]);
-			$Kehadiran = $this->input->post($hadir[$i]);
-			
-			$data = array(
-				'Kehadiran' => $Kehadiran
-			);
+			$IDHarian      = $this->input->post($id[$i]);
+			$Kehadiran     = $this->input->post($hadir[$i]);
+			$NIKPengganti  = $this->input->post($NIKP[$i]);
+			$NIKSebenarnya = $this->input->post($NIKS[$i]);
+
 			// echo $id[$i]. ' = '. $IDHarian;
 			// echo "<br>";
 			// echo $hadir[$i].' = '. $Kehadiran;
 			// echo "<br>";
-			if ($IDHarian != NULL AND $Kehadiran != NULL) {	
-				$query = $this->mAdmin->gantiAbsensi('harian',$IDHarian, $data);
-			}
+			// echo $NIKP[$i].' = '. $NIKPengganti;
+			// echo "<br>";
+			// echo $NIKS[$i].' = '. $NIKSebenarnya;
+			// echo "<br>";
+			// if ($IDHarian != NULL AND $Kehadiran != NULL) {	
+				// if ($Kehadiran == "Hadir") {
+				// 	$data = array(
+				// 		'Kehadiran' => $Kehadiran,
+				// 		'NIKP' => "0"
+				// 	);
+				// 	$query = $this->mAdmin->gantiAbsensi('harian',$IDHarian, $data);
+				// 	echo "<script type='text/javascript'>
+				// 	alert('Sukses menyimpan kehadiran. ');
+				// 	window.location.href = '" . base_url() . "admin/absensi';
+				// 	</script>";
+				// }
+				// else{
+					$data = $this->mAdmin->getChecklist($NIKSebenarnya);
+					header("Content-type:application/json");
+					echo json_encode($data);
+					// $data = array(
+					// 	'Kehadiran' => $Kehadiran,
+					// 	'NIKP' => $NIKPengganti
+					// );
+					// $query = $this->mAdmin->gantiAbsensi('harian',$IDHarian, $data);
+					// echo "<script type='text/javascript'>
+					// alert('Sukses menyimpan kehadiran dan mengganti PIC. ');
+					// window.location.href = '" . base_url() . "admin/absensi';
+					// </script>";
+				// }
+				
+			// }
 		}
-		echo "<script type='text/javascript'>
 
-				alert('Sukses menyimpan kehadiran. ');
-				window.location.href = '" . base_url() . "admin/absensi';
-			</script>";
 	}
 	public function notifikasi()
 	{

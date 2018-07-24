@@ -111,9 +111,11 @@
         $(this).toggle($(this).text().toLowerCase().indexOf(kalender) > -1);
       });
     }); 
-<<<<<<< HEAD
+
         }); 
       </script>
+
+
 
       <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" /><script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
@@ -124,7 +126,7 @@
     </head>
 
 
-    <body style="background-color: #bcd8d7">
+    <body style="background-image: url(<?php echo base_url('assets/images/blue.png'); ?>);">
       <!-- Header -->
       <div class="ui top fixed inverted pointing menu">
         <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
@@ -134,31 +136,6 @@
         <a class="item" href="<?php echo site_url('admin/beranda'); ?>">
           <div class="ui icon">
             <i class="home icon"></i>
-=======
-  }); 
-  </script>
-
-
-
-<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" /><script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-
-  <title>
-    <?php echo $judul; ?>
-  </title>
-  
-</head>
-
-
-<body style="background-image: url(<?php echo base_url('assets/images/blue.png'); ?>);">
-  <!-- Header -->
-    <div class="ui top fixed inverted pointing menu">
-      <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
-        <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
-        Artajasa
-      </a>
-      <a class="item" href="<?php echo site_url('admin/beranda'); ?>">
-        <div class="ui icon">
-          <i class="home icon"></i>
           Dashboard</div>
         </a>
         <a class="item" href="<?php echo site_url('admin/checklist'); ?>">
@@ -182,17 +159,17 @@
           </div>
         </div>
       </div>
-        
-        <div class="right menu">
-          <div class="ui pointing dropdown link item">
-            <span class="text">
 
-            Notifications</span>
-            <div class="ui small label" style="background-color: red;"><!-- <?php echo $temp; ?> -->2</div>
-            <div class="menu">
-              <div class="header">
-                <i class= "bell icon"></i>
-              Notifications</div>
+      <div class="right menu">
+        <div class="ui pointing dropdown link item">
+          <span class="text">
+
+          Notifications</span>
+          <div class="ui small label" style="background-color: red;"><!-- <?php echo $temp; ?> -->2</div>
+          <div class="menu">
+            <div class="header">
+              <i class= "bell icon"></i>
+            Notifications</div>
 
               <!-- <div class="ui relaxed divided list" style="margin: auto+10px auto+10px; padding-bottom: 10px;">
               <?php foreach ($notifikasi as $notifikasi): ?>
@@ -215,7 +192,6 @@
 
           </div>
         </div>
-        
 
         <a href="<?php echo site_url('admin/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
           <div class="item">
