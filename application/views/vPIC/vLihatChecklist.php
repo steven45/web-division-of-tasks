@@ -218,10 +218,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
 <script type="text/javascript">
   
-  var interval = null;
+  var interval = setInterval(myTimer,1000);
 
-  function reloadChecklist(){
-  moment.locale();
+  function myTimer(){
+  var d = new moment.locale();
+  console.log(d);
   var nowTime = moment();
   var nowDay = moment().format('dddd');
   var checkTime = moment('13:00', 'hh:mm');
@@ -312,22 +313,20 @@
       f[i] = document.getElementsByClassName('hasilku')[i];
 
        console.log(f[i]);
-       (function(i){
-        interval = setInterval(function() {
-          f[i].style.backgroundColor = (f[i].style.backgroundColor == 'tomato' ? '' : 'tomato');
-       }, 1000); 
-       })(i)
+       // (function(i){
+       //  interval = setInterval(function() {
+       //    f[i].style.backgroundColor = (f[i].style.backgroundColor == 'tomato' ? '' : 'tomato');
+       // }, 1000); 
+       // })(i)
+
+       f[i].style.backgroundColor = (f[i].style.backgroundColor == 'tomato' ? '' : 'tomato');
     }
   }
   console.log(cJumlah);
     
-  }//Akhir Method Reload Checklist
+  }//Akhir Method myTimer
 
-  reloadChecklist();
-  setInterval(function(){
-     clearInterval(interval);
-     reloadChecklist();
-  },60000);
+  
 
 </script>
 
