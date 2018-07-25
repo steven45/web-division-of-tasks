@@ -15,7 +15,7 @@
       
       </div>
   <div class="ui divider"></div>
-  <div class= "ui field">
+  <!-- <div class= "ui field">
         <select name="state" id="maxRows" class="form-control" style="width:150px;">
                         <option value="5000">Show All</option>
                         <option value="5">5</option>
@@ -26,9 +26,9 @@
                         <option value="75">75</option>
                         <option value="100">100</option>
                     </select>
-                  </div>
+                  </div> -->
 
-  <div class="field" style="margin-left: 600px; margin-top: -35px" >
+  <div class="field" style="margin-left: 600px; margin-top: 5px" >
   <select class="ui right selection tiny dropdown item" id="hari" >
       <!-- <option value="<?php echo $hari; ?>"><?php echo $hari; ?></option>         -->
       <option value="<?php echo $hari ?>"><?php echo $hari ?></option>
@@ -205,11 +205,11 @@
         </th>
     </tfoot>
   </table>
-  <div class="pagination-container">
+  <!-- <div class="pagination-container">
             <nav>
                 <ul class="pagination"></ul>
             </nav>
-        </div>
+        </div> -->
  
   </div>
   </div>
@@ -331,7 +331,7 @@
 </script>
 
 
-  <script>
+  <!-- <script>
     var table = '#mytable'
     $('#maxRows').on('change', function(){
         $('.pagination').html('')
@@ -369,7 +369,7 @@
             })
         })
     })
-    </script>
+    </script> -->
 
 
 

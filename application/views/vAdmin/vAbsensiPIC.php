@@ -28,6 +28,7 @@
             <th class="">Jam</th>
             <th class="">Hari</th>
             <th class="">Kehadiran</th>
+            <th class="">Pengganti</th>
             <th class="">Edit</th>
             <th class="">Hapus</th>
           </tr>
@@ -38,7 +39,7 @@
             <?php $jumlah = count($absensi); ?>
             <input type="hidden" name="jumlahAbsensi" value="<?php echo $jumlah ?>"> 
             <?php foreach ($absensi as $absensi) { ?>
-            <?php if ($absensi['Status'] == 'Enabled' ) { ?>
+            <?php if ($absensi['Status'] == 'Enabled' ) { ?> 
             <input type="hidden" name="<?php echo 'IDHarian'.$i; ?>" value ="<?php echo $absensi['IDHarian']; ?>">
             <tr>
               <td><?php echo $absensi['NIK'] ?></td>
@@ -46,9 +47,9 @@
               <td><?php echo $absensi['Shift'] ?></td>
               <td><?php echo $absensi['Jam'] ?></td>
               <td><?php echo $absensi['Hari'] ?></td>
-              <td>
+              <td class="absensi">
                
-                <select   name="<?php echo 'Kehadiran'.$i ?>" style="min-width: 10em; cursor: pointer;
+                <select class="<?php echo "hadir".$i ?>" target="<?php echo $i ?>" name="<?php echo 'Kehadiran'.$i ?>" style="min-width: 10em; cursor: pointer;
                 word-wrap: break-word;
                 line-height: 1em;
                 white-space: normal;
@@ -77,6 +78,40 @@
                 <option value="Hadir">Hadir</option>
                 <?php } ?>
               </select>
+            </td>
+            <td>
+              <select class="pengganti" id="<?php echo 'select'.$i ?>" style="min-width: 10em; cursor: pointer;
+                word-wrap: break-word;
+                line-height: 1em;
+                white-space: normal;
+                outline: 0;
+                -webkit-transform: rotateZ(0deg);
+                transform: rotateZ(0deg);
+                min-width: 14em;
+                min-height: 2.71428571em;
+                background: #FFFFFF;
+                display: inline-block;
+                padding: 0.78571429em 2.1em 0.78571429em 1em;
+                color: rgba(0, 0, 0, 0.87);
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                border: 1px solid rgba(34, 36, 38, 0.15);
+                border-radius: 0.28571429rem;
+                -webkit-transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
+                transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
+                transition: box-shadow 0.1s ease, width 0.1s ease;
+                transition: box-shadow 0.1s ease, width 0.1s ease, -webkit-box-shadow 0.1s ease;">
+                <option value="0">Vriza</option>
+                <option value="1">Wahyu</option>
+                <!-- <?php if ($absensi['Kehadiran'] == "Hadir") { ?>
+                <option value="<?php echo $absensi['Kehadiran']; ?>"><?php echo $absensi['Kehadiran']; ?></option>
+                <option value="Tidak Hadir">Tidak Hadir</option>
+                <?php } else if ($absensi['Kehadiran'] == "Tidak Hadir") { ?>
+                <option value="Tidak Hadir"><?php echo $absensi['Kehadiran']; ?></option>
+                <option value="Hadir">Hadir</option>
+                <?php } ?> -->
+              </select>
+              
             </td>
 
             <td>
@@ -107,7 +142,7 @@
     <tfoot class="full-width">
       <tr>
         
-        <th colspan="8">
+        <th colspan="9">
           
           <button class="ui right floated blue small button" style="margin-top: 5px;">
             <i class="save icon"></i>Simpan
@@ -126,3 +161,24 @@
 
 </div>
 </div>
+
+<script>
+jQuery(function() {
+
+  jQuery('.pengganti').hide();
+  var d = document.getElementsByClassName("absensi").length;
+  // console.log(d);
+  for (var i = 0; i < d; i++){
+    console.log(i +" = "+ $('.hadir'+i).val());
+    if($('.hadir'+i).val() == "Tidak Hadir"){
+      jQuery('#select' + $('.hadir'+i).attr('target')).show();
+    }
+
+
+    jQuery('.hadir'+i).change(function() {
+      jQuery('#select' + $(this).attr('target')).toggle();
+    });
+  }
+
+});
+</script>
