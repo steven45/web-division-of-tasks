@@ -859,12 +859,12 @@ class cAdmin extends CI_Controller {
 							);
 							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
 
-							$dataPengganti = array(
-								'IDChecklist' => $checklist['IDChecklist'],
-								'NamaPICS' => $picSebenarnya['NamaPIC'],
-								'NamaPICP' => $picPengganti['NamaPIC']
-							);
-							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
+							// $dataPengganti = array(
+							// 	'IDChecklist' => $checklist['IDChecklist'],
+							// 	'NamaPICS' => $picSebenarnya['NamaPIC'],
+							// 	'NamaPICP' => $picPengganti['NamaPIC']
+							// );
+							// $this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
 						else {
 							$set = array(
@@ -872,12 +872,12 @@ class cAdmin extends CI_Controller {
 							);
 							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
 
-							$dataPengganti = array(
-								'IDChecklist' => $checklist['IDChecklist'],
-								'NamaPICS' => $picPengganti['NamaPIC'],
-								'NamaPICP' => $picSebenarnya['NamaPIC']
-							);
-							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
+							// $dataPengganti = array(
+							// 	'IDChecklist' => $checklist['IDChecklist'],
+							// 	'NamaPICS' => $picPengganti['NamaPIC'],
+							// 	'NamaPICP' => $picSebenarnya['NamaPIC']
+							// );
+							// $this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
 
 					}
@@ -896,12 +896,12 @@ class cAdmin extends CI_Controller {
 							);
 							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
 
-							$dataPengganti = array(
-								'IDChecklist' => $checklist['IDChecklist'],
-								'NamaPICS' => $picSebenarnya['NamaPIC'],
-								'NamaPICP' => $picPengganti['NamaPIC']
-							);
-							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
+							// $dataPengganti = array(
+							// 	'IDChecklist' => $checklist['IDChecklist'],
+							// 	'NamaPICS' => $picSebenarnya['NamaPIC'],
+							// 	'NamaPICP' => $picPengganti['NamaPIC']
+							// );
+							// $this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
 						else {
 							$set = array(
@@ -909,12 +909,12 @@ class cAdmin extends CI_Controller {
 							);
 							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
 
-							$dataPengganti = array(
-								'IDChecklist' => $checklist['IDChecklist'],
-								'NamaPICS' => $picPengganti['NamaPIC'],
-								'NamaPICP' => $picSebenarnya['NamaPIC']
-							);
-							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
+							// $dataPengganti = array(
+							// 	'IDChecklist' => $checklist['IDChecklist'],
+							// 	'NamaPICS' => $picPengganti['NamaPIC'],
+							// 	'NamaPICP' => $picSebenarnya['NamaPIC']
+							// );
+							// $this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
 					}
 				}
@@ -938,6 +938,13 @@ class cAdmin extends CI_Controller {
 								'NIKP' => $NIKPengganti
 							);
 							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
+
+							$dataPengganti = array(
+								'IDChecklist' => $checklist['IDChecklist'],
+								'NamaPICS' => $picSebenarnya['NamaPIC'],
+								'NamaPICP' => $picPengganti['NamaPIC']
+							);
+							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
 						else {
 							$set = array(
