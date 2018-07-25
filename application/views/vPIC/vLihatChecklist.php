@@ -242,6 +242,8 @@
   var batasP = [];
   var statusCheck = [];
   var hari = [];
+  var selisih2 = [];
+
 
   if (nowDay == 'Sunday') {
     var hariSekarang = "Minggu";
@@ -273,6 +275,7 @@
     statusCheck[j] = document.getElementsByClassName("statusCheck")[j].value;
     batasP[j] = parseInt(document.getElementsByClassName("batasP")[j].innerHTML.substring(0,2));
     selisih[j] =  moment.duration(moment(time[j], 'hh:mm').diff(nowTime)).asMinutes();
+
   }
   
   // console.log(statusCheck);
@@ -293,7 +296,13 @@
   for (var i = 0; i < row.length; i++) {
     console.log(selisih[i]*(-1));
 
-    if ((selisih[i]*(-1)) > batasP[i] && statusCheck[i] == "0" && hari[i] == hariSekarang) {
+    if((selisih[i]*(-1)) > 0 && (selisih[i]*(-1)) < batasP[i] && statusCheck[i] == "0" && hari[i] == hariSekarang){
+
+      f[i] = document.getElementsByClassName('hasilku')[i];
+      f[i].style.backgroundColor = (f[i].style.backgroundColor == 'mediumseagreen' ? '' : 'mediumseagreen');
+    }
+
+    else if ((selisih[i]*(-1)) > batasP[i] && statusCheck[i] == "0" && hari[i] == hariSekarang) {
       // cJumlah++;
       // console.log((selisih[i]*(-1)) +" > "+batasP[i]);
       // row[i].style.backgroundColor = "red";
@@ -319,7 +328,7 @@
        // }, 1000); 
        // })(i)
 
-       f[i].style.backgroundColor = (f[i].style.backgroundColor == 'tomato' ? '' : 'tomato');
+       f[i].style.backgroundColor = (f[i].style.backgroundColor == 'yellow' ? '' : 'yellow');
     }
   }
   console.log(cJumlah);
