@@ -92,7 +92,13 @@
         <td class="time"><?php echo $checklist['Jam']; ?></td>
         <td class="batasP"><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
         <td><?php echo $checklist['NamaChecklist']; ?></td>
-        <td><?php echo $checklist['NamaPIC'] ?> </td> 
+        <td>
+          <?php if($checklist['NIKP'] == 0){ ?>
+              <?php echo $checklist['NamaPIC']; ?>
+            <?php } else { ?>
+              <?php echo $picPengganti[$temp]['NamaP'] ?>
+            <?php } ?>
+        </td> 
         <td>
           <?php 
             $nInfo = NULL;
