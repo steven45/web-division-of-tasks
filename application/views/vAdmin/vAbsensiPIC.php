@@ -40,7 +40,6 @@
             <input type="hidden" name="jumlahAbsensi" value="<?php echo $jumlah ?>"> 
             <?php foreach ($absensi as $absensi) { ?>
             <?php if ($absensi['Status'] == 'Enabled' ) { ?>
-            <input type="hidden" name="<?php echo 'NIKPengganti'.$i; ?>" value ="155150200111246">
             <input type="hidden" name="<?php echo 'NIKSebenarnya'.$i; ?>" value ="<?php echo $absensi['NIK'] ?>">
             <input type="hidden" name="<?php echo 'IDHarian'.$i; ?>" value ="<?php echo $absensi['IDHarian']; ?>">
             <tr>
@@ -50,7 +49,7 @@
               <td><?php echo $absensi['Jam'] ?></td>
               <td><?php echo $absensi['Hari'] ?></td>
               <td class="absensi">
-               
+
                 <select class="<?php echo "hadir".$i ?>" target="<?php echo $i ?>" name="<?php echo 'Kehadiran'.$i ?>" style="min-width: 10em; cursor: pointer;
                 word-wrap: break-word;
                 line-height: 1em;
@@ -82,29 +81,35 @@
               </select>
             </td>
             <td>
-              <select class="pengganti" id="<?php echo 'select'.$i ?>" style="min-width: 10em; cursor: pointer;
-                word-wrap: break-word;
-                line-height: 1em;
-                white-space: normal;
-                outline: 0;
-                -webkit-transform: rotateZ(0deg);
-                transform: rotateZ(0deg);
-                min-width: 14em;
-                min-height: 2.71428571em;
-                background: #FFFFFF;
-                display: inline-block;
-                padding: 0.78571429em 2.1em 0.78571429em 1em;
-                color: rgba(0, 0, 0, 0.87);
-                -webkit-box-shadow: none;
-                box-shadow: none;
-                border: 1px solid rgba(34, 36, 38, 0.15);
-                border-radius: 0.28571429rem;
-                -webkit-transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
-                transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
-                transition: box-shadow 0.1s ease, width 0.1s ease;
-                transition: box-shadow 0.1s ease, width 0.1s ease, -webkit-box-shadow 0.1s ease;">
-                <option value="0">Vriza</option>
-                <option value="1">Wahyu</option>
+              <select name="<?php echo 'NIKPengganti'.$i ?>" class="pengganti" id="<?php echo 'select'.$i ?>" style="min-width: 10em; cursor: pointer;
+              word-wrap: break-word;
+              line-height: 1em;
+              white-space: normal;
+              outline: 0;
+              -webkit-transform: rotateZ(0deg);
+              transform: rotateZ(0deg);
+              min-width: 14em;
+              min-height: 2.71428571em;
+              background: #FFFFFF;
+              display: inline-block;
+              padding: 0.78571429em 2.1em 0.78571429em 1em;
+              color: rgba(0, 0, 0, 0.87);
+              -webkit-box-shadow: none;
+              box-shadow: none;
+              border: 1px solid rgba(34, 36, 38, 0.15);
+              border-radius: 0.28571429rem;
+              -webkit-transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
+              transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
+              transition: box-shadow 0.1s ease, width 0.1s ease;
+              transition: box-shadow 0.1s ease, width 0.1s ease, -webkit-box-shadow 0.1s ease;">
+              <?php for ($j=0; $j < count($pic[$i]); $j++) { ?>
+                <!-- <?php if ($absensi['NIKP'] == '0') { ?>
+                  <option>Pilih PIC Pengganti</option>
+                <?php } else{ ?>
+                  <option value="<?php echo $absensi['NIKP'] ?>"><?php echo $absensi['NIKP'] ?></option>
+                <?php } ?> -->
+                <option value="<?php echo $pic[$i][$j]["NIK"]; ?>"><?php echo $pic[$i][$j]["NamaPIC"]; ?></option>
+              <?php } ?>
                 <!-- <?php if ($absensi['Kehadiran'] == "Hadir") { ?>
                 <option value="<?php echo $absensi['Kehadiran']; ?>"><?php echo $absensi['Kehadiran']; ?></option>
                 <option value="Tidak Hadir">Tidak Hadir</option>
@@ -143,9 +148,9 @@
     </tbody>
     <tfoot class="full-width">
       <tr>
-        
+
         <th colspan="9">
-          
+
           <button class="ui right floated blue small button" style="margin-top: 5px;">
             <i class="save icon"></i>Simpan
           </button>
@@ -165,10 +170,10 @@
 </div>
 
 <script>
-jQuery(function() {
+  jQuery(function() {
 
-  jQuery('.pengganti').hide();
-  var d = document.getElementsByClassName("absensi").length;
+    jQuery('.pengganti').hide();
+    var d = document.getElementsByClassName("absensi").length;
   // console.log(d);
   for (var i = 0; i < d; i++){
     console.log(i +" = "+ $('.hadir'+i).val());

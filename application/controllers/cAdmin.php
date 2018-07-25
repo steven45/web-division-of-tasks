@@ -817,9 +817,13 @@ class cAdmin extends CI_Controller {
 			$picSebenarnya = $this->mAdmin->getPIC($NIKSebenarnya);
 			$picPengganti = $this->mAdmin->getPIC($NIKPengganti);
 
+			// echo $id[$i]." = ".$IDHarian ."<br>";
+			// echo $hadir[$i]." = ".$Kehadiran ."<br>";
+			// echo $NIKP[$i]." = ".$NIKPengganti ."<br>";
+			// echo $NIKS[$i]." = ".$NIKSebenarnya ."<br><br>";
 			$temp = 0;
 			foreach ($data['checklist'] as $checklist) {
-				if ($absensi[0]['Shift']  == '3') {
+				if ($absensi[0]['Shift']  == '3' AND $NIKPengganti != NULL) {
 					$hariNext = NULL;
 					switch ($absensi[0]['Hari']) {
 						case 'Senin':
@@ -927,7 +931,8 @@ class cAdmin extends CI_Controller {
 						$checklist['Jam']     == '16:00') AND 
 						$checklist['NamaPIC'] == $absensi[0]['NamaPIC'] AND 
 						$absensi[0]['Shift'] == '1' AND 
-						$absensi[0]['Hari']   == $checklist['Hari']) {
+						$absensi[0]['Hari']   == $checklist['Hari'] AND 
+						$NIKPengganti != NULL) {
 						if ($Kehadiran == 'Tidak Hadir') {
 							$set = array(
 								'NIKP' => $NIKPengganti
@@ -953,7 +958,7 @@ class cAdmin extends CI_Controller {
 						$checklist['Jam']     == '21:00') AND 
 						$checklist['NamaPIC'] == $absensi[0]['NamaPIC'] AND 
 						$absensi[0]['Shift'] == '2' AND 
-						$absensi[0]['Hari']   == $checklist['Hari']) {
+						$absensi[0]['Hari']   == $checklist['Hari'] AND $NIKPengganti != NULL) {
 						if ($Kehadiran == 'Tidak Hadir') {
 							$set = array(
 								'NIKP' => $NIKPengganti
