@@ -111,12 +111,7 @@
         $(this).toggle($(this).text().toLowerCase().indexOf(kalender) > -1);
       });
     }); 
-
   }); 
-
-
-
-
   </script>
 
 
@@ -196,7 +191,6 @@
 
           </div>
         </div>
-        
 
         <a href="<?php echo site_url('admin/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
           <div class="item" style="margin-top: 3px ">

@@ -39,7 +39,9 @@
             <?php $jumlah = count($absensi); ?>
             <input type="hidden" name="jumlahAbsensi" value="<?php echo $jumlah ?>"> 
             <?php foreach ($absensi as $absensi) { ?>
-            <?php if ($absensi['Status'] == 'Enabled' ) { ?> 
+            <?php if ($absensi['Status'] == 'Enabled' ) { ?>
+            <input type="hidden" name="<?php echo 'NIKPengganti'.$i; ?>" value ="155150200111246">
+            <input type="hidden" name="<?php echo 'NIKSebenarnya'.$i; ?>" value ="<?php echo $absensi['NIK'] ?>">
             <input type="hidden" name="<?php echo 'IDHarian'.$i; ?>" value ="<?php echo $absensi['IDHarian']; ?>">
             <tr>
               <td><?php echo $absensi['NIK'] ?></td>
@@ -128,7 +130,7 @@
           </a>
         </td>
         <td>
-          <a href="<?php echo site_url($edit) ;?>" class="ui basic small red button">
+          <a href="<?php echo site_url("admin/hapusabsensi/".$absensi['IDHarian']) ;?>" class="ui basic small red button" onClick="return confirm('Apa anda yakin ingin menghapus absensi? ?');">
             <i class="icon trash"></i>
             Hapus
           </a>

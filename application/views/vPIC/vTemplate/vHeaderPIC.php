@@ -21,14 +21,14 @@
             "pagingType": "full_numbers"
           } );
         } );
-    </script> -->
-  <script type="text/javascript">
-    $(document).ready(function() 
-    { 
-        $('table').tablesort(); 
-    } 
-    ); 
-  </script>
+      </script> -->
+      <script type="text/javascript">
+        $(document).ready(function() 
+        { 
+          $('table').tablesort(); 
+        } 
+        ); 
+      </script>
 
   <!-- <script>
     $(document).ready(function()
@@ -45,42 +45,41 @@
 
  <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" /><script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
-  <script type="text/javascript">
-    $(document).ready(function() 
-    { 
-    $('.ui.dropdown').dropdown();
-    } 
-    ); 
-  </script>
+      <script type="text/javascript">
+        $(document).ready(function() 
+        { 
+          $('.ui.dropdown').dropdown();
+        } 
+        ); 
+      </script>
 
-  <!-- Javascript Untuk Filter Hari -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-  <script>
-  $(document).ready(function(){
+      <!-- Javascript Untuk Filter Hari -->
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+      <script>
+        $(document).ready(function(){
 
-    var day = $("#hari option:selected").val().toLowerCase();
-    $("#hasil tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(day) > -1);
+          var day = $("#hari option:selected").val().toLowerCase();
+          $("#hasil tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(day) > -1);
 
-    });
-    $("select#hari").change(function(){
-      var hari = $("#hari option:selected").val().toLowerCase();
-      var jumlah = document.getElementById("hasil").getElementsByTagName("tr").length;
+          });
+          $("select#hari").change(function(){
+            var hari = $("#hari option:selected").val().toLowerCase();
+            var jumlah = document.getElementById("hasil").getElementsByTagName("tr").length;
 
-      $("#hasil tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(hari) > -1)
-      });
-    });
-  });
-  </script>
+            $("#hasil tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(hari) > -1)
+            });
+          });
+        });
+      </script>
 
-  <title>
-    <?php echo $judul; ?>
-  </title>
-</head>
+      <title>
+        <?php echo $judul; ?>
+      </title>
+    </head>
 
 <body style="background-color: #B0E0E6">
-  <!-- Header -->
     <div class="ui top fixed inverted pointing menu">
       <div class="header item">
         <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
@@ -90,25 +89,25 @@
         <div class="ui icon">
           <i class="home icon"></i>
           Dashboard</div>
-      </a>
-      <a class="item" href="<?php echo site_url('pic/checklist'); ?>">
-        <div class="ui icon">
-          <i class="check square icon"></i>
-        Checklist</div>
-      </a>
-      <a class="item" href="<?php echo site_url('pic/absensi'); ?>">
-        <div class="ui icon">
-          <i class="user icon"></i>    
-            Absensi PIC</div>
-          </a>
+        </a>
+        <a class="item" href="<?php echo site_url('pic/checklist'); ?>">
+          <div class="ui icon">
+            <i class="check square icon"></i>
+          Checklist</div>
+        </a>
+        <a class="item" href="<?php echo site_url('pic/absensi'); ?>">
+          <div class="ui icon">
+            <i class="user icon"></i>    
+          Absensi PIC</div>
+        </a>
 
         
-      <div class="right menu">
-        <div class="ui pointing dropdown link item">
-          <span class="text">
+        <div class="right menu">
+          <div class="ui pointing dropdown link item">
+            <span class="text">
 
-          Notifications</span>
-          <div class="ui small label">1</div>
+            Notifications</span>
+            <div class="ui small label">1</div>
             <div class="menu">
               <div class="header">
                 <i class= "bell icon"></i>
@@ -125,20 +124,20 @@
                     <a class="header">Semantic-Org/Semantic-UI-Docsssss
                     </a>
                     <div class="description">Updated 22 mins ago sjjsak
-              </div>
+                    </div>
                   </div>
                 </div>
               </div>
               
             </div>
-        </div>
-      
-        <!-- <a class="item" href="<?php echo site_url('pic/ubahPassword'); ?>">
-        <i class="cog icon"></i>Setting -->
-     
-    </div>
+          </div>
 
-       <form method="POST" action="<?php echo site_url('pic/ubahPassword'); ?>">
+        <!-- <a class="item" href="<?php echo site_url('pic/ubahPassword'); ?>">
+          <i class="cog icon"></i>Setting -->
+
+        </div>
+
+        <form method="POST" action="<?php echo site_url('pic/ubahPassword'); ?>">
           <input type="hidden" name="NIK" value="<?php echo($_SESSION['nik']) ?>">
           <div class="item" style="align-items: center; margin-top: 3px ">
             <button class="ui grey button">
@@ -158,5 +157,6 @@
       </div>
     </div>
     </div>
-<br><br><br><br><br>
+  </div>
+  <br><br><br><br><br>
 
