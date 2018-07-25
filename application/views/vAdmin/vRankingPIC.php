@@ -7,10 +7,10 @@
         var myChart = new Chart(chartpic, {
             type: 'line',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: ["Panji", "Vriza", "Barbara", "Sarah", "Sonya", "Wahyu", "Yuli", "Evangelista", "Saputra", "Hutagaol", "Bambang"],
                 datasets: [{
                     label: 'Ranking PIC',
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: [12, 19, 23, 5, 30, 3, 18, 10, 4, 31, 40],
                     // backgroundColor: [
                     //     'rgba(255, 99, 132, 0.2)',
                     //     'rgba(54, 162, 235, 0.2)',
