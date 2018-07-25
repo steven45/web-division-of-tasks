@@ -80,6 +80,7 @@
     </head>
 
 <body style="background-color: #B0E0E6">
+<!-- <body style="background-image: url(<?php echo base_url('assets/images/square.png'); ?>);"> -->
     <div class="ui top fixed inverted pointing menu">
       <div class="header item">
         <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">

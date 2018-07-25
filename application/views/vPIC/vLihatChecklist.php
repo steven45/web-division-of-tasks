@@ -86,9 +86,10 @@
           }
         }
       ?>
-      <input type="hidden"  class="statusCheck" value="<?php echo $checklist['StatusCheck'] ?>">
+      
         <td><?php echo $nomor[$temp] ; $no = $no+1;?></td>
          <td class="hari"><?php echo $checklist['Hari']; ?></td>
+         <input type="hidden"  class="statusCheck" value="<?php echo $checklist['StatusCheck'] ?>">
         <td class="time"><?php echo $checklist['Jam']; ?></td>
         <td class="batasP"><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
         <td><?php echo $checklist['NamaChecklist']; ?></td>
