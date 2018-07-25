@@ -62,6 +62,7 @@
 
   <input type="hidden" name="NamaChecklist" placeholder="Nama Checklist" value="<?php echo $checklist['NamaChecklist']; ?>">
   <input type="hidden" name="IDChecklist" placeholder="Nama Checklist" value="<?php echo $checklist['IDChecklist']; ?>">
+  <input type="hidden" name="Hari" placeholder="Nama Checklist" value="<?php echo $checklist['Hari']; ?>">
 
   <div class="ui center aligned basic segment">
     <button class="ui blue button" type="submit">

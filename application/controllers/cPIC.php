@@ -112,7 +112,22 @@ class cPIC extends CI_Controller {
 			$nJumlah[$checklist['Hari']] = 0;
 		}
 		$key = array_keys($nJumlah);
+		$no = 0;
 		foreach ($data['checklist'] as $checklist ) {
+			
+			//Menyimpan PIC Pengganti jika ada
+			if ($checklist['NIKP'] == '0') {
+				$picPengganti[$no]['NIKP'] = '0';
+				$picPengganti[$no]['NamaP'] = '0';	
+			}
+			else{
+				$picP = $this->mPIC->getDaftarPIC($checklist['NIKP']);
+				// var_dump($picP)
+				$picPengganti[$no]['NIKP'] = $checklist['NIKP'];
+				$picPengganti[$no]['NamaP'] = $picP['NamaPIC'];	
+			}
+			$no = $no+1; //Akhir Menyimpan pengganti
+
 			for ($i=0; $i < count($key); $i++) { 
 				if ($checklist['Hari'] == $key[$i]) {
 					$nJumlah[$checklist['Hari']] = $nJumlah[$checklist['Hari']] +1;
@@ -129,6 +144,7 @@ class cPIC extends CI_Controller {
 		}
 
 		$data['nomor'] = $nomor;
+		$data['picPengganti'] = $picPengganti;
 		// $data['nomor'] = $nJumlah;
 		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
 		$this->load->view('vPIC/vLihatChecklist');

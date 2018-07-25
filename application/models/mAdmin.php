@@ -79,7 +79,7 @@ class mAdmin extends CI_Model
             $query = $this->db->order_by('c.Hari','ASC');
             $query = $this->db->order_by('c.NamaChecklist','ASC');
             $query = $this->db->order_by('c.Jam','ASC');
-            $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.Hari,c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status, c.BatasPengecekan, c.StatusCheck');
+            $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.Hari,c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status, c.BatasPengecekan, c.StatusCheck, c.NIKP');
              $query = $this->db->from('checklist c');
              $query = $this->db->join('pic p','p.NIK=c.NIK');
              $query = $this->db->get();
@@ -98,12 +98,13 @@ class mAdmin extends CI_Model
         return  $this->db->query($query)->row_array();
     }
 
-    public function editChecklist($table, $data, $IDChecklist, $namaChecklist, $jam)
+    public function editChecklist($table, $data, $IDChecklist, $namaChecklist, $jam, $batasPengecekan, $hari)
     {
         $nJam = substr($jam, 0,2);
-        $query = "SELECT * FROM $table WHERE `NamaChecklist` = '$namaChecklist' AND `Jam` = $jam ";
+        $query = "SELECT * FROM $table WHERE `NamaChecklist` = '$namaChecklist' AND `Jam` = $jam AND `BatasPengecekan` = '$batasPengecekan' AND `Hari` = '$hari'";
         $hasil =  $this->db->query($query)->row_array();
 
+        // var_dump($hasil);
         if ($hasil['IDChecklist'] != $IDChecklist AND $hasil != NULL) {
             return "0";
         }
@@ -222,8 +223,7 @@ class mAdmin extends CI_Model
 
     public function getPenggantiPIC()
     {
-        $query = $this->db->order_by('c.Hari','ASC');
-        $query = $this->db->order_by('c.Jam','ASC');
+        $query = $this->db->order_by('p.Waktu','ASC');
         $query = $this->db->order_by('c.NamaChecklist','ASC');
         $query = $this->db->select('c.Jam, c.Hari, c.NamaChecklist, p.NamaPICS, p.NamaPICP, p.Waktu');
          $query = $this->db->from('penggantipic p');
