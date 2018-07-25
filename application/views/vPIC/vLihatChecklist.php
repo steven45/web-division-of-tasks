@@ -280,6 +280,7 @@
     statusCheck[j] = document.getElementsByClassName("statusCheck")[j].value;
     batasP[j] = parseInt(document.getElementsByClassName("batasP")[j].innerHTML.substring(0,2));
     selisih[j] =  moment.duration(moment(time[j], 'hh:mm').diff(nowTime)).asMinutes();
+    
   }
   
   // console.log(statusCheck);
@@ -300,7 +301,16 @@
   for (var i = 0; i < row.length; i++) {
     console.log(selisih[i]*(-1));
 
-    if ((selisih[i]*(-1)) > batasP[i] && statusCheck[i] == "0" && hari[i] == hariSekarang) {
+    if ((selisih[i]*(-1)) > 0 && (selisih[i]*(-1)) < batasP[i] && statusCheck[i] == "0" && hari[i] == hariSekarang) {
+      f[i] = document.getElementsByClassName('hasilku')[i];
+
+       console.log(f[i]);
+     
+
+       f[i].style.backgroundColor = (f[i].style.backgroundColor == 'green' ? '' : 'green');
+     }
+
+    else if ((selisih[i]*(-1)) > batasP[i] && statusCheck[i] == "0" && hari[i] == hariSekarang) {
       // cJumlah++;
       // console.log((selisih[i]*(-1)) +" > "+batasP[i]);
       // row[i].style.backgroundColor = "red";
