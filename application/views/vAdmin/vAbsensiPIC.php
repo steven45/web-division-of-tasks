@@ -102,6 +102,8 @@
               transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
               transition: box-shadow 0.1s ease, width 0.1s ease;
               transition: box-shadow 0.1s ease, width 0.1s ease, -webkit-box-shadow 0.1s ease;">
+
+              <option value="" style="color: blue">Pilih :</option>
               <?php for ($j=0; $j < count($pic[$i]); $j++) { ?>
                 <!-- <?php if ($absensi['NIKP'] == '0') { ?>
                   <option>Pilih PIC Pengganti</option>

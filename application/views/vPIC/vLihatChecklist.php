@@ -335,7 +335,7 @@
        // }, 1000); 
        // })(i)
 
-       f[i].style.backgroundColor = (f[i].style.backgroundColor == 'yellow' ? '' : 'yellow');
+       f[i].style.backgroundColor = (f[i].style.backgroundColor == 'gold' ? '' : 'gold');
     }
   }
   console.log(cJumlah);

@@ -240,6 +240,7 @@ class cAdmin extends CI_Controller {
 
 					$data = array(
 						'NIK' => '123456',
+						'NIKP' => '0',
 						'Hari' => $hari[$j],
 						'Info' => $target_file,
 						'NamaChecklist' => $namaChecklist,
@@ -283,6 +284,7 @@ class cAdmin extends CI_Controller {
 					for ($i=0; $i < count($nJam); $i++) { 
 						$data = array(
 							'NIK' => '123456',
+							'NIKP' => '0',
 							'Hari' => $hari[$j],
 							'Info' => $target_file,
 							'NamaChecklist' => $namaChecklist,
@@ -859,12 +861,12 @@ class cAdmin extends CI_Controller {
 							);
 							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
 
-							// $dataPengganti = array(
-							// 	'IDChecklist' => $checklist['IDChecklist'],
-							// 	'NamaPICS' => $picSebenarnya['NamaPIC'],
-							// 	'NamaPICP' => $picPengganti['NamaPIC']
-							// );
-							// $this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
+							$dataPengganti = array(
+								'IDChecklist' => $checklist['IDChecklist'],
+								'NamaPICS' => $picSebenarnya['NamaPIC'],
+								'NamaPICP' => $picPengganti['NamaPIC']
+							);
+							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
 						else {
 							$set = array(
@@ -896,12 +898,12 @@ class cAdmin extends CI_Controller {
 							);
 							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
 
-							// $dataPengganti = array(
-							// 	'IDChecklist' => $checklist['IDChecklist'],
-							// 	'NamaPICS' => $picSebenarnya['NamaPIC'],
-							// 	'NamaPICP' => $picPengganti['NamaPIC']
-							// );
-							// $this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
+							$dataPengganti = array(
+								'IDChecklist' => $checklist['IDChecklist'],
+								'NamaPICS' => $picSebenarnya['NamaPIC'],
+								'NamaPICP' => $picPengganti['NamaPIC']
+							);
+							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
 						else {
 							$set = array(
@@ -971,6 +973,13 @@ class cAdmin extends CI_Controller {
 								'NIKP' => $NIKPengganti
 							);
 							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
+
+							$dataPengganti = array(
+								'IDChecklist' => $checklist['IDChecklist'],
+								'NamaPICS' => $picSebenarnya['NamaPIC'],
+								'NamaPICP' => $picPengganti['NamaPIC']
+							);
+							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
 						else {
 							$set = array(
