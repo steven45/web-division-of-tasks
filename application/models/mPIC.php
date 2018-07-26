@@ -76,13 +76,13 @@ class mPIC extends CI_Model
             return '1';
     }
 
-    public function ubahStatusCheck($IDChecklist)
+    public function ubahStatusCheck($IDChecklist, $status)
     {
         $statusCheck = array(
-                'StatusCheck' => '1'
+                'StatusCheck' => $status
             );
             
-        $query = "UPDATE `checklist` SET `StatusCheck` = '1' WHERE `checklist`.`IDChecklist` = $IDChecklist;";
+        $query = "UPDATE `checklist` SET `StatusCheck` = $status WHERE `checklist`.`IDChecklist` = $IDChecklist;";
         $this->db->query($query);
     }
 
