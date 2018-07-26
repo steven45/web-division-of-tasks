@@ -163,7 +163,7 @@ class cPIC extends CI_Controller {
 		$IDChecklist = $this->input->post('IDChecklist');
 		$namaPIC = $this->input->post('NamaPIC');
 		$namaChecklist = $this->input->post('NamaChecklist');
-		$namaChecklistSebenarnya = $this->input->post('NamaChecklistSebenarnya');
+		$namaPICSebenarnya = $this->input->post('NamaPICSebenarnya');
 		$jam = $this->input->post('Jam');
 		$info = $this->input->post('Info');
 		$status = $this->input->post('Status');
@@ -173,7 +173,7 @@ class cPIC extends CI_Controller {
 		$data = array(
 			'NamaPIC' => $namaPIC,
 			'NamaChecklist' => $namaChecklist,
-			'PICCek' => $namaChecklistSebenarnya,
+			'PICCek' => $namaPICSebenarnya,
 			'Jam' => $jam,
 			'Info' => $info,
 			'Status' => $status,
@@ -184,13 +184,13 @@ class cPIC extends CI_Controller {
 
 		// var_dump($IDChecklist);
 		//mengubah status checklist menjadi 1 supaya tidak bisa mengecek ulang
-		$this->mPIC->ubahStatusCheck($IDChecklist);
+		$this->mPIC->ubahStatusCheck($IDChecklist, "1");
 		
 		//Menyimpan di notifikasi
 		$notif = array(
 			'ForN' => 'admin',
 			'Waktu' => date("l, d-m-Y h:i:s a"),
-			'Isi' => $namaChecklistSebenarnya .' telah mengecek ' . $namaChecklist,
+			'Isi' => $namaPICSebenarnya .' telah mengecek ' . $namaChecklist,
 			'Status' => 'Belum'
 		);
 		$this->mPIC->notifikasi('notifikasi', $notif);
@@ -209,6 +209,55 @@ class cPIC extends CI_Controller {
 					alert('Sukses Mengupdate Pengecekan. ');
 					window.location.href = '" . base_url() . "pic/checklist';
 				</script>";
+		}
+	}
+
+	public function noChecklist()
+	{
+		// // header("Content-type:application/json");
+		// // $data['log']= $this->mAdmin->getLog();
+		// // echo json_encode($data);
+		$statusCheck = $this->input->post('statusCheck');
+		if ($statusCheck != '2') {
+		date_default_timezone_set('Asia/Jakarta');
+
+		$NIK = "-";
+		$IDChecklist = $this->input->post('IDChecklist');
+		$namaPIC = "-";
+		$namaChecklist = $this->input->post('NamaChecklist');
+		$namaPICSebenarnya = "-";
+		$jam = $this->input->post('Jam');
+		$info = $this->input->post('Info');
+		$status = "No Checked";
+		$keterangan = "-";
+		$hari = $this->input->post('Hari');
+
+		$data = array(
+			'NamaPIC' => $namaPIC,
+			'NamaChecklist' => $namaChecklist,
+			'PICCek' => $namaPICSebenarnya,
+			'Jam' => $jam,
+			'Info' => $info,
+			'Status' => $status,
+			'Keterangan' => $keterangan,
+			'Hari' => $hari
+		);
+		$hasil = $this->mPIC->doChecklist('log', $data);
+
+		// var_dump($IDChecklist);
+		//mengubah status checklist menjadi 1 supaya tidak bisa mengecek ulang
+		$this->mPIC->ubahStatusCheck($IDChecklist, "2");
+		
+		//Menyimpan di notifikasi
+		$notif = array(
+			'ForN' => 'admin',
+			'Waktu' => date("l, d-m-Y h:i:s a"),
+			'Isi' => $namaChecklist. "Tidak Dicek",
+			'Status' => 'Belum'
+		);
+		$this->mPIC->notifikasi('notifikasi', $notif);
+		
+		// echo "2";
 		}
 	}
 
