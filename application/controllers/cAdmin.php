@@ -250,6 +250,7 @@ class cAdmin extends CI_Controller {
 
 					$data = array(
 						'NIK' => '123456',
+						'NIKP' => '0',
 						'Hari' => $hari[$j],
 						'Info' => $target_file,
 						'NamaChecklist' => $namaChecklist,
@@ -293,6 +294,7 @@ class cAdmin extends CI_Controller {
 					for ($i=0; $i < count($nJam); $i++) { 
 						$data = array(
 							'NIK' => '123456',
+							'NIKP' => '0',
 							'Hari' => $hari[$j],
 							'Info' => $target_file,
 							'NamaChecklist' => $namaChecklist,
@@ -561,7 +563,7 @@ class cAdmin extends CI_Controller {
 			if ($imageFileType != 'txt') {
 				echo "<script type='text/javascript'>
 
-				alert('File yang anda masukkan bukan txt!!!');
+				alert('File yang anda masukkan bukan .txt!');
 				window.location.href = '" . base_url() . "admin/checklist';
 				</script>";
 			}
@@ -789,7 +791,7 @@ class cAdmin extends CI_Controller {
 		}
 		else{
 			echo "<script type='text/javascript'>
-			alert('Jadwal sudah ada !!!. ');
+			alert('Jadwal sudah ada!. ');
 			window.location.href = '" . base_url() . "admin/absensi';
 			</script>";
 		}
@@ -882,12 +884,12 @@ class cAdmin extends CI_Controller {
 							);
 							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
 
-							$dataPengganti = array(
-								'IDChecklist' => $checklist['IDChecklist'],
-								'NamaPICS' => $picPengganti['NamaPIC'],
-								'NamaPICP' => $picSebenarnya['NamaPIC']
-							);
-							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
+							// $dataPengganti = array(
+							// 	'IDChecklist' => $checklist['IDChecklist'],
+							// 	'NamaPICS' => $picPengganti['NamaPIC'],
+							// 	'NamaPICP' => $picSebenarnya['NamaPIC']
+							// );
+							// $this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
 
 					}
@@ -919,12 +921,12 @@ class cAdmin extends CI_Controller {
 							);
 							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
 
-							$dataPengganti = array(
-								'IDChecklist' => $checklist['IDChecklist'],
-								'NamaPICS' => $picPengganti['NamaPIC'],
-								'NamaPICP' => $picSebenarnya['NamaPIC']
-							);
-							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
+							// $dataPengganti = array(
+							// 	'IDChecklist' => $checklist['IDChecklist'],
+							// 	'NamaPICS' => $picPengganti['NamaPIC'],
+							// 	'NamaPICP' => $picSebenarnya['NamaPIC']
+							// );
+							// $this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
 					}
 				}
@@ -948,6 +950,13 @@ class cAdmin extends CI_Controller {
 								'NIKP' => $NIKPengganti
 							);
 							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
+
+							$dataPengganti = array(
+								'IDChecklist' => $checklist['IDChecklist'],
+								'NamaPICS' => $picSebenarnya['NamaPIC'],
+								'NamaPICP' => $picPengganti['NamaPIC']
+							);
+							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
 						else {
 							$set = array(
@@ -974,6 +983,13 @@ class cAdmin extends CI_Controller {
 								'NIKP' => $NIKPengganti
 							);
 							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
+
+							$dataPengganti = array(
+								'IDChecklist' => $checklist['IDChecklist'],
+								'NamaPICS' => $picSebenarnya['NamaPIC'],
+								'NamaPICP' => $picPengganti['NamaPIC']
+							);
+							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
 						else {
 							$set = array(
@@ -1067,12 +1083,99 @@ class cAdmin extends CI_Controller {
 	}
 
 	public function ranking()
-	{
+	{	
 		$data['judul'] = "Ranking PIC";
+		$data['pic'] = $this->mAdmin->getPIC();
+
+		$jumlahCek = [];
+		$jabatan = [];
+		$nilaiJabatan = [];
+		$lamaKerja = [];
+		$nilaiLamaKerja = [];
+		$checklist = [100, 60, 80, 60, 100, 80, 60, 60,80, 80, 80, 80, 60];
+		$jumlah = count($data['pic']);
+		$temp = 0;
+
+		foreach ($data['pic'] as $pic) {
+			$jumlahCek[$temp] = $pic['JumlahPengecekan'];
+			$jabatan[$temp] = $pic['Jabatan'];
+			$lamaKerja[$temp] = (date("Y")) - $pic['TahunMasuk'];
+			$temp = $temp+1;
+		}
+		
+		for ($i=0; $i < count($jabatan) ; $i++) { 
+			if($jabatan[$i] == 'Staff'){
+				$nilaiJabatan[$i] = 80;
+			}
+			else if($jabatan[$i] == 'Chief Leader'){
+				$nilaiJabatan[$i] = 100;
+			}
+		}
+
+		for ($j=0; $j < count($lamaKerja); $j++) { 
+			if ($lamaKerja[$j] < 4 ){ 
+				$nilaiLamaKerja[$j] = 40;
+			}
+			else if($lamaKerja[$j] < 7){
+				$nilaiLamaKerja[$j]= 55;
+				}
+			else if($lamaKerja[$j] < 10){
+				$nilaiLamaKerja[$j] = 70;
+			}
+			else{
+				$nilaiLamaKerja[$j] = 85;
+			}
+		}
+
+		//kriteria
+		$kriteria = ['Jumlah Pengecekan', 'Jabatan', 'Checklist', 'Masa Kerja'];
+		$bobot = [0.5, 0.15, 0.2, 0.15];
+		$hasilS = [];
+		$hasilV = [];
+		$jumlahS = 0;
+		$sort = [];
+
+		
+		for ($k=0; $k < count($data['pic']) ; $k++) { 
+			$hasilS[$k] = pow($jumlahCek[$k],$bobot[0])* pow($nilaiJabatan[$k],$bobot[1])* pow($checklist[$k],$bobot[2])* pow($nilaiLamaKerja[$k],$bobot[3]);
+
+				$jumlahS = $jumlahS + $hasilS[$k];		
+			}
+
+		for ($m=0; $m < count($data['pic']) ; $m++) { 
+			$hasilV[$m] = $hasilS[$m] / $jumlahS;
+			}
+
+
+
+		// 	$no = 0;
+		// foreach ($data['pic'] as $data ) {
+		// 	echo $data['NamaPIC']. "____";
+		// 	echo $data['Jabatan']."___";
+		// 	echo $jumlahCek[$no]. "____";
+		// 	echo $nilaiJabatan[$no]."____";
+		// 	echo $checklist[$no]. "____";
+		// 	echo $nilaiLamaKerja[$no]. "____";
+		// 	echo $hasilS[$no] . "<br> ";
+		// 	$no = $no+1;
+		// }
+		
+
+
+
+		
+
+		
+		// header("Content-type:application/json");
+		// echo json_encode($data['pic']);
+
+		
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vRankingPIC');
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
+
+
 
 	public function pergantian()
 	{

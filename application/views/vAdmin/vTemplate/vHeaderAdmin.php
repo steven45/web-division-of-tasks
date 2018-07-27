@@ -137,26 +137,34 @@
           <i class="home icon"></i>
           Dashboard</div>
         </a>
-        <a class="item" href="<?php echo site_url('admin/checklist'); ?>">
-          <div class="ui icon">
-            <i class="check square icon"></i>
-          Checklist</div>
-        </a>
+
+        <?php if ($_SESSION['nama'] == 'admin'): ?>
+          <a class="item" href="<?php echo site_url('admin/checklist'); ?>">
+            <div class="ui icon">
+              <i class="check square icon"></i>
+            Checklist</div>
+          </a>
+        <?php endif ?>
+
         <div class="ui dropdown item">
           <i class="user icon"></i>
           PIC
           <i class="dropdown icon"></i>
           <div class="menu">
+
+            <?php if ($_SESSION['nama'] == 'admin'): ?>
             <a class="item" href="<?php echo site_url('admin/pic'); ?>">
             Daftar PIC</a>
+            <?php endif ?>
+
             <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
             Absensi PIC</a>
+            
             <?php if ($_SESSION['nama'] == 'admin'): ?>
-              
             <a class="item" href="<?php echo site_url('admin/ranking'); ?>">
             Ranking PIC</a>
-            
             <?php endif ?>
+            
             <a class="item" href="<?php echo site_url('admin/pergantian'); ?>">
             Pergantian PIC</a>
           </div>

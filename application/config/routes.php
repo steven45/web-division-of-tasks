@@ -9,7 +9,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = 'cAdmin';
 $route['admin/validation'] = 'cAdmin/validation';
 $route['admin/beranda'] = 'cAdmin/lihatLog';
-$route['admin/berandaPIC'] = 'cAdmin'
+$route['admin/berandaPIC'] = 'cAdmin';
 $route['admin/keluar'] = 'cAdmin/keluar';
 
 //CRUD PIC

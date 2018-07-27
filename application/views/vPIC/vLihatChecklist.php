@@ -90,10 +90,12 @@
         <td><?php echo $nomor[$temp] ; $no = $no+1;?></td>
          <td class="hari"><?php echo $checklist['Hari']; ?></td>
          <input type="hidden"  class="statusCheck" value="<?php echo $checklist['StatusCheck'] ?>">
+         <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
+         <input class="info" type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
         <td class="time"><?php echo $checklist['Jam']; ?></td>
         <td class="batasP"><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
-        <td><?php echo $checklist['NamaChecklist']; ?></td>
-        <td>
+        <td class="namaChecklist"><?php echo $checklist['NamaChecklist']; ?></td>
+        <td class="namaPIC">
           <?php if($checklist['NIKP'] == 0){ ?>
               <?php echo $checklist['NamaPIC']; ?>
             <?php } else { ?>
@@ -133,10 +135,10 @@
 
               <form method="POST" action="<?php echo site_url('pic/docheck'); ?>">  
               <input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>">
-              <input type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
+              <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
               <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
               <input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">
-              <input type="hidden" name="NamaChecklistSebenarnya" value="<?php echo $_SESSION['NamaPIC'] ?>">
+              <input type="hidden" name="NamaPICSebenarnya" value="<?php echo $_SESSION['NamaPIC'] ?>">
               <input type="hidden" name="Jam" value="<?php echo $checklist['Jam'] ?>">
               <input type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
               <input type="hidden" name="Hari" value="<?php echo $checklist['Hari'] ?>">
@@ -170,10 +172,10 @@
 
               <form method="POST" action="<?php echo site_url('pic/docheck'); ?>">  
               <input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>">
-              <input type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
+              <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
               <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
               <input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">
-              <input type="hidden" name="NamaChecklistSebenarnya" value="<?php echo $_SESSION['NamaPIC'] ?>">
+              <input type="hidden" name="NamaPICSebenarnya" value="<?php echo $_SESSION['NamaPIC'] ?>">
               <input type="hidden" name="Jam" value="<?php echo $checklist['Jam'] ?>">
               <input type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
               <input type="hidden" name="Hari" value="<?php echo $checklist['Hari'] ?>">
@@ -217,7 +219,19 @@
   </div>
   </div>
 </div>
-
+<!-- <script type="text/javascript">
+  $(document).ready(function(){
+        $.post("<?php echo site_url('admin/validasitambahpic'); ?>",
+        {
+          NIK: "156",
+          NamaPIC: "Sarah",
+          Password : "123",
+          Divisi : "ITO",
+          Jabatan : "Boss",
+          TahunMasuk : "2020"
+        });
+  });
+</script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
 <script type="text/javascript">
   
@@ -239,8 +253,11 @@
   console.log(moment().format());
 
   var row = document.querySelectorAll("table#mytable>tbody#hasil>tr");
-  var blink = document.getElementById('hasil');
   var time = [];
+  var namaChecklist = [];
+  var idChecklist = [];
+  var namaPIC = [];
+  var info = [];
   var selisih = [];
   var batasP = [];
   var statusCheck = [];
@@ -272,30 +289,26 @@
   var x = document.getElementsByClassName("time");
   for(var j = 0; j < x.length; j++){
     time[j] =  document.getElementsByClassName("time")[j].innerHTML;
+    namaChecklist[j] =  document.getElementsByClassName("namaChecklist")[j].innerHTML;
     hari[j] =  document.getElementsByClassName("hari")[j].innerHTML;
     statusCheck[j] = document.getElementsByClassName("statusCheck")[j].value;
+    idChecklist[j] = document.getElementsByClassName("idChecklist")[j].value;
+    namaPIC[j] =  document.getElementsByClassName("namaPIC")[j].innerHTML;
+    info[j] = document.getElementsByClassName("info")[j].value;
     batasP[j] = parseInt(document.getElementsByClassName("batasP")[j].innerHTML.substring(0,2));
     selisih[j] =  moment.duration(moment(time[j], 'hh:mm').diff(nowTime)).asMinutes();
     
   }
   
-  // console.log(statusCheck);
-//   window.onload = function blink(){
-//   var f = document.getElementById('hasil');
-//    console.log(f);
-//    setInterval(function() {
-//       f.style.backgroundColor = (f.style.backgroundColor == 'red' ? '' : 'red');
-//    }, 1000);
-// }
   // console.log(row);
   // console.log(time);
   // console.log(selisih);
   // console.log(batasP);
-  console.log(hari);
+  // console.log(hari);
   var f = [];
   var cJumlah = 0;
   for (var i = 0; i < row.length; i++) {
-    console.log(selisih[i]*(-1));
+    // console.log(selisih[i]*(-1));
 
     if ((selisih[i]*(-1)) > 0 && (selisih[i]*(-1)) < batasP[i] && statusCheck[i] == "0" && hari[i] == hariSekarang) {
       f[i] = document.getElementsByClassName('hasilku')[i];
@@ -307,36 +320,50 @@
      }
 
     else if ((selisih[i]*(-1)) > batasP[i] && statusCheck[i] == "0" && hari[i] == hariSekarang) {
-      // cJumlah++;
-      // console.log((selisih[i]*(-1)) +" > "+batasP[i]);
-      // row[i].style.backgroundColor = "red";
-      // window.onload = function blink(){
-      // setInterval(function() {
-      // blink.style.backgroundColor = (blink.style.backgroundColor == 'green' ? '' : 'green');
-      // }, 1000);}
-
-      // window.onload = function blink(){
-      //   var f = document.getElementById('hasilku');
-      //    console.log(f);
-      //    setInterval(function() {
-      //       f.style.backgroundColor = (f.style.backgroundColor == 'red' ? '' : 'red');
-      //    }, 1000);
-      // }
 
       f[i] = document.getElementsByClassName('hasilku')[i];
 
-       console.log(f[i]);
-       // (function(i){
-       //  interval = setInterval(function() {
-       //    f[i].style.backgroundColor = (f[i].style.backgroundColor == 'tomato' ? '' : 'tomato');
-       // }, 1000); 
-       // })(i)
+       // console.log(f[i]);
+
 
        f[i].style.backgroundColor = (f[i].style.backgroundColor == 'gold' ? '' : 'gold');
     }
   }
-  console.log(cJumlah);
+  // console.log(cJumlah);
     
+
+  for (var i = 0; i < row.length; i++) {
+    if (hari[i] == hariSekarang) {
+      // console.log(jHariS);
+        jHariS = i+1;
+    }
+  }
+  console.log(jHariS);
+
+  for (var j = 0; j < row.length; j++) {
+    if (hari[j] == hariSekarang) {
+      console.log(j);
+      for (var k = j+1; k < jHariS; k++) {
+        f[j] = document.getElementsByClassName('hasilku')[j];
+        f[k] = document.getElementsByClassName('hasilku')[k];
+        console.log(hari[j]+" :: "+time[j]+" - "+ namaChecklist[j]+" == "+hari[k]+" :: "+time[k]+" - "+ namaChecklist[k]);
+        if (namaChecklist[j] == namaChecklist[k] && statusCheck[j] != "1" && f[j].style.backgroundColor == 'yellow') {
+          f[j].style.backgroundColor = 'tomato';
+          $.post("<?php echo site_url('pic/nocheck'); ?>",
+          {
+            statusCheck : statusCheck[j],
+            IDChecklist: idChecklist[j],
+            NamaChecklist: namaChecklist[j],
+            Jam : time[j],
+            Info : info[j],
+            Hari : hari[j],
+          }
+          );
+        }
+      } 
+    }
+  }
+
   }//Akhir Method myTimer
 
   
