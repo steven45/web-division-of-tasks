@@ -31,10 +31,10 @@ class cPIC extends CI_Controller {
 				'NamaPIC' => $cek['NamaPIC'],
 				'nik' => $NIK,
 				'status' => "login"
-				);
+			);
 
 			$this->session->set_userdata($data_session);
-		 	redirect(base_url("pic/beranda"));
+			redirect(base_url("pic/beranda"));
 		}
 		else{
 			$this->load->view('vPIC/vHomePIC.php');
@@ -81,28 +81,28 @@ class cPIC extends CI_Controller {
 		$date = date("N");
 		switch ($date) {
 			case '1':
-				$hari = 'Senin';
-				break;
+			$hari = 'Senin';
+			break;
 			case '2':
-				$hari = 'Selasa';
-				break;
+			$hari = 'Selasa';
+			break;
 			case '3':
-				$hari = 'Rabu';
-				break;
+			$hari = 'Rabu';
+			break;
 			case '4':
-				$hari = 'Kamis';
-				break;
+			$hari = 'Kamis';
+			break;
 			case '5':
-				$hari = 'Jumat';
-				break;
+			$hari = 'Jumat';
+			break;
 			break;
 			case '6':
-				$hari = 'Sabtu';
-				break;
+			$hari = 'Sabtu';
+			break;
 			break;
 			case '7':
-				$hari = 'Minggu';
-				break;
+			$hari = 'Minggu';
+			break;
 			break;
 		}
 		$data['hari'] = $hari;
@@ -170,23 +170,77 @@ class cPIC extends CI_Controller {
 		$keterangan = $this->input->post('Keterangan');
 		$hari = $this->input->post('Hari');
 
-		$data = array(
-			'NamaPIC' => $namaPIC,
-			'NamaChecklist' => $namaChecklist,
-			'PICCek' => $namaPICSebenarnya,
+		$lihat = array(
+			'Hari' => $hari,
 			'Jam' => $jam,
-			'Info' => $info,
-			'Status' => $status,
-			'Keterangan' => $keterangan,
-			'Hari' => $hari
+			'NamaChecklist' => $namaChecklist
 		);
-		$hasil = $this->mPIC->doChecklist('log', $data);
+
+		$lihatData = $this->mPIC->lihatDataLog('log', $lihat);
+		if ($lihatData != NULL) {
+			$tanggal = date("Y-m-d");
+			if (count($lihatData)== 1) {
+				// echo $tanggal;
+				// echo substr($lihatData[0]['Waktu'],0,10);
+				if ($tanggal != substr($lihatData[0]['Waktu'],0,10)) {
+					$data = array(
+						'NamaPIC' => $namaPIC,
+						'NamaChecklist' => $namaChecklist,
+						'PICCek' => $namaPICSebenarnya,
+						'Jam' => $jam,
+						'Info' => $info,
+						'Status' => $status,
+						'Keterangan' => $keterangan,
+						'Hari' => $hari
+					);
+					$hasil = $this->mPIC->doChecklist('log', $data);
+					// echo "JIKA DISINI MAKA DATANYA == 1 DAN DATANYA GA KEMBAR";
+				}
+			}
+			else{
+				$jumlah = 0;
+				foreach ($lihatData as $data) {
+					if ($tanggal != substr($lihatData[0]['Waktu'],0,10)) {
+						$jumlah = $jumlah + 1;
+					}
+				}
+				if ($jumlah == 0) {
+					$data = array(
+						'NamaPIC' => $namaPIC,
+						'NamaChecklist' => $namaChecklist,
+						'PICCek' => $namaPICSebenarnya,
+						'Jam' => $jam,
+						'Info' => $info,
+						'Status' => $status,
+						'Keterangan' => $keterangan,
+						'Hari' => $hari
+					);
+					$hasil = $this->mPIC->doChecklist('log', $data);
+				}
+				// echo "DATA LEBIH DARI 1, MAKA DATA AKAN DI CEK APAKAH ADA YANG SAMA";
+			}
+		}
+		else{
+			$data = array(
+				'NamaPIC' => $namaPIC,
+				'NamaChecklist' => $namaChecklist,
+				'PICCek' => $namaPICSebenarnya,
+				'Jam' => $jam,
+				'Info' => $info,
+				'Status' => $status,
+				'Keterangan' => $keterangan,
+				'Hari' => $hari
+			);
+			$hasil = $this->mPIC->doChecklist('log', $data);
+			echo "NULL COY";
+		}
+		
 
 		// var_dump($IDChecklist);
 		//mengubah status checklist menjadi 1 supaya tidak bisa mengecek ulang
 		$this->mPIC->ubahStatusCheck($IDChecklist, "1");
 		
-		//Menyimpan di notifikasi
+		// Menyimpan di notifikasi
 		$notif = array(
 			'ForN' => 'admin',
 			'Waktu' => date("l, d-m-Y h:i:s a"),
@@ -198,18 +252,10 @@ class cPIC extends CI_Controller {
 		//Menambahkan jumlah pengecekan pada PIC
 		$this->mPIC->tambahJumlah($NIK);
 
-		if ($hasil == 1) {
-			echo "<script type='text/javascript'>
-					alert('Sukses Melakukan Pengecekan.');
-					window.location.href = '" . base_url() . "pic/checklist';
-				</script>";
-		}
-		else{
-			echo "<script type='text/javascript'>
-					alert('Sukses Mengupdate Pengecekan. ');
-					window.location.href = '" . base_url() . "pic/checklist';
-				</script>";
-		}
+		echo "<script type='text/javascript'>
+		alert('Sukses Melakukan Pengecekan.');
+		window.location.href = '" . base_url() . "pic/checklist';
+		</script>";
 	}
 
 	public function noChecklist()
@@ -219,45 +265,112 @@ class cPIC extends CI_Controller {
 		// // echo json_encode($data);
 		$statusCheck = $this->input->post('statusCheck');
 		if ($statusCheck != '2') {
-		date_default_timezone_set('Asia/Jakarta');
+			date_default_timezone_set('Asia/Jakarta');
 
-		$NIK = "-";
-		$IDChecklist = $this->input->post('IDChecklist');
-		$namaPIC = "-";
-		$namaChecklist = $this->input->post('NamaChecklist');
-		$namaPICSebenarnya = "-";
-		$jam = $this->input->post('Jam');
-		$info = $this->input->post('Info');
-		$status = "No Checked";
-		$keterangan = "-";
-		$hari = $this->input->post('Hari');
+			$NIK = "-";
+			$IDChecklist = $this->input->post('IDChecklist');
+			$namaPIC = "-";
+			$namaChecklist = $this->input->post('NamaChecklist');
+			$namaPICSebenarnya = "-";
+			$jam = $this->input->post('Jam');
+			$info = $this->input->post('Info');
+			$status = "Not Checked";
+			$keterangan = "-";
+			$hari = $this->input->post('Hari');
 
-		$data = array(
-			'NamaPIC' => $namaPIC,
-			'NamaChecklist' => $namaChecklist,
-			'PICCek' => $namaPICSebenarnya,
-			'Jam' => $jam,
-			'Info' => $info,
-			'Status' => $status,
-			'Keterangan' => $keterangan,
-			'Hari' => $hari
-		);
-		$hasil = $this->mPIC->doChecklist('log', $data);
+			// $lihat = array(
+			// 	'Hari' => $hari,
+			// 	'Jam' => $jam,
+			// 	'NamaChecklist' => $namaChecklist
+			// );
+
+			// $lihatData = $this->mPIC->lihatDataLog('log', $lihat);
+			
+			// if ($lihatData != NULL) {
+			// 	$tanggal = date("Y-m-d");
+			// 	if (count($lihatData)== 1) {
+			// 	// echo $tanggal;
+			// 	// echo substr($lihatData[0]['Waktu'],0,10);
+			// 		if ($tanggal != substr($lihatData[0]['Waktu'],0,10)) {
+			// 			$data = array(
+			// 				'NamaPIC' => $namaPIC,
+			// 				'NamaChecklist' => $namaChecklist,
+			// 				'PICCek' => $namaPICSebenarnya,
+			// 				'Jam' => $jam,
+			// 				'Info' => $info,
+			// 				'Status' => $status,
+			// 				'Keterangan' => $keterangan,
+			// 				'Hari' => $hari
+			// 			);
+			// 			$hasil = $this->mPIC->doChecklist('log', $data);
+			// 		// echo "JIKA DISINI MAKA DATANYA == 1 DAN DATANYA GA KEMBAR";
+			// 		}
+			// 	}
+			// 	else{
+			// 		$jumlah = 0;
+			// 		foreach ($lihatData as $data) {
+			// 			if ($tanggal != substr($lihatData[0]['Waktu'],0,10)) {
+			// 				$jumlah = $jumlah + 1;
+			// 			}
+			// 		}
+			// 		if ($jumlah == 0) {
+			// 			$data = array(
+			// 				'NamaPIC' => $namaPIC,
+			// 				'NamaChecklist' => $namaChecklist,
+			// 				'PICCek' => $namaPICSebenarnya,
+			// 				'Jam' => $jam,
+			// 				'Info' => $info,
+			// 				'Status' => $status,
+			// 				'Keterangan' => $keterangan,
+			// 				'Hari' => $hari
+			// 			);
+			// 			$hasil = $this->mPIC->doChecklist('log', $data);
+			// 		}
+			// 	// echo "DATA LEBIH DARI 1, MAKA DATA AKAN DI CEK APAKAH ADA YANG SAMA";
+			// 	}
+			// }
+			// else{
+			// 	$data = array(
+			// 		'NamaPIC' => $namaPIC,
+			// 		'NamaChecklist' => $namaChecklist,
+			// 		'PICCek' => $namaPICSebenarnya,
+			// 		'Jam' => $jam,
+			// 		'Info' => $info,
+			// 		'Status' => $status,
+			// 		'Keterangan' => $keterangan,
+			// 		'Hari' => $hari
+			// 	);
+			// 	$hasil = $this->mPIC->doChecklist('log', $data);
+			// 	echo "NULL COY";
+			// }
+
+			$data = array(
+				'NamaPIC' => $namaPIC,
+				'NamaChecklist' => $namaChecklist,
+				'PICCek' => $namaPICSebenarnya,
+				'Jam' => $jam,
+				'Info' => $info,
+				'Status' => $status,
+				'Keterangan' => $keterangan,
+				'Hari' => $hari
+			);
+
+			$hasil = $this->mPIC->doChecklist('log', $data);
 
 		// var_dump($IDChecklist);
 		//mengubah status checklist menjadi 1 supaya tidak bisa mengecek ulang
-		$this->mPIC->ubahStatusCheck($IDChecklist, "2");
-		
+			$this->mPIC->ubahStatusCheck($IDChecklist, "2");
+
 		//Menyimpan di notifikasi
-		$notif = array(
-			'ForN' => 'admin',
-			'Waktu' => date("l, d-m-Y h:i:s a"),
-			'Isi' => $namaChecklist. "Tidak Dicek",
-			'Status' => 'Belum'
-		);
-		$this->mPIC->notifikasi('notifikasi', $notif);
-		
-		// echo "2";
+			$notif = array(
+				'ForN' => 'admin',
+				'Waktu' => date("l, d-m-Y h:i:s a"),
+				'Isi' => $namaChecklist. "Tidak Dicek",
+				'Status' => 'Belum'
+			);
+			$this->mPIC->notifikasi('notifikasi', $notif);
+
+			echo "2";
 		}
 	}
 
@@ -314,8 +427,8 @@ class cPIC extends CI_Controller {
 		$this->mPIC->validasiUbahPassword('pic', $data, $NIK);
 
 		echo "<script type='text/javascript'>
-					alert('Sukses Mengubah Password');
-					window.location.href = '" . base_url() . "pic/beranda';
-				</script>";
+		alert('Sukses Mengubah Password');
+		window.location.href = '" . base_url() . "pic/beranda';
+		</script>";
 	}
 }

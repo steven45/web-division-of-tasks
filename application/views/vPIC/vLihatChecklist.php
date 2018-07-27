@@ -1,20 +1,20 @@
 <div class="ui two column centered grid">
   <div class="column" style="width: auto;">
-  <div class="ui segment" style="border-radius: 1.285714rem">
+    <div class="ui segment" style="border-radius: 1.285714rem">
 
-    <div class="segment">
-      <div class="ui icon input" style="margin-left: 0px">
-        <input type="text" placeholder="Search..." id="pencarian">
-        <i class="circular search link icon"></i>
-      </div>
-      <h3 style="text-align: center; margin-top: -30px;">
-      <div class="ui icon">
-        <i class="tasks icon"></i>
-      Daftar Checklist 
-      </h3>
-      
-      </div>
-  <div class="ui divider"></div>
+      <div class="segment">
+        <div class="ui icon input" style="margin-left: 0px">
+          <input type="text" placeholder="Search..." id="pencarian">
+          <i class="circular search link icon"></i>
+        </div>
+        <h3 style="text-align: center; margin-top: -30px;">
+          <div class="ui icon">
+            <i class="tasks icon"></i>
+            Daftar Checklist 
+          </h3>
+
+        </div>
+        <div class="ui divider"></div>
   <!-- <div class= "ui field">
         <select name="state" id="maxRows" class="form-control" style="width:150px;">
                         <option value="5000">Show All</option>
@@ -28,112 +28,115 @@
                     </select>
                   </div> -->
 
-  <div class="field" style="margin-left: 600px; margin-top: 5px" >
-  <select class="ui right selection tiny dropdown item" id="hari" >
-      <!-- <option value="<?php echo $hari; ?>"><?php echo $hari; ?></option>         -->
-      <option value="<?php echo $hari ?>"><?php echo $hari ?></option>
-      <option value="Senin">Senin</option>
-      <option value="Selasa">Selasa</option>
-      <option value="Rabu">Rabu</option>
-      <option value="Kamis">Kamis</option>
-      <option value="Jumat">Jumat</option>
-      <option value="Sabtu">Sabtu</option>
-      <option value="Minggu">Minggu</option>
-    </select>
-  </div>
+                  <div class="field" style="margin-left: 600px; margin-top: 5px" >
+                    <select class="ui right selection tiny dropdown item" id="hari" >
+                      <!-- <option value="<?php echo $hari; ?>"><?php echo $hari; ?></option>         -->
+                      <option value="<?php echo $hari ?>"><?php echo $hari ?></option>
+                      <option value="Senin">Senin</option>
+                      <option value="Selasa">Selasa</option>
+                      <option value="Rabu">Rabu</option>
+                      <option value="Kamis">Kamis</option>
+                      <option value="Jumat">Jumat</option>
+                      <option value="Sabtu">Sabtu</option>
+                      <option value="Minggu">Minggu</option>
+                    </select>
+                  </div>
 
-  <table class="ui sortable celled table" id="mytable" class="display">
-    <thead>
-      <tr style="text-align: center">
-        <th class="sorted ascending">No</th>
-        <th>Hari</th>
-        <th >Jadwal</th>
-        <th>Batas Pengecekan</th>
-        <th >Nama Checklist</th>
-        <th>Nama PIC</th>
-        <th >Info Checklist</th>
-        <th >Check</th>
-        
-      </tr>
-    </thead>
-    <tbody id="hasil">
-      <?php $temp = 0; $no = 0; ?>
-      <?php foreach ($checklist as $checklist) { ?>
+                  <table class="ui sortable celled table" id="mytable" class="display">
+                    <thead>
+                      <tr style="text-align: center">
+                        <th class="sorted ascending">No</th>
+                        <th>Hari</th>
+                        <th >Jadwal</th>
+                        <th>Batas Pengecekan</th>
+                        <th >Nama Checklist</th>
+                        <th>Nama PIC</th>
+                        <th >Info Checklist</th>
+                        <th >Check</th>
+
+                      </tr>
+                    </thead>
+                    <tbody id="hasil">
+                      <?php $temp = 0; $no = 0; ?>
+                      <?php foreach ($checklist as $checklist) { ?>
 <!--       <?php if ($checklist['Status'] == $status) { ?>
       <?php if ($checklist['NamaPIC'] == $_SESSION['NamaPIC'] AND $checklist['StatusCheck'] == '1') { ?>
         <tr style="background-color: #75e2f2;">
       <?php } elseif( $checklist['StatusCheck'] != '1') { ?>
         <tr style="background-color: #95f080;">
-      <?php } ?> -->
+          <?php } ?> -->
 
-      <?php  
-        if ($checklist['Status'] == $status) {
-          if ($checklist['NamaPIC'] == $_SESSION['NamaPIC']) {
-            if ($checklist['StatusCheck'] == '1') {
-              echo '<tr style="background-color: #AFEEEE" class="hasilku">';
+          <?php  
+          if ($checklist['Status'] == $status) {
+            if ($checklist['NamaPIC'] == $_SESSION['NamaPIC']) {
+              if ($checklist['StatusCheck'] == '1') {
+                echo '<tr style="background-color: #AFEEEE" class="hasilku">';
+              }
+              else{
+                echo '<tr style="background-color: #e6ee6d" class="hasilku">';
+              }
             }
             else{
-              echo '<tr style="background-color: #e6ee6d" class="hasilku">';
+              if ($checklist['StatusCheck'] == '1') {
+                echo '<tr style="background-color: #AFEEEE" class="hasilku">';
+              }
+              else if ($checklist['StatusCheck'] == '2'){
+                echo '<tr style="background-color: tomato" class="hasilku">';
+              }
+              else{
+                echo '<tr class="hasilku">';
+              }
             }
           }
-          else{
-            if ($checklist['StatusCheck'] == '1') {
-              echo '<tr style="background-color: #AFEEEE" class="hasilku">';
-            }
-            else{
-              echo '<tr class="hasilku">';
-            }
-          }
-        }
-      ?>
-      
-        <td><?php echo $nomor[$temp] ; $no = $no+1;?></td>
-         <td class="hari"><?php echo $checklist['Hari']; ?></td>
-         <input type="hidden"  class="statusCheck" value="<?php echo $checklist['StatusCheck'] ?>">
-         <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
-         <input class="info" type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
-        <td class="time"><?php echo $checklist['Jam']; ?></td>
-        <td class="batasP"><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
-        <td class="namaChecklist"><?php echo $checklist['NamaChecklist']; ?></td>
-        <td class="namaPIC">
-          <?php if($checklist['NIKP'] == 0){ ?>
-              <?php echo $checklist['NamaPIC']; ?>
+          ?>
+
+          <td><?php echo $nomor[$temp] ; $no = $no+1;?></td>
+          <td class="hari"><?php echo $checklist['Hari']; ?></td>
+          <input type="hidden"  class="statusCheck" value="<?php echo $checklist['StatusCheck'] ?>">
+          <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
+          <input class="info" type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
+          <td class="time"><?php echo $checklist['Jam']; ?></td>
+          <td class="batasP"><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
+          <td class="namaChecklist"><?php echo $checklist['NamaChecklist']; ?></td>
+          <td class="namaPIC">
+            <?php if($checklist['NIKP'] == 0){ ?>
+            <?php echo $checklist['NamaPIC']; ?>
             <?php } else { ?>
-              <?php echo $picPengganti[$temp]['NamaP'] ?>
+            <?php echo $picPengganti[$temp]['NamaP'] ?>
             <?php } ?>
-        </td> 
-        <td>
-          <?php 
+          </td> 
+          <td>
+            <?php 
             $nInfo = NULL;
             $k = 0;
             $fh = fopen($checklist['Info'], 'r');
             while(!feof($fh)){
              $nInfo[$k] = fgets($fh);
              $k = $k +1;
-            }
-            
-          ?>
+           }
 
-          <a href="#" data-featherlight=" <?php echo '#bio-name'.$temp ?>">Lihat</a>
-            <div style="display:none;">
-              <div id="<?php echo 'bio-name'.$temp ?>">
-                <h3>Info Checklist</h3>
-                <div class="ui segment">
-                 <?php foreach ($nInfo as $info) {
-                    echo '<p>'.$info.'</p>';
-                  } ?> 
-                </div>
-              </div>
+           ?>
+
+           <a href="#" data-featherlight=" <?php echo '#bio-name'.$temp ?>">Lihat</a>
+           <div style="display:none;">
+            <div id="<?php echo 'bio-name'.$temp ?>">
+              <h3>Info Checklist</h3>
+              <div class="ui segment">
+               <?php foreach ($nInfo as $info) {
+                echo '<p>'.$info.'</p>';
+              } ?> 
             </div>
+          </div>
+        </div>
+      </td>
 
-        </td>
-        <?php if ($checklist['NamaPIC'] == $_SESSION['NamaPIC'] AND $checklist['StatusCheck'] == '0' AND $checklist['Hari'] == $hari) {?>
-          <td>
-          <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
-            <div style="display:none;">
-              <div id="<?php echo 'tampilKet'.$temp ?>">
+      <?php if ($checklist['NamaPIC'] == $_SESSION['NamaPIC'] AND $checklist['StatusCheck'] == '0' AND $checklist['Hari'] == $hari) {?>
+      <td class="docheck">
+        <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
+        <div style="display:none;">
+          <div id="<?php echo 'tampilKet'.$temp ?>">
 
-              <form method="POST" action="<?php echo site_url('pic/docheck'); ?>">  
+            <form method="POST" action="<?php echo site_url('pic/docheck'); ?>">  
               <input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>">
               <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
               <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
@@ -142,169 +145,157 @@
               <input type="hidden" name="Jam" value="<?php echo $checklist['Jam'] ?>">
               <input type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
               <input type="hidden" name="Hari" value="<?php echo $checklist['Hari'] ?>">
-                <h3>Status</h3>
-                <div class="ui form">
+              <h3>Status</h3>
+              <div class="ui form">
                 <select name="Status">
                   <option value="OK">OK</option>
                   <option value="Bad">Bad</option>
                 </select>
-                </div>
-                <h3>Keterangan</h3>
-                  <div class="ui form">
-                    <div class="field">
-                       <textarea name="Keterangan"></textarea>
-                    </div>
-                  </div>
-                  <br>
-                  <button class="ui right floated blue small button" >
-                    <i class="save icon"></i>Simpan
-                  </button>
-                </form>
               </div>
+              <h3>Keterangan</h3>
+              <div class="ui form">
+                <div class="field">
+                 <textarea name="Keterangan"></textarea>
+               </div>
+             </div>
+             <br>
+             <button class="ui right floated blue small button" >
+              <i class="save icon"></i>Simpan
+            </button>
+          </form>
+        </div>
+      </div>
+    </td>
+    <?php } else if($checklist['NamaPIC'] != $_SESSION['NamaPIC'] AND $checklist['StatusCheck'] == '0' AND $checklist['Hari'] == $hari){?>
+
+    <td class="docheck">
+      <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
+      <div style="display:none;">
+        <div id="<?php echo 'tampilKet'.$temp ?>">
+
+          <form method="POST" action="<?php echo site_url('pic/docheck'); ?>">  
+            <input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>">
+            <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
+            <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
+            <input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">
+            <input type="hidden" name="NamaPICSebenarnya" value="<?php echo $_SESSION['NamaPIC'] ?>">
+            <input type="hidden" name="Jam" value="<?php echo $checklist['Jam'] ?>">
+            <input type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
+            <input type="hidden" name="Hari" value="<?php echo $checklist['Hari'] ?>">
+            <h3>Status</h3>
+            <div class="ui form">
+              <select name="Status">
+                <option value="OK">OK</option>
+                <option value="Bad">Bad</option>
+              </select>
             </div>
-          </td>
-        <?php } else if($checklist['NamaPIC'] != $_SESSION['NamaPIC'] AND $checklist['StatusCheck'] == '0' AND $checklist['Hari'] == $hari){?>
+            <h3>Keterangan</h3>
+            <div class="ui form">
+              <div class="field">
+               <textarea name="Keterangan"></textarea>
+             </div>
+           </div>
+           <br>
+           <button class="ui right floated blue small button" onClick="return confirm('Perhatian!!! Bukan Jadwal Anda Untuk Mengecek !!! Apakah Anda Ingin Melanjutkan??');">
+            <i class="save icon"></i>Simpan
+          </button>
+        </form>
+      </div>
+    </div>
+  </td>
+  <?php } else { ?>
+    <td class="docheck"></td>
+  <?php } ?> 
+</tr> 
+<?php $temp = $temp + 1; ?>
+<?php } ?>
+<?php } ?>
+</tbody>
+<tfoot>
+  <th colspan="8">
 
-          <td>
-          <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
-            <div style="display:none;">
-              <div id="<?php echo 'tampilKet'.$temp ?>">
-
-              <form method="POST" action="<?php echo site_url('pic/docheck'); ?>">  
-              <input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>">
-              <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
-              <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
-              <input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">
-              <input type="hidden" name="NamaPICSebenarnya" value="<?php echo $_SESSION['NamaPIC'] ?>">
-              <input type="hidden" name="Jam" value="<?php echo $checklist['Jam'] ?>">
-              <input type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
-              <input type="hidden" name="Hari" value="<?php echo $checklist['Hari'] ?>">
-                <h3>Status</h3>
-                <div class="ui form">
-                <select name="Status">
-                  <option value="OK">OK</option>
-                  <option value="Bad">Bad</option>
-                </select>
-                </div>
-                <h3>Keterangan</h3>
-                  <div class="ui form">
-                    <div class="field">
-                       <textarea name="Keterangan"></textarea>
-                    </div>
-                  </div>
-                  <br>
-                  <button class="ui right floated blue small button" onClick="return confirm('Perhatian!!! Bukan Jadwal Anda Untuk Mengecek !!! Apakah Anda Ingin Melanjutkan??');">
-                    <i class="save icon"></i>Simpan
-                  </button>
-                </form>
-              </div>
-            </div>
-          </td>
-        <?php } else{ ?>
-          <td>Disabled</td>
-        <?php } ?>
-      </tr> 
-      <?php $temp = $temp + 1; ?>
-      <?php } ?>
-      <?php } ?>
-    </tbody>
-    <tfoot>
-        <th colspan="8">
-
-        </th>
-    </tfoot>
-  </table>
+  </th>
+</tfoot>
+</table>
   <!-- <div class="pagination-container">
             <nav>
                 <ul class="pagination"></ul>
             </nav>
-        </div> -->
- 
-  </div>
-  </div>
-</div>
-<!-- <script type="text/javascript">
-  $(document).ready(function(){
-        $.post("<?php echo site_url('admin/validasitambahpic'); ?>",
-        {
-          NIK: "156",
-          NamaPIC: "Sarah",
-          Password : "123",
-          Divisi : "ITO",
-          Jabatan : "Boss",
-          TahunMasuk : "2020"
-        });
-  });
-</script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
-<script type="text/javascript">
-  
-  var interval = setInterval(myTimer,1000);
+          </div> -->
 
-  function myTimer(){
-  var d = new moment.locale();
-  console.log(d);
-  var nowTime = moment();
-  var nowDay = moment().format('dddd');
-  var checkTime = moment('13:00', 'hh:mm');
-  var duration = moment.duration(checkTime.diff(nowTime));
+        </div>
+      </div>
+    </div>
 
-  console.log('now time', nowTime);
-  console.log('now day', nowDay);
-  console.log('check time', checkTime);
-  console.log('duration in hours', duration.asHours());
-  console.log('duration in minutes', duration.asMinutes());
-  console.log(moment().format());
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+    <script type="text/javascript">
 
-  var row = document.querySelectorAll("table#mytable>tbody#hasil>tr");
-  var time = [];
-  var namaChecklist = [];
-  var idChecklist = [];
-  var namaPIC = [];
-  var info = [];
-  var selisih = [];
-  var batasP = [];
-  var statusCheck = [];
-  var hari = [];
+      var interval = setInterval(myTimer,1000);
+
+      function myTimer(){
+        var d = new moment.locale();
+        console.log(d);
+        var nowTime = moment();
+        var nowDay = moment().format('dddd');
+        var checkTime = moment('13:00', 'hh:mm');
+        var duration = moment.duration(checkTime.diff(nowTime));
+
+        // console.log('now time', nowTime);
+        // console.log('now day', nowDay);
+        // console.log('check time', checkTime);
+        // console.log('duration in hours', duration.asHours());
+        // console.log('duration in minutes', duration.asMinutes());
+        // console.log(moment().format());
+
+        var row = document.querySelectorAll("table#mytable>tbody#hasil>tr");
+        var time = [];
+        var namaChecklist = [];
+        var idChecklist = [];
+        var namaPIC = [];
+        var info = [];
+        var selisih = [];
+        var batasP = [];
+        var statusCheck = [];
+        var hari = [];
 
 
-  if (nowDay == 'Sunday') {
-    var hariSekarang = "Minggu";
-  }
-  else if(nowDay == 'Monday'){
-    var hariSekarang = "Senin";
-  }
-  else if(nowDay == 'Tuesday'){
-    var hariSekarang = "Selasa";
-  }
-  else if(nowDay == 'Wednesday'){
-    var hariSekarang = "Rabu";
-  }
-  else if(nowDay == 'Thursday'){
-    var hariSekarang = "Kamis";
-  }
-  else if(nowDay == 'Friday'){
-    var hariSekarang = "Jumat";
-  }
-  else if(nowDay == 'Saturday'){
-    var hariSekarang = "Sabtu";
-  }
+        if (nowDay == 'Sunday') {
+          var hariSekarang = "Minggu";
+        }
+        else if(nowDay == 'Monday'){
+          var hariSekarang = "Senin";
+        }
+        else if(nowDay == 'Tuesday'){
+          var hariSekarang = "Selasa";
+        }
+        else if(nowDay == 'Wednesday'){
+          var hariSekarang = "Rabu";
+        }
+        else if(nowDay == 'Thursday'){
+          var hariSekarang = "Kamis";
+        }
+        else if(nowDay == 'Friday'){
+          var hariSekarang = "Jumat";
+        }
+        else if(nowDay == 'Saturday'){
+          var hariSekarang = "Sabtu";
+        }
 
 
-  var x = document.getElementsByClassName("time");
-  for(var j = 0; j < x.length; j++){
-    time[j] =  document.getElementsByClassName("time")[j].innerHTML;
-    namaChecklist[j] =  document.getElementsByClassName("namaChecklist")[j].innerHTML;
-    hari[j] =  document.getElementsByClassName("hari")[j].innerHTML;
-    statusCheck[j] = document.getElementsByClassName("statusCheck")[j].value;
-    idChecklist[j] = document.getElementsByClassName("idChecklist")[j].value;
-    namaPIC[j] =  document.getElementsByClassName("namaPIC")[j].innerHTML;
-    info[j] = document.getElementsByClassName("info")[j].value;
-    batasP[j] = parseInt(document.getElementsByClassName("batasP")[j].innerHTML.substring(0,2));
-    selisih[j] =  moment.duration(moment(time[j], 'hh:mm').diff(nowTime)).asMinutes();
+        var x = document.getElementsByClassName("time");
+        for(var j = 0; j < x.length; j++){
+          time[j] =  document.getElementsByClassName("time")[j].innerHTML;
+          namaChecklist[j] =  document.getElementsByClassName("namaChecklist")[j].innerHTML;
+          hari[j] =  document.getElementsByClassName("hari")[j].innerHTML;
+          statusCheck[j] = document.getElementsByClassName("statusCheck")[j].value;
+          idChecklist[j] = document.getElementsByClassName("idChecklist")[j].value;
+          namaPIC[j] =  document.getElementsByClassName("namaPIC")[j].innerHTML;
+          info[j] = document.getElementsByClassName("info")[j].value;
+          batasP[j] = parseInt(document.getElementsByClassName("batasP")[j].innerHTML.substring(0,2));
+          selisih[j] =  moment.duration(moment(time[j], 'hh:mm').diff(nowTime)).asMinutes();
 
-  }
-  
+        }
+
   // console.log(row);
   // console.log(time);
   // console.log(selisih);
@@ -312,57 +303,106 @@
   // console.log(hari);
   var f = [];
   var cJumlah = 0;
-  for (var i = 0; i < row.length; i++) {
-    // console.log(selisih[i]*(-1));
 
-    if((selisih[i]*(-1)) > 0 && (selisih[i]*(-1)) < batasP[i] && statusCheck[i] == "0" && hari[i] == hariSekarang){
-
-      f[i] = document.getElementsByClassName('hasilku')[i];
-      f[i].style.backgroundColor = (f[i].style.backgroundColor == 'mediumseagreen' ? '' : 'mediumseagreen');
-    }
-
-    else if ((selisih[i]*(-1)) > batasP[i] && statusCheck[i] == "0" && hari[i] == hariSekarang) {
-
-      f[i] = document.getElementsByClassName('hasilku')[i];
-
-       // console.log(f[i]);
-
-
-       f[i].style.backgroundColor = (f[i].style.backgroundColor == 'gold' ? '' : 'gold');
-    }
-  }
-  // console.log(cJumlah);
-    
 
   for (var i = 0; i < row.length; i++) {
     if (hari[i] == hariSekarang) {
-      // console.log(jHariS);
-        jHariS = i+1;
+      jHariS = i+1;
     }
   }
   console.log(jHariS);
 
+  // for (var i = 0; i < row.length; i++) {
+
+  //   if((selisih[i]*(-1)) > 0 && (selisih[i]*(-1)) < batasP[i] && statusCheck[i] == "0" && hari[i] == hariSekarang){
+
+  //     f[i] = document.getElementsByClassName('hasilku')[i];
+  //     f[i].style.backgroundColor = (f[i].style.backgroundColor == 'mediumseagreen' ? '' : 'mediumseagreen');
+  //   }
+
+  //   else if ((selisih[i]*(-1)) > batasP[i] && statusCheck[i] == "0" && hari[i] == hariSekarang) {
+  //     f[i] = document.getElementsByClassName('hasilku')[i];
+  //     f[i].style.backgroundColor = (f[i].style.backgroundColor == 'gold' ? '' : 'gold');
+  //   }
+  // }
+
+
+  // for (var j = 0; j < row.length; j++) {
+  //   if (hari[j] == hariSekarang) {
+  //     console.log(j);
+  //     for (var k = j+1; k < jHariS; k++) {
+  //       f[j] = document.getElementsByClassName('hasilku')[j];
+  //       f[k] = document.getElementsByClassName('hasilku')[k];
+  //       console.log(hari[j]+" :: "+time[j]+" - "+f[j].style.backgroundColor+" - "+ namaChecklist[j]+" == "+hari[k]+" :: "+time[k]+" - "+ namaChecklist[k]+" - "+ f[k].style.backgroundColor);
+  //       // console.log(f[j].style.backgroundColor);
+  //       if (namaChecklist[j] == namaChecklist[k] && statusCheck[j] == "0" && (f[k].style.backgroundColor == 'gold' ||f[k].style.backgroundColor == 'mediumseagreen')) {
+  //         f[j].style.backgroundColor = 'tomato';
+  //         console.log('Ubah Warna Menjadi merah');
+  //         // $.post("<?php echo site_url('pic/nocheck'); ?>",
+  //         // {
+  //         //   statusCheck : statusCheck[j],
+  //         //   IDChecklist: idChecklist[j],
+  //         //   NamaChecklist: namaChecklist[j],
+  //         //   Jam : time[j],
+  //         //   Info : info[j],
+  //         //   Hari : hari[j],
+  //         // }
+  //         // );
+  //       }
+  //     } 
+  //   }
+  // }
   for (var j = 0; j < row.length; j++) {
-    if (hari[j] == hariSekarang) {
-      console.log(j);
+    f[j] = document.getElementsByClassName('hasilku')[j];
+    console.log(j);
+    console.log(f[j].style.backgroundColor);
+
+    if (hari[j] == hariSekarang && statusCheck[j] == "0") {
+      console.log("Status cek nya : " +statusCheck[j]);
+      if((selisih[j]*(-1)) > 0 && (selisih[j]*(-1)) < batasP[j] ){
+        f[j].style.backgroundColor = (f[j].style.backgroundColor == 'mediumseagreen' ? '' : 'mediumseagreen');
+      }
+
+      else if ((selisih[j]*(-1)) > batasP[j]) {
+        f[j].style.backgroundColor = (f[j].style.backgroundColor == 'gold' ? '' : 'gold');
+      }
+
       for (var k = j+1; k < jHariS; k++) {
-        f[j] = document.getElementsByClassName('hasilku')[j];
-        f[k] = document.getElementsByClassName('hasilku')[k];
-        console.log(hari[j]+" :: "+time[j]+" - "+ namaChecklist[j]+" == "+hari[k]+" :: "+time[k]+" - "+ namaChecklist[k]);
-        if (namaChecklist[j] == namaChecklist[k] && statusCheck[j] != "1" && f[j].style.backgroundColor == 'yellow') {
+        if (namaChecklist[j] == namaChecklist[k] && (selisih[k]*-1)>0 &&f[j].style.backgroundColor != 'tomato') {
+          // console.log(time[k] +" = "+ (selisih[k]*-1));
+          console.log("Awalanya colornya : " +f[j].style.backgroundColor)
           f[j].style.backgroundColor = 'tomato';
-          $.post("<?php echo site_url('pic/nocheck'); ?>",
-          {
-            statusCheck : statusCheck[j],
-            IDChecklist: idChecklist[j],
-            NamaChecklist: namaChecklist[j],
-            Jam : time[j],
-            Info : info[j],
-            Hari : hari[j],
+          console.log(hari[j]+" :: "+time[j]+" - "+ namaChecklist[j]+" == "+hari[k]+" :: "+time[k]+" - "+ namaChecklist[k]+" MAKA UBAH JADI "+ f[j].style.backgroundColor);
+
+          if (f[j].style.backgroundColor == 'tomato') {
+            console.log("Kalau warnanya tomato maka kirim ke tabel log dan status check ganti 2");
+            document.getElementsByClassName("statusCheck")[j].value = "2";
+            document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
+            console.log("Status Check akhir : " + document.getElementsByClassName("statusCheck")[j].value);
+
+            $.post("<?php echo site_url('pic/nocheck'); ?>",
+            {
+              statusCheck : statusCheck[j],
+              IDChecklist: idChecklist[j],
+              NamaChecklist: namaChecklist[j],
+              Jam : time[j],
+              Info : info[j],
+              Hari : hari[j],
+            }
+            );
           }
-          );
         }
-      } 
+
+      }
+    } 
+    else if(hari[j] == hariSekarang && statusCheck[j] == "2"){
+      document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
+    }
+    else if(hari[j] == hariSekarang && statusCheck[j] == "1"){
+      document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
+    }
+    else if(hari[j] != hariSekarang){
+      document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
     }
   }
 
@@ -411,9 +451,9 @@
             })
         })
     })
-    </script> -->
+  </script> -->
 
 
 
 
-    
+
