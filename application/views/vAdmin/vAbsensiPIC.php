@@ -10,11 +10,12 @@
         <div class="ui icon">
           <i class="user icon"></i>
           Absensi PIC 
-          
         </h3>
-        <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Absensi PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahabsensi'); ?>">
-          <i class="add icon"></i>
-        </a>
+          <?php if ($_SESSION['nama'] == 'admin'): ?>   
+            <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Absensi PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahabsensi'); ?>">
+              <i class="add icon"></i>
+            </a>
+          <?php endif ?>
       </div>
 
       <div class="ui divider"></div>
@@ -29,8 +30,10 @@
             <th class="">Hari</th>
             <th class="">Kehadiran</th>
             <th class="">Pengganti</th>
+             <?php if ($_SESSION['nama'] == 'admin'): ?>
             <th class="">Edit</th>
             <th class="">Hapus</th>
+            <?php endif ?>
           </tr>
         </thead>
         <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
@@ -123,6 +126,7 @@
               
             </td>
 
+            <?php if ($_SESSION['nama'] == 'admin'): ?>
             <td>
        <!--  <form method="GET" action="<?php echo base_url('admin/editpic'); ?> ">
             <input type="hidden" name="NIK" value="<?php echo $pic[$i]['NIK'] ?>">
@@ -130,18 +134,23 @@
               <i class="edit icon"></i>Edit
             </button>
           </form> -->
+
           <?php $edit = 'admin/editabsensi/'.$absensi['IDHarian'] ?>
           <a href="<?php echo site_url($edit) ;?>" class="ui basic small blue button">
             <i class="icon edit"></i>
             Edit
           </a>
         </td>
+        <?php endif ?>
+
+        <?php if ($_SESSION['nama'] == 'admin'): ?>
         <td>
           <a href="<?php echo site_url("admin/hapusabsensi/".$absensi['IDHarian']) ;?>" class="ui basic small red button" onClick="return confirm('Apa anda yakin ingin menghapus absensi? ?');">
             <i class="icon trash"></i>
             Hapus
           </a>
         </td>
+        <?php endif ?>
         
       </tr>
       <?php } ?>
