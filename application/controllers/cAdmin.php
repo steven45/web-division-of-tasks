@@ -83,6 +83,15 @@ class cAdmin extends CI_Controller {
 
 		$query = $this->mAdmin->tambahPIC('pic', $data, $NIK);
 
+		if ($jabatan == "Chief Leader") {
+			$dataA = array(
+				'Username' => $NIK,
+				'Password' => md5($password)
+			);
+
+			$this->mAdmin->tambahAdmin('admin', $dataA, $NIK);
+		}
+
 		if ($query == 1) 
 		{
 			echo "<script type='text/javascript'>
@@ -98,6 +107,7 @@ class cAdmin extends CI_Controller {
 			window.location.href = '" . base_url() . "admin/tambahpic';
 			</script>";
 		}
+		
 	}
 
 	public function tambahPIC()
@@ -1038,6 +1048,20 @@ class cAdmin extends CI_Controller {
 		$data['temp'] = $this->notifikasi();
 		// echo json_encode($data);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		$this->load->view('vAdmin/vBerandaAdmin', $data);
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
+	public function lihatLog1()
+	{
+		// header("Content-type:application/json");
+		$data['judul'] = "Log Checklist";
+		$data['log']= $this->mAdmin->getLog();
+		
+		$data['notifikasi'] = $this->mAdmin->getNotifikasi();
+		$data['temp'] = $this->notifikasi();
+		// echo json_encode($data);
+		$this->load->view('vAdmin/vTemplate/vHeaderAdminPIC', $data);
 		$this->load->view('vAdmin/vBerandaAdmin', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}

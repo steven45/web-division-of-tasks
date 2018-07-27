@@ -212,11 +212,7 @@
         </th>
     </tfoot>
   </table>
-  <!-- <div class="pagination-container">
-            <nav>
-                <ul class="pagination"></ul>
-            </nav>
-        </div> -->
+
  
   </div>
   </div>
@@ -336,7 +332,7 @@
        // }, 1000); 
        // })(i)
 
-       f[i].style.backgroundColor = (f[i].style.backgroundColor == 'tomato' ? '' : 'tomato');
+       f[i].style.backgroundColor = (f[i].style.backgroundColor == 'gold' ? '' : 'gold');
     }
   }
   console.log(cJumlah);

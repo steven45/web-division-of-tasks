@@ -33,6 +33,22 @@ class mAdmin extends CI_Model
     	}
     }
 
+    public function tambahAdmin($table, $data, $username)
+    {
+        $query = "SELECT * FROM `admin` WHERE `username` = $username";
+        $hasil =  $this->db->query($query)->row_array();
+
+        if ($hasil['username'] == $username) 
+        {
+            return "0";
+        }
+        else
+        {
+            $this->db->insert($table,$data);
+            return "1";
+        }
+    }    
+
     public function getPIC($NIK = false)
     {
         if ($NIK == null) {

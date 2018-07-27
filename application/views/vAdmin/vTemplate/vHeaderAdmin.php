@@ -151,8 +151,12 @@
             Daftar PIC</a>
             <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
             Absensi PIC</a>
+            <?php if ($_SESSION['nama'] == 'admin'): ?>
+              
             <a class="item" href="<?php echo site_url('admin/ranking'); ?>">
             Ranking PIC</a>
+            
+            <?php endif ?>
             <a class="item" href="<?php echo site_url('admin/pergantian'); ?>">
             Pergantian PIC</a>
           </div>

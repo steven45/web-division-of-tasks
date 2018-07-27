@@ -14,9 +14,13 @@
       Daftar PIC 
       </h3>
       
-      <a class="ui right floated tiny blue icon button" data-tooltip="Tambah PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahpic'); ?>">
-          <i class="add icon"></i>
-      </a>
+      <?php if ($_SESSION['nama'] == 'admin'): ?>       
+          <a class="ui right floated tiny blue icon button" data-tooltip="Tambah PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahpic'); ?>">
+            <i class="add icon"></i>
+          </a>
+      <?php endif ?>
+      
+
       </div>
 
       <div class="ui divider"></div>
@@ -203,7 +207,7 @@
     $('#maxRows').on('change', function(){
         $('.pagination').html('')
         var trnum = 0
-        var maxRows = parseInt(6)
+        var maxRows = parseInt($(this).val())
         var totalRows = $(table+' tbody tr').length
         $(table+' tr:gt(0)').each(function(){
             trnum++
@@ -236,7 +240,7 @@
             })
         })
     })
-</script>
+  </script>
 
 
 
