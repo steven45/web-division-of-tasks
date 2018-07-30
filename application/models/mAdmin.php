@@ -149,7 +149,7 @@ class mAdmin extends CI_Model
     {
         if ($IDHarian == NULL) {
             $query = $this->db->order_by('h.Hari','ASC');
-            $this->db->select('h.IDHarian, h.NIK, h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam, p.Status');
+            $this->db->select('h.IDHarian, h.NIK, h.NIKP,h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam, p.Status');
              $this->db->from('harian h');
              $this->db->join('pic p','p.NIK=h.NIK');
              $this->db->join('jadwal j','j.IDJadwal=h.IDJadwal');
@@ -157,7 +157,7 @@ class mAdmin extends CI_Model
              return $query->result_array();
         }
         else{
-            $this->db->select('h.IDHarian, h.NIK, h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam');
+            $this->db->select('h.IDHarian, h.NIK, h.NIKP, h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam');
              $this->db->from('harian h');
              $this->db->join('pic p','p.NIK=h.NIK');
              $this->db->join('jadwal j','j.IDJadwal=h.IDJadwal');

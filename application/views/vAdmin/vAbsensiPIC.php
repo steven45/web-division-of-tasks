@@ -106,13 +106,11 @@
               transition: box-shadow 0.1s ease, width 0.1s ease;
               transition: box-shadow 0.1s ease, width 0.1s ease, -webkit-box-shadow 0.1s ease;">
 
-              <option value="" style="color: blue">Pilih :</option>
+              <!-- <option value="0" style="color: blue">Pilih :</option> -->
               <?php for ($j=0; $j < count($pic[$i]); $j++) { ?>
-                <!-- <?php if ($absensi['NIKP'] == '0') { ?>
-                  <option>Pilih PIC Pengganti</option>
-                <?php } else{ ?>
-                  <option value="<?php echo $absensi['NIKP'] ?>"><?php echo $absensi['NIKP'] ?></option>
-                <?php } ?> -->
+                <?php if ($absensi['NIKP'] != '0') { ?>
+                  <option value="<?php echo $absensi['NIKP'] ?>"><?php echo $absensi['NamaPICP'] ?></option>
+                <?php } ?> 
                 <option value="<?php echo $pic[$i][$j]["NIK"]; ?>"><?php echo $pic[$i][$j]["NamaPIC"]; ?></option>
               <?php } ?>
                 <!-- <?php if ($absensi['Kehadiran'] == "Hadir") { ?>
