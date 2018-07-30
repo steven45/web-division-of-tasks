@@ -68,12 +68,9 @@ class mPIC extends CI_Model
     }
 
     public function doChecklist($table, $data)
-    {
-        // $nJam = substr($jam, 0,2);
-        // $query = "SELECT * FROM $table WHERE `Hari` = '$hari' AND `NamaChecklist` = '$namaChecklist' AND `NamaPIC` = '$namaPIC'  AND `Jam` = $nJam ";
-        // $hasil =  $this->db->query($query)->row_array();
-            $this->db->insert($table,$data);
-            return '1';
+    {   
+        $this->db->insert($table,$data);
+        return '1';
     }
 
     public function ubahStatusCheck($IDChecklist, $status)
@@ -127,6 +124,11 @@ class mPIC extends CI_Model
         $jumlah = $hasil['JumlahPengecekan'] + 1;
         $query1 = "UPDATE `pic` SET `JumlahPengecekan` = $jumlah WHERE `pic`.`NIK` = $NIK;";
         $this->db->query($query1);
+    }
+
+    public function lihatDataLog($table, $data)
+    {
+        return $this->db->get_where($table, $data)->result_array();
     }
 
 }
