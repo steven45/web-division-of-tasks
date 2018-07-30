@@ -282,6 +282,7 @@
         }
 
 
+
         var x = document.getElementsByClassName("time");
         for(var j = 0; j < x.length; j++){
           time[j] =  document.getElementsByClassName("time")[j].innerHTML;
@@ -293,6 +294,7 @@
           info[j] = document.getElementsByClassName("info")[j].value;
           batasP[j] = parseInt(document.getElementsByClassName("batasP")[j].innerHTML.substring(0,2));
           selisih[j] =  moment.duration(moment(time[j], 'hh:mm').diff(nowTime)).asMinutes();
+
 
         }
 

@@ -40,6 +40,7 @@ $route['admin/editabsensi/(:any)'] = 'cAdmin/editAbsensi/$1';
 $route['admin/validasieditabsensi'] = 'cAdmin/validasiEditAbsensi';
 $route['admin/gantiabsensi'] = 'cAdmin/gantiAbsensi';
 $route['admin/ranking'] = 'cAdmin/ranking';
+$route['admin/tampilRanking'] = 'cAdmin/tampilRangking';
 $route['admin/pergantian'] = 'cAdmin/pergantian';
 
 $route['admin/log'] = 'cAdmin/lihatLog';

@@ -16,6 +16,7 @@
           <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Checklist" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahchecklist'); ?>">
             <i class="add icon"></i>
           </a>
+          
         </div>
         <form method="POST" action="<?php echo site_url('admin/gantichecklist'); ?>">    
           <div class="ui divider"></div>
