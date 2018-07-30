@@ -161,7 +161,7 @@
             Absensi PIC</a>
             
             <?php if ($_SESSION['nama'] == 'admin'): ?>
-            <a class="item" href="<?php echo site_url('admin/ranking'); ?>">
+            <a class="item" href="<?php echo site_url('admin/tampilRanking'); ?>">
             Ranking PIC</a>
             <?php endif ?>
             

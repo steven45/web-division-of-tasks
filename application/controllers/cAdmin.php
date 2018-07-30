@@ -1097,6 +1097,7 @@ class cAdmin extends CI_Controller {
 		$temp = 0;
 
 		foreach ($data['pic'] as $pic) {
+			$nama[$temp] = $pic['NamaPIC'];
 			$jumlahCek[$temp] = $pic['JumlahPengecekan'];
 			$jabatan[$temp] = $pic['Jabatan'];
 			$lamaKerja[$temp] = (date("Y")) - $pic['TahunMasuk'];
@@ -1146,6 +1147,16 @@ class cAdmin extends CI_Controller {
 			$hasilV[$m] = $hasilS[$m] / $jumlahS;
 			}
 
+		// foreach ($data as $key => $value) {
+		// 	# code...
+		// }
+		for ($i=0; $i < count($hasilV); $i++) { 
+			$hasilAkhir[$i]['nama'] = $nama[$i];
+			$hasilAkhir[$i]['hasilV'] = $hasilV[$i];
+		}
+		// echo json_encode($nama);	
+		echo json_encode($hasilAkhir);
+
 
 
 		// 	$no = 0;
@@ -1160,17 +1171,20 @@ class cAdmin extends CI_Controller {
 		// 	$no = $no+1;
 		// }
 		
-
-
-
-		
-
-		
 		// header("Content-type:application/json");
 		// echo json_encode($data['pic']);
 
 		
-		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		// $this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		// $this->load->view('vAdmin/vRankingPIC');
+		// $this->load->view('vAdmin/vTemplate/vFooterAdmin');
+
+
+	}
+
+	public function tampilRangking()
+	{
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
 		$this->load->view('vAdmin/vRankingPIC');
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
