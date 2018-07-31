@@ -56,6 +56,7 @@ $route['pic/beranda'] = 'cPIC/lihatLog';
 $route['pic/keluar'] = 'cPIC/keluar';
 $route['pic/checklist'] = 'cPIC/lihatChecklist';
 $route['pic/docheck'] = 'cPIC/doChecklist';
+$route['pic/nocheck'] = 'cPIC/noChecklist';
 $route['pic/daftarPIC'] = 'cPIC/daftarPIC';
 $route['pic/absensi'] = 'cPIC/lihatAbsensi';
 $route['pic/ranking'] = 'cPIC/ranking';

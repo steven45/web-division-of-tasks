@@ -194,13 +194,15 @@ class cPIC extends CI_Controller {
 						'Hari' => $hari
 					);
 					$hasil = $this->mPIC->doChecklist('log', $data);
+					//mengubah status checklist menjadi 1 supaya tidak bisa mengecek ulang
+					$this->mPIC->ubahStatusCheck($IDChecklist, "1");
 					// echo "JIKA DISINI MAKA DATANYA == 1 DAN DATANYA GA KEMBAR";
 				}
 			}
 			else{
 				$jumlah = 0;
 				foreach ($lihatData as $data) {
-					if ($tanggal != substr($lihatData[0]['Waktu'],0,10)) {
+					if ($tanggal == substr($lihatData[0]['Waktu'],0,10)) {
 						$jumlah = $jumlah + 1;
 					}
 				}
@@ -216,6 +218,8 @@ class cPIC extends CI_Controller {
 						'Hari' => $hari
 					);
 					$hasil = $this->mPIC->doChecklist('log', $data);
+					//mengubah status checklist menjadi 1 supaya tidak bisa mengecek ulang
+					$this->mPIC->ubahStatusCheck($IDChecklist, "1");
 				}
 				// echo "DATA LEBIH DARI 1, MAKA DATA AKAN DI CEK APAKAH ADA YANG SAMA";
 			}
@@ -232,13 +236,10 @@ class cPIC extends CI_Controller {
 				'Hari' => $hari
 			);
 			$hasil = $this->mPIC->doChecklist('log', $data);
+			//mengubah status checklist menjadi 1 supaya tidak bisa mengecek ulang
+			$this->mPIC->ubahStatusCheck($IDChecklist, "1");
 			echo "NULL COY";
 		}
-		
-
-		// var_dump($IDChecklist);
-		//mengubah status checklist menjadi 1 supaya tidak bisa mengecek ulang
-		$this->mPIC->ubahStatusCheck($IDChecklist, "1");
 		
 		// Menyimpan di notifikasi
 		$notif = array(
@@ -278,90 +279,78 @@ class cPIC extends CI_Controller {
 			$keterangan = "-";
 			$hari = $this->input->post('Hari');
 
-			// $lihat = array(
-			// 	'Hari' => $hari,
-			// 	'Jam' => $jam,
-			// 	'NamaChecklist' => $namaChecklist
-			// );
-
-			// $lihatData = $this->mPIC->lihatDataLog('log', $lihat);
-			
-			// if ($lihatData != NULL) {
-			// 	$tanggal = date("Y-m-d");
-			// 	if (count($lihatData)== 1) {
-			// 	// echo $tanggal;
-			// 	// echo substr($lihatData[0]['Waktu'],0,10);
-			// 		if ($tanggal != substr($lihatData[0]['Waktu'],0,10)) {
-			// 			$data = array(
-			// 				'NamaPIC' => $namaPIC,
-			// 				'NamaChecklist' => $namaChecklist,
-			// 				'PICCek' => $namaPICSebenarnya,
-			// 				'Jam' => $jam,
-			// 				'Info' => $info,
-			// 				'Status' => $status,
-			// 				'Keterangan' => $keterangan,
-			// 				'Hari' => $hari
-			// 			);
-			// 			$hasil = $this->mPIC->doChecklist('log', $data);
-			// 		// echo "JIKA DISINI MAKA DATANYA == 1 DAN DATANYA GA KEMBAR";
-			// 		}
-			// 	}
-			// 	else{
-			// 		$jumlah = 0;
-			// 		foreach ($lihatData as $data) {
-			// 			if ($tanggal != substr($lihatData[0]['Waktu'],0,10)) {
-			// 				$jumlah = $jumlah + 1;
-			// 			}
-			// 		}
-			// 		if ($jumlah == 0) {
-			// 			$data = array(
-			// 				'NamaPIC' => $namaPIC,
-			// 				'NamaChecklist' => $namaChecklist,
-			// 				'PICCek' => $namaPICSebenarnya,
-			// 				'Jam' => $jam,
-			// 				'Info' => $info,
-			// 				'Status' => $status,
-			// 				'Keterangan' => $keterangan,
-			// 				'Hari' => $hari
-			// 			);
-			// 			$hasil = $this->mPIC->doChecklist('log', $data);
-			// 		}
-			// 	// echo "DATA LEBIH DARI 1, MAKA DATA AKAN DI CEK APAKAH ADA YANG SAMA";
-			// 	}
-			// }
-			// else{
-			// 	$data = array(
-			// 		'NamaPIC' => $namaPIC,
-			// 		'NamaChecklist' => $namaChecklist,
-			// 		'PICCek' => $namaPICSebenarnya,
-			// 		'Jam' => $jam,
-			// 		'Info' => $info,
-			// 		'Status' => $status,
-			// 		'Keterangan' => $keterangan,
-			// 		'Hari' => $hari
-			// 	);
-			// 	$hasil = $this->mPIC->doChecklist('log', $data);
-			// 	echo "NULL COY";
-			// }
-
-			$data = array(
-				'NamaPIC' => $namaPIC,
-				'NamaChecklist' => $namaChecklist,
-				'PICCek' => $namaPICSebenarnya,
+			$lihat = array(
+				'Hari' => $hari,
 				'Jam' => $jam,
-				'Info' => $info,
-				'Status' => $status,
-				'Keterangan' => $keterangan,
-				'Hari' => $hari
+				'NamaChecklist' => $namaChecklist
 			);
 
-			$hasil = $this->mPIC->doChecklist('log', $data);
+			$lihatData = $this->mPIC->lihatDataLog('log', $lihat);
+			
+			if ($lihatData != NULL) {
+				$tanggal = date("Y-m-d");
+				if (count($lihatData)== 1) {
+				// echo $tanggal;
+				// echo substr($lihatData[0]['Waktu'],0,10);
+					if ($tanggal != substr($lihatData[0]['Waktu'],0,10)) {
+						$data = array(
+							'NamaPIC' => $namaPIC,
+							'NamaChecklist' => $namaChecklist,
+							'PICCek' => $namaPICSebenarnya,
+							'Jam' => $jam,
+							'Info' => $info,
+							'Status' => $status,
+							'Keterangan' => $keterangan,
+							'Hari' => $hari
+						);
+						$hasil = $this->mPIC->doChecklist('log', $data);
+					// echo "JIKA DISINI MAKA DATANYA == 1 DAN DATANYA GA KEMBAR";
+					}
+				}
+				else{
+					$jumlah = 0;
+					foreach ($lihatData as $data) {
+						if ($tanggal == substr($lihatData[0]['Waktu'],0,10)) {
+							$jumlah = $jumlah + 1;
+						}
+					}
+					if ($jumlah == 0) {
+						$data = array(
+							'NamaPIC' => $namaPIC,
+							'NamaChecklist' => $namaChecklist,
+							'PICCek' => $namaPICSebenarnya,
+							'Jam' => $jam,
+							'Info' => $info,
+							'Status' => $status,
+							'Keterangan' => $keterangan,
+							'Hari' => $hari
+						);
+						$hasil = $this->mPIC->doChecklist('log', $data);
+						
+					}
+				// echo "DATA LEBIH DARI 1, MAKA DATA AKAN DI CEK APAKAH ADA YANG SAMA";
+				}
+			}
+			else{
+				$data = array(
+					'NamaPIC' => $namaPIC,
+					'NamaChecklist' => $namaChecklist,
+					'PICCek' => $namaPICSebenarnya,
+					'Jam' => $jam,
+					'Info' => $info,
+					'Status' => $status,
+					'Keterangan' => $keterangan,
+					'Hari' => $hari
+				);
+				$hasil = $this->mPIC->doChecklist('log', $data);
 
-		// var_dump($IDChecklist);
-		//mengubah status checklist menjadi 1 supaya tidak bisa mengecek ulang
+				// echo "NULL COY";
+			}
+
+			//mengubah status checklist menjadi 2 supaya tidak bisa mengecek ulang
 			$this->mPIC->ubahStatusCheck($IDChecklist, "2");
 
-		//Menyimpan di notifikasi
+			//Menyimpan di notifikasi
 			$notif = array(
 				'ForN' => 'admin',
 				'Waktu' => date("l, d-m-Y h:i:s a"),
