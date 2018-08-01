@@ -691,13 +691,20 @@ class cAdmin extends CI_Controller {
 					$pic[$temp1][$temp2]['NIK'] = $cek['NIK'];
 					$pic[$temp1][$temp2]['NamaPIC'] = $cek['NamaPIC'];	
 					$temp2 = $temp2 +1;
+					if ($absensi['NIKP'] == $cek['NIK']) {
+						// echo $cek['NamaPIC']."<br>";
+						$data['absensi'][$temp1]['NamaPICP'] = $cek['NamaPIC'];
+					}
+					else if ($absensi['NIKP'] != $cek['NIK']) {
+						$data['absensi'][$temp1]['NamaPICP'] = "0";
+					}
 				}
 			}
 			$temp1 = $temp1 +1;
 		}
 
 		// header("Content-type:application/json");
-		// echo json_encode($pic);
+		// echo json_encode($data['absensi']);
 
 		$data['pic'] = $pic;
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
@@ -878,7 +885,7 @@ class cAdmin extends CI_Controller {
 							);
 							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
-						else {
+						else if ($Kehadiran == 'Hadir'){
 							$set = array(
 								'NIKP' => '0'
 							);
@@ -915,7 +922,7 @@ class cAdmin extends CI_Controller {
 							);
 							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
-						else {
+						else if ($Kehadiran == 'Hadir') {
 							$set = array(
 								'NIKP' => '0'
 							);
@@ -958,7 +965,7 @@ class cAdmin extends CI_Controller {
 							);
 							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
-						else {
+						else if ($Kehadiran == 'Hadir') {
 							$set = array(
 								'NIKP' => '0'
 							);
@@ -991,7 +998,7 @@ class cAdmin extends CI_Controller {
 							);
 							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
-						else {
+						else if ($Kehadiran == 'Hadir') {
 							$set = array(
 								'NIKP' => '0'
 							);
