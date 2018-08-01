@@ -196,7 +196,7 @@
              </div>
            </div>
            <br>
-           <button class="ui right floated blue small button" onClick="return confirm('Perhatian!!! Bukan Jadwal Anda Untuk Mengecek !!! Apakah Anda Ingin Melanjutkan??');">
+           <button class="ui right floated blue small button" onClick="return confirm('Perhatian! Bukan jadwal Anda untuk melakukan pengecekan. Apakah Anda ingin melanjutkan?');">
             <i class="save icon"></i>Simpan
           </button>
         </form>

@@ -77,7 +77,7 @@
                   <?php if ($log['Status'] == 'OK') {?>
                   <td style="background-color: #90EE90 ;"><b>OK</b></td>
                   <?php } else if($log['Status'] == 'Bad') {?>
-                    <td style="background-color: orange;"><b>Bad</b></td>
+                    <td style="background-color:  #f5ae70;"><b>Bad</b></td>
                   <?php } else if($log['Status'] == 'Not Checked'){?>
                     <td style="background-color: tomato;"><b>Not Checked</b></td>
                   <?php } ?>
