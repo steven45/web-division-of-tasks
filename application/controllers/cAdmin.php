@@ -1050,6 +1050,7 @@ class cAdmin extends CI_Controller {
 		$data['judul'] = "Ranking PIC";
 		$data['pic'] = $this->mAdmin->getPIC();
 
+
 		$jumlah = count($data['pic']);
 		$temp = 0;
 
@@ -1170,10 +1171,10 @@ class cAdmin extends CI_Controller {
 		// 	echo $nilaiJabatan[$no]."____";
 		// 	echo $checklist[$no]. "____";
 		// 	echo $nilaiLamaKerja[$no]. "____";
-		// 	echo $hasilS[$no] . "<br> ";
+		// 	echo $hasilS[$no] . "<br>";
+		// 	// echo $hasilV[$no]."<br";
 		// 	$no = $no+1;
 		// }
-		
 
 
 	}
