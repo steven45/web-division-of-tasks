@@ -170,7 +170,6 @@
       <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
       <div style="display:none;">
         <div id="<?php echo 'tampilKet'.$temp ?>">
-
           <form method="POST" class="form-check">  
             <input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>">
             <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
@@ -224,13 +223,6 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
-    <!-- <script type="text/javascript">
-      $.getJSON("<?php echo site_url('pic/jChecklist') ?>", function(result){
-        $.each(result, function(i, field){
-          document.getElementsByClassName("statusCheck")[i].value = field['StatusCheck'];
-        });
-      });
-    </script> -->
     <script type="text/javascript">
       $(".tSimpan").click(function(){
         var data = $('.form-check').serialize();
@@ -362,8 +354,40 @@
     if (hari[j] == hariSekarang && (selisih[j]*(-1)) < 0) {
       document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
     }
+    else{
+       // document.getElementsByClassName("docheck")[j].innerHTML = 
+       // '<a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>'+
+       // '<div style="display:none;">'+
+       // '<div id="<?php echo 'tampilKet'.$temp ?>">'+
+       // '<form method="POST" class="form-check"> '+
+       // '<input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>">'+
+       // '<input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">'+
+       // '<input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">'+
+       // '<input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">'+
+       // '<input type="hidden" name="NamaPICSebenarnya" value="<?php echo $_SESSION['NamaPIC'] ?>">'+
+       // '<input type="hidden" name="Jam" value="<?php echo $checklist['Jam'] ?>">'+
+       // '<input type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">'+
+       // '<input type="hidden" name="Hari" value="<?php echo $checklist['Hari'] ?>">'+
+       // '<h3>Status</h3>'+
+       // ' <div class="ui form">'+
+       // '<select name="Status">'+
+       // '<option value="OK">OK</option>'+
+       // '<option value="Bad">Bad</option>'+
+       // ' </select>'+
+       // '</div>'+
+       // '<h3>Keterangan</h3>'+
+       // '<div class="ui form">'+
+       // '<div class="field">'+
+       // '<textarea name="Keterangan"></textarea>'+
+       // '</div>'+
+       // '</div>'+
+       // '<a class="tSimpan ui right floated blue small button"><i class="save icon" target="<?php echo $temp; ?> " ></i>Simpan</a>'+
+       // '</form>'+
+       // '</div>'+
+       // '</div>';
+    }
     
-    else if (hari[j] == hariSekarang && statusCheck[j] == "0") { // 2
+    if (hari[j] == hariSekarang && statusCheck[j] == "0") { // 2
       console.log(j);
       console.log("Status cek nya : " +statusCheck[j]);
       
@@ -395,6 +419,7 @@
               statusCheck : statusCheck[j],
               IDChecklist: idChecklist[j],
               NamaChecklist: namaChecklist[j],
+              NamaPIC : namaPIC[j],
               Jam : time[j],
               Info : info[j],
               Hari : hari[j],

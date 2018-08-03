@@ -116,13 +116,27 @@ class mPIC extends CI_Model
         $this->db->update($table, $data);
     }
 
-    public function tambahJumlah($NIK)
+    public function tambahJumlah($NIK, $IDChecklist)
     {
         $query = "SELECT * FROM `pic` WHERE `NIK` = $NIK";
-        $hasil = $this->db->query($query)->row_array();
+        $hasilP = $this->db->query($query)->row_array();
+        $jumlahP = $hasilP['JumlahPengecekan'] + 1;
 
-        $jumlah = $hasil['JumlahPengecekan'] + 1;
-        $query1 = "UPDATE `pic` SET `JumlahPengecekan` = $jumlah WHERE `pic`.`NIK` = $NIK;";
+        $hasilC = $this->db->query("SELECT * FROM `checklist` WHERE `IDChecklist` = $IDChecklist")->row_array();
+        if ($hasilC['TingkatPengecekan'] == 'Mudah') {
+            $jumlahT = $hasilP['JMudah'] +1;
+            $this->db->query("UPDATE `pic` SET `JMudah` = $jumlahT WHERE `pic`.`NIK` = $NIK;");
+        }
+        else if ($hasilC['TingkatPengecekan'] == 'Sedang'){
+            $jumlahT = $hasilP['JSedang'] +1;   
+            $this->db->query("UPDATE `pic` SET `JSedang` = $jumlahT WHERE `pic`.`NIK` = $NIK;");
+        }
+        else if ($hasilC['TingkatPengecekan'] == 'Sulit'){
+            $jumlahT = $hasilP['JSulit'] +1;   
+            $this->db->query("UPDATE `pic` SET `JSulit` = $jumlahT WHERE `pic`.`NIK` = $NIK;");
+        }
+
+        $query1 = "UPDATE `pic` SET `JumlahPengecekan` = $jumlahP WHERE `pic`.`NIK` = $NIK;";
         $this->db->query($query1);
     }
 
