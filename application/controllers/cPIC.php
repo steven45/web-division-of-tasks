@@ -151,6 +151,13 @@ class cPIC extends CI_Controller {
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
 	}
 
+	public function jChecklist()
+	{
+		$data = $this->mPIC->getChecklist();
+		header("Content-type:application/json");
+		echo json_encode($data);
+	}
+
 	public function doChecklist()
 	{
 		// // header("Content-type:application/json");

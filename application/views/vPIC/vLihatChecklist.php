@@ -228,11 +228,25 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+    <!-- <script type="text/javascript">
+      $.getJSON("<?php echo site_url('pic/jChecklist') ?>", function(result){
+        $.each(result, function(i, field){
+          document.getElementsByClassName("statusCheck")[i].value = field['StatusCheck'];
+        });
+      });
+    </script> -->
     <script type="text/javascript">
 
       var interval = setInterval(myTimer,1000);
 
       function myTimer(){
+
+        $.getJSON("<?php echo site_url('pic/jChecklist') ?>", function(result){
+          $.each(result, function(i, field){
+            document.getElementsByClassName("statusCheck")[i].value = field['StatusCheck'];
+          });
+        });
+
         var d = new moment.locale();
         console.log(d);
         var nowTime = moment();
@@ -359,9 +373,16 @@
     console.log(j);
     console.log(f[j].style.backgroundColor);
 
-    if (hari[j] == hariSekarang && statusCheck[j] == "0") {
+
+    if (hari[j] == hariSekarang && (selisih[j]*(-1)) < 0) {
+      document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
+    }
+    
+    else if (hari[j] == hariSekarang && statusCheck[j] == "0") { // 2
+      console.log(j);
       console.log("Status cek nya : " +statusCheck[j]);
-      if((selisih[j]*(-1)) > 0 && (selisih[j]*(-1)) < batasP[j] ){
+      
+      if((selisih[j]*(-1)) > 0 && (selisih[j]*(-1)) < batasP[j] ){ // 2A
         f[j].style.backgroundColor = (f[j].style.backgroundColor == 'mediumseagreen' ? '' : 'mediumseagreen');
       }
 
@@ -402,6 +423,7 @@
     }
     else if(hari[j] == hariSekarang && statusCheck[j] == "1"){
       document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
+      f[j].style.backgroundColor = '#AFEEEE';
     }
     else if(hari[j] != hariSekarang){
       document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";

@@ -1099,7 +1099,7 @@ class cAdmin extends CI_Controller {
 		$nilaiJabatan = [];
 		$lamaKerja = [];
 		$nilaiLamaKerja = [];
-		$checklist = [100, 60, 80, 60, 100, 80, 60, 60,80, 80, 80, 80, 60];
+		$checklist = [80, 60, 60, 60, 80, 60, 100, 60,80, 60, 60, 60, 60];
 		$jumlah = count($data['pic']);
 		$temp = 0;
 
@@ -1174,10 +1174,13 @@ class cAdmin extends CI_Controller {
 		// 	echo $nilaiJabatan[$no]."____";
 		// 	echo $checklist[$no]. "____";
 		// 	echo $nilaiLamaKerja[$no]. "____";
-		// 	echo $hasilS[$no] . "<br> ";
+		// 	echo $hasilS[$no] . "<br>";
+		// 	// echo $hasilV[$no]."<br";
 		// 	$no = $no+1;
 		// }
 		
+
+
 		// header("Content-type:application/json");
 		// echo json_encode($data['pic']);
 
