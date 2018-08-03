@@ -95,7 +95,7 @@ class mAdmin extends CI_Model
             $query = $this->db->order_by('c.Hari','ASC');
             $query = $this->db->order_by('c.NamaChecklist','ASC');
             $query = $this->db->order_by('c.Jam','ASC');
-            $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.Hari,c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status, c.BatasPengecekan, c.StatusCheck, c.NIKP');
+            $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.Hari,c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status, c.BatasPengecekan, c.tingkatPengecekan, c.StatusCheck, c.NIKP');
              $query = $this->db->from('checklist c');
              $query = $this->db->join('pic p','p.NIK=c.NIK');
              $query = $this->db->get();
@@ -246,5 +246,11 @@ class mAdmin extends CI_Model
          $query = $this->db->join('checklist c','c.IDChecklist=p.IDChecklist');
          $query = $this->db->get();
          return $query->result_array();
+    }
+
+    public function getKriteria()
+    {
+        $query = $this->db->get('weightproduct');
+        return $query->result_array();
     }
 }

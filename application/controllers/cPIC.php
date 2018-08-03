@@ -258,7 +258,7 @@ class cPIC extends CI_Controller {
 		$this->mPIC->notifikasi('notifikasi', $notif);
 
 		//Menambahkan jumlah pengecekan pada PIC
-		$this->mPIC->tambahJumlah($NIK);
+		$this->mPIC->tambahJumlah($NIK, $IDChecklist);
 
 		echo "<script type='text/javascript'>
 		alert('Sukses Melakukan Pengecekan.');
@@ -277,7 +277,7 @@ class cPIC extends CI_Controller {
 
 			$NIK = "-";
 			$IDChecklist = $this->input->post('IDChecklist');
-			$namaPIC = "-";
+			$namaPIC = $this->input->post('NamaPIC');
 			$namaChecklist = $this->input->post('NamaChecklist');
 			$namaPICSebenarnya = "-";
 			$jam = $this->input->post('Jam');

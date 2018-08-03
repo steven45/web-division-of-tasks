@@ -41,6 +41,15 @@
         <option value="60">60 Menit</option>
       </select>
     </div>
+    <label>Tingkat Pengecekan</label>
+    <div class="field">
+      <select class="ui dropdown" name="TingkatPengecekan">
+        <option value="">Tingkat Pengecekan</option>
+        <option value="Mudah">Mudah</option>
+        <option value="Sedang">Sedang</option>
+        <option value="Sulit">Sulit</option>
+      </select>
+    </div>
     <div class="ui small field" >
       <label>Info Checklist</label>
       <input type="file" name="Info" id="fileToUpload">

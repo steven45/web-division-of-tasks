@@ -43,7 +43,7 @@
         </select>
       </div>
     <div class="field">
-      <label>Batas Waktu Pengecekan</label>
+      <label>Batas Pengecekan</label>
       <select class="ui dropdown" name="BatasPengecekan">
         <option value="<?php echo $checklist['BatasPengecekan'] ?>"><?php echo $checklist['BatasPengecekan'] ?> Menit</option>
         <option value="10">10 Menit</option>
@@ -52,6 +52,15 @@
         <option value="40">40 Menit</option>
         <option value="50">50 Menit</option>
         <option value="60">60 Menit</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Tingkat Pengecekan</label>
+      <select class="ui dropdown" name="TingkatPengecekan">
+        <option value="<?php echo $checklist['TingkatPengecekan'] ?>"><?php echo $checklist['TingkatPengecekan'] ?></option>
+        <option value="Mudah">Mudah</option>
+        <option value="Sedang">Sedang</option>
+        <option value="Sulit">Sulit</option>
       </select>
     </div>
     <div class="ui small field" >

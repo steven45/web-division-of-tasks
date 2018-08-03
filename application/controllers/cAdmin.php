@@ -222,6 +222,7 @@ class cAdmin extends CI_Controller {
 		$jam = $this->input->post('Jam');
 		$jam1 = $this->input->post('Jam1');
 		$batasPengecekan = $this->input->post('BatasPengecekan');
+		$tingkatPengecekan = $this->input->post('TingkatPengecekan');
 
 		$hari = array('Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu');
 		if ($jam == "Setiap Jam") {
@@ -257,6 +258,7 @@ class cAdmin extends CI_Controller {
 						'Jam' => $nJam,
 						'Status' => 'Enabled',
 						'BatasPengecekan' => $batasPengecekan,
+						'TingkatPengecekan' => $tingkatPengecekan,
 						'StatusCheck' => '0'
 					);
 
@@ -301,6 +303,7 @@ class cAdmin extends CI_Controller {
 							'Jam' => $nJam[$i],
 							'Status' => 'Enabled',
 							'BatasPengecekan' => $batasPengecekan,
+							'TingkatPengecekan' => $tingkatPengecekan,
 							'StatusCheck' => '0'
 						);
 						$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, substr($nJam[$i], 0,2), $hari[$j]);
@@ -545,57 +548,10 @@ class cAdmin extends CI_Controller {
 		$namaChecklist   = $this->input->post('NamaChecklist');
 		$jam             = $this->input->post('Jam');
 		$batasPengecekan = $this->input->post('BatasPengecekan');
+		$tingkatPengecekan = $this->input->post('TingkatPengecekan');
 		$hari = $this->input->post('Hari');
 
-		if (basename($_FILES["Info"]["name"] == NULL)) {
-			$data = array(
-				'BatasPengecekan' => $batasPengecekan,
-				'NamaChecklist'   => $namaChecklist,
-				'Jam'             => $jam.':00'
-			);
-			$data= $this->mAdmin->editChecklist('checklist', $data, $IDChecklist, $namaChecklist, $jam, $batasPengecekan, $hari);
-		}
-		else{
-			$target_dir = "assets/Checklist/";
-			$target_file = $target_dir .date('Ymdhis').'_'. basename($_FILES["Info"]["name"]);
-			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-			if ($imageFileType != 'txt') {
-				echo "<script type='text/javascript'>
-
-				alert('File yang anda masukkan bukan .txt!');
-				window.location.href = '" . base_url() . "admin/checklist';
-				</script>";
-			}
-			else{
-				$data = array(
-					'BatasPengecekan' => $batasPengecekan,
-					'Info' => $target_file,
-					'NamaChecklist' => $namaChecklist,
-					'Jam' => $jam.':00'
-				);
-
-				$data= $this->mAdmin->editChecklist('checklist', $data, $IDChecklist, $namaChecklist, $jam, $batasPengecekan, $hari);
-
-				if ($data == 1) {
-					move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
-				}
-			}
-		}
-		
-		if ($data == 1) {
-			echo "<script type='text/javascript'>
-			alert('Sukses Mengedit Checklist');
-			window.location.href = '" . base_url() . "admin/checklist';
-			</script>";
-		}
-		else{
-			echo "<script type='text/javascript'>
-			alert('Jam $jam:00 sudah ada');
-			window.location.href = '" . base_url() . "admin/checklist';
-			</script>";
-		}
-		
 	}
 
 	public function lihatInfoChecklist($IDChecklist)
@@ -1094,23 +1050,48 @@ class cAdmin extends CI_Controller {
 		$data['judul'] = "Ranking PIC";
 		$data['pic'] = $this->mAdmin->getPIC();
 
-		$jumlahCek = [];
-		$jabatan = [];
-		$nilaiJabatan = [];
-		$lamaKerja = [];
-		$nilaiLamaKerja = [];
-		$checklist = [80, 60, 60, 60, 80, 60, 100, 60,80, 60, 60, 60, 60];
+
 		$jumlah = count($data['pic']);
 		$temp = 0;
+
+		$maxMudah = $data['pic'][0]['JMudah'];
+		$maxSedang = $data['pic'][0]['JSedang'];
+		$maxSulit = $data['pic'][0]['JSulit'];	
+
+		foreach ($data['pic'] as $pic) {
+			if ($pic['JMudah'] > $maxMudah) {
+				$maxMudah = $pic['JMudah'];
+			}
+			if ($pic['JSedang'] > $maxSedang) {
+				$maxSedang = $pic['JSedang'];
+			}
+			if ($pic['JSulit'] > $maxSulit) {
+				$maxSulit = $pic['JSulit'];
+			}
+		}
 
 		foreach ($data['pic'] as $pic) {
 			$nama[$temp] = $pic['NamaPIC'];
 			$jumlahCek[$temp] = $pic['JumlahPengecekan'];
 			$jabatan[$temp] = $pic['Jabatan'];
 			$lamaKerja[$temp] = (date("Y")) - $pic['TahunMasuk'];
+			$rataChecklist[$temp] = ($pic['JMudah']/$maxMudah*20)+($pic['JSedang']/$maxSedang*30)+($pic['JSulit']/$maxSulit*50);
 			$temp = $temp+1;
 		}
+
 		
+		for ($i=0; $i < count($rataChecklist) ; $i++) { 
+			if ($rataChecklist[$i] < 60) {
+				$checklist[$i] = 60;
+			}
+			elseif ($rataChecklist[$i] >= 60 && $rataChecklist[$i] < 80) {
+				$checklist[$i] = 80;
+			}
+			else{
+				$checklist[$i] = 100;
+			}
+		}
+
 		for ($i=0; $i < count($jabatan) ; $i++) { 
 			if($jabatan[$i] == 'Staff'){
 				$nilaiJabatan[$i] = 80;
@@ -1126,7 +1107,7 @@ class cAdmin extends CI_Controller {
 			}
 			else if($lamaKerja[$j] < 7){
 				$nilaiLamaKerja[$j]= 55;
-				}
+			}
 			else if($lamaKerja[$j] < 10){
 				$nilaiLamaKerja[$j] = 70;
 			}
@@ -1135,34 +1116,50 @@ class cAdmin extends CI_Controller {
 			}
 		}
 
-		//kriteria
-		$kriteria = ['Jumlah Pengecekan', 'Jabatan', 'Checklist', 'Masa Kerja'];
-		$bobot = [0.5, 0.15, 0.2, 0.15];
-		$hasilS = [];
-		$hasilV = [];
-		$jumlahS = 0;
-		$sort = [];
+		// echo "<table border ='1px'>";
+		// echo "<tr><td>Nama</td> <td>Jumlah Pengecekan</td><td>Jabatan</td><td>Checklist</td><td>Lama Kerja</td><td>";
+		// for ($i=0; $i < count($data['pic']); $i++) { 
+		// 	echo "<tr><td>".$nama[$i] ."</td> <td>". $jumlahCek[$i] ."</td><td>". $nilaiJabatan[$i] ."</td><td>". $checklist[$i] ."</td><td>". $nilaiLamaKerja[$i] ."</td><td>";
+		// }
+		// echo "</table>";
 
+		//kriteria
+		$data['kriteria'] = $this->mAdmin->getKriteria();
+		for ($i=0; $i < count($data['kriteria']); $i++) { 
+			$kriteria[$i] = $data['kriteria'][$i]['NamaParameter'];
+			$bobot[$i] = $data['kriteria'][$i]['Bobot'];
+		}
+
+		$jumlahS = 0;
 		
 		for ($k=0; $k < count($data['pic']) ; $k++) { 
 			$hasilS[$k] = pow($jumlahCek[$k],$bobot[0])* pow($nilaiJabatan[$k],$bobot[1])* pow($checklist[$k],$bobot[2])* pow($nilaiLamaKerja[$k],$bobot[3]);
 
-				$jumlahS = $jumlahS + $hasilS[$k];		
-			}
+			$jumlahS = $jumlahS + $hasilS[$k];		
+		}
 
 		for ($m=0; $m < count($data['pic']) ; $m++) { 
 			$hasilV[$m] = $hasilS[$m] / $jumlahS;
-			}
+		}
 
-		// foreach ($data as $key => $value) {
-		// 	# code...
-		// }
 		for ($i=0; $i < count($hasilV); $i++) { 
 			$hasilAkhir[$i]['nama'] = $nama[$i];
 			$hasilAkhir[$i]['hasilV'] = $hasilV[$i];
 		}
-		// echo json_encode($nama);	
-		echo json_encode($hasilAkhir);
+
+
+		$jumlahSel = 0;
+		for ($i=0; $i < count($data['pic']); $i++) { 
+			$selisihHasil[$i] = 1-$hasilV[$i];
+			$jumlahSel = $jumlahSel+$selisihHasil[$i];
+		}
+
+		for ($i=0; $i < count($data['pic']); $i++) { 
+			$jumJadwal[$i] = $selisihHasil[$i]/$jumlahSel*100;
+		}
+
+		var_dump($selisihHasil);
+		// echo json_encode($hasilAkhir);
 
 
 
@@ -1178,16 +1175,6 @@ class cAdmin extends CI_Controller {
 		// 	// echo $hasilV[$no]."<br";
 		// 	$no = $no+1;
 		// }
-		
-
-
-		// header("Content-type:application/json");
-		// echo json_encode($data['pic']);
-
-		
-		// $this->load->view('vAdmin/vTemplate/vHeaderAdmin');
-		// $this->load->view('vAdmin/vRankingPIC');
-		// $this->load->view('vAdmin/vTemplate/vFooterAdmin');
 
 
 	}
