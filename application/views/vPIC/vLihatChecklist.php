@@ -143,6 +143,12 @@
                   <option value="Bad">Bad</option>
                 </select>
               </div>
+              <h3>Bukti Pengecekan (Screenshot)</h3>
+            <div class="ui form">
+              <div class="field">
+              <input type="file" name="buktiCek" id="fileToUpload">
+              </div>
+           </div>
               <h3>Keterangan</h3>
               <div class="ui form">
                 <div class="field">
