@@ -28,7 +28,7 @@
                     </select>
                   </div> -->
 
-                  <div class="field" style="margin-left: 600px; margin-top: 5px" >
+                  <div class="field" style="margin-left: 78%; margin-top: 5px" >
                     <select class="ui right selection tiny dropdown item" id="hari" >
                       <!-- <option value="<?php echo $hari; ?>"><?php echo $hari; ?></option>         -->
                       <option value="<?php echo $hari ?>"><?php echo $hari ?></option>
@@ -49,14 +49,14 @@
                         <th>Hari</th>
                         <th >Jadwal</th>
                         <th>Batas Pengecekan</th>
-                        <th >Nama Checklist</th>
+                        <th style="width: 300px;">Nama Checklist</th>
                         <th>Nama PIC</th>
                         <th >Info Checklist</th>
                         <th >Check</th>
 
                       </tr>
                     </thead>
-                    <tbody id="hasil">
+                    <tbody id="hasil" style="text-align: center;">
                       <?php $temp = 0; $no = 0; ?>
                       <?php foreach ($checklist as $checklist) { ?>
 <!--       <?php if ($checklist['Status'] == $status) { ?>

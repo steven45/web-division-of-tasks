@@ -24,7 +24,7 @@
         		</td>
         		<td>
         			<div class="ui input">
-        			<input type="text" name="<?php echo 'Bobot'.$temp ?>" value="<?php echo $wp['Bobot']; ?>" >
+        			<input type="number" name="<?php echo 'Bobot'.$temp ?>" value="<?php echo $wp['Bobot']; ?>" >
         		</div>
         		</td>
         	</tr>

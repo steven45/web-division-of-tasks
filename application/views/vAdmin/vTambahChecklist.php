@@ -51,7 +51,7 @@
       </select>
     </div>
     <div class="ui small field" >
-      <label>Instruksi Pengerjaan</label>
+      <label>Instruksi Pengerjaan (.txt)</label>
       <input type="file" name="Info" id="fileToUpload">
     </div>    
 
