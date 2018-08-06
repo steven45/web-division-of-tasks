@@ -20,6 +20,8 @@ $route['admin/validasitambahpic'] = 'cAdmin/validasiTambahPIC';
 $route['admin/editpic/(:any)'] = 'cAdmin/editPIC/$1';
 $route['admin/validasieditpic'] = 'cAdmin/validasiEditPIC';
 $route['admin/hapuspic'] = 'cAdmin/hapusPIC';
+$route['admin/ubahshift'] = 'cAdmin/ubahJadwalShift';
+
 
 //CRUD CHECKLIST
 $route['admin/checklist'] = 'cAdmin/lihatChecklist';
@@ -47,6 +49,8 @@ $route['admin/log'] = 'cAdmin/lihatLog';
 $route['admin/jLog'] = 'cAdmin/jLihatLog';
 $route['admin/gantipiclog'] = 'cAdmin/gantiPICLog';
 
+//BOBOT WEIGHTED PRODUCT
+$route['admin/ubahbobotwp'] = 'cAdmin/bobotWP';
 
 
 //<-- HALAMAN PIC -->

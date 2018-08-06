@@ -1,4 +1,5 @@
-<div class="ui two column centered grid">
+
+  <div class="ui two column centered grid">
   <div class="column" style="width: auto;">
     <div class="ui segment" style="border-radius: 1.285714rem">
 
@@ -28,8 +29,8 @@
                     </select>
                   </div> -->
 
-                  <div class="field" style="margin-left: 600px; margin-top: 5px" >
-                    <select class="ui right selection tiny dropdown item" id="hari" >
+                  <div class="field" style="margin-left: 80%; margin-top: 5px; position: relative; display: flex;" >
+                    <select class="ui right selection tiny dropdown item" id="hari" style="margin-left: 80%;display: flex;position: relative;">
                       <!-- <option value="<?php echo $hari; ?>"><?php echo $hari; ?></option>         -->
                       <option value="<?php echo $hari ?>"><?php echo $hari ?></option>
                       <option value="Senin">Senin</option>
@@ -51,12 +52,12 @@
                         <th>Batas Pengecekan</th>
                         <th >Nama Checklist</th>
                         <th>Nama PIC</th>
-                        <th >Info Checklist</th>
+                        <th >Instruksi Pengerjaan</th>
                         <th >Check</th>
 
                       </tr>
                     </thead>
-                    <tbody id="hasil">
+                    <tbody style="text-align: center;" id="hasil">
                       <?php $temp = 0; $no = 0; ?>
                       <?php foreach ($checklist as $checklist) { ?>
 <!--       <?php if ($checklist['Status'] == $status) { ?>
@@ -68,6 +69,7 @@
 
           <?php  
           if ($checklist['Status'] == $status) {
+
               if ($checklist['StatusCheck'] == '1') { ?>
                 <tr style="background-color: #AFEEEE" class="hasilku" id="<?php echo 'hasilQ'.$temp; ?>">
               <?php }
@@ -82,7 +84,7 @@
 
           <td><?php echo $nomor[$temp] ; $no = $no+1;?></td>
           <td class="hari"><?php echo $checklist['Hari']; ?></td>
-          <input type="hidden"  class="statusCheck" value="<?php echo $checklist['StatusCheck'] ?>" id="<?php echo "sttsCheck".$temp ?>">
+          <input type="hidden"  class="statusCheck" value="<?php echo $checklist['StatusCheck'] ?>">
           <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
           <input class="info" type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
           <td class="time"><?php echo $checklist['Jam']; ?></td>
@@ -110,7 +112,7 @@
            <a href="#" data-featherlight=" <?php echo '#bio-name'.$temp ?>">Lihat</a>
            <div style="display:none;">
             <div id="<?php echo 'bio-name'.$temp ?>">
-              <h3>Info Checklist</h3>
+              <h3>Instruksi Pengerjaan</h3>
               <div class="ui segment">
                <?php foreach ($nInfo as $info) {
                 echo '<p>'.$info.'</p>';
@@ -125,7 +127,6 @@
         <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
         <div style="display:none;">
           <div id="<?php echo 'tampilKet'.$temp ?>">
-
             <form method="POST" class="form-check" target="<?php $temp; ?>">  
               <input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>">
               <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
@@ -149,7 +150,9 @@
                </div>
              </div>
              <br>
-            <a class="tSimpan ui right floated blue small button"><i class="save icon" target="<?php echo $temp; ?>" ></i>Simpan</a>
+             <button class="ui right floated blue small button" >
+              <i class="save icon"></i>Simpan
+            </button>
           </form>
         </div>
       </div>
@@ -180,24 +183,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
     <script type="text/javascript">
-      $(".tSimpan").click(function(){
-        var data = $('.form-check').serialize();
-        $.ajax({
-          type: 'POST',
-          url: "<?php echo site_url('pic/docheck'); ?>",
-          data: data,
-          success: function() {
-            jQuery('#hasilQ' + $('.tSimpan').attr('target')).css("background-color","#AFEEEE");
-            jQuery('#sttsCheck' + $('.tSimpan').attr('target')).val("1");
-            jQuery('#' + $('.tSimpan').attr('target')).text("Disabled");
-            alert("Checklist sukses");
-            var current = $.featherlight.current();
-            current.close();
-          }
-        });
-      });
-    </script>
-    <script type="text/javascript">
+
       var interval = setInterval(myTimer,1000);
 
       function myTimer(){
@@ -256,6 +242,8 @@
           var hariSekarang = "Sabtu";
         }
 
+
+
         var x = document.getElementsByClassName("time");
         for(var j = 0; j < x.length; j++){
           time[j] =  document.getElementsByClassName("time")[j].innerHTML;
@@ -285,27 +273,53 @@
       jHariS = i+1;
     }
   }
-  // console.log(jHariS);
+  console.log(jHariS);
 
-  /*
-  Rule pewarnaan pada baris checklist :
-  1. Membuat perulangan pada setiap baris checklist
-  2. Jika hari adalah hari sekarang dan status check 0 (belum dicek)
-    2A. Jika selisih dari antara jam pada baris dan jam sekarang > 0 dan masih dibawah batas pengecekan buat kedip-kedip warna baris hijau
-    2B. Jika selisih dari antara jam pada baris dan jam sekarang sudah melebihi batas pengcekan maka buat kedip-kedip warna kuning
-    2C. Melakukan perulangan untuk mengecek apakah checklist pada baris tersebut sudah melampaui checklist berikutnya atau belum
-      2CA. Mengecek baris J dengan kondisi :
-           - Baris J apakah nama checklistnya sama atau tidak dengan baris K  
-           - Pada baris K selisihnya antara jam sekarang dengan jam pada baris tersebut apakah > 0 
-           - Warna background nya bukan merah
-           Jika kondisi terpenuhi maka buat warna baris J menjadi merah
-           2CAA. Jika warna baris K adalah merah maka buat status check menjadi 2 dan simpan di database
-  3. Jika hari adalah hari sekarang dan status adalah check 2 (tidak dicek) maka tidak bisa mengecek lagi
-  4. Jika hari adalah hari sekarang dan status adalah check 1 (sudah dicek) maka tidak bisa mengecek lagi
-  5. Jika hari tidak hari sekarang maka tidak bisa dicek
-  */
-  for (var j = 0; j < row.length; j++) { // 1
+  // for (var i = 0; i < row.length; i++) {
+
+  //   if((selisih[i]*(-1)) > 0 && (selisih[i]*(-1)) < batasP[i] && statusCheck[i] == "0" && hari[i] == hariSekarang){
+
+  //     f[i] = document.getElementsByClassName('hasilku')[i];
+  //     f[i].style.backgroundColor = (f[i].style.backgroundColor == 'mediumseagreen' ? '' : 'mediumseagreen');
+  //   }
+
+  //   else if ((selisih[i]*(-1)) > batasP[i] && statusCheck[i] == "0" && hari[i] == hariSekarang) {
+  //     f[i] = document.getElementsByClassName('hasilku')[i];
+  //     f[i].style.backgroundColor = (f[i].style.backgroundColor == 'gold' ? '' : 'gold');
+  //   }
+  // }
+
+
+  // for (var j = 0; j < row.length; j++) {
+  //   if (hari[j] == hariSekarang) {
+  //     console.log(j);
+  //     for (var k = j+1; k < jHariS; k++) {
+  //       f[j] = document.getElementsByClassName('hasilku')[j];
+  //       f[k] = document.getElementsByClassName('hasilku')[k];
+  //       console.log(hari[j]+" :: "+time[j]+" - "+f[j].style.backgroundColor+" - "+ namaChecklist[j]+" == "+hari[k]+" :: "+time[k]+" - "+ namaChecklist[k]+" - "+ f[k].style.backgroundColor);
+  //       // console.log(f[j].style.backgroundColor);
+  //       if (namaChecklist[j] == namaChecklist[k] && statusCheck[j] == "0" && (f[k].style.backgroundColor == 'gold' ||f[k].style.backgroundColor == 'mediumseagreen')) {
+  //         f[j].style.backgroundColor = 'tomato';
+  //         console.log('Ubah Warna Menjadi merah');
+  //         // $.post("<?php echo site_url('pic/nocheck'); ?>",
+  //         // {
+  //         //   statusCheck : statusCheck[j],
+  //         //   IDChecklist: idChecklist[j],
+  //         //   NamaChecklist: namaChecklist[j],
+  //         //   Jam : time[j],
+  //         //   Info : info[j],
+  //         //   Hari : hari[j],
+  //         // }
+  //         // );
+  //       }
+  //     } 
+  //   }
+  // }
+  for (var j = 0; j < row.length; j++) {
     f[j] = document.getElementsByClassName('hasilku')[j];
+    console.log(j);
+    console.log(f[j].style.backgroundColor);
+
 
     if (hari[j] == hariSekarang && (selisih[j]*(-1)) < 0) {
       document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
@@ -349,22 +363,20 @@
       
       if((selisih[j]*(-1)) > 0 && (selisih[j]*(-1)) < batasP[j] ){ // 2A
         f[j].style.backgroundColor = (f[j].style.backgroundColor == 'mediumseagreen' ? '' : 'mediumseagreen');
-        console.log(f[j].style.backgroundColor);
       }
 
-      else if ((selisih[j]*(-1)) > batasP[j]) { // 2B
+      else if ((selisih[j]*(-1)) > batasP[j]) {
         f[j].style.backgroundColor = (f[j].style.backgroundColor == 'gold' ? '' : 'gold');
-        console.log(f[j].style.backgroundColor);
       }
 
-      for (var k = j+1; k < jHariS; k++) { //2C
-        if (namaChecklist[j] == namaChecklist[k] && (selisih[k]*-1)>0 &&f[j].style.backgroundColor != 'tomato') { //2CA
+      for (var k = j+1; k < jHariS; k++) {
+        if (namaChecklist[j] == namaChecklist[k] && (selisih[k]*-1)>0 &&f[j].style.backgroundColor != 'tomato') {
           // console.log(time[k] +" = "+ (selisih[k]*-1));
           console.log("Awalanya colornya : " +f[j].style.backgroundColor)
           f[j].style.backgroundColor = 'tomato';
           console.log(hari[j]+" :: "+time[j]+" - "+ namaChecklist[j]+" == "+hari[k]+" :: "+time[k]+" - "+ namaChecklist[k]+" MAKA UBAH JADI "+ f[j].style.backgroundColor);
 
-          if (f[j].style.backgroundColor == 'tomato') { //2CAA
+          if (f[j].style.backgroundColor == 'tomato') {
             console.log("Kalau warnanya tomato maka kirim ke tabel log dan status check ganti 2");
             document.getElementsByClassName("statusCheck")[j].value = "2";
             document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
@@ -383,20 +395,24 @@
             );
           }
         }
+
       }
     } 
-    else if(hari[j] == hariSekarang && statusCheck[j] == "2"){ // 3
+    else if(hari[j] == hariSekarang && statusCheck[j] == "2"){
       document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
     }
-    else if(hari[j] == hariSekarang && statusCheck[j] == "1"){ // 4
+    else if(hari[j] == hariSekarang && statusCheck[j] == "1"){
       document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
       f[j].style.backgroundColor = '#AFEEEE';
     }
-    else if(hari[j] != hariSekarang){ // 5
+    else if(hari[j] != hariSekarang){
       document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
     }
   }
+
   }//Akhir Method myTimer
+
+  
 
 </script>
 

@@ -204,6 +204,30 @@
           </div>
         </div>
 
+        <div class="ui dropdown item">
+          <i class="setting icon"></i>
+          Settings
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <a class="item" href="<?php echo site_url('admin/ubahbobotwp'); ?>">
+            Ubah Bobot WP</a>
+            <a class="item" href="<?php echo site_url('admin/ubahshift'); ?>">
+            Ubah Jadwal Shift PIC</a>
+          </div>
+        </div>
+
+
+
+
+        <!-- <form method="POST" action="<?php echo site_url('admin/bobotwp'); ?>">
+        <div class="item" style="align-items: center; margin-top: 3px ">
+            <button class="ui grey button" >
+              <i class="setting icon"></i>
+              Setting
+            </button>
+          </div>
+        </form> -->
+
         <a href="<?php echo site_url('admin/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
           <div class="item" style="margin-top: 3px ">
             <div class="ui teal button">

@@ -1256,4 +1256,20 @@ class cAdmin extends CI_Controller {
 		$this->load->view('vAdmin/vUbahPassword');
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
+
+	public function bobotWP()
+	{
+		$data['judul'] = "Ubah Bobot Weighted Product";
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		$this->load->view('vAdmin/vBobotWP');
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
+	public function ubahJadwalShift()
+	{
+		$data['judul'] = "Ubah Jadwal Shift PIC";
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		$this->load->view('vAdmin/vJadwalShiftPIC');
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
 }
