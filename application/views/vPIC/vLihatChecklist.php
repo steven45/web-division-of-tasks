@@ -49,8 +49,8 @@
                         <th class="sorted ascending">No</th>
                         <th>Hari</th>
                         <th >Jadwal</th>
-                        <th>Batas Pengecekan</th>
-                        <th >Nama Checklist</th>
+                        <th >Batas Pengecekan</th>
+                        <th style="width: 300px;">Nama Checklist</th>
                         <th>Nama PIC</th>
                         <th >Instruksi Pengerjaan</th>
                         <th >Check</th>
