@@ -255,4 +255,20 @@ class mAdmin extends CI_Model
         $query = $this->db->get('weightproduct');
         return $query->result_array();
     }
+
+    public function gantiBobotWP($table, $data, $IDParameter )
+    {
+
+        $this->db->where('IDParameter', $IDParameter);
+        $this->db->update($table, $data);
+    }
+
+    public function gantiJadwal($table, $data, $IDJadwal )
+    {
+
+        $this->db->where('IDJadwal', $IDJadwal);
+        $this->db->update($table, $data);
+    }
+
+
 }

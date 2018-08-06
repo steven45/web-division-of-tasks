@@ -6,7 +6,7 @@
 	  		<i class="setting icon"></i>
 			Jadwal Shift PIC</div></h3>
 			<div class="ui divider"></div>
-			<table class="ui compact celled definition table" id="example">
+			<table class="ui compact celled table" id="example">
         <thead class="full-width" style="text-align: center; background-color: #dbedff">
           <tr>
             <th class="">Shift</th>
@@ -14,27 +14,26 @@
             </tr>
         </thead>
         <tbody style="text-align: center;">
-        	<tr>
-        		<td>
-        			1
-        		</td>
-        		<td>
-        			<div class="ui input">
-        			<input type="text">
-        		</div>
-        		</td>
-        	</tr>
-        	<tr>
-        		<td>
-        			2
-        		</td>
-        		<td>
-        			<div class="ui input">
-        			<input type="text">
-        		</div>
-        		</td>
-        	</tr>
+            <form method="POST" action="<?php echo site_url('admin/gantijadwal'); ?>">
+            <?php $temp = 0; ?>
+            <?php foreach ($jadwal as $jadwal) { ?>
+                <tr>
+                <td>
+                    <?php echo $jadwal['Shift']; ?>
+                    <input type="hidden" name="<?php echo 'IDJadwal'.$temp ?>" value="<?php echo $jadwal['IDJadwal']; ?>">
+                </td>
+                <td>
+                    <div class="ui input">
+                    <input type="text" name="<?php echo 'Jam'.$temp ?>" value="<?php echo $jadwal['Jam']; ?>" >
+                </div>
+                </td>
+            </tr>
+            <?php $temp = $temp + 1;
+             } ?>
+             <input type="hidden" name="temp" value="<?php echo $temp ?>">
+
         	
+
         </tbody>
         <tfoot class="full-width">
       <tr>
@@ -44,6 +43,7 @@
           <button class="ui right floated blue small button" style="margin-top: 5px;">
             <i class="save icon"></i>Simpan
           </button>
+      </form>
           
         </th>
 
