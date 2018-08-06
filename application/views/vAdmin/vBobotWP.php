@@ -6,7 +6,7 @@
 	  		<i class="setting icon"></i>
 			Bobot Weighted Product</div></h3>
 			<div class="ui divider"></div>
-			<table class="ui compact celled definition table" id="example">
+			<table class="ui compact celled table">
         <thead class="full-width" style="text-align: center; background-color: #dbedff">
           <tr>
             <th class="">Nama Parameter</th>
@@ -14,27 +14,23 @@
             </tr>
         </thead>
         <tbody style="text-align: center;">
-        	<tr>
+        	<form method="POST" action="<?php echo site_url('admin/gantibobotwp'); ?>">
+        	<?php $temp = 0; ?>
+        	<?php foreach ($wp as $wp) { ?>
+        		<tr>
         		<td>
-        			Checklist
+        			<?php echo $wp['NamaParameter']; ?>
+        			<input type="hidden" name="<?php echo 'IDParameter'.$temp ?>" value="<?php echo $wp['IDParameter']; ?>">
         		</td>
         		<td>
         			<div class="ui input">
-        			<input type="text">
+        			<input type="text" name="<?php echo 'Bobot'.$temp ?>" value="<?php echo $wp['Bobot']; ?>" >
         		</div>
         		</td>
         	</tr>
-        	<tr>
-        		<td>
-        			Masa Kerja
-        		</td>
-        		<td>
-        			<div class="ui input">
-        			<input type="text">
-        		</div>
-        		</td>
-        	</tr>
-        	
+        	<?php $temp = $temp + 1;
+        	 } ?>
+        	 <input type="hidden" name="temp" value="<?php echo $temp ?>"> 	
         </tbody>
         <tfoot class="full-width">
       <tr>
@@ -44,6 +40,7 @@
           <button class="ui right floated blue small button" style="margin-top: 5px;">
             <i class="save icon"></i>Simpan
           </button>
+      </form>
           
         </th>
 

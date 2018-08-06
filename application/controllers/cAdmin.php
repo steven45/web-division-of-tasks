@@ -1260,6 +1260,7 @@ class cAdmin extends CI_Controller {
 	public function bobotWP()
 	{
 		$data['judul'] = "Ubah Bobot Weighted Product";
+		$data['wp'] = $this->mAdmin->getKriteria();
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vBobotWP');
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
@@ -1268,8 +1269,55 @@ class cAdmin extends CI_Controller {
 	public function ubahJadwalShift()
 	{
 		$data['judul'] = "Ubah Jadwal Shift PIC";
+		$data['jadwal'] = $this->mAdmin->getJadwal();
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vJadwalShiftPIC');
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
+	public function gantiBobotWP()
+	{
+		$temp= $this->input->post('temp');
+
+		for ($i=0; $i < $temp ; $i++) { 
+			$IDParameter[$i]	= $this->input->post('IDParameter'.$i);
+			$bobot[$i]			= $this->input->post('Bobot'.$i);
+		}
+		for ($i=0; $i < $temp; $i++) { 
+			$data = array(
+				'Bobot' => $bobot[$i]
+			);
+
+			$this->mAdmin->gantiBobotWP('weightproduct',$data, $IDParameter[$i]);
+		}
+
+		echo "<script type='text/javascript'>
+			alert('Sukses Mengganti Bobot. ');
+			window.location.href = '" . base_url() . "admin/ubahbobotwp';
+			</script>";
+		
+	}
+
+	public function gantiJadwal()
+	{
+		$temp= $this->input->post('temp');
+
+		for ($i=0; $i < $temp ; $i++) { 
+			$IDJadwal[$i]	= $this->input->post('IDJadwal'.$i);
+			$jam[$i]		= $this->input->post('Jam'.$i);
+		}
+		for ($i=0; $i < $temp; $i++) { 
+			$data = array(
+				'Jam' => $jam[$i]
+			);
+
+			$this->mAdmin->gantiJadwal('jadwal',$data, $IDJadwal[$i]);
+		}
+
+		echo "<script type='text/javascript'>
+			alert('Sukses Mengganti Jadwal Shift. ');
+			window.location.href = '" . base_url() . "admin/ubahshift';
+			</script>";
+
 	}
 }

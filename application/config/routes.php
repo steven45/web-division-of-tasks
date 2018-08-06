@@ -21,6 +21,8 @@ $route['admin/editpic/(:any)'] = 'cAdmin/editPIC/$1';
 $route['admin/validasieditpic'] = 'cAdmin/validasiEditPIC';
 $route['admin/hapuspic'] = 'cAdmin/hapusPIC';
 $route['admin/ubahshift'] = 'cAdmin/ubahJadwalShift';
+$route['admin/gantijadwal'] = 'cAdmin/gantiJadwal';
+
 
 
 //CRUD CHECKLIST
@@ -51,6 +53,7 @@ $route['admin/gantipiclog'] = 'cAdmin/gantiPICLog';
 
 //BOBOT WEIGHTED PRODUCT
 $route['admin/ubahbobotwp'] = 'cAdmin/bobotWP';
+$route['admin/gantibobotwp'] = 'cAdmin/gantiBobotWP';
 
 
 //<-- HALAMAN PIC -->
