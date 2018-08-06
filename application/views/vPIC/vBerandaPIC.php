@@ -18,7 +18,7 @@
         <div class="ui right calendar" style="margin-left: 765px; margin-top: -45px">
           <div class="ui input left icon">
             <i class="calendar icon"></i>
-            <input type="date" value="<?php echo date('20y-m-d') ?>">
+            <input type="date" value="<?php echo date('20y-m-d') ?>" id="kalender">
           </div>
       </div>
       </div>
@@ -39,7 +39,7 @@
             <th>Keterangan</th>
             </tr>
           </thead>
-          <tbody id="hasil">
+          <tbody id="hasilLog">
             <?php $temp = 1; ?>
             <?php foreach ($log as $log): ?>
                 <tr>
@@ -109,3 +109,17 @@
     </div>
   </div>
 </div>
+
+
+<script type="text/javascript">
+  kalender =  $('#kalender').val();
+  $("#hasilLog tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(kalender) > -1);
+  });
+  $('#kalender').on("change",function(){
+    kalender =  $('#kalender').val();
+    $("#hasilLog tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(kalender) > -1);
+    });
+  }); 
+</script>

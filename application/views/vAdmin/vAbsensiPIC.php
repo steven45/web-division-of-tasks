@@ -110,9 +110,9 @@
               <?php for ($j=0; $j < count($pic[$i]); $j++) { ?>
                 <?php if ($absensi['NIKP'] != '0') { ?>
                   <option value="<?php echo $absensi['NIKP'] ?>"><?php echo $absensi['NamaPICP'] ?></option>
-                <?php } ?> 
+                <?php } else{?> 
                 <option value="<?php echo $pic[$i][$j]["NIK"]; ?>"><?php echo $pic[$i][$j]["NamaPIC"]; ?></option>
-              <?php } ?>
+              <?php }} ?>
                 <!-- <?php if ($absensi['Kehadiran'] == "Hadir") { ?>
                 <option value="<?php echo $absensi['Kehadiran']; ?>"><?php echo $absensi['Kehadiran']; ?></option>
                 <option value="Tidak Hadir">Tidak Hadir</option>

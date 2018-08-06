@@ -174,15 +174,15 @@
         var checkTime = moment('13:00', 'hh:mm');
         var duration = moment.duration(checkTime.diff(nowTime));
 
-        console.log('now time', nowTime);
-        console.log('now day', nowDay);
-        console.log('check time', checkTime);
-        console.log('duration in hours', duration.asHours());
-        console.log('duration in minutes', duration.asMinutes());
-        console.log(moment().format());
+        // console.log('now time', nowTime);
+        // console.log('now day', nowDay);
+        // console.log('check time', checkTime);
+        // console.log('duration in hours', duration.asHours());
+        // console.log('duration in minutes', duration.asMinutes());
+        // console.log(moment().format());
 
         var row = document.querySelectorAll("table#mytable>tbody#hasil>tr");
-        console.log(row);
+        // console.log(row);
         var time = [];
         var namaChecklist = [];
         var idChecklist = [];
@@ -219,10 +219,10 @@
 
 
         var x = document.getElementsByClassName("time");
-        console.log(x);
+        // console.log(x);
         for(var j = 0; j < x.length; j++){
           time[j] =  document.getElementsByClassName("time")[j].innerHTML;
-          console.log(time[j]);
+          // console.log(time[j]);
           // namaChecklist[j] =  document.getElementsByClassName("namaChecklist")[j].innerHTML;
           hari[j] =  document.getElementsByClassName("hari")[j].innerHTML;
           // // statusCheck[j] = document.getElementsByClassName("statusCheck")[j].value;
@@ -235,11 +235,11 @@
 
         }
 
-  console.log(row);
-  console.log(time);
-  console.log(selisih);
-  console.log(batasP);
-  console.log(hari);
+  // console.log(row);
+  // console.log(time);
+  // console.log(selisih);
+  // console.log(batasP);
+  // console.log(hari);
   var f = [];
   // var cJumlah = 0;
 

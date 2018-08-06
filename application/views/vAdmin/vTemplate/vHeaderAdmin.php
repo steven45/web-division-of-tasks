@@ -67,7 +67,7 @@
         });
       </script> -->
 
-      <script type="text/javascript">
+      <!-- <script type="text/javascript">
         $(document).ready(function(){
           var txt= ""; var a = "";
           var kalender = $("#kalender").val();
@@ -112,7 +112,7 @@
       });
     }); 
   }); 
-  </script>
+  </script> -->
 
 
 

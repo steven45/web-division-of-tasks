@@ -1,0 +1,3 @@
+Proses	: P1A^BIC-SV-ACEH
+Station	: S1A^TCP-SVACEH1
+Line	: L1A^TCP-SVACEH1

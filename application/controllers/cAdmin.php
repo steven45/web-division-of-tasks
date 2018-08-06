@@ -275,8 +275,8 @@ class cAdmin extends CI_Controller {
 				</script>";
 			}
 			else{
-				$nJam = str_replace(",","",$jam1);
-				$nJam = explode(" ",$nJam);
+				$nJam = str_replace(" ","",$jam1);
+				$nJam = explode(",",$nJam);
 				//Menyimpan target direktori
 				$target_dir = "assets/Checklist/";
 				$target_file = $target_dir .date('Ymdhis').'_'. basename($_FILES["Info"]["name"]);
@@ -551,6 +551,56 @@ class cAdmin extends CI_Controller {
 		$tingkatPengecekan = $this->input->post('TingkatPengecekan');
 		$hari = $this->input->post('Hari');
 
+		if (basename($_FILES["Info"]["name"] == NULL)) {
+			$data = array(
+				'BatasPengecekan' => $batasPengecekan,
+				'NamaChecklist'   => $namaChecklist,
+				'TingkatPengecekan' => $tingkatPengecekan,
+				'Jam'             => $jam.':00'
+			);
+			$data= $this->mAdmin->editChecklist('checklist', $data, $IDChecklist, $namaChecklist, $jam, $batasPengecekan, $hari);
+		}
+		else{
+			$target_dir = "assets/Checklist/";
+			$target_file = $target_dir .date('Ymdhis').'_'. basename($_FILES["Info"]["name"]);
+			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+			if ($imageFileType != 'txt') {
+				echo "<script type='text/javascript'>
+
+				alert('File yang anda masukkan bukan .txt!');
+				window.location.href = '" . base_url() . "admin/checklist';
+				</script>";
+			}
+			else{
+				$data = array(
+					'BatasPengecekan' => $batasPengecekan,
+					'Info' => $target_file,
+					'NamaChecklist' => $namaChecklist,
+					'TingkatPengecekan' => $tingkatPengecekan,
+					'Jam' => $jam.':00'
+				);
+
+				$data= $this->mAdmin->editChecklist('checklist', $data, $IDChecklist, $namaChecklist, $jam, $batasPengecekan, $hari);
+
+				if ($data == 1) {
+					move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
+				}
+			}
+		}
+		
+		if ($data == 1) {
+			echo "<script type='text/javascript'>
+			alert('Sukses Mengedit Checklist');
+			window.location.href = '" . base_url() . "admin/checklist';
+			</script>";
+		}
+		else{
+			echo "<script type='text/javascript'>
+			alert('Jam $jam:00 sudah ada');
+			window.location.href = '" . base_url() . "admin/checklist';
+			</script>";
+		}
 
 	}
 
@@ -1158,8 +1208,8 @@ class cAdmin extends CI_Controller {
 			$jumJadwal[$i] = $selisihHasil[$i]/$jumlahSel*100;
 		}
 
-		var_dump($selisihHasil);
-		// echo json_encode($hasilAkhir);
+		// var_dump($selisihHasil);
+		echo json_encode($hasilAkhir);
 
 
 
@@ -1181,7 +1231,8 @@ class cAdmin extends CI_Controller {
 
 	public function tampilRangking()
 	{
-		$this->load->view('vAdmin/vTemplate/vHeaderAdmin');
+		$data['judul'] = "Ranking PIC";
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vRankingPIC');
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}

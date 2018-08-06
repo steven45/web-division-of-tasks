@@ -68,15 +68,6 @@
 
           <?php  
           if ($checklist['Status'] == $status) {
-            if ($checklist['NamaPIC'] == $_SESSION['NamaPIC']) {
-              if ($checklist['StatusCheck'] == '1') {?>
-                <tr style="background-color: #AFEEEE" class="hasilku" id="<?php echo 'hasilQ'.$temp; ?>">
-              <?php }
-              else{ ?>
-                <tr style="background-color: #e6ee6d" class="hasilku" id="<?php echo 'hasilQ'.$temp; ?>">
-              <?php }
-            }
-            else{
               if ($checklist['StatusCheck'] == '1') { ?>
                 <tr style="background-color: #AFEEEE" class="hasilku" id="<?php echo 'hasilQ'.$temp; ?>">
               <?php }
@@ -86,7 +77,6 @@
               else{ ?>
                 <tr class="hasilku" id="<?php echo 'hasilQ'.$temp; ?>">
               <?php }
-            }
           }
           ?>
 
@@ -130,13 +120,13 @@
         </div>
       </td>
 
-      <?php if ($checklist['NamaPIC'] == $_SESSION['NamaPIC'] AND $checklist['StatusCheck'] == '0' AND $checklist['Hari'] == $hari) {?>
+      <?php if ($checklist['StatusCheck'] == '0' AND $checklist['Hari'] == $hari) {?>
       <td class="docheck" target"<?php echo $temp; ?>" id="<?php echo $temp; ?>">
         <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
         <div style="display:none;">
           <div id="<?php echo 'tampilKet'.$temp ?>">
 
-            <form method="POST" class="form-check">  
+            <form method="POST" class="form-check" target="<?php $temp; ?>">  
               <input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>">
               <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
               <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
@@ -164,41 +154,7 @@
         </div>
       </div>
     </td>
-    <?php } else if($checklist['NamaPIC'] != $_SESSION['NamaPIC'] AND $checklist['StatusCheck'] == '0' AND $checklist['Hari'] == $hari){?>
-
-    <td class="docheck" target"<?php echo $temp; ?>" id="<?php echo $temp; ?>">
-      <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
-      <div style="display:none;">
-        <div id="<?php echo 'tampilKet'.$temp ?>">
-          <form method="POST" class="form-check">  
-            <input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>">
-            <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
-            <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
-            <input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">
-            <input type="hidden" name="NamaPICSebenarnya" value="<?php echo $_SESSION['NamaPIC'] ?>">
-            <input type="hidden" name="Jam" value="<?php echo $checklist['Jam'] ?>">
-            <input type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
-            <input type="hidden" name="Hari" value="<?php echo $checklist['Hari'] ?>">
-            <h3>Status</h3>
-            <div class="ui form">
-              <select name="Status">
-                <option value="OK">OK</option>
-                <option value="Bad">Bad</option>
-              </select>
-            </div>
-            <h3>Keterangan</h3>
-            <div class="ui form">
-              <div class="field">
-               <textarea name="Keterangan"></textarea>
-             </div>
-           </div>
-           <br>
-          <a class="tSimpan ui right floated blue small button" target="<?php echo $temp; ?>"><i class="save icon"></i>Simpan</a>
-        </form>
-      </div>
-    </div>
-  </td>
-  <?php } else { ?>
+    <?php } else { ?>
   <td class="docheck" target"<?php echo $temp; ?>" id="<?php echo $temp; ?>">Disabled</td>
   <?php } ?> 
 </tr> 

@@ -93,8 +93,8 @@ class mAdmin extends CI_Model
     {
         if ($IDChecklist == null) {
             $query = $this->db->order_by('c.Hari','ASC');
-            $query = $this->db->order_by('c.NamaChecklist','ASC');
             $query = $this->db->order_by('c.Jam','ASC');
+            $query = $this->db->order_by('c.BatasPengecekan','ASC');
             $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.Hari,c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status, c.BatasPengecekan, c.tingkatPengecekan, c.StatusCheck, c.NIKP');
              $query = $this->db->from('checklist c');
              $query = $this->db->join('pic p','p.NIK=c.NIK');
@@ -222,6 +222,8 @@ class mAdmin extends CI_Model
 
             $this->db->select('*');
              $this->db->from('log l');
+             $this->db->order_by('Waktu','DESC');
+             $this->db->order_by('Jam','DESC');
              $query = $this->db->get();
              return $query->result_array();
         }
