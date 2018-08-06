@@ -18,7 +18,7 @@
       <input type="text" name="NamaChecklist" placeholder="Nama Nama PIC">
     </div>
     <div class="ui disabled small field" >
-      <label>Info Checklist</label>
+      <label>Instruksi Pengerjaan</label>
       <input type="file" name="Info" id="fileToUpload">
     </div>
     <div class="ui disabled small field" >

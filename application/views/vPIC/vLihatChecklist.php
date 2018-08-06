@@ -1,3 +1,4 @@
+
   <div class="ui two column centered grid">
   <div class="column" style="width: auto;">
     <div class="ui segment" style="border-radius: 1.285714rem">
@@ -28,8 +29,8 @@
                     </select>
                   </div> -->
 
-                  <div class="field" style="margin-left: 600px; margin-top: 5px" >
-                    <select class="ui right selection tiny dropdown item" id="hari" >
+                  <div class="field" style="margin-left: 80%; margin-top: 5px; position: relative; display: flex;" >
+                    <select class="ui right selection tiny dropdown item" id="hari" style="margin-left: 80%;display: flex;position: relative;">
                       <!-- <option value="<?php echo $hari; ?>"><?php echo $hari; ?></option>         -->
                       <option value="<?php echo $hari ?>"><?php echo $hari ?></option>
                       <option value="Senin">Senin</option>
@@ -51,12 +52,12 @@
                         <th>Batas Pengecekan</th>
                         <th >Nama Checklist</th>
                         <th>Nama PIC</th>
-                        <th >Info Checklist</th>
+                        <th >Instruksi Pengerjaan</th>
                         <th >Check</th>
 
                       </tr>
                     </thead>
-                    <tbody id="hasil">
+                    <tbody style="text-align: center;" id="hasil">
                       <?php $temp = 0; $no = 0; ?>
                       <?php foreach ($checklist as $checklist) { ?>
 <!--       <?php if ($checklist['Status'] == $status) { ?>
@@ -120,7 +121,7 @@
            <a href="#" data-featherlight=" <?php echo '#bio-name'.$temp ?>">Lihat</a>
            <div style="display:none;">
             <div id="<?php echo 'bio-name'.$temp ?>">
-              <h3>Info Checklist</h3>
+              <h3>Instruksi Pengerjaan</h3>
               <div class="ui segment">
                <?php foreach ($nInfo as $info) {
                 echo '<p>'.$info.'</p>';
@@ -172,12 +173,12 @@
       <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
       <div style="display:none;">
         <div id="<?php echo 'tampilKet'.$temp ?>">
-<<<<<<< HEAD
+
 
           <form method="POST" action="<?php echo site_url('pic/docheck'); ?>">  
-=======
+<!-- =======
           <form method="POST" class="form-check">  
->>>>>>> 4b49ef8f7a665d1e569992dbf4b76f3fa973194e
+>>>>>>> 4b49ef8f7a665d1e569992dbf4b76f3fa973194e -->
             <input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>">
             <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
             <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
@@ -193,6 +194,12 @@
                 <option value="Bad">Bad</option>
               </select>
             </div>
+            <h3>Bukti Pengecekan (Screenshot)</h3>
+            <div class="ui form">
+              <div class="field">
+              <input type="file" name="buktiCek" id="fileToUpload">
+              </div>
+           </div>
             <h3>Keterangan</h3>
             <div class="ui form">
               <div class="field">

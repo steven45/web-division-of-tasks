@@ -34,7 +34,7 @@
             <th>Nama Checklist</th>
             <th>Nama PIC</th>
             <th>PIC Yang Mengecek</th>
-            <th>Info Pengecekan</th>
+            <th>Istruksi Pengerjaan</th>
             <th>Status</th>
             <th>Keterangan</th>
             </tr>

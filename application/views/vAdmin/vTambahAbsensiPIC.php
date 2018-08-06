@@ -30,7 +30,7 @@
 					</div>
 
 					<div class="field">
-						<label>Shift</label>
+						<label>Hari</label>
 						<select style="min-width: 10em;" class="ui selected dropdown" name="Hari">
 							<option value="Senin">Senin</option>
 							<option value="Selasa">Selasa</option>

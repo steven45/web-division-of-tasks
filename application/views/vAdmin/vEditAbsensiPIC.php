@@ -29,7 +29,7 @@
 		    </select>
 		  </div>
 		  <div class="field">
-		    <label>Shift</label>
+		    <label>Hari</label>
 		    <select style="min-width: 10em;" class="ui selected dropdown" name="Hari">
 		    	<option value="<?php echo $absensi['Hari'] ?>"><?php echo $absensi['Hari'] ?></option>
 		    	<option value="Senin">Senin</option>
