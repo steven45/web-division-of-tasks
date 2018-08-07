@@ -51,7 +51,7 @@
                         <th>Batas Pengecekan</th>
                         <th style="width: 300px;">Nama Checklist</th>
                         <th>Nama PIC</th>
-                        <th >Info Checklist</th>
+                        <th >Instruksi Pengerjaan</th>
                         <th >Check</th>
 
                       </tr>
@@ -110,7 +110,7 @@
            <a href="#" data-featherlight=" <?php echo '#bio-name'.$temp ?>">Lihat</a>
            <div style="display:none;">
             <div id="<?php echo 'bio-name'.$temp ?>">
-              <h3>Info Checklist</h3>
+              <h3>Instruksi Pengerjaan</h3>
               <div class="ui segment">
                <?php foreach ($nInfo as $info) {
                 echo '<p>'.$info.'</p>';
