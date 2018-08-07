@@ -15,7 +15,7 @@
     <div class="grouped fields">
     <label>Jadwal Pengecekan:</label>
     <div class="field">
-      <div class="ui radio checkbox">
+      <div class="ui radio checkbox" class="radio">
         <input type="radio" name="Jam" checked="checked" tabindex="0" value="Setiap Jam">
         <label>Setiap Jam</label>
       </div>
@@ -25,7 +25,7 @@
         <input type="radio" name="Jam" tabindex="0" value="Lainnya">
         <label>Lainnya</label>      
       </div>
-      <div class="field" style="margin-left: 25px">
+      <div class="field" style="margin-left: 25px" id="lainnya">
         <input type="text" name="Jam1" placeholder="Tulis Jam disini (03:00, 07:00, 11:00, dst)">
     </div>
     </div>
@@ -66,3 +66,17 @@
 </div>
 </div>
 </div>
+
+<script>
+  jQuery(function() {
+
+    jQuery('#lainnya').hide();
+
+      jQuery('.radio').change(function() {
+        selected_value = $("input[name='Jam']:checked").val();
+        jQuery('#lainnya').toggle();
+    });
+  });
+
+
+</script>
