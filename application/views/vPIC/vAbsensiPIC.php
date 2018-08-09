@@ -10,10 +10,18 @@
       <div class="ui icon">
         <i class="user icon"></i>
       Absensi PIC 
-      
+
       </h3>
+
+      <div class="ui right calendar" style="margin-left: 400px; margin-top: -45px">
+        <div class="ui small input left icon">
+          <i class="calendar icon"></i>
+          <input type="date" value="<?php echo date('20y-m-d') ?>">
+        </div>
+        
+      </div>
       
-    </div>
+    
 
       <div class="ui divider"></div>
 
