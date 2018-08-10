@@ -46,3 +46,25 @@
 </div>
 </div>
 </div>
+
+<script>
+$(document).ready(function(){
+$('.ui.form')
+            .form({
+              on: 'blur',
+              inline : true,
+              fields: {
+                password: {
+                  identifier  : 'Password',
+                  rules: [
+                    {
+                      type   : 'minLength[6]',
+                      prompt : 'Password setidaknya 6 karakter'
+                    },
+                ]
+              }
+          }
+      }
+      );
+});
+</script>

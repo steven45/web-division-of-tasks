@@ -156,18 +156,22 @@
 
             <?php if ($_SESSION['nama'] == 'admin'): ?>
             <a class="item" href="<?php echo site_url('admin/pic'); ?>">
+              <i class="file alternate outline icon"></i>
             Daftar PIC</a>
             <?php endif ?>
 
             <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
+              <i class="calendar check outline icon"></i>
             Absensi PIC</a>
             
             <?php if ($_SESSION['nama'] == 'admin'): ?>
             <a class="item" href="<?php echo site_url('admin/tampilRanking'); ?>">
+              <i class="chart bar outline icon"></i>
             Ranking PIC</a>
             <?php endif ?>
             
             <a class="item" href="<?php echo site_url('admin/pergantian'); ?>">
+              <i class="sync alternate icon"></i>
             Pergantian PIC</a>
           </div>
         </div>
@@ -212,8 +216,10 @@
           <i class="dropdown icon"></i>
           <div class="menu">
             <a class="item" href="<?php echo site_url('admin/ubahbobotwp'); ?>">
+              <i class="chart area icon"></i>
             Ubah Bobot WP</a>
             <a class="item" href="<?php echo site_url('admin/ubahshift'); ?>">
+              <i class="clock outline icon"></i>
             Ubah Jadwal Shift PIC</a>
           </div>
         </div>

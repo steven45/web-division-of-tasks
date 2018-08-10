@@ -20,7 +20,7 @@
         </div>
         <form method="POST" action="<?php echo site_url('admin/gantichecklist'); ?>">    
           <div class="ui divider"></div>
-          <div class="field" style="margin-left: 900px">
+          <div class="field" style="margin-left: 85%">
             <select class="ui right selection tiny dropdown item" id="hari">  
               <option value="<?php echo $hari ?>"><?php echo $hari ?></option>      
               <option value="Senin">Senin</option>
@@ -40,7 +40,7 @@
                 <th>Hari</th>
                 <th>Jadwal</th>
                 <th>Batas Waktu</th>
-                <th >Nama Checklist</th>
+                <th style="width: 300px;" >Nama Checklist</th>
                 <th>Nama PIC</th>
                 <th >Instruksi Pengerjaan</th>
                 <th>Edit</th>
