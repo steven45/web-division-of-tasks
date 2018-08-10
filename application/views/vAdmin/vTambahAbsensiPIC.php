@@ -30,16 +30,12 @@
 					</div>
 
 					<div class="field">
-						<label>Hari</label>
-						<select style="min-width: 10em;" class="ui selected dropdown" name="Hari">
-							<option value="Senin">Senin</option>
-							<option value="Selasa">Selasa</option>
-							<option value="Rabu">Rabu</option>
-							<option value="Kamis">Kamis</option>
-							<option value="Jumat">Jumat</option>
-							<option value="Sabtu">Sabtu</option>
-							<option value="Minggu">Minggu</option>
-						</select>
+						<label>Tanggal</label>
+						<div class="ui input icon">
+							
+						<i class="calendar icon"></i>
+						<input type="date" name="Hari" value="<?php echo date('20y-m-d') ?>">
+						</div>
 					</div>
 					<div class="ui center aligned basic segment">
 						<button class="ui right vertical blue button" tabindex="0">

@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/Semantic-UI/semantic.min.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/Semantic-UI/data-paginate.css'); ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/pagination.min.css'); ?>">
+  
   <script type="text/javascript" src="<?php echo base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/tablesort.js'); ?>"></script>
@@ -41,17 +42,18 @@
       <script>
         $(document).ready(function(){
 
-          var day = $("#hari option:selected").val().toLowerCase();
+          var day = $("#hari option:selected").val();
+          console.log(day);
           $("#hasil tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(day) > -1);
+            $(this).toggle($(this).text().indexOf(day) > -1);
 
           });
           $("select#hari").change(function(){
-            var hari = $("#hari option:selected").val().toLowerCase();
+            var hari = $("#hari option:selected").val();
             var jumlah = document.getElementById("hasil").getElementsByTagName("tr").length;
 
             $("#hasil tr").filter(function() {
-              $(this).toggle($(this).text().toLowerCase().indexOf(hari) > -1)
+              $(this).toggle($(this).text().indexOf(hari) > -1)
             });
           });
         });
@@ -154,18 +156,22 @@
 
             <?php if ($_SESSION['nama'] == 'admin'): ?>
             <a class="item" href="<?php echo site_url('admin/pic'); ?>">
+              <i class="file alternate outline icon"></i>
             Daftar PIC</a>
             <?php endif ?>
 
             <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
+              <i class="calendar check outline icon"></i>
             Absensi PIC</a>
             
             <?php if ($_SESSION['nama'] == 'admin'): ?>
             <a class="item" href="<?php echo site_url('admin/tampilRanking'); ?>">
+              <i class="chart bar outline icon"></i>
             Ranking PIC</a>
             <?php endif ?>
             
             <a class="item" href="<?php echo site_url('admin/pergantian'); ?>">
+              <i class="sync alternate icon"></i>
             Pergantian PIC</a>
           </div>
         </div>
@@ -210,8 +216,10 @@
           <i class="dropdown icon"></i>
           <div class="menu">
             <a class="item" href="<?php echo site_url('admin/ubahbobotwp'); ?>">
+              <i class="chart area icon"></i>
             Ubah Bobot WP</a>
             <a class="item" href="<?php echo site_url('admin/ubahshift'); ?>">
+              <i class="clock outline icon"></i>
             Ubah Jadwal Shift PIC</a>
           </div>
         </div>
