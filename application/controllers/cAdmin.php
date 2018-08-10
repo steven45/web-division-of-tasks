@@ -1055,6 +1055,16 @@ class cAdmin extends CI_Controller {
 		}
 
 	}
+
+	public function templateAbsensi()
+	{
+		$data['judul'] = "Template Absensi";
+		$data['pic'] = $pic;
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		$this->load->view('vAdmin/vTemplateAbsensi', $data);
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
 	public function notifikasi()
 	{
 		$data['notifikasi'] = $this->mAdmin->getNotifikasi();

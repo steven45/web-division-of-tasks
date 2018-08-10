@@ -161,6 +161,11 @@
             <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
               <i class="calendar check outline icon"></i>
             Absensi PIC</a>
+
+            <a class="item" href="<?php echo site_url('admin/templateabsensi'); ?>">
+              <i class="calendar check icon"></i>
+            Template Absensi</a>
+
             
             <?php if ($_SESSION['nama'] == 'admin'): ?>
             <a class="item" href="<?php echo site_url('admin/tampilRanking'); ?>">

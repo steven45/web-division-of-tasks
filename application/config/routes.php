@@ -25,6 +25,7 @@ $route['admin/gantijadwal'] = 'cAdmin/gantiJadwal';
 
 
 
+
 //CRUD CHECKLIST
 $route['admin/checklist'] = 'cAdmin/lihatChecklist';
 $route['admin/checklist/(:any)'] = 'cAdmin/lihatChecklist/$1';
@@ -46,6 +47,7 @@ $route['admin/gantiabsensi'] = 'cAdmin/gantiAbsensi';
 $route['admin/ranking'] = 'cAdmin/ranking';
 $route['admin/tampilRanking'] = 'cAdmin/tampilRangking';
 $route['admin/pergantian'] = 'cAdmin/pergantian';
+$riute['admin/templateabsensi'] = 'cAdmin/templateAbsensi';
 
 $route['admin/log'] = 'cAdmin/lihatLog';
 $route['admin/jLog'] = 'cAdmin/jLihatLog';
