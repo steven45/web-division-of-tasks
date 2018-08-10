@@ -688,31 +688,44 @@ class cAdmin extends CI_Controller {
 		$data['judul'] = "Lihat Absensi";
 		$data['absensi']= $this->mAdmin->getAbsensi();
 
-		$pic = NULL;
-		$temp1 = 0;
-		foreach ($data['absensi'] as $absensi) {
-			$temp2 = 0;
-			foreach ($data['absensi'] as $cek) {
-				if ($absensi['Hari'] == $cek['Hari'] AND $absensi['Shift'] == $cek['Shift'] AND $absensi['NIK'] != $cek['NIK']) {
-					$pic[$temp1][$temp2]['NIK'] = $cek['NIK'];
-					$pic[$temp1][$temp2]['NamaPIC'] = $cek['NamaPIC'];	
-					$temp2 = $temp2 +1;
-					if ($absensi['NIKP'] == $cek['NIK']) {
-						// echo $cek['NamaPIC']."<br>";
-						$data['absensi'][$temp1]['NamaPICP'] = $cek['NamaPIC'];
-					}
-					else if ($absensi['NIKP'] != $cek['NIK']) {
-						$data['absensi'][$temp1]['NamaPICP'] = "0";
-					}
-				}
-			}
-			$temp1 = $temp1 +1;
-		}
+		// $pic = NULL;
+		// $temp1 = 0;
+		// foreach ($data['absensi'] as $absensi) {
+		// 	$temp2 = 0;
+		// 	foreach ($data['absensi'] as $cek) {
+		// 		if ($absensi['Hari'] == $cek['Hari'] AND $absensi['Shift'] == $cek['Shift'] AND $absensi['NIK'] != $cek['NIK']) {
+		// 			$pic[$temp1][$temp2]['NIK'] = $cek['NIK'];
+		// 			$pic[$temp1][$temp2]['NamaPIC'] = $cek['NamaPIC'];	
+		// 			$temp2 = $temp2 +1;
+		// 			if ($absensi['NIKP'] == $cek['NIK']) {
+		// 				// echo $cek['NamaPIC']."<br>";
+		// 				$data['absensi'][$temp1]['NamaPICP'] = $cek['NamaPIC'];
+		// 			}
+		// 			else if ($absensi['NIKP'] != $cek['NIK']) {
+		// 				$data['absensi'][$temp1]['NamaPICP'] = "0";
+		// 			}
+		// 		}
+		// 	}
+		// 	$temp1 = $temp1 +1;
+		// }
 
 		// header("Content-type:application/json");
 		// echo json_encode($data['absensi']);
 
-		$data['pic'] = $pic;
+		$data['pic'] = $data['absensi'];
+		$temp = 0;
+		foreach ($data['absensi'] as $absensi ) {
+			if ($absensi['NIKP'] != '0' AND $absensi['NIKP'] != '') {
+				$namaP                          = $this->mAdmin->getPIC($absensi['NIKP']);
+				$picPengganti[$temp]['NamaPIC'] = $namaP['NamaPIC'];
+				$picPengganti[$temp]['NIK']     = $namaP['NIK'];
+			}
+			else{
+				$picPengganti[$temp]['NamaPIC'] = '0';
+			}
+			$temp = $temp + 1;
+		}
+		$data['picPengganti'] = $picPengganti;
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vAbsensiPIC', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
@@ -735,14 +748,25 @@ class cAdmin extends CI_Controller {
 		$IDJadwal = $this->input->post('IDJadwal');
 		$hari = $this->input->post('Hari');
 
+		$daftar_hari = array(
+			'Sunday'    => 'Minggu',
+			'Monday'    => 'Senin',
+			'Tuesday'   => 'Selasa',
+			'Wednesday' => 'Rabu',
+			'Thursday'  => 'Kamis',
+			'Friday'    => 'Jumat',
+			'Saturday'  => 'Sabtu'
+		);
+		$namahari = date('l', strtotime($hari));
+
 		$data = array(
 			'NIK' => $NIK,
 			'IDJadwal' => $IDJadwal,
-			'Hari' => $hari,
+			'Hari' =>  $daftar_hari[$namahari].', '.$hari,
 			'kehadiran' => 'Hadir'
 		);
-
-		$query = $this->mAdmin->tambahAbsensi('harian', $data, $NIK, $IDJadwal, $hari);
+		$h = $daftar_hari[$namahari].', '.$hari;
+		$query = $this->mAdmin->tambahAbsensi('harian', $data, $NIK, $IDJadwal, $h);
 
 		if ($query == 1) 
 		{
@@ -813,89 +837,82 @@ class cAdmin extends CI_Controller {
 	public function gantiAbsensi()
 	{
 		$jumlahAbsensi= $this->input->post('jumlahAbsensi');
+		$kalender = $this->input->post('kalender');
 
 		for ($i=0; $i < $jumlahAbsensi; $i++) { 
-			$id[$i]    = 'IDHarian'.$i;
-			$hadir[$i] = 'Kehadiran'.$i;
-			$NIKP[$i]  = 'NIKPengganti'.$i;
-			$NIKS[$i]  = 'NIKSebenarnya'.$i;
-			// echo $id[$i];
-			// echo $hadir[$i];
-			// echo $NIKP[$i];
-			// echo $NIKS[$i];
-			// echo "<br>";
-		}
+			$IDHarian      = $this->input->post('IDHarian'.$i);
+			$Kehadiran     = $this->input->post('Kehadiran'.$i);
+			$NIKPengganti  = $this->input->post('NIKPengganti'.$i);
+			$NIKSebenarnya = $this->input->post('NIKSebenarnya'.$i);
+			$day = $this->input->post('Hari'.$i);
+			$day = str_replace(" ","",$day);
+			$myDay = explode(",",$day);
 
-		for ($i=0; $i < $jumlahAbsensi; $i++) { 
-			$IDHarian      = $this->input->post($id[$i]);
-			$Kehadiran     = $this->input->post($hadir[$i]);
-			$NIKPengganti  = $this->input->post($NIKP[$i]);
-			$NIKSebenarnya = $this->input->post($NIKS[$i]);
+			if ($kalender == $myDay[1]) {
+				// header("Content-type:application/json");
+				$data['checklist'] = $this->mAdmin->getChecklist();
+				// var_dump($data['checklist']);
+				// $pic = $this->mAdmin->getPIC($NIKSebenarnya);
+				$absensi = $this->mAdmin->getAbsensi($IDHarian);
+				// var_dump($absensi);
+				// echo json_encode($data);
+				$picSebenarnya = $this->mAdmin->getPIC($NIKSebenarnya);
+				$picPengganti = $this->mAdmin->getPIC($NIKPengganti);
 
-			// header("Content-type:application/json");
-			$data['checklist'] = $this->mAdmin->getChecklist();
-			// var_dump($data['checklist']);
-			// $pic = $this->mAdmin->getPIC($NIKSebenarnya);
-			$absensi = $this->mAdmin->getAbsensi($IDHarian);
-			// var_dump($absensi);
-			// echo json_encode($data);
-			$picSebenarnya = $this->mAdmin->getPIC($NIKSebenarnya);
-			$picPengganti = $this->mAdmin->getPIC($NIKPengganti);
-
-			// echo $id[$i]." = ".$IDHarian ."<br>";
-			// echo $hadir[$i]." = ".$Kehadiran ."<br>";
-			// echo $NIKP[$i]." = ".$NIKPengganti ."<br>";
-			// echo $NIKS[$i]." = ".$NIKSebenarnya ."<br><br>";
-			$temp = 0;
-			foreach ($data['checklist'] as $checklist) {
-				if ($absensi[0]['Shift']  == '3' AND $NIKPengganti != NULL) {
-					$hariNext = NULL;
-					switch ($absensi[0]['Hari']) {
-						case 'Senin':
-						$hariNext = 'Selasa';
-						break;
-						case 'Selasa':
-						$hariNext = 'Rabu';
-						break;
-						case 'Rabu':
-						$hariNext = 'Kamis';
-						break;
-						case 'Kamis':
-						$hariNext = 'Jumat';
-						break;
-						case 'Jumat':
-						$hariNext = 'Sabtu';
-						break;
-						case 'Sabtu':
-						$hariNext = 'Minggu';
-						break;
-						case 'Minggu':
-						$hariNext = 'Senin';
-						break;
-					}
-
-					if (($checklist['Jam']     == '22:00' OR
-						$checklist['Jam']     == '23:00') AND 
-						$checklist['NamaPIC'] == $absensi[0]['NamaPIC'] AND 
-						$absensi[0]['Hari']   == $checklist['Hari']) {
-						if ($Kehadiran == 'Tidak Hadir') {
-							$set = array(
-								'NIKP' => $NIKPengganti
-							);
-							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
-
-							$dataPengganti = array(
-								'IDChecklist' => $checklist['IDChecklist'],
-								'NamaPICS' => $picSebenarnya['NamaPIC'],
-								'NamaPICP' => $picPengganti['NamaPIC']
-							);
-							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
+				// echo $id[$i]." = ".$IDHarian ."<br>";
+				// echo $hadir[$i]." = ".$Kehadiran ."<br>";
+				// echo $NIKP[$i]." = ".$NIKPengganti ."<br>";
+				// echo $NIKS[$i]." = ".$NIKSebenarnya ."<br><br>";
+				$temp = 0;
+				foreach ($data['checklist'] as $checklist) {
+					if ($absensi[0]['Shift']  == '3' AND $NIKPengganti != NULL) {
+						$hariNext = NULL;
+						switch ($absensi[0]['Hari']) {
+							case 'Senin':
+							$hariNext = 'Selasa';
+							break;
+							case 'Selasa':
+							$hariNext = 'Rabu';
+							break;
+							case 'Rabu':
+							$hariNext = 'Kamis';
+							break;
+							case 'Kamis':
+							$hariNext = 'Jumat';
+							break;
+							case 'Jumat':
+							$hariNext = 'Sabtu';
+							break;
+							case 'Sabtu':
+							$hariNext = 'Minggu';
+							break;
+							case 'Minggu':
+							$hariNext = 'Senin';
+							break;
 						}
-						else if ($Kehadiran == 'Hadir'){
-							$set = array(
-								'NIKP' => '0'
-							);
-							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
+
+						if (($checklist['Jam']     == '22:00' OR
+							$checklist['Jam']     == '23:00') AND 
+							$checklist['NamaPIC'] == $absensi[0]['NamaPIC'] AND 
+							$absensi[0]['Hari']   == $checklist['Hari']) {
+							if ($Kehadiran == 'Tidak Hadir') {
+								$set = array(
+									'NIKP' => $NIKPengganti
+								);
+								$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
+
+								$dataPengganti = array(
+									'IDChecklist' => $checklist['IDChecklist'],
+									'NamaPICS' => $picSebenarnya['NamaPIC'],
+									'NamaPICP' => $picPengganti['NamaPIC']
+								);
+								$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
+							}
+							else if ($Kehadiran == 'Hadir'){
+								$set = array(
+									'NIKP' => '0'
+								);
+								$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
 
 							// $dataPengganti = array(
 							// 	'IDChecklist' => $checklist['IDChecklist'],
@@ -903,36 +920,36 @@ class cAdmin extends CI_Controller {
 							// 	'NamaPICP' => $picSebenarnya['NamaPIC']
 							// );
 							// $this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
-						}
+							}
 
-					}
-					else if(($checklist['Jam']     == '00:00' OR
-						$checklist['Jam']     == '01:00'OR
-						$checklist['Jam']     == '02:00'OR
-						$checklist['Jam']     == '03:00'OR
-						$checklist['Jam']     == '04:00'OR
-						$checklist['Jam']     == '05:00'OR
-						$checklist['Jam']     == '06:00') AND 
-						$checklist['NamaPIC'] == $absensi[0]['NamaPIC'] AND 
-						$hariNext   == $checklist['Hari']){
-						if ($Kehadiran == 'Tidak Hadir') {
-							$set = array(
-								'NIKP' => $NIKPengganti
-							);
-							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
-
-							$dataPengganti = array(
-								'IDChecklist' => $checklist['IDChecklist'],
-								'NamaPICS' => $picSebenarnya['NamaPIC'],
-								'NamaPICP' => $picPengganti['NamaPIC']
-							);
-							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
 						}
-						else if ($Kehadiran == 'Hadir') {
-							$set = array(
-								'NIKP' => '0'
-							);
-							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
+						else if(($checklist['Jam']     == '00:00' OR
+							$checklist['Jam']     == '01:00'OR
+							$checklist['Jam']     == '02:00'OR
+							$checklist['Jam']     == '03:00'OR
+							$checklist['Jam']     == '04:00'OR
+							$checklist['Jam']     == '05:00'OR
+							$checklist['Jam']     == '06:00') AND 
+							$checklist['NamaPIC'] == $absensi[0]['NamaPIC'] AND 
+							$hariNext   == $checklist['Hari']){
+							if ($Kehadiran == 'Tidak Hadir') {
+								$set = array(
+									'NIKP' => $NIKPengganti
+								);
+								$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
+
+								$dataPengganti = array(
+									'IDChecklist' => $checklist['IDChecklist'],
+									'NamaPICS' => $picSebenarnya['NamaPIC'],
+									'NamaPICP' => $picPengganti['NamaPIC']
+								);
+								$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
+							}
+							else if ($Kehadiran == 'Hadir') {
+								$set = array(
+									'NIKP' => '0'
+								);
+								$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
 
 							// $dataPengganti = array(
 							// 	'IDChecklist' => $checklist['IDChecklist'],
@@ -940,81 +957,81 @@ class cAdmin extends CI_Controller {
 							// 	'NamaPICP' => $picSebenarnya['NamaPIC']
 							// );
 							// $this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
+							}
 						}
 					}
+					else{
+						if (($checklist['Jam'] 	  == '07:00' OR
+							$checklist['Jam']     == '08:00' OR
+							$checklist['Jam']     == '09:00' OR
+							$checklist['Jam']     == '10:00' OR
+							$checklist['Jam']     == '11:00' OR
+							$checklist['Jam']     == '12:00' OR
+							$checklist['Jam']     == '13:00' OR
+							$checklist['Jam']     == '14:00' OR
+							$checklist['Jam']     == '15:00' OR
+							$checklist['Jam']     == '16:00') AND 
+							$checklist['NamaPIC'] == $absensi[0]['NamaPIC'] AND 
+							$absensi[0]['Shift'] == '1' AND 
+							$absensi[0]['Hari']   == $checklist['Hari'] AND 
+							$NIKPengganti != NULL) {
+							if ($Kehadiran == 'Tidak Hadir') {
+								$set = array(
+									'NIKP' => $NIKPengganti
+								);
+								$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
+
+								$dataPengganti = array(
+									'IDChecklist' => $checklist['IDChecklist'],
+									'NamaPICS' => $picSebenarnya['NamaPIC'],
+									'NamaPICP' => $picPengganti['NamaPIC']
+								);
+								$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
+							}
+							else if ($Kehadiran == 'Hadir') {
+								$set = array(
+									'NIKP' => '0'
+								);
+								$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
+							}
+
+						}
+						else if(($checklist['Jam'] 	  == '13:00' OR
+							$checklist['Jam']     == '14:00' OR
+							$checklist['Jam']     == '15:00' OR
+							$checklist['Jam']     == '16:00' OR
+							$checklist['Jam']     == '17:00' OR
+							$checklist['Jam']     == '18:00' OR
+							$checklist['Jam']     == '19:00' OR
+							$checklist['Jam']     == '20:00' OR
+							$checklist['Jam']     == '21:00') AND 
+							$checklist['NamaPIC'] == $absensi[0]['NamaPIC'] AND 
+							$absensi[0]['Shift'] == '2' AND 
+							$absensi[0]['Hari']   == $checklist['Hari'] AND $NIKPengganti != NULL) {
+							if ($Kehadiran == 'Tidak Hadir') {
+								$set = array(
+									'NIKP' => $NIKPengganti
+								);
+								$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
+
+								$dataPengganti = array(
+									'IDChecklist' => $checklist['IDChecklist'],
+									'NamaPICS' => $picSebenarnya['NamaPIC'],
+									'NamaPICP' => $picPengganti['NamaPIC']
+								);
+								$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
+							}
+							else if ($Kehadiran == 'Hadir') {
+								$set = array(
+									'NIKP' => '0'
+								);
+								$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
+							}
+
+						}
+					}
+
 				}
-				else{
-					if (($checklist['Jam'] 	  == '07:00' OR
-						$checklist['Jam']     == '08:00' OR
-						$checklist['Jam']     == '09:00' OR
-						$checklist['Jam']     == '10:00' OR
-						$checklist['Jam']     == '11:00' OR
-						$checklist['Jam']     == '12:00' OR
-						$checklist['Jam']     == '13:00' OR
-						$checklist['Jam']     == '14:00' OR
-						$checklist['Jam']     == '15:00' OR
-						$checklist['Jam']     == '16:00') AND 
-						$checklist['NamaPIC'] == $absensi[0]['NamaPIC'] AND 
-						$absensi[0]['Shift'] == '1' AND 
-						$absensi[0]['Hari']   == $checklist['Hari'] AND 
-						$NIKPengganti != NULL) {
-						if ($Kehadiran == 'Tidak Hadir') {
-							$set = array(
-								'NIKP' => $NIKPengganti
-							);
-							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
-
-							$dataPengganti = array(
-								'IDChecklist' => $checklist['IDChecklist'],
-								'NamaPICS' => $picSebenarnya['NamaPIC'],
-								'NamaPICP' => $picPengganti['NamaPIC']
-							);
-							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
-						}
-						else if ($Kehadiran == 'Hadir') {
-							$set = array(
-								'NIKP' => '0'
-							);
-							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
-						}
-						
-					}
-					else if(($checklist['Jam'] 	  == '13:00' OR
-						$checklist['Jam']     == '14:00' OR
-						$checklist['Jam']     == '15:00' OR
-						$checklist['Jam']     == '16:00' OR
-						$checklist['Jam']     == '17:00' OR
-						$checklist['Jam']     == '18:00' OR
-						$checklist['Jam']     == '19:00' OR
-						$checklist['Jam']     == '20:00' OR
-						$checklist['Jam']     == '21:00') AND 
-						$checklist['NamaPIC'] == $absensi[0]['NamaPIC'] AND 
-						$absensi[0]['Shift'] == '2' AND 
-						$absensi[0]['Hari']   == $checklist['Hari'] AND $NIKPengganti != NULL) {
-						if ($Kehadiran == 'Tidak Hadir') {
-							$set = array(
-								'NIKP' => $NIKPengganti
-							);
-							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
-
-							$dataPengganti = array(
-								'IDChecklist' => $checklist['IDChecklist'],
-								'NamaPICS' => $picSebenarnya['NamaPIC'],
-								'NamaPICP' => $picPengganti['NamaPIC']
-							);
-							$this->mAdmin->penggantiPIC('penggantipic', $dataPengganti);
-						}
-						else if ($Kehadiran == 'Hadir') {
-							$set = array(
-								'NIKP' => '0'
-							);
-							$this->mAdmin->gantiChecklist('checklist', $checklist['IDChecklist'], $set);
-						}
-
-					}
-				}
-				
-			}
 
 			// echo $id[$i]. ' = '. $IDHarian;
 			// echo "<br>";
@@ -1024,37 +1041,39 @@ class cAdmin extends CI_Controller {
 			// echo "<br>";
 			// echo $NIKS[$i].' = '. $NIKSebenarnya;
 			// echo "<br>";
-			if ($IDHarian != NULL AND $Kehadiran != NULL) {	
-				if ($Kehadiran == "Hadir") {
-					$data = array(
-						'Kehadiran' => $Kehadiran,
-						'NIKP' => "0"
-					);
-					$query = $this->mAdmin->gantiAbsensi('harian',$IDHarian, $data);
-					echo "<script type='text/javascript'>
-					alert('Sukses menyimpan kehadiran. ');
-					window.location.href = '" . base_url() . "admin/absensi';
-					</script>";
-				}
-				else{
+				if ($IDHarian != NULL AND $Kehadiran != NULL) {	
+					if ($Kehadiran == "Hadir") {
+						$data = array(
+							'Kehadiran' => $Kehadiran,
+							'NIKP' => "0"
+						);
+						$query = $this->mAdmin->gantiAbsensi('harian',$IDHarian, $data);
+						echo "<script type='text/javascript'>
+						alert('Sukses menyimpan kehadiran. ');
+						window.location.href = '" . base_url() . "admin/absensi';
+						</script>";
+					}
+					else{
 					// $data = $this->mAdmin->getChecklist($NIKSebenarnya);
 					// header("Content-type:application/json");
 					// echo json_encode($data);
-					$data = array(
-						'Kehadiran' => $Kehadiran,
-						'NIKP' => $NIKPengganti
-					);
-					$query = $this->mAdmin->gantiAbsensi('harian',$IDHarian, $data);
-					echo "<script type='text/javascript'>
-					alert('Sukses menyimpan kehadiran dan mengganti PIC. ');
-					window.location.href = '" . base_url() . "admin/absensi';
-					</script>";
-				}
+						$data = array(
+							'Kehadiran' => $Kehadiran,
+							'NIKP' => $NIKPengganti
+						);
+						$query = $this->mAdmin->gantiAbsensi('harian',$IDHarian, $data);
+						echo "<script type='text/javascript'>
+						alert('Sukses menyimpan kehadiran dan mengganti PIC. ');
+						window.location.href = '" . base_url() . "admin/absensi';
+						</script>";
+					}
 
+				}
 			}
 		}
 
 	}
+
 
 	public function templateAbsensi()
 	{
@@ -1064,6 +1083,7 @@ class cAdmin extends CI_Controller {
 		$this->load->view('vAdmin/vTemplateAbsensi', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
+
 
 	public function notifikasi()
 	{
@@ -1109,7 +1129,6 @@ class cAdmin extends CI_Controller {
 	{	
 		$data['judul'] = "Ranking PIC";
 		$data['pic'] = $this->mAdmin->getPIC();
-
 
 		$jumlah = count($data['pic']);
 		$temp = 0;
@@ -1176,14 +1195,7 @@ class cAdmin extends CI_Controller {
 			}
 		}
 
-		// echo "<table border ='1px'>";
-		// echo "<tr><td>Nama</td> <td>Jumlah Pengecekan</td><td>Jabatan</td><td>Checklist</td><td>Lama Kerja</td><td>";
-		// for ($i=0; $i < count($data['pic']); $i++) { 
-		// 	echo "<tr><td>".$nama[$i] ."</td> <td>". $jumlahCek[$i] ."</td><td>". $nilaiJabatan[$i] ."</td><td>". $checklist[$i] ."</td><td>". $nilaiLamaKerja[$i] ."</td><td>";
-		// }
-		// echo "</table>";
-
-		//kriteria
+			//kriteria
 		$data['kriteria'] = $this->mAdmin->getKriteria();
 		for ($i=0; $i < count($data['kriteria']); $i++) { 
 			$kriteria[$i] = $data['kriteria'][$i]['NamaParameter'];
@@ -1191,7 +1203,7 @@ class cAdmin extends CI_Controller {
 		}
 
 		$jumlahS = 0;
-		
+
 		for ($k=0; $k < count($data['pic']) ; $k++) { 
 			$hasilS[$k] = pow($jumlahCek[$k],$bobot[0])* pow($nilaiJabatan[$k],$bobot[1])* pow($checklist[$k],$bobot[2])* pow($nilaiLamaKerja[$k],$bobot[3]);
 
@@ -1205,37 +1217,87 @@ class cAdmin extends CI_Controller {
 		for ($i=0; $i < count($hasilV); $i++) { 
 			$hasilAkhir[$i]['nama'] = $nama[$i];
 			$hasilAkhir[$i]['hasilV'] = $hasilV[$i];
+
+			$wp[$i]['NIK'] = $data['pic'][$i]['NIK'];
+			$wp[$i]['nama'] = $nama[$i];
+			$wp[$i]['hasilV'] = $hasilV[$i];
 		}
+		return $hasilAkhir;
+		// echo json_encode($hasilAkhir);
 
-
-		$jumlahSel = 0;
-		for ($i=0; $i < count($data['pic']); $i++) { 
-			$selisihHasil[$i] = 1-$hasilV[$i];
-			$jumlahSel = $jumlahSel+$selisihHasil[$i];
-		}
-
-		for ($i=0; $i < count($data['pic']); $i++) { 
-			$jumJadwal[$i] = $selisihHasil[$i]/$jumlahSel*100;
-		}
-
-		// var_dump($selisihHasil);
-		echo json_encode($hasilAkhir);
-
-
-
-		// 	$no = 0;
-		// foreach ($data['pic'] as $data ) {
-		// 	echo $data['NamaPIC']. "____";
-		// 	echo $data['Jabatan']."___";
-		// 	echo $jumlahCek[$no]. "____";
-		// 	echo $nilaiJabatan[$no]."____";
-		// 	echo $checklist[$no]. "____";
-		// 	echo $nilaiLamaKerja[$no]. "____";
-		// 	echo $hasilS[$no] . "<br>";
-		// 	// echo $hasilV[$no]."<br";
-		// 	$no = $no+1;
+		//MENAMPILKAN HASIL DARI PERHITUNGAN WEIGHT PRODUCT
+		// echo "<table border ='1px'>";
+		// echo "<tr><td>Nama</td> <td>Jumlah Pengecekan</td><td>Jabatan</td><td>Checklist</td><td>Lama Kerja</td><td>S(i)</td><td>V(i)</td></tr>";
+		// for ($i=0; $i < count($data['pic']); $i++) { 
+		// 	echo "<tr><td>".$nama[$i] ."</td> <td>". $jumlahCek[$i] ."</td><td>". $nilaiJabatan[$i] ."</td><td>". $checklist[$i] ."</td><td>". $nilaiLamaKerja[$i] ."</td><td>". $hasilS[$i] ."</td><td>".$hasilV[$i] ."</td></tr>";
 		// }
+		// echo "</table>";
+	}
 
+	public function jRanking()
+	{
+		$wp = $this->ranking();
+		echo json_encode($wp);
+	}
+
+	public function penjadwalan()
+	{
+
+		//MULAI PERHITUNGAN UNTUK PENJADWALAN OTOMATIS
+		//1. Mengurutkan hasil dari WP
+
+		$wp        = $this->ranking(); 
+		$data      = $this->mAdmin->getPIC();
+		$jChecklist = $this->mAdmin->getChecklistWhere();
+
+		for ($i=0; $i < count($data); $i++) { 
+			$wp[$i]['NIK'] = $data[$i]['NIK'];
+			$hasilV[$i] = $wp[$i]['hasilV'];
+		}
+
+		array_multisort($hasilV,SORT_DESC,$wp); //1. 
+		sort($hasilV); //
+
+		$jumlahV = 0;
+		for ($i=0; $i < count($data); $i++) { 
+			$wp[$i]['hasilVB'] = $hasilV[$i];
+			$jumlahV = $jumlahV + $hasilV[$i];
+		}
+
+		//Pembagian jadwal checklist
+		$sPembagian =0;
+		for ($i=0; $i < count($data); $i++) { 
+			$wp[$i]['jPembagian'] = $wp[$i]['hasilVB']/$jumlahV*$jChecklist;
+			$sPembagian = $sPembagian+ $wp[$i]['jPembagian'];
+		}
+
+		$rataPembagian = $sPembagian/count($data);
+
+		$sRPembagian = 0;
+		for ($i=0; $i < count($data); $i++) { 
+			if ($wp[$i]['jPembagian'] < $rataPembagian) {
+				$wp[$i]['rPembagian'] = floor($wp[$i]['jPembagian']);
+			}
+			else{
+				$wp[$i]['rPembagian'] = ceil($wp[$i]['jPembagian'])	;
+			}
+			$sRPembagian = $sRPembagian + $wp[$i]['rPembagian'];
+		}
+		var_dump($sPembagian);
+		var_dump($sRPembagian);
+		(int) $jm = ((int)$sPembagian-(int)$sRPembagian);
+
+		for ($i=0; $i < $jm; $i++) { 
+			$wp[$i]['rPembagian'] = $wp[$i]['rPembagian']+1;
+			$sRPembagian = $sRPembagian + 1;
+		}
+		var_dump($sRPembagian);
+		echo "<table border ='1px'>";
+		echo "<tr><td>NIK</td> <td>Nama</td><td>Hasil WP</td><td>Hasil WP Dibalik</td><td>Jumlah Pembagian</td><td>Real Pembagian</td></tr>";
+		for ($i=0; $i < count($data); $i++) { 
+			echo "<tr><td>".$wp[$i]['NIK'] ."</td> <td>". $wp[$i]['nama'] ."</td><td>". $wp[$i]['hasilV'] ."</td><td>".$wp[$i]['hasilVB']."</td><td>". $wp[$i]['jPembagian']."</td><td>". $wp[$i]['rPembagian']."</td></tr>";
+		}
+		echo "</table>";
 
 	}
 
@@ -1246,8 +1308,6 @@ class cAdmin extends CI_Controller {
 		$this->load->view('vAdmin/vRankingPIC');
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
-
-
 
 	public function pergantian()
 	{
@@ -1302,9 +1362,9 @@ class cAdmin extends CI_Controller {
 		}
 
 		echo "<script type='text/javascript'>
-			alert('Sukses Mengganti Bobot. ');
-			window.location.href = '" . base_url() . "admin/ubahbobotwp';
-			</script>";
+		alert('Sukses Mengganti Bobot. ');
+		window.location.href = '" . base_url() . "admin/ubahbobotwp';
+		</script>";
 		
 	}
 
@@ -1325,9 +1385,9 @@ class cAdmin extends CI_Controller {
 		}
 
 		echo "<script type='text/javascript'>
-			alert('Sukses Mengganti Jadwal Shift. ');
-			window.location.href = '" . base_url() . "admin/ubahshift';
-			</script>";
+		alert('Sukses Mengganti Jadwal Shift. ');
+		window.location.href = '" . base_url() . "admin/ubahshift';
+		</script>";
 
 	}
 }
