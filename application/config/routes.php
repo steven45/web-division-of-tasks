@@ -50,6 +50,7 @@ $route['admin/pergantian'] = 'cAdmin/pergantian';
 $route['admin/templateabsensi'] = 'cAdmin/templateAbsensi';
 $route['admin/tambahtemplateabsensi'] = 'cAdmin/tambahTemplateAbsensi';
 $route['admin/validasitambahtemplate'] = 'cAdmin/validasiTambahTemplate';
+$route['admin/edittemplateabsensi'] = 'cAdmin/editTemplateAbsensi';
 
 $route['admin/log'] = 'cAdmin/lihatLog';
 $route['admin/jLog'] = 'cAdmin/jLihatLog';
