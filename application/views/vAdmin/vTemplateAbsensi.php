@@ -9,7 +9,7 @@
       <h3 style="text-align: center; margin-top: -30px;">
         <div class="ui icon">
           <i class="user icon"></i>
-          Template Absensi
+          Template Absensi PIC 
         </h3>
           <?php if ($_SESSION['nama'] == 'admin'): ?>   
             <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Template Absensi" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahtemplateabsensi'); ?>">

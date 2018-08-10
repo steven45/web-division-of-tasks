@@ -165,7 +165,7 @@
             Absensi PIC</a>
 
             <a class="item" href="<?php echo site_url('admin/templateabsensi'); ?>">
-              <i class="calendar check icon"></i>
+              <i class="calendar plus alternate icon"></i>
             Template Absensi</a>
 
             
