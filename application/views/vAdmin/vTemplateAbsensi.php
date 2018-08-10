@@ -20,7 +20,7 @@
 
       <div class="ui divider"></div>
 
-      <table class="ui sortable compact celled definition table" id="example">
+      <table class="ui sortable compact celled definition table">
         <thead class="full-width" style="text-align: center; background-color: #dbedff">
           <tr>
             <th class="sorted ascending">NIK</th>
@@ -35,52 +35,38 @@
             <?php endif ?>
           </tr>
         </thead>
-        <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
-          <tbody id="hasil">
-            <?php $i = 0; ?>
-            <?php $jumlah = count($absensi); ?>
-            <input type="hidden" name="jumlahAbsensi" value="<?php echo $jumlah ?>"> 
-            <?php foreach ($absensi as $absensi) { ?>
-            <?php if ($absensi['Status'] == 'Enabled' ) { ?>
-            <input type="hidden" name="<?php echo 'NIKSebenarnya'.$i; ?>" value ="<?php echo $absensi['NIK'] ?>">
-            <input type="hidden" name="<?php echo 'IDHarian'.$i; ?>" value ="<?php echo $absensi['IDHarian']; ?>">
-            <tr>
-              <td><?php echo $absensi['NIK'] ?></td>
-              <td><?php echo $absensi['NamaPIC'] ?></td>
-              <td><?php echo $absensi['Shift'] ?></td>
-              <td><?php echo $absensi['Jam'] ?></td>
-              <td><?php echo $absensi['Hari'] ?></td>
-              
-            <?php if ($_SESSION['nama'] == 'admin'): ?>
-            <td>
-       <!--  <form method="GET" action="<?php echo base_url('admin/editpic'); ?> ">
-            <input type="hidden" name="NIK" value="<?php echo $pic[$i]['NIK'] ?>">
-            <button class="ui small blue button">
-              <i class="edit icon"></i>Edit
-            </button>
-          </form> -->
+<!--         <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
+ -->          <tbody>
+            
+          <?php $temp = 0; ?>
+            <?php foreach ($template as $template) { ?>
+                <tr>
+                  <input type="hidden" name="<?php echo 'IDTHarian'.$temp ?>" value="<?php echo $template['IDTHarian']; ?>">
+                <td>
+                    <?php echo $template['NIK']; ?>
+                    
+                </td>
 
-          <?php $edit = 'admin/editabsensi/'.$absensi['IDHarian'] ?>
-          <a href="<?php echo site_url($edit) ;?>" class="ui basic small blue button">
-            <i class="icon edit"></i>
-            Edit
-          </a>
-        </td>
-        <?php endif ?>
+                <td>
+                  <?php echo $template['NamaPIC']; ?>
+                </td>
+                <td>
+                    <?php echo $template['Shift']; ?>
+                    
+                </td>
+                <td>
+                  <?php echo $template['Jam']; ?>
+                </td>
+                <td>
+                    <?php echo $template['Hari']; ?>
+                   
+                </td>
+                
+            </tr>
+            <?php $temp = $temp + 1;
+             } ?>
+             <input type="hidden" name="temp" value="<?php echo $temp ?>">
 
-        <?php if ($_SESSION['nama'] == 'admin'): ?>
-        <td>
-          <a href="<?php echo site_url("admin/hapusabsensi/".$absensi['IDHarian']) ;?>" class="ui basic small red button" onClick="return confirm('Apa anda yakin ingin menghapus absensi? ?');">
-            <i class="icon trash"></i>
-            Hapus
-          </a>
-        </td>
-        <?php endif ?>
-        
-      </tr>
-      <?php } ?>
-      <?php $i = $i+1; ?>
-      <?php } ?>
     </tbody>
     <tfoot class="full-width">
       <tr>
@@ -95,7 +81,7 @@
 
       </tr>
     </tfoot>
-  </form>
+  <!-- </form> -->
 </table>
 <br><br>
 </div>
@@ -105,7 +91,7 @@
 </div>
 </div>
 
-<script>
+<!-- <script>
   jQuery(function() {
 
     jQuery('.pengganti').hide();
@@ -124,4 +110,4 @@
   }
 
 });
-</script>
+</script> -->

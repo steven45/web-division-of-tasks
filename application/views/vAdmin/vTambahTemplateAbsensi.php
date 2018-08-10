@@ -7,7 +7,7 @@
 				Tambah Template Absensi PIC</div></h3>
 				<div class="ui divider"></div>
 
-				<form class="ui form" method="POST" action="<?php echo site_url('admin/validasitambahabsensi'); ?>">
+				<form class="ui form" method="POST" action="<?php echo site_url('admin/validasitambahtemplate'); ?>">
 					<div class="field">
 						<label>Nama PIC</label>
 						<select style="min-width: 10em;" class="ui selected dropdown" name="NIK">
@@ -31,7 +31,7 @@
 
 					<div class="field">
 						<label>Hari</label>
-						<select style="min-width: 10em;" class="ui selected dropdown" name="IDJadwal">
+						<select style="min-width: 10em;" class="ui selected dropdown" name="Hari">
 							<option>Senin</option>
 							<option>Selasa</option>
 							<option>Rabu</option>

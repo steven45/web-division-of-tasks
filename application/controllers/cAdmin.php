@@ -1078,50 +1078,13 @@ class cAdmin extends CI_Controller {
 	public function templateAbsensi()
 	{
 		$data['judul'] = "Template Absensi";
-		$data['absensi']= $this->mAdmin->getAbsensi();
-
-		// $pic = NULL;
-		// $temp1 = 0;
-		// foreach ($data['absensi'] as $absensi) {
-		// 	$temp2 = 0;
-		// 	foreach ($data['absensi'] as $cek) {
-		// 		if ($absensi['Hari'] == $cek['Hari'] AND $absensi['Shift'] == $cek['Shift'] AND $absensi['NIK'] != $cek['NIK']) {
-		// 			$pic[$temp1][$temp2]['NIK'] = $cek['NIK'];
-		// 			$pic[$temp1][$temp2]['NamaPIC'] = $cek['NamaPIC'];	
-		// 			$temp2 = $temp2 +1;
-		// 			if ($absensi['NIKP'] == $cek['NIK']) {
-		// 				// echo $cek['NamaPIC']."<br>";
-		// 				$data['absensi'][$temp1]['NamaPICP'] = $cek['NamaPIC'];
-		// 			}
-		// 			else if ($absensi['NIKP'] != $cek['NIK']) {
-		// 				$data['absensi'][$temp1]['NamaPICP'] = "0";
-		// 			}
-		// 		}
-		// 	}
-		// 	$temp1 = $temp1 +1;
-		// }
-
-		// header("Content-type:application/json");
-		// echo json_encode($data['absensi']);
-
-		$data['pic'] = $data['absensi'];
-		$temp = 0;
-
+		$data['template']= $this->mAdmin->getTemplateAbsensi();
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vTemplateAbsensi', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
-	public function tambahTemplateAbsensi()
-	{
-		$data['judul'] = "Tambah Template Absensi";
-		$data['pic'] = $this->mAdmin->getPIC();
-		$data['jadwal'] = $this->mAdmin->getJadwal();
-		// var_dump($data['pic']);
-		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
-		$this->load->view('vAdmin/vTambahTemplateAbsensi', $data);
-		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
-	}
+	
 
 	public function notifikasi()
 	{
@@ -1427,5 +1390,58 @@ class cAdmin extends CI_Controller {
 		window.location.href = '" . base_url() . "admin/ubahshift';
 		</script>";
 
+	}
+
+	public function tambahTemplateAbsensi()
+	{
+		$data['judul'] = "Tambah Template Absensi";
+		$data['pic'] = $this->mAdmin->getPIC();
+		$data['jadwal'] = $this->mAdmin->getJadwal();
+		// var_dump($data['pic']);
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		$this->load->view('vAdmin/vTambahTemplateAbsensi', $data);
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
+	public function validasiTambahTemplate()
+	{
+		$NIK = $this->input->post('NIK');
+		$IDJadwal = $this->input->post('IDJadwal');
+		$hari = $this->input->post('Hari');
+
+		$daftar_hari = array(
+			'Sunday'    => 'Minggu',
+			'Monday'    => 'Senin',
+			'Tuesday'   => 'Selasa',
+			'Wednesday' => 'Rabu',
+			'Thursday'  => 'Kamis',
+			'Friday'    => 'Jumat',
+			'Saturday'  => 'Sabtu'
+		);
+		$namahari = date('l', strtotime($hari));
+
+		$data = array(
+			'NIK' => $NIK,
+			'IDJadwal' => $IDJadwal,
+			'Hari' =>  $hari,
+		);
+		$h = $daftar_hari[$namahari].', '.$hari;
+		$query = $this->mAdmin->tambahTemplateAbsensi('templateabsensi', $data, $NIK, $IDJadwal, $h);
+
+		if ($query == 1) 
+		{
+			echo "<script type='text/javascript'>
+			alert('Sukses Menambahkan Template');
+			window.location.href = '" . base_url() . "admin/templateabsensi';
+			</script>";
+		}
+		else
+		{
+			echo "<script type='text/javascript'>
+
+			alert('Template sudah ada!!! ');
+			window.location.href = '" . base_url() . "admin/tambahtemplateabsensi';
+			</script>";
+		}
 	}
 }
