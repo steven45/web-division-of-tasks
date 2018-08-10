@@ -18,9 +18,15 @@
           <?php endif ?>
       </div>
 
+      <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
       <div class="ui divider"></div>
-
-      <table class="ui sortable compact celled definition table" id="example">
+      <div class="ui calendar" style="right: 0px;">
+          <div class="ui input left icon">
+            <i class="calendar icon"></i>
+            <input type="date" value="<?php echo date('20y-m-d') ?>" id="kalender" name="kalender">
+          </div>
+      </div>
+      <table class="ui sortable compact celled definition table">
         <thead class="full-width" style="text-align: center; background-color: #dbedff">
           <tr>
             <th class="sorted ascending">NIK</th>
@@ -36,8 +42,7 @@
             <?php endif ?>
           </tr>
         </thead>
-        <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
-          <tbody id="hasil">
+          <tbody >
             <?php $i = 0; ?>
             <?php $jumlah = count($absensi); ?>
             <input type="hidden" name="jumlahAbsensi" value="<?php echo $jumlah ?>"> 
@@ -45,12 +50,13 @@
             <?php if ($absensi['Status'] == 'Enabled' ) { ?>
             <input type="hidden" name="<?php echo 'NIKSebenarnya'.$i; ?>" value ="<?php echo $absensi['NIK'] ?>">
             <input type="hidden" name="<?php echo 'IDHarian'.$i; ?>" value ="<?php echo $absensi['IDHarian']; ?>">
-            <tr>
+            <input type="hidden" name="<?php echo 'Hari'.$i; ?>" value ="<?php echo $absensi['Hari']; ?>">
+            <tr id="<?php echo 'hasilAbs'. $i; ?>">
               <td><?php echo $absensi['NIK'] ?></td>
               <td><?php echo $absensi['NamaPIC'] ?></td>
               <td><?php echo $absensi['Shift'] ?></td>
               <td><?php echo $absensi['Jam'] ?></td>
-              <td><?php echo $absensi['Hari'] ?></td>
+              <td><?php echo $absensi['Hari'] ?> <input target="<?php echo $i; ?>" type="hidden" class="hasilAbsensi" value="<?php $tanggal = explode(' ',$absensi['Hari']); echo $tanggal[1]?>"></td>
               <td class="absensi">
 
                 <select class="<?php echo "hadir".$i ?>" target="<?php echo $i ?>" name="<?php echo 'Kehadiran'.$i ?>" style="min-width: 10em; cursor: pointer;
@@ -105,34 +111,18 @@
               transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
               transition: box-shadow 0.1s ease, width 0.1s ease;
               transition: box-shadow 0.1s ease, width 0.1s ease, -webkit-box-shadow 0.1s ease;">
-
-              <!-- <option value="0" style="color: blue">Pilih :</option> -->
-              <?php for ($j=0; $j < count($pic[$i]); $j++) { ?>
-                <?php if ($absensi['NIKP'] != '0') { ?>
-                  <option value="<?php echo $absensi['NIKP'] ?>"><?php echo $absensi['NamaPICP'] ?></option>
-                <?php } else{?> 
-                <option value="<?php echo $pic[$i][$j]["NIK"]; ?>"><?php echo $pic[$i][$j]["NamaPIC"]; ?></option>
-              <?php }} ?>
-                <!-- <?php if ($absensi['Kehadiran'] == "Hadir") { ?>
-                <option value="<?php echo $absensi['Kehadiran']; ?>"><?php echo $absensi['Kehadiran']; ?></option>
-                <option value="Tidak Hadir">Tidak Hadir</option>
-                <?php } else if ($absensi['Kehadiran'] == "Tidak Hadir") { ?>
-                <option value="Tidak Hadir"><?php echo $absensi['Kehadiran']; ?></option>
-                <option value="Hadir">Hadir</option>
-                <?php } ?> -->
+              <?php if ($picPengganti[$i]['NamaPIC'] != '0'): ?>
+                <option value="<?php echo $picPengganti[$i]['NIK'] ?>"><?php echo $picPengganti[$i]['NamaPIC'] ?></option>
+              <?php endif ?>
+              <?php for ($j=0; $j < count($pic); $j++) { ?>
+                <?php if ($absensi['NamaPIC'] != $pic[$j]["NamaPIC"]): ?>
+                  <option value="<?php echo $pic[$j]["NIK"] ?>"><?php echo $pic[$j]["NamaPIC"] ?></option>
+                <?php endif ?>
+              <?php } ?>
               </select>
-              
             </td>
-
             <?php if ($_SESSION['nama'] == 'admin'): ?>
             <td>
-       <!--  <form method="GET" action="<?php echo base_url('admin/editpic'); ?> ">
-            <input type="hidden" name="NIK" value="<?php echo $pic[$i]['NIK'] ?>">
-            <button class="ui small blue button">
-              <i class="edit icon"></i>Edit
-            </button>
-          </form> -->
-
           <?php $edit = 'admin/editabsensi/'.$absensi['IDHarian'] ?>
           <a href="<?php echo site_url($edit) ;?>" class="ui basic small blue button">
             <i class="icon edit"></i>
@@ -157,44 +147,46 @@
     </tbody>
     <tfoot class="full-width">
       <tr>
-
         <th colspan="9">
-
           <button class="ui right floated blue small button" style="margin-top: 5px;">
             <i class="save icon"></i>Simpan
           </button>
-          
         </th>
-
       </tr>
     </tfoot>
   </form>
 </table>
 <br><br>
 </div>
-
-
-
 </div>
 </div>
 
 <script>
   jQuery(function() {
-
     jQuery('.pengganti').hide();
     var d = document.getElementsByClassName("absensi").length;
-  // console.log(d);
-  for (var i = 0; i < d; i++){
-    console.log(i +" = "+ $('.hadir'+i).val());
-    if($('.hadir'+i).val() == "Tidak Hadir"){
-      jQuery('#select' + $('.hadir'+i).attr('target')).show();
+    for (var i = 0; i < d; i++){
+      console.log(i +" = "+ $('.hadir'+i).val());
+      if($('.hadir'+i).val() == "Tidak Hadir"){
+        jQuery('#select' + $('.hadir'+i).attr('target')).show();
+      }
+      jQuery('.hadir'+i).change(function() {
+        jQuery('#select' + $(this).attr('target')).toggle();
+      });
     }
-
-
-    jQuery('.hadir'+i).change(function() {
-      jQuery('#select' + $(this).attr('target')).toggle();
-    });
-  }
-
-});
+  });
 </script>
+
+<!-- Filter Per Tanggal -->
+<script type="text/javascript">
+  kalender =  $('#kalender').val();
+  $(".hasilAbsensi").filter(function() {
+      $('#hasilAbs'+ $(this).attr('target')).toggle($(this).val().indexOf(kalender) > -1);
+  });
+  $('#kalender').on("change",function(){
+    kalender =  $('#kalender').val();
+    $(".hasilAbsensi").filter(function() {
+      $('#hasilAbs'+ $(this).attr('target')).toggle($(this).val().indexOf(kalender) > -1);
+    });
+  }); 
+</script> 

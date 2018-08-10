@@ -108,6 +108,12 @@ class mAdmin extends CI_Model
         }
     }
 
+    public function getChecklistWhere()
+    {
+        $query = $this->db->query("SELECT * FROM checklist WHERE `Hari` = 'Senin' OR `Hari` = 'Selasa'OR `Hari` = 'Rabu'OR `Hari` = 'Kamis'");
+        return $query->num_rows();
+    }
+
     public function getInfoChecklist($table, $IDChecklist)
     {
         $query = "SELECT * FROM $table WHERE `IDChecklist` = $IDChecklist";
@@ -148,7 +154,7 @@ class mAdmin extends CI_Model
     public function getAbsensi($IDHarian = FALSE)
     {
         if ($IDHarian == NULL) {
-            $query = $this->db->order_by('h.Hari','ASC');
+            $query = $this->db->order_by('j.Shift','ASC');
             $this->db->select('h.IDHarian, h.NIK, h.NIKP,h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam, p.Status');
              $this->db->from('harian h');
              $this->db->join('pic p','p.NIK=h.NIK');
@@ -170,7 +176,7 @@ class mAdmin extends CI_Model
 
     public function tambahAbsensi($table, $data, $NIK, $IDJadwal, $hari)
     {
-        $query = "SELECT * FROM $table WHERE `NIK` = '$NIK' AND `IDJadwal` = $IDJadwal AND `hari` = '$hari'";
+        $query = "SELECT * FROM $table WHERE `NIK` = '$NIK' AND `IDJadwal` = '$IDJadwal' AND `hari` = '$hari'";
         $hasil =  $this->db->query($query)->row_array();
 
         if ($hasil == NULL) {
