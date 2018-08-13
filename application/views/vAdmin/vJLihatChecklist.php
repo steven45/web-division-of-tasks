@@ -14,15 +14,15 @@
           </h3>
         
           <form method="POST" action="<?php echo site_url('admin/jchecklist'); ?>">
-            <div class="ui calendar" style="margin-left: 70%; margin-top: -45px">
+            <div class="ui calendar" style="margin-left: 76.8%; margin-top: -45px">
               <div class="ui input left icon">
                 <i class="calendar icon"></i>
                 <input type="date" value="<?php echo $tanggal; ?>" name="tanggal">
+                <button class="ui right floated tiny basic icon button" data-tooltip="Cari Jadwal Checklist" data-inverted="" data-position="top right" >
+              	  <i class="search icon"></i>
+            	</button>
               </div>
             </div>
-            <button class="ui right floated tiny grey basic icon button" data-tooltip="Cari Jadwal Checklist" data-inverted="" data-position="top right" style="margin-top: -37px">
-              <i class="search icon"></i>
-            </button>
           </form>
 
           
@@ -62,7 +62,7 @@
                 <td class="hari"><?php echo $checklist['Tanggal']; ?></td>
                 <td class="time"><?php echo $checklist['Jam']; ?></td>
                 <td class="batasP"><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
-                <td class="namaChecklist"><?php echo $checklist['NamaChecklist']; ?></td>
+                <td class="namaChecklist" ><?php echo $checklist['NamaChecklist']; ?></td>
                 <td>
                   <input type="hidden" name="<?php echo 'NIK'.$temp ?>" value="<?php echo $checklist['NIK'] ?>">
                   <?php if ($checklist['StatusCheck'] != '1') { ?>

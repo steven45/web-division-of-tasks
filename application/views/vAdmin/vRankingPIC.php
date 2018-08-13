@@ -64,18 +64,25 @@
 
         });
         </script>
-        <br>
-        <form method="POST" action="<?php echo site_url('admin/penjadwalan'); ?>">
+
+
+     
+        <form method="POST" action="<?php echo site_url('admin/penjadwalan'); ?>" >
+            <div class="ui center aligned basic segment">
+            Dari :   
             <div class="ui input left icon">
                 <i class="calendar icon"></i>
                 <input type="date" value="<?php echo date('20y-m-d'); ?>" name="date0">
             </div>
-            -
+
+            Sampai :
             <div class="ui input left icon">
                 <i class="calendar icon"></i>
                 <input type="date" value="<?php echo date('20y-m-d'); ?>" name="date1">
             </div>
+            <br><br>
             <button class="ui small green button">Jadwalkan Sekarang! </button>
+        </div>
         </form>
         <?php for ($i=0; $i < count($alert); $i++) { ?>
             <?php if ($alert[$i]['hasil'] == 'gagal') { ?>

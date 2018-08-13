@@ -41,7 +41,7 @@
                 </th>
               </tr>
             </thead>
-            <tbody> 
+            <tbody style="text-align: center;"> 
               <?php $temp = 0; $no = 1;?>
               
               <input type="hidden" name="nJumlah" value="<?php echo count($checklist); ?>">
