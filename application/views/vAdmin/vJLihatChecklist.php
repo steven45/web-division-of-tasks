@@ -41,7 +41,7 @@
                 <th >Instruksi Pengerjaan</th>
               </tr>
             </thead>
-            <tbody >
+            <tbody id="tabelku">
               <?php $temp = 0; $no = 1; ?>
               <input type="hidden" name="nJumlah" value="<?php echo count($checklist); ?>">
               <?php foreach ($checklist as $checklist) { ?>
@@ -58,7 +58,7 @@
 
                 ?>
                 <td> <?php echo $no ; $no = $no+1;?> </td>
-                <td class="hari"><?php echo $checklist['Tanggal']; ?></td>
+                <td class=""><?php echo $checklist['Tanggal']; ?></td>
                 <td class="time"><?php echo $checklist['Jam']; ?></td>
                 <td class="batasP"><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
                 <td class="namaChecklist"><?php echo $checklist['NamaChecklist']; ?></td>
@@ -144,7 +144,7 @@
         // console.log('duration in minutes', duration.asMinutes());
         // console.log(moment().format());
 
-        var row = document.querySelectorAll("table#mytable>tbody#hasil>tr");
+        var row = document.querySelectorAll("table#mytable>tbody#tabelku>tr");
         // console.log(row);
         var time = [];
         var namaChecklist = [];
@@ -154,30 +154,30 @@
         var selisih = [];
         var batasP = [];
         // var statusCheck = [];
-        var hari = [];
+        // var hari = [];
 
 
-        if (nowDay == 'Sunday') {
-          var hariSekarang = "Minggu";
-        }
-        else if(nowDay == 'Monday'){
-          var hariSekarang = "Senin";
-        }
-        else if(nowDay == 'Tuesday'){
-          var hariSekarang = "Selasa";
-        }
-        else if(nowDay == 'Wednesday'){
-          var hariSekarang = "Rabu";
-        }
-        else if(nowDay == 'Thursday'){
-          var hariSekarang = "Kamis";
-        }
-        else if(nowDay == 'Friday'){
-          var hariSekarang = "Jumat";
-        }
-        else if(nowDay == 'Saturday'){
-          var hariSekarang = "Sabtu";
-        }
+        // if (nowDay == 'Sunday') {
+        //   var hariSekarang = "Minggu";
+        // }
+        // else if(nowDay == 'Monday'){
+        //   var hariSekarang = "Senin";
+        // }
+        // else if(nowDay == 'Tuesday'){
+        //   var hariSekarang = "Selasa";
+        // }
+        // else if(nowDay == 'Wednesday'){
+        //   var hariSekarang = "Rabu";
+        // }
+        // else if(nowDay == 'Thursday'){
+        //   var hariSekarang = "Kamis";
+        // }
+        // else if(nowDay == 'Friday'){
+        //   var hariSekarang = "Jumat";
+        // }
+        // else if(nowDay == 'Saturday'){
+        //   var hariSekarang = "Sabtu";
+        // }
 
 
 
@@ -186,8 +186,8 @@
         for(var j = 0; j < x.length; j++){
           time[j] =  document.getElementsByClassName("time")[j].innerHTML;
           // console.log(time[j]);
-          // namaChecklist[j] =  document.getElementsByClassName("namaChecklist")[j].innerHTML;
-          hari[j] =  document.getElementsByClassName("hari")[j].innerHTML;
+          namaChecklist[j] =  document.getElementsByClassName("namaChecklist")[j].innerHTML;
+          // hari[j] =  document.getElementsByClassName("hari")[j].innerHTML;
           // // statusCheck[j] = document.getElementsByClassName("statusCheck")[j].value;
           // // idChecklist[j] = document.getElementsByClassName("idChecklist")[j].value;
           // namaPIC[j] =  document.getElementsByClassName("namaPIC")[j].innerHTML;
@@ -214,19 +214,19 @@
   // }
   // console.log(jHariS);
 
-  for (var i = 0; i < row.length; i++) {
+  // for (var i = 0; i < row.length; i++) {
 
-    if((selisih[i]*(-1)) > 0 && (selisih[i]*(-1)) < batasP[i] && hari[i] == hariSekarang){
+  //   if((selisih[i]*(-1)) > 0 && (selisih[i]*(-1)) < batasP[i]){
 
-      f[i] = document.getElementsByClassName('hasilku')[i];
-      f[i].style.backgroundColor = (f[i].style.backgroundColor == 'mediumseagreen' ? '' : 'mediumseagreen');
-    }
+  //     f[i] = document.getElementsByClassName('hasilku')[i];
+  //     f[i].style.backgroundColor = (f[i].style.backgroundColor == 'mediumseagreen' ? '' : 'mediumseagreen');
+  //   }
 
-    else if ((selisih[i]*(-1)) > batasP[i] && hari[i] == hariSekarang) {
-      f[i] = document.getElementsByClassName('hasilku')[i];
-      f[i].style.backgroundColor = (f[i].style.backgroundColor == 'gold' ? '' : 'gold');
-    }
-  }
+  //   else if ((selisih[i]*(-1)) > batasP[i] ) {
+  //     f[i] = document.getElementsByClassName('hasilku')[i];
+  //     f[i].style.backgroundColor = (f[i].style.backgroundColor == 'gold' ? '' : 'gold');
+  //   }
+  // }
 
 
   // // for (var j = 0; j < row.length; j++) {
@@ -254,59 +254,60 @@
   // //     } 
   // //   }
   // // }
-  // for (var j = 0; j < row.length; j++) {
-  //   f[j] = document.getElementsByClassName('hasilku')[j];
-  //   console.log(j);
-  //   console.log(f[j].style.backgroundColor);
+  for (var j = 0; j < row.length; j++) {
+    f[j] = document.getElementsByClassName('hasilku')[j];
+    // console.log(j);
+    // console.log(f[j].style.backgroundColor);
 
   //   if (hari[j] == hariSekarang ) {
   //     console.log("Status cek nya : " +statusCheck[j]);
-  //     if((selisih[j]*(-1)) > 0 && (selisih[j]*(-1)) < batasP[j] ){
-  //       f[j].style.backgroundColor = (f[j].style.backgroundColor == 'mediumseagreen' ? '' : 'mediumseagreen');
-  //     }
+      if((selisih[j]*(-1)) > 0 && (selisih[j]*(-1)) < batasP[j] ){
+        f[j].style.backgroundColor = (f[j].style.backgroundColor == 'mediumseagreen' ? '' : 'mediumseagreen');
+      }
 
-  //     else if ((selisih[j]*(-1)) > batasP[j]) {
-  //       f[j].style.backgroundColor = (f[j].style.backgroundColor == 'gold' ? '' : 'gold');
-  //     }
+      else if ((selisih[j]*(-1)) > batasP[j]) {
+        f[j].style.backgroundColor = (f[j].style.backgroundColor == 'gold' ? '' : 'gold');
+      }
 
-  //     for (var k = j+1; k < jHariS; k++) {
-  //       if (namaChecklist[j] == namaChecklist[k] && (selisih[k]*-1)>0 &&f[j].style.backgroundColor != 'tomato') {
-  //         // console.log(time[k] +" = "+ (selisih[k]*-1));
-  //         console.log("Awalanya colornya : " +f[j].style.backgroundColor)
-  //         f[j].style.backgroundColor = 'tomato';
-  //         console.log(hari[j]+" :: "+time[j]+" - "+ namaChecklist[j]+" == "+hari[k]+" :: "+time[k]+" - "+ namaChecklist[k]+" MAKA UBAH JADI "+ f[j].style.backgroundColor);
+      for (var k = j+1; k < row.length; k++) {
+        if (namaChecklist[j] == namaChecklist[k] && (selisih[k]*-1) > 0 && f[j].style.backgroundColor != 'tomato') {
+          // console.log(time[k] +" = "+ (selisih[k]*-1));
+          console.log("Awalanya colornya : " +f[j].style.backgroundColor)
+          f[j].style.backgroundColor = 'tomato';
+          console.log(time[j]+" - "+ namaChecklist[j]+" ==  :: "+time[k]+" - "+ namaChecklist[k]+" MAKA UBAH JADI "+ f[j].style.backgroundColor);
 
-  //         if (f[j].style.backgroundColor == 'tomato') {
-  //           console.log("Kalau warnanya tomato maka kirim ke tabel log dan status check ganti 2");
-  //           // document.getElementsByClassName("statusCheck")[j].value = "2";
-  //           // document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
-  //           // console.log("Status Check akhir : " + document.getElementsByClassName("statusCheck")[j].value);
+  // //         if (f[j].style.backgroundColor == 'tomato') {
+  // //           console.log("Kalau warnanya tomato maka kirim ke tabel log dan status check ganti 2");
+  // //           // document.getElementsByClassName("statusCheck")[j].value = "2";
+  // //           // document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
+  // //           // console.log("Status Check akhir : " + document.getElementsByClassName("statusCheck")[j].value);
 
-  //           // $.post("<?php echo site_url('pic/nocheck'); ?>",
-  //           // {
-  //           //   statusCheck : statusCheck[j],
-  //           //   IDChecklist: idChecklist[j],
-  //           //   NamaChecklist: namaChecklist[j],
-  //           //   Jam : time[j],
-  //           //   Info : info[j],
-  //           //   Hari : hari[j],
-  //           // }
-  //           // );
-  //         }
-  //       }
+  // //           // $.post("<?php echo site_url('pic/nocheck'); ?>",
+  // //           // {
+  // //           //   statusCheck : statusCheck[j],
+  // //           //   IDChecklist: idChecklist[j],
+  // //           //   NamaChecklist: namaChecklist[j],
+  // //           //   Jam : time[j],
+  // //           //   Info : info[j],
+  // //           //   Hari : hari[j],
+  // //           // }
+  // //           // );
+  // //         }
+  // //       }
 
-  //     }
-  //   } 
-  //   // else if(hari[j] == hariSekarang && statusCheck[j] == "2"){
-  //   //   document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
-  //   // }
-  //   // else if(hari[j] == hariSekarang && statusCheck[j] == "1"){
-  //   //   document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
-  //   // }
-  //   // else if(hari[j] != hariSekarang){
-  //   //   document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
-  //   // }
-  // }
+  // //     }
+  // //   } 
+  // //   // else if(hari[j] == hariSekarang && statusCheck[j] == "2"){
+  // //   //   document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
+  // //   // }
+  // //   // else if(hari[j] == hariSekarang && statusCheck[j] == "1"){
+  // //   //   document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
+  // //   // }
+  // //   // else if(hari[j] != hariSekarang){
+  // //   //   document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
+}
+    }
+  }
 
   }//Akhir Method myTimer
 
