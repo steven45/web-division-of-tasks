@@ -147,12 +147,12 @@
         <div class="menu">
           <a class="item" href="<?php echo site_url('admin/checklist'); ?>">
             <div class="ui icon">
-              <i class="file alternate outline icon"></i>
+              <i class="list icon"></i>
             List Checklist</div>
           </a>
           <a class="item" href="<?php echo site_url('admin/jchecklist'); ?>">
             <div class="ui icon">
-              <i class="check square icon"></i>
+              <i class="calendar outline icon"></i>
             Jadwal Checklist</div>
           </a>
         </div>
