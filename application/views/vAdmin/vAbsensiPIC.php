@@ -9,24 +9,34 @@ $(document).ready(function(){
 <div class="ui two column centered grid">
   <div class="column" style="width: auto;">
     <div class="ui segment" style="border-radius: 1.285714rem">
-     <div class="segment">
-      <div class="ui icon input" style="margin-left: 0px">
-        <input type="text" placeholder="Search..." id="pencarian">
-        <i class="circular search link icon"></i>
-      </div>
+     <div class="segment"> 
+          <form method="POST" action="<?php echo site_url('admin/absensi'); ?>">
+        <div class="ui calendar" style="right: 0px; m">
+          <div class="ui input left icon">
+            <i class="calendar icon"></i>
+            <input type="date" value="<?php echo $tanggal ?>" id="kalender" name="tanggal">
+            <button class="ui right floated tiny basic icon button" data-tooltip="Cari Jadwal Checklist" data-inverted="" data-position="top right">
+            <i class="search icon"></i>
+        </button>
+          </div>
+        </div>
+      </form>
+    
       <h3 style="text-align: center; margin-top: -30px;">
         <div class="ui icon">
           <i class="user icon"></i>
           Absensi PIC 
         </h3>
           <?php if ($_SESSION['nama'] == 'admin'): ?>
-          <a class="ui right floated basic blue button" id="template" data-tooltip="Input Sesuai template" data-inverted="" data-position="top right" style="margin-top: -42px; margin-right: 40px;"><i class="calendar plus alternate icon"></i>Input Sesuai Template</a>
+          <a class="ui right floated basic blue button" id="template" data-tooltip="Input Sesuai template" data-inverted="" data-position="top right" style="margin-top: -44px; margin-right: 40px;"><i class="calendar plus alternate icon"></i>Input Sesuai Template</a>
           
           <div class="ui tiny modal">
               <div class="header">Input Tanggal</div>
               <div class="content">
                 <p>
                   <form method="POST" action="<?php echo site_url('admin/ikuttemplate'); ?>">
+                    <div class="ui center aligned basic segment">
+
                   <div class="ui input left icon">
                       <i class="calendar icon"></i>
                       <input type="date" value="<?php echo date('20y-m-d'); ?>" name="date0">
@@ -39,28 +49,20 @@ $(document).ready(function(){
                   <br>
                   <br>
                   <button class="ui blue button">Input Tanggal</button>
+                </div>
                 </form>
                 </p>
                 
               </div>
             </div>   
-            <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Absensi PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahabsensi'); ?>">
+            <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Absensi PIC" data-inverted="" data-position="top right" style="margin-top: -41px" href="<?php echo site_url('admin/tambahabsensi'); ?>">
               <i class="add icon"></i>
             </a>
           <?php endif ?>
       </div>
       <div class="ui divider"></div>
-      <form method="POST" action="<?php echo site_url('admin/absensi'); ?>">
-        <div class="ui calendar" style="right: 0px;">
-          <div class="ui input left icon">
-            <i class="calendar icon"></i>
-            <input type="date" value="<?php echo $tanggal ?>" id="kalender" name="tanggal">
-          </div>
-        </div>
-        <button class="ui right floated tiny grey basic icon button" data-tooltip="Cari Jadwal Checklist" data-inverted="" data-position="top right" style="margin-top: -37px">
-            <i class="search icon"></i>
-        </button>
-      </form>
+
+
       <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
       <table class="ui sortable compact celled definition table">
         <thead class="full-width" style="text-align: center; background-color: #dbedff">
