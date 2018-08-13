@@ -34,7 +34,7 @@
             <?php foreach ($penggantiPIC as $pic): ?>
               <tr style="text-align: center">
               <td><?php echo $temp; ?></td>
-              <td><?php echo $pic['Hari']; ?></td>
+              <td><?php echo $pic['Tanggal']; ?></td>
               <td ><?php echo $pic['Jam']; ?></td>
               <td><?php echo $pic['NamaChecklist']; ?></td>
               <td><?php echo $pic['NamaPICS']; ?></td>

@@ -114,45 +114,56 @@
       });
     }); 
   }); 
-  </script> -->
+</script> -->
 
 
 
 <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" /><script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
-  <title>
-    <?php echo $judul; ?>
-  </title>
-  
+<title>
+  <?php echo $judul; ?>
+</title>
+
 </head>
 
 
 <body style="background-image: url(<?php echo base_url('assets/images/blue.png'); ?>);">
   <!-- Header -->
-    <div class="ui top fixed inverted pointing menu">
-      <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
-        <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
-        Artajasa
-      </a>
-      <a class="item" href="<?php echo site_url('admin/beranda'); ?>">
-        <div class="ui icon">
-          <i class="home icon"></i>
-          Dashboard</div>
-        </a>
+  <div class="ui top fixed inverted pointing menu">
+    <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
+      <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
+      Artajasa
+    </a>
+    <a class="item" href="<?php echo site_url('admin/beranda'); ?>">
+      <div class="ui icon">
+        <i class="home icon"></i>
+      Dashboard</div>
+    </a>
 
-        <?php if ($_SESSION['nama'] == 'admin'): ?>
+    <?php if ($_SESSION['nama'] == 'admin'): ?>
+      <div class="ui dropdown item">
+        Checklist
+        <i class="dropdown icon"></i>
+        <div class="menu">
           <a class="item" href="<?php echo site_url('admin/checklist'); ?>">
             <div class="ui icon">
-              <i class="check square icon"></i>
-            Checklist</div>
+              <i class="file alternate outline icon"></i>
+            List Checklist</div>
           </a>
-        <?php endif ?>
+          <a class="item" href="<?php echo site_url('admin/jchecklist'); ?>">
+            <div class="ui icon">
+              <i class="check square icon"></i>
+            Jadwal Checklist</div>
+          </a>
+        </div>
+      </div>
+    <?php endif ?>
 
-        <div class="ui dropdown item">
-          <i class="user icon"></i>
-          PIC
-          <i class="dropdown icon"></i>
-          <div class="menu">
+    <div class="ui dropdown item">
+      <i class="user icon"></i>
+      PIC
+      <i class="dropdown icon"></i>
+      <div class="menu">
 
             <?php if ($_SESSION['nama'] == 'admin'): ?>
             <a class="item" href="<?php echo site_url('admin/pic'); ?>">
@@ -250,9 +261,9 @@
         </a>
       </div>
     </div>
-    </body>
-    </div>
-    <br><br><br><br><br>
+  </body>
+</div>
+<br><br><br><br><br>
 
 
 

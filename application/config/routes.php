@@ -23,9 +23,6 @@ $route['admin/hapuspic'] = 'cAdmin/hapusPIC';
 $route['admin/ubahshift'] = 'cAdmin/ubahJadwalShift';
 $route['admin/gantijadwal'] = 'cAdmin/gantiJadwal';
 
-
-
-
 //CRUD CHECKLIST
 $route['admin/checklist'] = 'cAdmin/lihatChecklist';
 $route['admin/checklist/(:any)'] = 'cAdmin/lihatChecklist/$1';
@@ -35,6 +32,8 @@ $route['admin/validasieditchecklist'] = 'cAdmin/validasiEditChecklist';
 $route['admin/tambahchecklist'] = 'cAdmin/tambahChecklist';
 $route['admin/validasitambahchecklist'] = 'cAdmin/validasiTambahChecklist';
 $route['admin/gantichecklist'] = 'cAdmin/gantiChecklist';
+$route['admin/jchecklist'] = 'cAdmin/lihatJChecklist';
+$route['admin/gantijchecklist'] = 'cAdmin/gantiJChecklist';
 
 //CRUD ABSENSI
 $route['admin/absensi'] = 'cAdmin/lihatAbsensi';
@@ -45,8 +44,11 @@ $route['admin/editabsensi/(:any)'] = 'cAdmin/editAbsensi/$1';
 $route['admin/validasieditabsensi'] = 'cAdmin/validasiEditAbsensi';
 $route['admin/gantiabsensi'] = 'cAdmin/gantiAbsensi';
 $route['admin/ranking'] = 'cAdmin/ranking';
+$route['admin/jranking'] = 'cAdmin/jRanking';
 $route['admin/tampilRanking'] = 'cAdmin/tampilRangking';
+$route['admin/penjadwalan'] = 'cAdmin/penjadwalan';
 $route['admin/pergantian'] = 'cAdmin/pergantian';
+
 $route['admin/templateabsensi'] = 'cAdmin/templateAbsensi';
 $route['admin/tambahtemplateabsensi'] = 'cAdmin/tambahTemplateAbsensi';
 $route['admin/validasitambahtemplate'] = 'cAdmin/validasiTambahTemplate';
@@ -73,6 +75,7 @@ $route['pic/checklist'] = 'cPIC/lihatChecklist';
 $route['pic/jChecklist'] = 'cPIC/jChecklist';
 $route['pic/docheck'] = 'cPIC/doChecklist';
 $route['pic/nocheck'] = 'cPIC/noChecklist';
+$route['pic/uploadBukti'] = 'cPIC/uploadBukti';
 $route['pic/daftarPIC'] = 'cPIC/daftarPIC';
 $route['pic/absensi'] = 'cPIC/lihatAbsensi';
 $route['pic/ranking'] = 'cPIC/ranking';

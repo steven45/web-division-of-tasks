@@ -76,7 +76,21 @@ class mAdmin extends CI_Model
         $this->db->update($table, $data);
     }
 
-    public function tambahChecklist($table, $data, $namaChecklist, $jam, $hari)
+    public function tambahChecklist($table, $data, $namaChecklist, $jam)
+    {
+        $query = "SELECT * FROM `checklist` WHERE `NamaChecklist` = '$namaChecklist' AND `Jam` = $jam ";
+        $hasil =  $this->db->query($query)->row_array();
+        if ($hasil == NULL) {
+            $query = $this->db->insert($table,$data); 
+            return "_".$data['Jam'];
+        }
+        else{
+            return $hasil['Jam'];
+        }
+    }
+
+    //Belum Digunakan
+    public function tambahChecklist1($table, $data, $namaChecklist, $jam, $hari)
     {
         $query = "SELECT * FROM `checklist` WHERE `NamaChecklist` = '$namaChecklist' AND `Jam` = $jam AND `Hari` = '$hari'";
         $hasil =  $this->db->query($query)->row_array();
@@ -89,15 +103,12 @@ class mAdmin extends CI_Model
         }
     }
 
-    public function getChecklist($IDChecklist =  false)
+    public function getChecklist($IDChecklist = false)
     {
         if ($IDChecklist == null) {
-            $query = $this->db->order_by('c.Hari','ASC');
-            $query = $this->db->order_by('c.Jam','ASC');
-            $query = $this->db->order_by('c.BatasPengecekan','ASC');
-            $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.Hari,c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status, c.BatasPengecekan, c.tingkatPengecekan, c.StatusCheck, c.NIKP');
-             $query = $this->db->from('checklist c');
-             $query = $this->db->join('pic p','p.NIK=c.NIK');
+            $query = $this->db->order_by('Jam','ASC');
+            $query = $this->db->select('*');
+             $query = $this->db->from('checklist');
              $query = $this->db->get();
              return $query->result_array();
         }
@@ -108,10 +119,27 @@ class mAdmin extends CI_Model
         }
     }
 
+    public function getJChecklist($tanggal)
+    {
+        $query = $this->db->order_by('c.Jam','ASC');
+        $query = $this->db->order_by('c.BatasPengecekan','ASC');
+        $query = $this->db->where('c.Status','Enabled');
+        $query = $this->db->where('j.Tanggal',$tanggal);
+        $query = $this->db->select('p.NamaPIC, j.IDJadwalChecklist, j.NIK, j.NIKP, j.IDChecklist, j.Tanggal, j.StatusCheck, c.Info, c.NamaChecklist, c.Jam, c.BatasPengecekan, c.tingkatPengecekan');
+         $query = $this->db->from('jchecklist j');
+         $query = $this->db->join('pic p','p.NIK=j.NIK');
+         $query = $this->db->join('checklist c','c.IDChecklist=j.IDChecklist');
+         $query = $this->db->get();
+         return $query->result_array();
+    }
+
     public function getChecklistWhere()
     {
-        $query = $this->db->query("SELECT * FROM checklist WHERE `Hari` = 'Senin' OR `Hari` = 'Selasa'OR `Hari` = 'Rabu'OR `Hari` = 'Kamis'");
-        return $query->num_rows();
+        $query[0] = $this->db->query("SELECT `IDChecklist`,`Jam` FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = '07:00' OR `Jam` = '08:00' OR `Jam` = '09:00' OR `Jam` = '10:00' OR `Jam` = '11:00' OR `Jam` = '12:00' OR `Jam` = '13:00')")->result_array();
+        $query[1] = $this->db->query("SELECT `IDChecklist`,`Jam` FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = '14:00' OR `Jam` = '15:00' OR `Jam` = '16:00' )")->result_array();
+        $query[2] = $this->db->query("SELECT `IDChecklist`,`Jam` FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = '17:00' OR `Jam` = '18:00' OR `Jam` = '19:00' OR `Jam` = '20:00' OR `Jam` = '21:00')")->result_array();
+        $query[3] = $this->db->query("SELECT `IDChecklist`,`Jam`  FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = '22:00' OR `Jam` = '23:00' OR`Jam` = '00:00' OR `Jam` = '01:00'OR `Jam` = '02:00' OR `Jam` = '03:00' OR `Jam` = '04:00' OR `Jam` = '05:00' OR `Jam` = '06:00')")->result_array();
+        return $query;
     }
 
     public function getInfoChecklist($table, $IDChecklist)
@@ -120,27 +148,31 @@ class mAdmin extends CI_Model
         return  $this->db->query($query)->row_array();
     }
 
-    public function editChecklist($table, $data, $IDChecklist, $namaChecklist, $jam, $batasPengecekan, $hari)
+    public function editChecklist($table, $data, $IDChecklist, $namaChecklist, $jam)
     {
         $nJam = substr($jam, 0,2);
-        $query = "SELECT * FROM $table WHERE `NamaChecklist` = '$namaChecklist' AND `Jam` = $jam AND `BatasPengecekan` = '$batasPengecekan' AND `Hari` = '$hari'";
+        $query = "SELECT * FROM $table WHERE `NamaChecklist` = '$namaChecklist' AND `Jam` = $nJam ";
         $hasil =  $this->db->query($query)->row_array();
 
-        // var_dump($hasil);
         if ($hasil['IDChecklist'] != $IDChecklist AND $hasil != NULL) {
             return "0";
         }
-        else{
+        elseif ($hasil['IDChecklist'] == $IDChecklist){
             $this->db->where('IDChecklist', $IDChecklist);
             $this->db->update($table, $data);
             return "1";
         }
-        
     }
 
     public function gantiChecklist($table, $IDChecklist, $data)
     {
         $this->db->where('IDChecklist', $IDChecklist);
+        $this->db->update($table, $data);
+    }
+
+    public function gantiJChecklist($table, $IDChecklist, $data)
+    {
+        $this->db->where('IDJadwalChecklist', $IDChecklist);
         $this->db->update($table, $data);
     }
 
@@ -174,6 +206,18 @@ class mAdmin extends CI_Model
          
     }
 
+    public function getAbsensiDate($hari)
+    {
+        $query = $this->db->order_by('j.Shift','ASC');
+        $this->db->where('Hari', $hari);
+        $this->db->select('h.IDHarian, h.NIK, h.NIKP,h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam, p.Status');
+         $this->db->from('harian h');
+         $this->db->join('pic p','p.NIK=h.NIK');
+         $this->db->join('jadwal j','j.IDJadwal=h.IDJadwal');
+         $query = $this->db->get();
+         return $query->result_array();
+    }
+
     public function tambahAbsensi($table, $data, $NIK, $IDJadwal, $hari)
     {
         $query = "SELECT * FROM $table WHERE `NIK` = '$NIK' AND `IDJadwal` = '$IDJadwal' AND `hari` = '$hari'";
@@ -190,7 +234,7 @@ class mAdmin extends CI_Model
 
     public function editAbsensi($table, $IDHarian, $data,$NIK, $IDJadwal, $hari)
     {
-        $query = "SELECT * FROM $table WHERE `NIK` = '$NIK' AND `IDJadwal` = $IDJadwal AND `hari` = '$hari'";
+        $query = "SELECT * FROM $table WHERE `NIK` = '$NIK' AND `IDJadwal` = $IDJadwal AND `Hari` = '$hari'";
         $hasil =  $this->db->query($query)->row_array();
         if ($hasil == NULL) {
             $this->db->where('IDHarian', $IDHarian);
@@ -249,9 +293,10 @@ class mAdmin extends CI_Model
     {
         $query = $this->db->order_by('p.Waktu','ASC');
         $query = $this->db->order_by('c.NamaChecklist','ASC');
-        $query = $this->db->select('c.Jam, c.Hari, c.NamaChecklist, p.NamaPICS, p.NamaPICP, p.Waktu');
+        $query = $this->db->select('j.Tanggal, c.Jam, c.NamaChecklist, p.NamaPICS, p.NamaPICP, p.Waktu');
          $query = $this->db->from('penggantipic p');
          $query = $this->db->join('checklist c','c.IDChecklist=p.IDChecklist');
+         $query = $this->db->join('jchecklist j','j.IDJadwalChecklist=p.IDJadwalChecklist');
          $query = $this->db->get();
          return $query->result_array();
     }
@@ -274,6 +319,20 @@ class mAdmin extends CI_Model
 
         $this->db->where('IDJadwal', $IDJadwal);
         $this->db->update($table, $data);
+    }
+
+    public function penjadwalan($IDChecklist, $data, $tanggal)
+    {
+        $query = "SELECT * FROM `jChecklist` WHERE `IDChecklist` = '$IDChecklist' AND `Tanggal` = '$tanggal'";
+        $hasil =  $this->db->query($query)->row_array();
+
+        if ($hasil == NULL) {
+            $this->db->insert('jChecklist',$data);
+        }
+        else{   
+            $this->db->where('IDJadwalChecklist', $hasil['IDJadwalChecklist']);
+            $this->db->update('jChecklist', $data);
+        }
     }
 
     public function tambahTemplateAbsensi($table, $data, $NIK, $IDJadwal, $hari)
