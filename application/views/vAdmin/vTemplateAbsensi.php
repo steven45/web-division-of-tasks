@@ -19,6 +19,19 @@
       </div>
 
       <div class="ui divider"></div>
+      <div class="field" style="margin-left: 600px; margin-top: 5px" >
+                    <select class="ui right selection tiny dropdown item" id="hari" >
+                      <!-- <option value="<?php echo $hari; ?>"><?php echo $hari; ?></option>         -->
+                      <option value="<?php echo $hari ?>"><?php echo $hari ?></option>
+                      <option value="Senin">Senin</option>
+                      <option value="Selasa">Selasa</option>
+                      <option value="Rabu">Rabu</option>
+                      <option value="Kamis">Kamis</option>
+                      <option value="Jumat">Jumat</option>
+                      <option value="Sabtu">Sabtu</option>
+                      <option value="Minggu">Minggu</option>
+                    </select>
+                  </div>
 
       <table class="ui sortable compact celled definition table">
         <thead class="full-width" style="text-align: center; background-color: #dbedff">
@@ -36,32 +49,35 @@
           </tr>
         </thead>
 <!--         <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
- -->          <tbody>
+ -->          <tbody id="hasil">
             
           <?php $temp = 0; ?>
             <?php foreach ($template as $template) { ?>
                 <tr>
                   <input type="hidden" name="<?php echo 'IDTHarian'.$temp ?>" value="<?php echo $template['IDTHarian']; ?>">
+                <td><?php echo $template['NIK']; ?></td>
+                <td><?php echo $template['NamaPIC']; ?></td>
+                <td><?php echo $template['Shift']; ?></td>
+                <td><?php echo $template['Jam']; ?></td>
+                <td><?php echo $template['Hari']; ?></td>
+                <?php if ($_SESSION['nama'] == 'admin'): ?>
                 <td>
-                    <?php echo $template['NIK']; ?>
-                    
-                </td>
+              <?php $edit = 'admin/edittemplateabsensi/'.$template['IDTHarian'] ?>
+              <a href="<?php echo site_url($edit) ;?>" class="ui basic small blue button">
+                <i class="icon edit"></i>
+                Edit
+              </a>
+            </td>
+            <?php endif ?> 
 
-                <td>
-                  <?php echo $template['NamaPIC']; ?>
-                </td>
-                <td>
-                    <?php echo $template['Shift']; ?>
-                    
-                </td>
-                <td>
-                  <?php echo $template['Jam']; ?>
-                </td>
-                <td>
-                    <?php echo $template['Hari']; ?>
-                   
-                </td>
-                
+            <?php if ($_SESSION['nama'] == 'admin'): ?>
+            <td>
+              <a href="<?php echo site_url("admin/hapustemplateabsensi/".$template['IDTHarian']) ;?>" class="ui basic small red button" onClick="return confirm('Apa anda yakin ingin menghapus template absensi? ?');">
+                <i class="icon trash"></i>
+                Hapus
+              </a>
+            </td>
+            <?php endif ?>
             </tr>
             <?php $temp = $temp + 1;
              } ?>

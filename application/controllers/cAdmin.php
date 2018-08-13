@@ -1077,6 +1077,34 @@ class cAdmin extends CI_Controller {
 
 	public function templateAbsensi()
 	{
+		$date = date("N");
+		switch ($date) {
+			case '1':
+			$hari = 'Senin';
+			break;
+			case '2':
+			$hari = 'Selasa';
+			break;
+			case '3':
+			$hari = 'Rabu';
+			break;
+			case '4':
+			$hari = 'Kamis';
+			break;
+			case '5':
+			$hari = 'Jumat';
+			break;
+			break;
+			case '6':
+			$hari = 'Sabtu';
+			break;
+			break;
+			case '7':
+			$hari = 'Minggu';
+			break;
+			break;
+		}
+		$data['hari'] = $hari;
 		$data['judul'] = "Template Absensi";
 		$data['template']= $this->mAdmin->getTemplateAbsensi();
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
@@ -1443,5 +1471,54 @@ class cAdmin extends CI_Controller {
 			window.location.href = '" . base_url() . "admin/tambahtemplateabsensi';
 			</script>";
 		}
+	}
+
+	public function editTemplateAbsensi($IDTHarian= NULL)
+	{
+		$data['judul'] = 'Edit Template Absensi';
+		$IDTHarian = $IDTHarian;
+		$data['template']= $this->mAdmin->getTemplateAbsensi($IDTHarian);
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		$this->load->view('vAdmin/vEditTemplateAbsensi', $data);
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');		
+	}
+
+	public function validasiTemplateAbsensi()
+	{
+		$IDTHarian = $this->input->post('IDTHarian');
+		$NIK = $this->input->post('NIK');
+		$IDJadwal = $this->input->post('IDJadwal');
+		$hari = $this->input->post('Hari');
+
+		$data = array(
+			'IDJadwal' => $IDJadwal,
+			'Hari' => $hari
+		);
+
+		$query = $this->mAdmin->editTemplateAbsensi('templateabsensi',$IDTHarian, $data, $NIK, $IDJadwal, $hari);
+		if ($query == '1') {
+			echo "<script type='text/javascript'>
+			alert('Sukses mengedit template absensi. ');
+			window.location.href = '" . base_url() . "admin/templateabsensi';
+			</script>";
+		}
+		else{
+			echo "<script type='text/javascript'>
+			alert('Jadwal sudah ada!. ');
+			window.location.href = '" . base_url() . "admin/templateabsensi';
+			</script>";
+		}
+	}
+
+	public function hapusTemplateAbsensi($IDTHarian)
+	{
+		if (!isset($_SESSION['nama'])) {
+			redirect(base_url("admin"));
+		}
+		$this->mAdmin->hapusTemplateAbsensi('templateabsensi', $IDTHarian);
+		echo "<script type='text/javascript'>
+		alert('Sukses menghapus template absensi ');
+		window.location.href = '" . base_url() . "admin/templateabsensi';
+		</script>";
 	}
 }
