@@ -49,6 +49,11 @@ $route['admin/tampilRanking'] = 'cAdmin/tampilRangking';
 $route['admin/penjadwalan'] = 'cAdmin/penjadwalan';
 $route['admin/pergantian'] = 'cAdmin/pergantian';
 
+$route['admin/templateabsensi'] = 'cAdmin/templateAbsensi';
+$route['admin/tambahtemplateabsensi'] = 'cAdmin/tambahTemplateAbsensi';
+$route['admin/validasitambahtemplate'] = 'cAdmin/validasiTambahTemplate';
+$route['admin/edittemplateabsensi'] = 'cAdmin/editTemplateAbsensi';
+
 $route['admin/log'] = 'cAdmin/lihatLog';
 $route['admin/jLog'] = 'cAdmin/jLihatLog';
 $route['admin/gantipiclog'] = 'cAdmin/gantiPICLog';

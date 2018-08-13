@@ -165,39 +165,44 @@
       <i class="dropdown icon"></i>
       <div class="menu">
 
-        <?php if ($_SESSION['nama'] == 'admin'): ?>
-          <a class="item" href="<?php echo site_url('admin/pic'); ?>">
-            <i class="file alternate outline icon"></i>
-          Daftar PIC</a>
-        <?php endif ?>
+            <?php if ($_SESSION['nama'] == 'admin'): ?>
+            <a class="item" href="<?php echo site_url('admin/pic'); ?>">
+              <i class="file alternate outline icon"></i>
+            Daftar PIC</a>
+            <?php endif ?>
 
-        <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
-          <i class="calendar check outline icon"></i>
-        Absensi PIC</a>
+            <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
+              <i class="calendar check outline icon"></i>
+            Absensi PIC</a>
 
-        <?php if ($_SESSION['nama'] == 'admin'): ?>
-          <a class="item" href="<?php echo site_url('admin/tampilRanking'); ?>">
-            <i class="chart bar outline icon"></i>
-          Ranking PIC</a>
-        <?php endif ?>
+            <a class="item" href="<?php echo site_url('admin/templateabsensi'); ?>">
+              <i class="calendar plus alternate icon"></i>
+            Template Absensi</a>
 
-        <a class="item" href="<?php echo site_url('admin/pergantian'); ?>">
-          <i class="sync alternate icon"></i>
-        Pergantian PIC</a>
-      </div>
-    </div>
+            
+            <?php if ($_SESSION['nama'] == 'admin'): ?>
+            <a class="item" href="<?php echo site_url('admin/tampilRanking'); ?>">
+              <i class="chart bar outline icon"></i>
+            Ranking PIC</a>
+            <?php endif ?>
+            
+            <a class="item" href="<?php echo site_url('admin/pergantian'); ?>">
+              <i class="sync alternate icon"></i>
+            Pergantian PIC</a>
+          </div>
+        </div>
+      
+        
+        <div class="right menu">
+          <div class="ui pointing dropdown link item">
+            <span class="text">
 
-
-    <div class="right menu">
-      <div class="ui pointing dropdown link item">
-        <span class="text">
-
-        Notifications</span>
-        <div class="ui small label" style="background-color: red;"><!-- <?php echo $temp; ?> -->2</div>
-        <div class="menu">
-          <div class="header">
-            <i class= "bell icon"></i>
-          Notifications</div>
+            Notifications</span>
+            <div class="ui small label" style="background-color: red;"><!-- <?php echo $temp; ?> -->2</div>
+            <div class="menu">
+              <div class="header">
+                <i class= "bell icon"></i>
+              Notifications</div>
 
               <!-- <div class="ui relaxed divided list" style="margin: auto+10px auto+10px; padding-bottom: 10px;">
               <?php foreach ($notifikasi as $notifikasi): ?>

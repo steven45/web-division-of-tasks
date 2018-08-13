@@ -973,6 +973,18 @@ class cAdmin extends CI_Controller {
 
 	}
 
+
+	public function templateAbsensi()
+	{
+		$data['judul'] = "Template Absensi";
+		$data['template']= $this->mAdmin->getTemplateAbsensi();
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		$this->load->view('vAdmin/vTemplateAbsensi', $data);
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
+	
+
 	public function notifikasi()
 	{
 		$data['notifikasi'] = $this->mAdmin->getNotifikasi();
@@ -1430,5 +1442,58 @@ class cAdmin extends CI_Controller {
 		window.location.href = '" . base_url() . "admin/ubahshift';
 		</script>";
 
+	}
+
+	public function tambahTemplateAbsensi()
+	{
+		$data['judul'] = "Tambah Template Absensi";
+		$data['pic'] = $this->mAdmin->getPIC();
+		$data['jadwal'] = $this->mAdmin->getJadwal();
+		// var_dump($data['pic']);
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		$this->load->view('vAdmin/vTambahTemplateAbsensi', $data);
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
+	}
+
+	public function validasiTambahTemplate()
+	{
+		$NIK = $this->input->post('NIK');
+		$IDJadwal = $this->input->post('IDJadwal');
+		$hari = $this->input->post('Hari');
+
+		$daftar_hari = array(
+			'Sunday'    => 'Minggu',
+			'Monday'    => 'Senin',
+			'Tuesday'   => 'Selasa',
+			'Wednesday' => 'Rabu',
+			'Thursday'  => 'Kamis',
+			'Friday'    => 'Jumat',
+			'Saturday'  => 'Sabtu'
+		);
+		$namahari = date('l', strtotime($hari));
+
+		$data = array(
+			'NIK' => $NIK,
+			'IDJadwal' => $IDJadwal,
+			'Hari' =>  $hari,
+		);
+		$h = $daftar_hari[$namahari].', '.$hari;
+		$query = $this->mAdmin->tambahTemplateAbsensi('templateabsensi', $data, $NIK, $IDJadwal, $h);
+
+		if ($query == 1) 
+		{
+			echo "<script type='text/javascript'>
+			alert('Sukses Menambahkan Template');
+			window.location.href = '" . base_url() . "admin/templateabsensi';
+			</script>";
+		}
+		else
+		{
+			echo "<script type='text/javascript'>
+
+			alert('Template sudah ada!!! ');
+			window.location.href = '" . base_url() . "admin/tambahtemplateabsensi';
+			</script>";
+		}
 	}
 }
