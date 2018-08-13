@@ -142,7 +142,10 @@
 
     <?php if ($_SESSION['nama'] == 'admin'): ?>
       <div class="ui dropdown item">
+        <div class="ui icon">
+            <i class="check square icon"></i>
         Checklist
+      </div>
         <i class="dropdown icon"></i>
         <div class="menu">
           <a class="item" href="<?php echo site_url('admin/checklist'); ?>">
