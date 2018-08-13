@@ -1590,7 +1590,14 @@ class cAdmin extends CI_Controller {
 
 			$template = $this->mAdmin->getTemplateAbsensiDate($hari);
 			// var_dump($template);
-
+			if ($template == NULL){
+				echo "<script type='text/javascript'>
+			alert('Template Kosong!');
+			window.location.href = '" . base_url() . "admin/absensi';
+			</script>";
+			
+			}
+			else{
 			foreach ($template as $template) {
 				$data = array(
 					'NIK' => $template['NIK'],
@@ -1602,8 +1609,10 @@ class cAdmin extends CI_Controller {
 				);
 				// var_dump($data);
 				$query = $this->mAdmin->tambahAbsensiTemplate('harian', $data, $template['NIK'], $template['IDJadwal'], $haritanggal);
+				// var_dump($query);
 
 			}
+
 			if ($query == '1') {
 			echo "<script type='text/javascript'>
 			alert('Sukses menambahkan absensi. ');
@@ -1612,11 +1621,12 @@ class cAdmin extends CI_Controller {
 			}
 			else{
 				echo "<script type='text/javascript'>
-				alert('Jadwal sudah ada!. ');
+				alert('Jadwal Sudah Ada! ');
 				window.location.href = '" . base_url() . "admin/absensi';
 				</script>";
 			}
 
 		}
+	}
 	}
 }
