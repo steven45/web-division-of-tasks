@@ -17,15 +17,19 @@
             </a>
           <?php endif ?>
       </div>
-
-      <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
       <div class="ui divider"></div>
-      <div class="ui calendar" style="right: 0px;">
+      <form method="POST" action="<?php echo site_url('admin/absensi'); ?>">
+        <div class="ui calendar" style="right: 0px;">
           <div class="ui input left icon">
             <i class="calendar icon"></i>
-            <input type="date" value="<?php echo date('20y-m-d') ?>" id="kalender" name="kalender">
+            <input type="date" value="<?php echo $tanggal ?>" id="kalender" name="tanggal">
           </div>
-      </div>
+        </div>
+        <button class="ui right floated tiny grey basic icon button" data-tooltip="Cari Jadwal Checklist" data-inverted="" data-position="top right" style="margin-top: -37px">
+            <i class="search icon"></i>
+        </button>
+      </form>
+      <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
       <table class="ui sortable compact celled definition table">
         <thead class="full-width" style="text-align: center; background-color: #dbedff">
           <tr>
@@ -111,13 +115,10 @@
               transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
               transition: box-shadow 0.1s ease, width 0.1s ease;
               transition: box-shadow 0.1s ease, width 0.1s ease, -webkit-box-shadow 0.1s ease;">
-              <?php if ($picPengganti[$i]['NamaPIC'] != '0'): ?>
-                <option value="<?php echo $picPengganti[$i]['NIK'] ?>"><?php echo $picPengganti[$i]['NamaPIC'] ?></option>
-              <?php endif ?>
-              <?php for ($j=0; $j < count($pic); $j++) { ?>
-                <?php if ($absensi['NamaPIC'] != $pic[$j]["NamaPIC"]): ?>
-                  <option value="<?php echo $pic[$j]["NIK"] ?>"><?php echo $pic[$j]["NamaPIC"] ?></option>
-                <?php endif ?>
+              <?php foreach ($picPengganti as $pic ) {?>
+                <?php if ($pic['NIK'] != $absensi['NIK']) { ?>
+                  <option value="<?php echo $pic['NIK'] ?>"><?php echo $pic['NamaPIC'] ?></option>
+                <?php } ?>
               <?php } ?>
               </select>
             </td>
@@ -178,7 +179,7 @@
 </script>
 
 <!-- Filter Per Tanggal -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   kalender =  $('#kalender').val();
   $(".hasilAbsensi").filter(function() {
       $('#hasilAbs'+ $(this).attr('target')).toggle($(this).val().indexOf(kalender) > -1);
@@ -189,4 +190,4 @@
       $('#hasilAbs'+ $(this).attr('target')).toggle($(this).val().indexOf(kalender) > -1);
     });
   }); 
-</script> 
+</script>  -->

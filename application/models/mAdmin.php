@@ -205,6 +205,17 @@ class mAdmin extends CI_Model
         }
          
     }
+    public function getAbsensiWhere($tanggal)
+    {
+        $query = $this->db->order_by('j.Shift','ASC');
+        $this->db->select('h.IDHarian, h.NIK, h.NIKP, h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam, p.Status');
+         $this->db->from('harian h');
+         $this->db->join('pic p','p.NIK=h.NIK');
+         $this->db->join('jadwal j','j.IDJadwal=h.IDJadwal');
+         $this->db->where(array('Hari' => $tanggal));
+         $query = $this->db->get();
+         return $query->result_array();
+    }
 
     public function getAbsensiDate($hari)
     {
