@@ -31,7 +31,7 @@ $(document).ready(function(){
                       <i class="calendar icon"></i>
                       <input type="date" value="<?php echo date('20y-m-d'); ?>" name="date0">
                   </div>
-                  -
+                  Sampai:
                   <div class="ui input left icon">
                       <i class="calendar icon"></i>
                       <input type="date" value="<?php echo date('20y-m-d'); ?>" name="date1">
