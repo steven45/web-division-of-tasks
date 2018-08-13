@@ -114,79 +114,90 @@
       });
     }); 
   }); 
-  </script> -->
+</script> -->
 
 
 
 <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" /><script src="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
-  <title>
-    <?php echo $judul; ?>
-  </title>
-  
+<title>
+  <?php echo $judul; ?>
+</title>
+
 </head>
 
 
 <body style="background-image: url(<?php echo base_url('assets/images/blue.png'); ?>);">
   <!-- Header -->
-    <div class="ui top fixed inverted pointing menu">
-      <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
-        <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
-        Artajasa
-      </a>
-      <a class="item" href="<?php echo site_url('admin/beranda'); ?>">
-        <div class="ui icon">
-          <i class="home icon"></i>
-          Dashboard</div>
-        </a>
+  <div class="ui top fixed inverted pointing menu">
+    <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
+      <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
+      Artajasa
+    </a>
+    <a class="item" href="<?php echo site_url('admin/beranda'); ?>">
+      <div class="ui icon">
+        <i class="home icon"></i>
+      Dashboard</div>
+    </a>
 
-        <?php if ($_SESSION['nama'] == 'admin'): ?>
+    <?php if ($_SESSION['nama'] == 'admin'): ?>
+      <div class="ui dropdown item">
+        Checklist
+        <i class="dropdown icon"></i>
+        <div class="menu">
           <a class="item" href="<?php echo site_url('admin/checklist'); ?>">
             <div class="ui icon">
-              <i class="check square icon"></i>
-            Checklist</div>
+              <i class="file alternate outline icon"></i>
+            List Checklist</div>
           </a>
+          <a class="item" href="<?php echo site_url('admin/jchecklist'); ?>">
+            <div class="ui icon">
+              <i class="check square icon"></i>
+            Jadwal Checklist</div>
+          </a>
+        </div>
+      </div>
+    <?php endif ?>
+
+    <div class="ui dropdown item">
+      <i class="user icon"></i>
+      PIC
+      <i class="dropdown icon"></i>
+      <div class="menu">
+
+        <?php if ($_SESSION['nama'] == 'admin'): ?>
+          <a class="item" href="<?php echo site_url('admin/pic'); ?>">
+            <i class="file alternate outline icon"></i>
+          Daftar PIC</a>
         <?php endif ?>
 
-        <div class="ui dropdown item">
-          <i class="user icon"></i>
-          PIC
-          <i class="dropdown icon"></i>
-          <div class="menu">
+        <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
+          <i class="calendar check outline icon"></i>
+        Absensi PIC</a>
 
-            <?php if ($_SESSION['nama'] == 'admin'): ?>
-            <a class="item" href="<?php echo site_url('admin/pic'); ?>">
-              <i class="file alternate outline icon"></i>
-            Daftar PIC</a>
-            <?php endif ?>
+        <?php if ($_SESSION['nama'] == 'admin'): ?>
+          <a class="item" href="<?php echo site_url('admin/tampilRanking'); ?>">
+            <i class="chart bar outline icon"></i>
+          Ranking PIC</a>
+        <?php endif ?>
 
-            <a class="item" href="<?php echo site_url('admin/absensi'); ?>">
-              <i class="calendar check outline icon"></i>
-            Absensi PIC</a>
-            
-            <?php if ($_SESSION['nama'] == 'admin'): ?>
-            <a class="item" href="<?php echo site_url('admin/tampilRanking'); ?>">
-              <i class="chart bar outline icon"></i>
-            Ranking PIC</a>
-            <?php endif ?>
-            
-            <a class="item" href="<?php echo site_url('admin/pergantian'); ?>">
-              <i class="sync alternate icon"></i>
-            Pergantian PIC</a>
-          </div>
-        </div>
-      
-        
-        <div class="right menu">
-          <div class="ui pointing dropdown link item">
-            <span class="text">
+        <a class="item" href="<?php echo site_url('admin/pergantian'); ?>">
+          <i class="sync alternate icon"></i>
+        Pergantian PIC</a>
+      </div>
+    </div>
 
-            Notifications</span>
-            <div class="ui small label" style="background-color: red;"><!-- <?php echo $temp; ?> -->2</div>
-            <div class="menu">
-              <div class="header">
-                <i class= "bell icon"></i>
-              Notifications</div>
+
+    <div class="right menu">
+      <div class="ui pointing dropdown link item">
+        <span class="text">
+
+        Notifications</span>
+        <div class="ui small label" style="background-color: red;"><!-- <?php echo $temp; ?> -->2</div>
+        <div class="menu">
+          <div class="header">
+            <i class= "bell icon"></i>
+          Notifications</div>
 
               <!-- <div class="ui relaxed divided list" style="margin: auto+10px auto+10px; padding-bottom: 10px;">
               <?php foreach ($notifikasi as $notifikasi): ?>
@@ -245,9 +256,9 @@
         </a>
       </div>
     </div>
-    </body>
-    </div>
-    <br><br><br><br><br>
+  </body>
+</div>
+<br><br><br><br><br>
 
 
 

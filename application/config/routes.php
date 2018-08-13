@@ -23,8 +23,6 @@ $route['admin/hapuspic'] = 'cAdmin/hapusPIC';
 $route['admin/ubahshift'] = 'cAdmin/ubahJadwalShift';
 $route['admin/gantijadwal'] = 'cAdmin/gantiJadwal';
 
-
-
 //CRUD CHECKLIST
 $route['admin/checklist'] = 'cAdmin/lihatChecklist';
 $route['admin/checklist/(:any)'] = 'cAdmin/lihatChecklist/$1';
@@ -34,6 +32,8 @@ $route['admin/validasieditchecklist'] = 'cAdmin/validasiEditChecklist';
 $route['admin/tambahchecklist'] = 'cAdmin/tambahChecklist';
 $route['admin/validasitambahchecklist'] = 'cAdmin/validasiTambahChecklist';
 $route['admin/gantichecklist'] = 'cAdmin/gantiChecklist';
+$route['admin/jchecklist'] = 'cAdmin/lihatJChecklist';
+$route['admin/gantijchecklist'] = 'cAdmin/gantiJChecklist';
 
 //CRUD ABSENSI
 $route['admin/absensi'] = 'cAdmin/lihatAbsensi';

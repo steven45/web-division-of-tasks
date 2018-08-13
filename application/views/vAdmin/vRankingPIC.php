@@ -61,11 +61,14 @@
         });
         </script>
         <br>
-        <a class="ui small green button">
-		Jadwalkan Sekarang!	</a>
+        <form method="POST" action="<?php echo site_url('admin/penjadwalan'); ?>">
+            <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                <input type="date" value="<?php echo date('20y-m-d'); ?>" name="tanggal">
+              </div>
+            <button class="ui small green button">Jadwalkan Sekarang! </button>
+        </form>
         </div>
-
-
 </div>
 </div>
 </div>
