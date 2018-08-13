@@ -43,7 +43,7 @@
         $(document).ready(function(){
 
           var day = $("#hari option:selected").val();
-          console.log(day);
+          // console.log(day);
           $("#hasil tr").filter(function() {
             $(this).toggle($(this).text().indexOf(day) > -1);
 

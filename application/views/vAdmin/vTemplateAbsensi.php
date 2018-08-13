@@ -11,7 +11,8 @@
           <i class="user icon"></i>
           Template Absensi PIC 
         </h3>
-          <?php if ($_SESSION['nama'] == 'admin'): ?>   
+
+          <?php if ($_SESSION['nama'] == 'admin'): ?> 
             <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Template Absensi" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahtemplateabsensi'); ?>">
               <i class="add icon"></i>
             </a>

@@ -11,11 +11,11 @@
   <form class="ui form" method="POST" action="<?php echo site_url('admin/validasitambahchecklist'); ?>" enctype="multipart/form-data">
     <div class="disabled field">
       <label>Nama PIC</label>
-      <input type="text" name="NamaPIC" placeholder="Nama Checklist">
+      <input type="text" name="NamaPIC" placeholder="Nama PIC">
     </div>
     <div class="disabled field">
       <label>Nama Checklist</label>
-      <input type="text" name="NamaChecklist" placeholder="Nama Nama PIC">
+      <input type="text" name="NamaChecklist" placeholder="Nama Checklist">
     </div>
     <div class="ui disabled small field" >
       <label>Instruksi Pengerjaan</label>

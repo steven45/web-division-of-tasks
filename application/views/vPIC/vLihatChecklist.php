@@ -121,7 +121,7 @@
             </td>
 
             <?php if ($checklist['StatusCheck'] == '0' AND $checklist['Hari'] == $hari) {?>
-            <td class="docheck" target"<?php echo $temp; ?>" id="<?php echo $temp; ?>">
+            <td class="docheck" target="<?php echo $temp; ?>" id="<?php echo $temp; ?>">
               <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
               <div style="display:none;">
                 <div id="<?php echo 'tampilKet'.$temp ?>">

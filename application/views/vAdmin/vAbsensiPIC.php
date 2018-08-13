@@ -1,3 +1,11 @@
+<script>
+$(document).ready(function(){
+  $("#template").click(function(){
+    $('.tiny.modal').modal('show');
+  });
+});
+</script>
+
 <div class="ui two column centered grid">
   <div class="column" style="width: auto;">
     <div class="ui segment" style="border-radius: 1.285714rem">
@@ -11,21 +19,49 @@
           <i class="user icon"></i>
           Absensi PIC 
         </h3>
-          <?php if ($_SESSION['nama'] == 'admin'): ?>   
+          <?php if ($_SESSION['nama'] == 'admin'): ?>
+          <a class="ui right floated basic blue button" id="template" data-tooltip="Input Sesuai template" data-inverted="" data-position="top right" style="margin-top: -42px; margin-right: 40px;"><i class="calendar plus alternate icon"></i>Input Sesuai Template</a>
+          
+          <div class="ui tiny modal">
+              <div class="header">Input Tanggal</div>
+              <div class="content">
+                <p>
+                  <form method="POST" action="<?php echo site_url('admin/ikuttemplate'); ?>">
+                  <div class="ui input left icon">
+                      <i class="calendar icon"></i>
+                      <input type="date" value="<?php echo date('20y-m-d'); ?>" name="date0">
+                  </div>
+                  -
+                  <div class="ui input left icon">
+                      <i class="calendar icon"></i>
+                      <input type="date" value="<?php echo date('20y-m-d'); ?>" name="date1">
+                  </div>
+                  <br>
+                  <br>
+                  <button class="ui blue button">Input Tanggal</button>
+                </form>
+                </p>
+                
+              </div>
+            </div>   
             <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Absensi PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahabsensi'); ?>">
               <i class="add icon"></i>
             </a>
           <?php endif ?>
       </div>
-
-      <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
       <div class="ui divider"></div>
-      <div class="ui calendar" style="right: 0px;">
+      <form method="POST" action="<?php echo site_url('admin/absensi'); ?>">
+        <div class="ui calendar" style="right: 0px;">
           <div class="ui input left icon">
             <i class="calendar icon"></i>
-            <input type="date" value="<?php echo date('20y-m-d') ?>" id="kalender" name="kalender">
+            <input type="date" value="<?php echo $tanggal ?>" id="kalender" name="tanggal">
           </div>
-      </div>
+        </div>
+        <button class="ui right floated tiny grey basic icon button" data-tooltip="Cari Jadwal Checklist" data-inverted="" data-position="top right" style="margin-top: -37px">
+            <i class="search icon"></i>
+        </button>
+      </form>
+      <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
       <table class="ui sortable compact celled definition table">
         <thead class="full-width" style="text-align: center; background-color: #dbedff">
           <tr>
@@ -111,13 +147,10 @@
               transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
               transition: box-shadow 0.1s ease, width 0.1s ease;
               transition: box-shadow 0.1s ease, width 0.1s ease, -webkit-box-shadow 0.1s ease;">
-              <?php if ($picPengganti[$i]['NamaPIC'] != '0'): ?>
-                <option value="<?php echo $picPengganti[$i]['NIK'] ?>"><?php echo $picPengganti[$i]['NamaPIC'] ?></option>
-              <?php endif ?>
-              <?php for ($j=0; $j < count($pic); $j++) { ?>
-                <?php if ($absensi['NamaPIC'] != $pic[$j]["NamaPIC"]): ?>
-                  <option value="<?php echo $pic[$j]["NIK"] ?>"><?php echo $pic[$j]["NamaPIC"] ?></option>
-                <?php endif ?>
+              <?php foreach ($picPengganti as $pic ) {?>
+                <?php if ($pic['NIK'] != $absensi['NIK']) { ?>
+                  <option value="<?php echo $pic['NIK'] ?>"><?php echo $pic['NamaPIC'] ?></option>
+                <?php } ?>
               <?php } ?>
               </select>
             </td>
@@ -178,7 +211,7 @@
 </script>
 
 <!-- Filter Per Tanggal -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   kalender =  $('#kalender').val();
   $(".hasilAbsensi").filter(function() {
       $('#hasilAbs'+ $(this).attr('target')).toggle($(this).val().indexOf(kalender) > -1);
@@ -189,4 +222,4 @@
       $('#hasilAbs'+ $(this).attr('target')).toggle($(this).val().indexOf(kalender) > -1);
     });
   }); 
-</script> 
+</script>  -->

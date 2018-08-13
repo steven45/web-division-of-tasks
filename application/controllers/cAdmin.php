@@ -574,46 +574,27 @@ class cAdmin extends CI_Controller {
 	public function lihatAbsensi()
 	{
 		$data['judul'] = "Lihat Absensi";
-		$data['absensi']= $this->mAdmin->getAbsensi();
-
-		// $pic = NULL;
-		// $temp1 = 0;
-		// foreach ($data['absensi'] as $absensi) {
-		// 	$temp2 = 0;
-		// 	foreach ($data['absensi'] as $cek) {
-		// 		if ($absensi['Hari'] == $cek['Hari'] AND $absensi['Shift'] == $cek['Shift'] AND $absensi['NIK'] != $cek['NIK']) {
-		// 			$pic[$temp1][$temp2]['NIK'] = $cek['NIK'];
-		// 			$pic[$temp1][$temp2]['NamaPIC'] = $cek['NamaPIC'];	
-		// 			$temp2 = $temp2 +1;
-		// 			if ($absensi['NIKP'] == $cek['NIK']) {
-		// 				// echo $cek['NamaPIC']."<br>";
-		// 				$data['absensi'][$temp1]['NamaPICP'] = $cek['NamaPIC'];
-		// 			}
-		// 			else if ($absensi['NIKP'] != $cek['NIK']) {
-		// 				$data['absensi'][$temp1]['NamaPICP'] = "0";
-		// 			}
-		// 		}
-		// 	}
-		// 	$temp1 = $temp1 +1;
-		// }
-
-		// header("Content-type:application/json");
-		// echo json_encode($data['absensi']);
-
-		$data['pic'] = $data['absensi'];
-		$temp = 0;
-		foreach ($data['absensi'] as $absensi ) {
-			if ($absensi['NIKP'] != '0' AND $absensi['NIKP'] != '') {
-				$namaP                          = $this->mAdmin->getPIC($absensi['NIKP']);
-				$picPengganti[$temp]['NamaPIC'] = $namaP['NamaPIC'];
-				$picPengganti[$temp]['NIK']     = $namaP['NIK'];
-			}
-			else{
-				$picPengganti[$temp]['NamaPIC'] = '0';
-			}
-			$temp = $temp + 1;
+		$tanggal = $this->input->post('tanggal');
+		if ($tanggal == NULL) {
+			$tanggal = date('20y-m-d');
 		}
-		$data['picPengganti'] = $picPengganti;
+
+		$daftar_hari = array(
+			'Sunday'    => 'Minggu',
+			'Monday'    => 'Senin',
+			'Tuesday'   => 'Selasa',
+			'Wednesday' => 'Rabu',
+			'Thursday'  => 'Kamis',
+			'Friday'    => 'Jumat',
+			'Saturday'  => 'Sabtu'
+		);
+		$namahari = date('l', strtotime($tanggal));
+
+		$data['tanggal'] = $tanggal;
+		$tanggal = $daftar_hari[$namahari].', '.$tanggal;
+		$data['absensi']= $this->mAdmin->getAbsensiWhere($tanggal);
+
+		$data['picPengganti'] = $this->mAdmin->getPIC();
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vAbsensiPIC', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
@@ -1503,24 +1484,13 @@ class cAdmin extends CI_Controller {
 		$IDJadwal = $this->input->post('IDJadwal');
 		$hari = $this->input->post('Hari');
 
-		$daftar_hari = array(
-			'Sunday'    => 'Minggu',
-			'Monday'    => 'Senin',
-			'Tuesday'   => 'Selasa',
-			'Wednesday' => 'Rabu',
-			'Thursday'  => 'Kamis',
-			'Friday'    => 'Jumat',
-			'Saturday'  => 'Sabtu'
-		);
-		$namahari = date('l', strtotime($hari));
-
 		$data = array(
 			'NIK' => $NIK,
 			'IDJadwal' => $IDJadwal,
 			'Hari' =>  $hari,
 		);
-		$h = $daftar_hari[$namahari].', '.$hari;
-		$query = $this->mAdmin->tambahTemplateAbsensi('templateabsensi', $data, $NIK, $IDJadwal, $h);
+		$query = $this->mAdmin->tambahTemplateAbsensi('templateabsensi', $data, $NIK, $IDJadwal, $hari);
+
 
 		if ($query == 1) 
 		{
@@ -1586,5 +1556,67 @@ class cAdmin extends CI_Controller {
 		alert('Sukses menghapus template absensi ');
 		window.location.href = '" . base_url() . "admin/templateabsensi';
 		</script>";
+	}
+
+	public function ikutTemplate(){
+		// $begin = new DateTime($this->input->post('date0'));
+		// $end = new DateTime($this->input->post('date1'));
+
+		$daftar_hari = array(
+			'Sunday'    => 'Minggu',
+			'Monday'    => 'Senin',
+			'Tuesday'   => 'Selasa',
+			'Wednesday' => 'Rabu',
+			'Thursday'  => 'Kamis',
+			'Friday'    => 'Jumat',
+			'Saturday'  => 'Sabtu'
+		);
+		// $namahari = date('l', strtotime($tanggal));
+
+		// $data['tanggal'] = $tanggal;
+		// $tanggal = $daftar_hari[$namahari].', '.$tanggal;
+
+		$begin = new DateTime($this->input->post('date0'));
+		$end = new DateTime($this->input->post('date1'));
+		$end = $end->modify( '+1 day' ); 
+
+		$interval = new DateInterval('P1D');
+		$daterange = new DatePeriod($begin, $interval ,$end);
+		foreach($daterange as $date){
+			$tanggal   = $date->format("Y-m-d");
+			$namahari = date('l', strtotime($tanggal));
+			$hari = $daftar_hari[$namahari];
+			$haritanggal = $hari.', '.$tanggal;
+
+			$template = $this->mAdmin->getTemplateAbsensiDate($hari);
+			// var_dump($template);
+
+			foreach ($template as $template) {
+				$data = array(
+					'NIK' => $template['NIK'],
+					'IDJadwal' => $template['IDJadwal'],
+					'Hari' => $haritanggal,
+					'NIKP' => "0",
+					'Kehadiran' => "Hadir"
+					
+				);
+				// var_dump($data);
+				$query = $this->mAdmin->tambahAbsensiTemplate('harian', $data, $template['NIK'], $template['IDJadwal'], $haritanggal);
+
+			}
+			if ($query == '1') {
+			echo "<script type='text/javascript'>
+			alert('Sukses menambahkan absensi. ');
+			window.location.href = '" . base_url() . "admin/absensi';
+			</script>";
+			}
+			else{
+				echo "<script type='text/javascript'>
+				alert('Jadwal sudah ada!. ');
+				window.location.href = '" . base_url() . "admin/absensi';
+				</script>";
+			}
+
+		}
 	}
 }
