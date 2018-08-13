@@ -20,18 +20,18 @@
 
       <div class="ui divider"></div>
       <div class="field" style="margin-left: 600px; margin-top: 5px" >
-                    <select class="ui right selection tiny dropdown item" id="hari" >
-                      <!-- <option value="<?php echo $hari; ?>"><?php echo $hari; ?></option>         -->
-                      <option value="<?php echo $hari ?>"><?php echo $hari ?></option>
-                      <option value="Senin">Senin</option>
-                      <option value="Selasa">Selasa</option>
-                      <option value="Rabu">Rabu</option>
-                      <option value="Kamis">Kamis</option>
-                      <option value="Jumat">Jumat</option>
-                      <option value="Sabtu">Sabtu</option>
-                      <option value="Minggu">Minggu</option>
-                    </select>
-                  </div>
+        <select class="ui right selection tiny dropdown item" id="hari" >
+          <!-- <option value="<?php echo $hari; ?>"><?php echo $hari; ?></option>         -->
+          <option value="<?php echo $hari ?>"><?php echo $hari ?></option>
+          <option value="Senin">Senin</option>
+          <option value="Selasa">Selasa</option>
+          <option value="Rabu">Rabu</option>
+          <option value="Kamis">Kamis</option>
+          <option value="Jumat">Jumat</option>
+          <option value="Sabtu">Sabtu</option>
+          <option value="Minggu">Minggu</option>
+        </select>
+      </div>
 
       <table class="ui sortable compact celled definition table">
         <thead class="full-width" style="text-align: center; background-color: #dbedff">

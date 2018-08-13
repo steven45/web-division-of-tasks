@@ -12,7 +12,7 @@
             <i class="tasks icon"></i>
             Jadwal Checklist 
           </h3>
-
+        
           <form method="POST" action="<?php echo site_url('admin/jchecklist'); ?>">
             <div class="ui calendar" style="margin-left: 70%; margin-top: -45px">
               <div class="ui input left icon">
@@ -20,10 +20,11 @@
                 <input type="date" value="<?php echo $tanggal; ?>" name="tanggal">
               </div>
             </div>
-            <button class="ui right floated tiny blue icon button" data-tooltip="Cari Jadwal Checklist" data-inverted="" data-position="top right" style="margin-top: -40px">
-              <i class="add icon"></i>
+            <button class="ui right floated tiny grey basic icon button" data-tooltip="Cari Jadwal Checklist" data-inverted="" data-position="top right" style="margin-top: -37px">
+              <i class="search icon"></i>
             </button>
           </form>
+
           
         </div>
         <form method="POST" action="<?php echo site_url('admin/gantijchecklist'); ?>">    

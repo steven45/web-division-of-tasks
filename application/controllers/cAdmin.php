@@ -1011,8 +1011,6 @@ class cAdmin extends CI_Controller {
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
-	
-
 	public function notifikasi()
 	{
 		$data['notifikasi'] = $this->mAdmin->getNotifikasi();
@@ -1170,221 +1168,237 @@ class cAdmin extends CI_Controller {
 
 	public function penjadwalan()
 	{
-
 		//MULAI PERHITUNGAN UNTUK PENJADWALAN OTOMATIS
 		//1. Mengurutkan hasil dari WP
 
-		$wp        = $this->ranking(); 
-		$data      = $this->mAdmin->getPIC();
-		$jChecklist = $this->mAdmin->getChecklistWhere();
-		$tanggal0 = $this->input->post('tanggal');
-		$tanggal1 = date('Y-m-d', strtotime($tanggal0. ' + 1 days'));
+		$begin = new DateTime($this->input->post('date0'));
+		$end = new DateTime($this->input->post('date1'));
+		$end = $end->modify( '+1 day' ); 
 
-		$daftar_hari = array(
-			'Sunday'    => 'Minggu',
-			'Monday'    => 'Senin',
-			'Tuesday'   => 'Selasa',
-			'Wednesday' => 'Rabu',
-			'Thursday'  => 'Kamis',
-			'Friday'    => 'Jumat',
-			'Saturday'  => 'Sabtu'
-		);
-		$namahari0 = date('l', strtotime($tanggal0));
-		$namahari1 = date('l', strtotime($tanggal1));
+		$interval = new DateInterval('P1D');
+		$daterange = new DatePeriod($begin, $interval ,$end);
 
-		$tanggal0 = $daftar_hari[$namahari0].', '.$tanggal0;
-		$tanggal1 = $daftar_hari[$namahari1].', '.$tanggal1;
+		$y = 0;
+		foreach($daterange as $date){
+			$wp         = $this->ranking(); 
+			$data       = $this->mAdmin->getPIC();
+			$jChecklist = $this->mAdmin->getChecklistWhere();
+			$tanggal0   = $date->format("Y-m-d");
+			$tanggal1   = date('Y-m-d', strtotime($tanggal0. ' + 1 days'));
 
-		$absensi = $this->mAdmin->getAbsensiDate($tanggal0);
-		if ($absensi == NULL) {
-			echo "<script type='text/javascript'>
-			alert('Penjadwalan Gagal ! Absensi Kosong');
-			window.location.href = '" . base_url() . "admin/absensi';
-			</script>";
-		}
-		else{
-			for ($i=0; $i < count($data); $i++) { 
-				$wp[$i]['NIK'] = $data[$i]['NIK'];
-				$hasilV[$i] = $wp[$i]['hasilV'];
+			$daftar_hari = array(
+				'Sunday'    => 'Minggu',
+				'Monday'    => 'Senin',
+				'Tuesday'   => 'Selasa',
+				'Wednesday' => 'Rabu',
+				'Thursday'  => 'Kamis',
+				'Friday'    => 'Jumat',
+				'Saturday'  => 'Sabtu'
+			);
+			$namahari0 = date('l', strtotime($tanggal0));
+			$namahari1 = date('l', strtotime($tanggal1));
+
+			$tanggal0 = $daftar_hari[$namahari0].', '.$tanggal0;
+			$tanggal1 = $daftar_hari[$namahari1].', '.$tanggal1;
+
+			$absensi = $this->mAdmin->getAbsensiDate($tanggal0);
+			if ($absensi == NULL) {
+				$alert[$y]['hasil'] = 'gagal';
+				$alert[$y]['tanggal'] = $tanggal0;
+				$y++;
 			}
+			else{
+				$alert[$y]['hasil'] = 'benar';
+				$alert[$y]['tanggal'] = $tanggal0;
+				$y++;
+				for ($i=0; $i < count($data); $i++) { 
+					$wp[$i]['NIK'] = $data[$i]['NIK'];
+					$hasilV[$i] = $wp[$i]['hasilV'];
+				}
 
-			array_multisort($hasilV,SORT_DESC,$wp); //1. 
-			sort($hasilV); //
+				array_multisort($hasilV,SORT_DESC,$wp); //1. 
+				sort($hasilV); //
 
-			$jumlahV = 0;
-			for ($i=0; $i < count($data); $i++) { 
-				$wp[$i]['hasilVB'] = $hasilV[$i];
-				$jumlahV = $jumlahV + $hasilV[$i];
-			}
+				$jumlahV = 0;
+				for ($i=0; $i < count($data); $i++) { 
+					$wp[$i]['hasilVB'] = $hasilV[$i];
+					$jumlahV = $jumlahV + $hasilV[$i];
+				}
 
-			$t0 = 0; $t1 = 0;$t2 = 0;
-			$sWP[0] = 0; $sWP[1] = 0; $sWP[2] = 0; $sWP[3] = 0;
-			for ($i = 0; $i < count($absensi); $i++) {
-				for ($j=0; $j < count($wp); $j++) { 
-					if ($absensi[$i]['Shift'] == '1' AND $absensi[$i]['NIK']==$wp[$j]['NIK']) {
-						$pic[0][$t0]['NIK']     = $wp[$j]['NIK'];
-						$pic[0][$t0]['NamaPIC'] = $wp[$j]['nama'];
-						$pic[0][$t0]['hasilVB'] = $wp[$j]['hasilVB'];
-						$sWP[0] = $sWP[0] + $pic[0][$t0]['hasilVB'];
+				$t0 = 0; $t1 = 0;$t2 = 0;
+				$sWP[0] = 0; $sWP[1] = 0; $sWP[2] = 0; $sWP[3] = 0;
+				for ($i = 0; $i < count($absensi); $i++) {
+					for ($j=0; $j < count($wp); $j++) { 
+						if ($absensi[$i]['Shift'] == '1' AND $absensi[$i]['NIK']==$wp[$j]['NIK']) {
+							$pic[0][$t0]['NIK']     = $wp[$j]['NIK'];
+							$pic[0][$t0]['NamaPIC'] = $wp[$j]['nama'];
+							$pic[0][$t0]['hasilVB'] = $wp[$j]['hasilVB'];
+							$sWP[0] = $sWP[0] + $pic[0][$t0]['hasilVB'];
 
-						$pic[1][$t0]['NIK']     = $wp[$j]['NIK'];
-						$pic[1][$t0]['NamaPIC'] = $wp[$j]['nama'];
-						$pic[1][$t0]['hasilVB'] = $wp[$j]['hasilVB'];
-						$sWP[1] = $sWP[1] + $pic[1][$t0]['hasilVB'];
-
-						$t0 = $t0+1;
-					}
-					elseif ($absensi[$i]['Shift'] == '2' AND $absensi[$i]['NIK']==$wp[$j]['NIK']){
-						$bool = true;
-						$k = 0;
-						while ($bool == true AND $k < $i) {
-							if ($pic[1][$k]['NIK'] == $wp[$j]['NIK']) {		
-								$bool = false;
-							}
-							else{
-								$bool = true;
-							}
-							$k = $k+1;
-						}
-						if ($bool == true) {
-							$pic[1][$t0]['NIK'] = $wp[$j]['NIK'];
+							$pic[1][$t0]['NIK']     = $wp[$j]['NIK'];
 							$pic[1][$t0]['NamaPIC'] = $wp[$j]['nama'];
 							$pic[1][$t0]['hasilVB'] = $wp[$j]['hasilVB'];
 							$sWP[1] = $sWP[1] + $pic[1][$t0]['hasilVB'];
+
+							$t0 = $t0+1;
 						}
-
-						$pic[2][$t1]['NIK'] = $wp[$j]['NIK'];
-						$pic[2][$t1]['NamaPIC'] = $wp[$j]['nama'];
-						$pic[2][$t1]['hasilVB'] = $wp[$j]['hasilVB'];
-						$sWP[2] = $sWP[2] + $pic[2][$t1]['hasilVB'];
-						$t1 = $t1+1;
-						$t0 = $t0+1;
-					}
-					elseif ($absensi[$i]['Shift'] == '3'AND $absensi[$i]['NIK']==$wp[$j]['NIK']){
-						$pic[3][$t2]['NIK'] = $wp[$j]['NIK'];
-						$pic[3][$t2]['NamaPIC'] = $wp[$j]['nama'];
-						$pic[3][$t2]['hasilVB'] = $wp[$j]['hasilVB'];
-						$sWP[3] = $sWP[3] + $pic[3][$t2]['hasilVB'];
-						$t2 = $t2+1;
-					}
-				}
-			}
-
-			//Cari rata-rata pada setiap jumlah pembagian
-			for ($i=0; $i < count($pic); $i++) { 
-				$rataPembagian[$i] = count($jChecklist[$i])/count($pic[$i]);
-			}
-			// var_dump($rataPembagian);
-
-			$sRPembagian[0] = 0; $sRPembagian[1] = 0; $sRPembagian[2] = 0; $sRPembagian[3] = 0;
-			$sPembagian[0] = 0; $sPembagian[1] = 0; $sPembagian[2] = 0; $sPembagian[3] = 0;
-			for ($i=0; $i < count($pic); $i++) { 
-				for ($j=0; $j < count($pic[$i]); $j++) { 
-					$pic[$i][$j]['jPembagian'] = $pic[$i][$j]['hasilVB']/$sWP[$i]*count($jChecklist[$i]);
-					if ($pic[$i][$j]['jPembagian']<$rataPembagian[$i]) {
-						$pic[$i][$j]['rPembagian'] = floor($pic[$i][$j]['jPembagian']);
-					}
-					else{
-						$pic[$i][$j]['rPembagian'] = ceil($pic[$i][$j]['jPembagian']);
-					}
-					$sPembagian[$i] = $sPembagian[$i] + $pic[$i][$j]['jPembagian'];
-					$sRPembagian[$i] = $sRPembagian[$i] + $pic[$i][$j]['rPembagian'];
-				}
-			}
-
-			
-			for ($i=0; $i < count($pic); $i++) { 
-				(int) $selisih[$i] = (count($jChecklist[$i]) - (int) $sRPembagian[$i] );
-				if ($selisih[$i] > 0) {
-					for ($j=0; $j < $selisih[$i]; $j++) { 
-						$rand = rand(0, (count($pic[$i])-1));
-						$pic[$i][$rand]['rPembagian'] = $pic[$i][$rand]['rPembagian'] +1;
-					}
-				}
-				elseif ($selisih[$i] < 0) {
-					$j = 0;
-					$k = 0;
-					while ($j < ($selisih[$i]*-1)) {
-						$rand = rand(0, (count($pic[$i])-1));
-						if ($pic[$i][$rand]['rPembagian'] > 0) {
-							$pic[$i][$rand]['rPembagian'] = $pic[$i][$rand]['rPembagian'] -1;
-							$j = $j+1;
-						}
-					}
-				}
-			}
-
-			$sRPembagianNew[0] = 0; $sRPembagianNew[1] = 0; $sRPembagianNew[2] = 0; $sRPembagianNew[3] = 0;
-			for ($i=0; $i < count($pic); $i++) { 
-				for ($j=0; $j < count($pic[$i]); $j++) { 
-					$sRPembagianNew[$i] = $sRPembagianNew[$i] + $pic[$i][$j]['rPembagian'];
-				}
-			}
-
-			// for ($i=0; $i < count($pic); $i++) { 
-			// 	echo "Jumlah Pengecekan : ". count($jChecklist[$i]);
-			// 	echo "<table border ='1px'>";
-			// 	echo "<tr><td>NIK</td> <td>Nama</td><td>Hasil WP</td><td>Jumlah Pembagian</td><td>Real Pembagian</td></tr>";
-			// 	for ($j=0; $j < count($pic[$i]); $j++) { 
-			// 		echo "<tr><td>".$pic[$i][$j]['NIK'] ."</td> <td>".$pic[$i][$j]['NamaPIC']."</td> <td>".$pic[$i][$j]['hasilVB']."</td> <td>".$pic[$i][$j]['jPembagian']."</td> <td>".$pic[$i][$j]['rPembagian']."</td></tr>";
-			// 	}
-			// 	echo "<tr style='background-color:tomato;'><td> Jumlah </td><td>". count($pic[$i])."</td><td>". $sWP[$i] . "</td><td>".$sPembagian[$i]."</td><td>".$sRPembagianNew[$i]. "</td></tr>";
-			// 	echo "</table>";
-			// 	echo "<br>";
-			// }
-
-			//MULAI MENAMBAHKAN KE DATABASE
-			for ($i=0; $i < count($pic); $i++) { 
-				$temp = 0;
-				for ($j=0; $j < count($pic[$i]); $j++) { 
-					if ($pic[$i][$j]['rPembagian']>0) {
-						for ($k=0; $k < $pic[$i][$j]['rPembagian']; $k++) { 
-							// echo $pic[$i][$j]['NamaPIC']." ";
-							// echo $jChecklist[$i][$temp]['IDChecklist']."<br>";
-
-							$data0 = array(
-								"NIK" => $pic[$i][$j]['NIK'],
-								"NIKP" => '0',
-								"IDChecklist" => $jChecklist[$i][$temp]['IDChecklist'],
-								"StatusCheck" => '0',
-								"Tanggal" => $tanggal0
-							);
-
-							$data1 = array(
-								"NIK" => $pic[$i][$j]['NIK'],
-								"NIKP" => '0',
-								"IDChecklist" => $jChecklist[$i][$temp]['IDChecklist'],
-								"StatusCheck" => '0',
-								"Tanggal" => $tanggal1
-							);
-
-							if ($i == 3) {
-								if ($jChecklist[$i][$temp]['Jam'] == '22:00' OR $jChecklist[$i][$temp]['Jam'] == '23:00') {
-									$this->mAdmin->penjadwalan($jChecklist[$i][$temp]['IDChecklist'], $data0, $tanggal0);
+						elseif ($absensi[$i]['Shift'] == '2' AND $absensi[$i]['NIK']==$wp[$j]['NIK']){
+							$bool = true;
+							$k = 0;
+							while ($bool == true AND $k < $i) {
+								if ($pic[1][$k]['NIK'] == $wp[$j]['NIK']) {		
+									$bool = false;
 								}
 								else{
-									$this->mAdmin->penjadwalan($jChecklist[$i][$temp]['IDChecklist'], $data1, $tanggal1);
+									$bool = true;
 								}
+								$k = $k+1;
 							}
-							else{
-								$this->mAdmin->penjadwalan($jChecklist[$i][$temp]['IDChecklist'], $data0, $tanggal0);
+							if ($bool == true) {
+								$pic[1][$t0]['NIK'] = $wp[$j]['NIK'];
+								$pic[1][$t0]['NamaPIC'] = $wp[$j]['nama'];
+								$pic[1][$t0]['hasilVB'] = $wp[$j]['hasilVB'];
+								$sWP[1] = $sWP[1] + $pic[1][$t0]['hasilVB'];
 							}
-							$temp = $temp+1;
+
+							$pic[2][$t1]['NIK'] = $wp[$j]['NIK'];
+							$pic[2][$t1]['NamaPIC'] = $wp[$j]['nama'];
+							$pic[2][$t1]['hasilVB'] = $wp[$j]['hasilVB'];
+							$sWP[2] = $sWP[2] + $pic[2][$t1]['hasilVB'];
+							$t1 = $t1+1;
+							$t0 = $t0+1;
+						}
+						elseif ($absensi[$i]['Shift'] == '3'AND $absensi[$i]['NIK']==$wp[$j]['NIK']){
+							$pic[3][$t2]['NIK'] = $wp[$j]['NIK'];
+							$pic[3][$t2]['NamaPIC'] = $wp[$j]['nama'];
+							$pic[3][$t2]['hasilVB'] = $wp[$j]['hasilVB'];
+							$sWP[3] = $sWP[3] + $pic[3][$t2]['hasilVB'];
+							$t2 = $t2+1;
+						}
+					}
+				}
+
+				//Cari rata-rata pada setiap jumlah pembagian
+				for ($i=0; $i < count($pic); $i++) { 
+					$rataPembagian[$i] = count($jChecklist[$i])/count($pic[$i]);
+				}
+				// var_dump($rataPembagian);
+
+				$sRPembagian[0] = 0; $sRPembagian[1] = 0; $sRPembagian[2] = 0; $sRPembagian[3] = 0;
+				$sPembagian[0] = 0; $sPembagian[1] = 0; $sPembagian[2] = 0; $sPembagian[3] = 0;
+				for ($i=0; $i < count($pic); $i++) { 
+					for ($j=0; $j < count($pic[$i]); $j++) { 
+						$pic[$i][$j]['jPembagian'] = $pic[$i][$j]['hasilVB']/$sWP[$i]*count($jChecklist[$i]);
+						if ($pic[$i][$j]['jPembagian']<$rataPembagian[$i]) {
+							$pic[$i][$j]['rPembagian'] = floor($pic[$i][$j]['jPembagian']);
+						}
+						else{
+							$pic[$i][$j]['rPembagian'] = ceil($pic[$i][$j]['jPembagian']);
+						}
+						$sPembagian[$i] = $sPembagian[$i] + $pic[$i][$j]['jPembagian'];
+						$sRPembagian[$i] = $sRPembagian[$i] + $pic[$i][$j]['rPembagian'];
+					}
+				}
+
+				
+				for ($i=0; $i < count($pic); $i++) { 
+					(int) $selisih[$i] = (count($jChecklist[$i]) - (int) $sRPembagian[$i] );
+					if ($selisih[$i] > 0) {
+						for ($j=0; $j < $selisih[$i]; $j++) { 
+							$rand = rand(0, (count($pic[$i])-1));
+							$pic[$i][$rand]['rPembagian'] = $pic[$i][$rand]['rPembagian'] +1;
+						}
+					}
+					elseif ($selisih[$i] < 0) {
+						$j = 0;
+						$k = 0;
+						while ($j < ($selisih[$i]*-1)) {
+							$rand = rand(0, (count($pic[$i])-1));
+							if ($pic[$i][$rand]['rPembagian'] > 0) {
+								$pic[$i][$rand]['rPembagian'] = $pic[$i][$rand]['rPembagian'] -1;
+								$j = $j+1;
+							}
+						}
+					}
+				}
+
+				$sRPembagianNew[0] = 0; $sRPembagianNew[1] = 0; $sRPembagianNew[2] = 0; $sRPembagianNew[3] = 0;
+				for ($i=0; $i < count($pic); $i++) { 
+					for ($j=0; $j < count($pic[$i]); $j++) { 
+						$sRPembagianNew[$i] = $sRPembagianNew[$i] + $pic[$i][$j]['rPembagian'];
+					}
+				}
+
+				//Menampilkan perhitungan penjadwalan otomatis
+				// for ($i=0; $i < count($pic); $i++) { 
+				// 	echo "Jumlah Pengecekan : ". count($jChecklist[$i]);
+				// 	echo "<table border ='1px'>";
+				// 	echo "<tr><td>NIK</td> <td>Nama</td><td>Hasil WP</td><td>Jumlah Pembagian</td><td>Real Pembagian</td></tr>";
+				// 	for ($j=0; $j < count($pic[$i]); $j++) { 
+				// 		echo "<tr><td>".$pic[$i][$j]['NIK'] ."</td> <td>".$pic[$i][$j]['NamaPIC']."</td> <td>".$pic[$i][$j]['hasilVB']."</td> <td>".$pic[$i][$j]['jPembagian']."</td> <td>".$pic[$i][$j]['rPembagian']."</td></tr>";
+				// 	}
+				// 	echo "<tr style='background-color:tomato;'><td> Jumlah </td><td>". count($pic[$i])."</td><td>". $sWP[$i] . "</td><td>".$sPembagian[$i]."</td><td>".$sRPembagianNew[$i]. "</td></tr>";
+				// 	echo "</table>";
+				// 	echo "<br>";
+				// }
+
+				//MULAI MENAMBAHKAN KE DATABASE
+				for ($i=0; $i < count($pic); $i++) { 
+					$temp = 0;
+					for ($j=0; $j < count($pic[$i]); $j++) { 
+						if ($pic[$i][$j]['rPembagian']>0) {
+							for ($k=0; $k < $pic[$i][$j]['rPembagian']; $k++) { 
+								// echo $pic[$i][$j]['NamaPIC']." ";
+								// echo $jChecklist[$i][$temp]['IDChecklist']."<br>";
+
+								$data0 = array(
+									"NIK" => $pic[$i][$j]['NIK'],
+									"NIKP" => '0',
+									"IDChecklist" => $jChecklist[$i][$temp]['IDChecklist'],
+									"StatusCheck" => '0',
+									"Tanggal" => $tanggal0
+								);
+
+								$data1 = array(
+									"NIK" => $pic[$i][$j]['NIK'],
+									"NIKP" => '0',
+									"IDChecklist" => $jChecklist[$i][$temp]['IDChecklist'],
+									"StatusCheck" => '0',
+									"Tanggal" => $tanggal1
+								);
+
+								if ($i == 3) {
+									if ($jChecklist[$i][$temp]['Jam'] == '22:00' OR $jChecklist[$i][$temp]['Jam'] == '23:00') {
+										$this->mAdmin->penjadwalan($jChecklist[$i][$temp]['IDChecklist'], $data0, $tanggal0);
+									}
+									else{
+										$this->mAdmin->penjadwalan($jChecklist[$i][$temp]['IDChecklist'], $data1, $tanggal1);
+									}
+								}
+								else{
+									$this->mAdmin->penjadwalan($jChecklist[$i][$temp]['IDChecklist'], $data0, $tanggal0);
+								}
+								$temp = $temp+1;
+							}
 						}
 					}
 				}
 			}
-
-			echo "<script type='text/javascript'>
-			alert('Sukses Melakukan Penjadwalan');
-			window.location.href = '" . base_url() . "admin/jchecklist';
-			</script>";
 		}
+		if ($y == 0) {
+			$alert[$y]['hasil'] = 'kosong';
+		}
+		$data['judul'] = "Ranking PIC";
+		$data['alert'] = $alert;
+		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+		$this->load->view('vAdmin/vRankingPIC');
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
 	public function tampilRangking()
 	{
 		$data['judul'] = "Ranking PIC";
+		$data['alert'][0]['hasil'] = '';
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vRankingPIC');
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
