@@ -1,3 +1,11 @@
+<script>
+$(document).ready(function(){
+  $("#template").click(function(){
+    $('.tiny.modal').modal('show');
+  });
+});
+</script>
+
 <div class="ui two column centered grid">
   <div class="column" style="width: auto;">
     <div class="ui segment" style="border-radius: 1.285714rem">
@@ -11,7 +19,31 @@
           <i class="user icon"></i>
           Absensi PIC 
         </h3>
-          <?php if ($_SESSION['nama'] == 'admin'): ?>   
+          <?php if ($_SESSION['nama'] == 'admin'): ?>
+          <a class="ui right floated basic blue button" id="template" data-tooltip="Input Sesuai template" data-inverted="" data-position="top right" style="margin-top: -42px; margin-right: 40px;"><i class="calendar plus alternate icon"></i>Input Sesuai Template</a>
+          
+          <div class="ui tiny modal">
+              <div class="header">Input Tanggal</div>
+              <div class="content">
+                <p>
+                  <form method="POST" action="<?php echo site_url('admin/ikuttemplate'); ?>">
+                  <div class="ui input left icon">
+                      <i class="calendar icon"></i>
+                      <input type="date" value="<?php echo date('20y-m-d'); ?>" name="date0">
+                  </div>
+                  -
+                  <div class="ui input left icon">
+                      <i class="calendar icon"></i>
+                      <input type="date" value="<?php echo date('20y-m-d'); ?>" name="date1">
+                  </div>
+                  <br>
+                  <br>
+                  <button class="ui blue button">Input Tanggal</button>
+                </form>
+                </p>
+                
+              </div>
+            </div>   
             <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Absensi PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahabsensi'); ?>">
               <i class="add icon"></i>
             </a>

@@ -55,6 +55,8 @@ $route['admin/validasitambahtemplate'] = 'cAdmin/validasiTambahTemplate';
 $route['admin/edittemplateabsensi/(:any)'] = 'cAdmin/editTemplateAbsensi/$1';
 $route['admin/validasitemplateabsensi'] = 'cAdmin/validasiTemplateAbsensi';
 $route['admin/hapustemplateabsensi/(:any)'] = 'cAdmin/hapusTemplateAbsensi/$1';
+$route['admin/ikuttemplate'] = 'cAdmin/ikutTemplate';
+
 
 
 $route['admin/log'] = 'cAdmin/lihatLog';
