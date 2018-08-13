@@ -15,7 +15,7 @@ $(document).ready(function(){
           <div class="ui input left icon">
             <i class="calendar icon"></i>
             <input type="date" value="<?php echo $tanggal ?>" id="kalender" name="tanggal">
-            <button class="ui right floated tiny basic icon button" data-tooltip="Cari Jadwal Checklist" data-inverted="" data-position="top right">
+            <button class="ui right floated tiny basic icon button" data-tooltip="Cari Absensi PIC" data-inverted="" data-position="top right">
             <i class="search icon"></i>
         </button>
           </div>
