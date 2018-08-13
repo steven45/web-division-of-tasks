@@ -349,16 +349,47 @@ class mAdmin extends CI_Model
         }
     }
 
-    public function getTemplateAbsensi()
+    public function getTemplateAbsensi($IDTHarian = FALSE)
     {
-        $query = $this->db->order_by('j.Shift','ASC');
+        if($IDTHarian == NULL){
+            $query = $this->db->order_by('j.Shift','ASC');
             $this->db->select('t.IDTHarian, t.NIK, t.IDJadwal, t.Hari, p.NamaPIC, j.Shift, j.Jam');
              $this->db->from('templateabsensi t');
              $this->db->join('pic p','p.NIK=t.NIK');
              $this->db->join('jadwal j','j.IDJadwal=t.IDJadwal');
              $query = $this->db->get();
         return $query->result_array();
+        }
+        else {
+        $query = $this->db->order_by('j.Shift','ASC');
+            $this->db->select('t.IDTHarian, t.NIK, t.IDJadwal, t.Hari, p.NamaPIC, j.Shift, j.Jam');
+             $this->db->from('templateabsensi t');
+             $this->db->join('pic p','p.NIK=t.NIK');
+             $this->db->join('jadwal j','j.IDJadwal=t.IDJadwal');
+             $query = $this->db->where('IDTHarian',$IDTHarian);
+             $query = $this->db->get();
+        return $query->result_array();
+        }
     }
 
+    public function editTemplateAbsensi($table, $IDTHarian, $data, $NIK, $IDJadwal, $hari)
+    {
+        $query = "SELECT * FROM $table WHERE `NIK` = '$NIK' AND `IDJadwal` = $IDJadwal AND `hari` = '$hari'";
+        $hasil =  $this->db->query($query)->row_array();
+        if ($hasil == NULL) {
+            $this->db->where('IDTHarian', $IDTHarian);
+            $this->db->update($table, $data);
+            return "1";
+        }
+        else{
+            return "0";
+        }
+        
+    }
+
+    public function hapusTemplateAbsensi($table, $IDTHarian)
+    {
+        $this->db->delete('templateabsensi', array('IDTHarian' => $IDTHarian));
+    }
 
 }

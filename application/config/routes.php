@@ -52,7 +52,10 @@ $route['admin/pergantian'] = 'cAdmin/pergantian';
 $route['admin/templateabsensi'] = 'cAdmin/templateAbsensi';
 $route['admin/tambahtemplateabsensi'] = 'cAdmin/tambahTemplateAbsensi';
 $route['admin/validasitambahtemplate'] = 'cAdmin/validasiTambahTemplate';
-$route['admin/edittemplateabsensi'] = 'cAdmin/editTemplateAbsensi';
+$route['admin/edittemplateabsensi/(:any)'] = 'cAdmin/editTemplateAbsensi/$1';
+$route['admin/validasitemplateabsensi'] = 'cAdmin/validasiTemplateAbsensi';
+$route['admin/hapustemplateabsensi/(:any)'] = 'cAdmin/hapusTemplateAbsensi/$1';
+
 
 $route['admin/log'] = 'cAdmin/lihatLog';
 $route['admin/jLog'] = 'cAdmin/jLihatLog';
