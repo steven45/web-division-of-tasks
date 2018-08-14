@@ -1310,7 +1310,7 @@ class cAdmin extends CI_Controller {
 					}
 				}
 
-				//Menampilkan perhitungan penjadwalan otomatis
+				// //Menampilkan perhitungan penjadwalan otomatis
 				// for ($i=0; $i < count($pic); $i++) { 
 				// 	echo "Jumlah Pengecekan : ". count($jChecklist[$i]);
 				// 	echo "<table border ='1px'>";
@@ -1558,10 +1558,8 @@ class cAdmin extends CI_Controller {
 		</script>";
 	}
 
-	public function ikutTemplate(){
-		// $begin = new DateTime($this->input->post('date0'));
-		// $end = new DateTime($this->input->post('date1'));
-
+	public function ikutTemplate()
+	{
 		$daftar_hari = array(
 			'Sunday'    => 'Minggu',
 			'Monday'    => 'Senin',
@@ -1572,10 +1570,8 @@ class cAdmin extends CI_Controller {
 			'Saturday'  => 'Sabtu'
 		);
 		// $namahari = date('l', strtotime($tanggal));
-
 		// $data['tanggal'] = $tanggal;
 		// $tanggal = $daftar_hari[$namahari].', '.$tanggal;
-
 		$begin = new DateTime($this->input->post('date0'));
 		$end = new DateTime($this->input->post('date1'));
 		$end = $end->modify( '+1 day' ); 
@@ -1613,20 +1609,61 @@ class cAdmin extends CI_Controller {
 
 			}
 
-			if ($query == '1') {
-			echo "<script type='text/javascript'>
-			alert('Sukses menambahkan absensi. ');
-			window.location.href = '" . base_url() . "admin/absensi';
-			</script>";
-			}
-			else{
-				echo "<script type='text/javascript'>
-				alert('Jadwal Sudah Ada! ');
-				window.location.href = '" . base_url() . "admin/absensi';
-				</script>";
-			}
+				if ($query == '1') {
+					echo "<script type='text/javascript'>
+					alert('Sukses menambahkan absensi. ');
+					window.location.href = '" . base_url() . "admin/absensi';
+					</script>";
+				}
+				else{
+					echo "<script type='text/javascript'>
+					alert('Jadwal Sudah Ada! ');
+					window.location.href = '" . base_url() . "admin/absensi';
+					</script>";
+				}
 
+			}
 		}
 	}
+
+	public function getStatusJChecklist()
+	{
+		$tanggal = date('20y-m-d');
+		$daftar_hari = array(
+			'Sunday'    => 'Minggu',
+			'Monday'    => 'Senin',
+			'Tuesday'   => 'Selasa',
+			'Wednesday' => 'Rabu',
+			'Thursday'  => 'Kamis',
+			'Friday'    => 'Jumat',
+			'Saturday'  => 'Sabtu'
+		);
+		$namahari = date('l', strtotime($tanggal));
+		$hari = $daftar_hari[$namahari];
+		$haritanggal = $hari.', '.$tanggal;
+		$query = $this->mAdmin->getStatusJChecklist('jchecklist', $haritanggal);
+		// echo json_encode($query);
+		var_dump($query);
+	}
+
+	public function jsonChecklist()
+	{
+		$tanggal = date('20y-m-d');
+		$daftar_hari = array(
+			'Sunday'    => 'Minggu',
+			'Monday'    => 'Senin',
+			'Tuesday'   => 'Selasa',
+			'Wednesday' => 'Rabu',
+			'Thursday'  => 'Kamis',
+			'Friday'    => 'Jumat',
+			'Saturday'  => 'Sabtu'
+		);
+		$namahari = date('l', strtotime($tanggal));
+		$hari = $daftar_hari[$namahari];
+		$haritanggal = $hari.', '.$tanggal;
+
+		$data = $this->mAdmin->getJChecklist($haritanggal);
+		header("Content-type:application/json");
+		echo json_encode($data);
 	}
 }
