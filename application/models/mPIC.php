@@ -12,23 +12,18 @@ class mPIC extends CI_Model
         return $this->db->query($query)->row_array();
     }
 
-    public function getChecklist($IDChecklist =  false)
+    public function getChecklist($tanggal)
     {
-        if ($IDChecklist == null) {
-            $query = $this->db->order_by('c.Hari','ASC');
-            $query = $this->db->order_by('c.Jam','ASC');
-            $query = $this->db->order_by('c.BatasPengecekan','ASC');
-            $query = $this->db->select('p.NamaPIC, c.IDChecklist, c.Hari,c.NIK, c.Info, c.NamaChecklist, c.Jam, c.Status, c.BatasPengecekan, c.StatusCheck, c.NIKP');
-             $query = $this->db->from('checklist c');
-             $query = $this->db->join('pic p','p.NIK=c.NIK');
-             $query = $this->db->get();
-             return $query->result_array();
-        }
-        else
-        {
-            $query = "SELECT * FROM `checklist` WHERE `IDChecklist` = $IDChecklist";
-            return $this->db->query($query)->row_array();
-        }
+        $query = $this->db->order_by('c.Jam','ASC');
+        $query = $this->db->order_by('c.BatasPengecekan','ASC');
+        $query = $this->db->where('c.Status','Enabled');
+        $query = $this->db->where('j.Tanggal',$tanggal);
+        $query = $this->db->select('p.NamaPIC, j.IDJadwalChecklist, j.NIK, j.NIKP, j.IDChecklist, j.Tanggal, j.StatusCheck, c.Info, c.NamaChecklist, c.Jam, c.BatasPengecekan, c.tingkatPengecekan');
+         $query = $this->db->from('jchecklist j');
+         $query = $this->db->join('pic p','p.NIK=j.NIK');
+         $query = $this->db->join('checklist c','c.IDChecklist=j.IDChecklist');
+         $query = $this->db->get();
+         return $query->result_array();
     }
 
     public function getDaftarPIC($NIK = false)

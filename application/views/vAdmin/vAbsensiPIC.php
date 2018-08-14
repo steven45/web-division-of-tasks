@@ -1,85 +1,85 @@
 <script>
-$(document).ready(function(){
-  $("#template").click(function(){
-    $('.tiny.modal').modal('show');
+  $(document).ready(function(){
+    $("#template").click(function(){
+      $('.tiny.modal').modal('show');
+    });
   });
-});
 </script>
 
 <div class="ui two column centered grid">
   <div class="column" style="width: auto;">
     <div class="ui segment" style="border-radius: 1.285714rem">
      <div class="segment"> 
-          <form method="POST" action="<?php echo site_url('admin/absensi'); ?>">
+      <form method="POST" action="<?php echo site_url('admin/absensi'); ?>">
         <div class="ui calendar" style="right: 0px; m">
           <div class="ui input left icon">
             <i class="calendar icon"></i>
             <input type="date" value="<?php echo $tanggal ?>" id="kalender" name="tanggal">
             <button class="ui right floated tiny basic icon button" data-tooltip="Cari Absensi PIC" data-inverted="" data-position="top right">
-            <i class="search icon"></i>
-        </button>
+              <i class="search icon"></i>
+            </button>
           </div>
         </div>
       </form>
-    
+
       <h3 style="text-align: center; margin-top: -30px;">
         <div class="ui icon">
           <i class="user icon"></i>
           Absensi PIC 
         </h3>
-          <?php if ($_SESSION['nama'] == 'admin'): ?>
+        <?php if ($_SESSION['nama'] == 'admin'): ?>
           <a class="ui right floated basic blue button" id="template" data-tooltip="Input Sesuai template" data-inverted="" data-position="top right" style="margin-top: -44px; margin-right: 40px;"><i class="calendar plus alternate icon"></i>Input Sesuai Template</a>
           
           <div class="ui tiny modal">
-              <div class="header">Input Tanggal</div>
-              <div class="content">
-                <p>
-                  <form method="POST" action="<?php echo site_url('admin/ikuttemplate'); ?>">
-                    <div class="ui center aligned basic segment">
+            <div class="header">Input Tanggal</div>
+            <div class="content">
+              <p>
+                <form method="POST" action="<?php echo site_url('admin/ikuttemplate'); ?>">
+                  <div class="ui center aligned basic segment">
 
-                  <div class="ui input left icon">
+                    <div class="ui input left icon">
                       <i class="calendar icon"></i>
                       <input type="date" value="<?php echo date('20y-m-d'); ?>" name="date0">
-                  </div>
-                  Sampai:
-                  <div class="ui input left icon">
+                    </div>
+                    Sampai:
+                    <div class="ui input left icon">
                       <i class="calendar icon"></i>
                       <input type="date" value="<?php echo date('20y-m-d'); ?>" name="date1">
+                    </div>
+                    <br>
+                    <br>
+                    <button class="ui blue button">Input Tanggal</button>
                   </div>
-                  <br>
-                  <br>
-                  <button class="ui blue button">Input Tanggal</button>
-                </div>
                 </form>
-                </p>
-                
-              </div>
-            </div>   
-            <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Absensi PIC" data-inverted="" data-position="top right" style="margin-top: -41px" href="<?php echo site_url('admin/tambahabsensi'); ?>">
-              <i class="add icon"></i>
-            </a>
-          <?php endif ?>
+              </p>
+
+            </div>
+          </div>   
+          <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Absensi PIC" data-inverted="" data-position="top right" style="margin-top: -41px" href="<?php echo site_url('admin/tambahabsensi'); ?>">
+            <i class="add icon"></i>
+          </a>
+        <?php endif ?>
       </div>
       <div class="ui divider"></div>
 
 
       <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
-      <table class="ui sortable compact celled definition table">
-        <thead class="full-width" style="text-align: center; background-color: #dbedff">
-          <tr>
-            <th class="sorted ascending">NIK</th>
-            <th class="">Nama PIC</th>
-            <th class="">Shift</th>
-            <th class="">Jam</th>
-            <th class="">Hari</th>
-            <th class="">Kehadiran</th>
-            <th class="">Pengganti</th>
-             <?php if ($_SESSION['nama'] == 'admin'): ?>
-            <th class="">Edit</th>
-            <th class="">Hapus</th>
-            <?php endif ?>
-          </tr>
-        </thead>
+        <table class="ui sortable compact celled definition table">
+          <thead class="full-width" style="text-align: center; background-color: #dbedff">
+            <tr>
+              <th class="sorted ascending">NIK</th>
+              <th class="">Nama PIC</th>
+              <th class="">Shift</th>
+              <th class="">Jam</th>
+              <th class="">Hari</th>
+              <th class="">Kehadiran</th>
+              <th class="">Pengganti</th>
+              <?php if ($_SESSION['nama'] == 'admin'): ?>
+                <th class="">Edit</th>
+                <th class="">Hapus</th>
+              <?php endif ?>
+            </tr>
+          </thead>
           <tbody >
             <?php $i = 0; ?>
             <?php $jumlah = count($absensi); ?>
@@ -92,9 +92,16 @@ $(document).ready(function(){
             <tr id="<?php echo 'hasilAbs'. $i; ?>">
               <td><?php echo $absensi['NIK'] ?></td>
               <td><?php echo $absensi['NamaPIC'] ?></td>
-              <td><?php echo $absensi['Shift'] ?></td>
+              <td>
+                <?php echo $absensi['Shift'] ?>
+                <input type="hidden" name="<?php echo 'Shift'.$i; ?>" value="<?php echo $absensi['Shift']; ?>">
+              </td>
               <td><?php echo $absensi['Jam'] ?></td>
-              <td><?php echo $absensi['Hari'] ?> <input target="<?php echo $i; ?>" type="hidden" class="hasilAbsensi" value="<?php $tanggal = explode(' ',$absensi['Hari']); echo $tanggal[1]?>"></td>
+              <td>
+                <?php echo $absensi['Hari'] ?> 
+                <input type="hidden" name="<?php echo 'Hari'.$i ?>" value="<?php echo $absensi['Hari'] ?>">
+                <input target="<?php echo $i; ?>" type="hidden" class="hasilAbsensi" value="<?php $tanggal = explode(' ',$absensi['Hari']); echo $tanggal[1]?>">
+              </td>
               <td class="absensi">
 
                 <select class="<?php echo "hadir".$i ?>" target="<?php echo $i ?>" name="<?php echo 'Kehadiran'.$i ?>" style="min-width: 10em; cursor: pointer;
@@ -149,49 +156,52 @@ $(document).ready(function(){
               transition: width 0.1s ease, -webkit-box-shadow 0.1s ease;
               transition: box-shadow 0.1s ease, width 0.1s ease;
               transition: box-shadow 0.1s ease, width 0.1s ease, -webkit-box-shadow 0.1s ease;">
-              <?php foreach ($picPengganti as $pic ) {?>
-                <?php if ($pic['NIK'] != $absensi['NIK']) { ?>
-                  <option value="<?php echo $pic['NIK'] ?>"><?php echo $pic['NamaPIC'] ?></option>
-                <?php } ?>
+              <?php if ($picP[$i]['NIK'] != '0') { ?>
+                <option value="<?php echo $picP[$i]['NIK'] ?>"><?php echo $picP[$i]['NamaPIC'] ?></option>
               <?php } ?>
-              </select>
-            </td>
-            <?php if ($_SESSION['nama'] == 'admin'): ?>
+              <?php foreach ($picPengganti as $pic ) {?>
+              <?php if ($pic['NIK'] != $absensi['NIK']) { ?>
+              <option value="<?php echo $pic['NIK'] ?>"><?php echo $pic['NamaPIC'] ?></option>
+              <?php } ?>
+              <?php } ?>
+            </select>
+          </td>
+          <?php if ($_SESSION['nama'] == 'admin'): ?>
             <td>
-          <?php $edit = 'admin/editabsensi/'.$absensi['IDHarian'] ?>
-          <a href="<?php echo site_url($edit) ;?>" class="ui basic small blue button">
-            <i class="icon edit"></i>
-            Edit
-          </a>
-        </td>
-        <?php endif ?>
+              <?php $edit = 'admin/editabsensi/'.$absensi['IDHarian'] ?>
+              <a href="<?php echo site_url($edit) ;?>" class="ui basic small blue button">
+                <i class="icon edit"></i>
+                Edit
+              </a>
+            </td>
+          <?php endif ?>
 
-        <?php if ($_SESSION['nama'] == 'admin'): ?>
-        <td>
-          <a href="<?php echo site_url("admin/hapusabsensi/".$absensi['IDHarian']) ;?>" class="ui basic small red button" onClick="return confirm('Apa anda yakin ingin menghapus absensi? ?');">
-            <i class="icon trash"></i>
-            Hapus
-          </a>
-        </td>
-        <?php endif ?>
-        
-      </tr>
-      <?php } ?>
-      <?php $i = $i+1; ?>
-      <?php } ?>
-    </tbody>
-    <tfoot class="full-width">
-      <tr>
-        <th colspan="9">
-          <button class="ui right floated blue small button" style="margin-top: 5px;">
-            <i class="save icon"></i>Simpan
-          </button>
-        </th>
-      </tr>
-    </tfoot>
-  </form>
-</table>
-<br><br>
+          <?php if ($_SESSION['nama'] == 'admin'): ?>
+            <td>
+              <a href="<?php echo site_url("admin/hapusabsensi/".$absensi['IDHarian']) ;?>" class="ui basic small red button" onClick="return confirm('Apa anda yakin ingin menghapus absensi? ?');">
+                <i class="icon trash"></i>
+                Hapus
+              </a>
+            </td>
+          <?php endif ?>
+
+        </tr>
+        <?php } ?>
+        <?php $i = $i+1; ?>
+        <?php } ?>
+      </tbody>
+      <tfoot class="full-width">
+        <tr>
+          <th colspan="9">
+            <button class="ui right floated blue small button" style="margin-top: 5px;">
+              <i class="save icon"></i>Simpan
+            </button>
+          </th>
+        </tr>
+      </tfoot>
+    </form>
+  </table>
+  <br><br>
 </div>
 </div>
 </div>

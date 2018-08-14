@@ -12,9 +12,18 @@
             <i class="tasks icon"></i>
             Daftar Checklist 
           </h3>
-
-        </div>
-        <div class="ui divider"></div>
+          <form method="POST" action="<?php echo site_url('pic/checklist'); ?>">
+            <div class="ui calendar" style="margin-left: 76.8%; margin-top: -45px">
+              <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                <input type="date" value="<?php echo $tanggal; ?>" name="tanggal">
+                <button class="ui right floated tiny basic icon button" data-tooltip="Cari Jadwal Checklist" data-inverted="" data-position="top right" >
+                  <i class="search icon"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          <div class="ui divider"></div>
   <!-- <div class= "ui field">
         <select name="state" id="maxRows" class="form-control" style="width:150px;">
                         <option value="5000">Show All</option>
@@ -28,20 +37,6 @@
                     </select>
                   </div> -->
 
-                  <div class="field" style="margin-left: 600px; margin-top: 5px" >
-                    <select class="ui right selection tiny dropdown item" id="hari" >
-                      <!-- <option value="<?php echo $hari; ?>"><?php echo $hari; ?></option>         -->
-                      <option value="<?php echo $hari ?>"><?php echo $hari ?></option>
-                      <option value="Senin">Senin</option>
-                      <option value="Selasa">Selasa</option>
-                      <option value="Rabu">Rabu</option>
-                      <option value="Kamis">Kamis</option>
-                      <option value="Jumat">Jumat</option>
-                      <option value="Sabtu">Sabtu</option>
-                      <option value="Minggu">Minggu</option>
-                    </select>
-                  </div>
-
                   <table class="ui sortable celled table" id="mytable" class="display">
                     <thead>
                       <tr style="text-align: center">
@@ -49,140 +44,131 @@
                         <th>Hari</th>
                         <th >Jadwal</th>
                         <th>Batas Pengecekan</th>
-                        <th >Nama Checklist</th>
-                        <th>Nama PIC</th>
-                        <th >Info Checklist</th>
+                        <th style="width: 300px;">Nama Checklist</th>
+                        <th >Nama PIC</th>
+                        <th >Instruksi Pengerjaan</th>
                         <th >Check</th>
 
                       </tr>
                     </thead>
                     <tbody id="hasil">
-                      <?php $temp = 0; $no = 0; ?>
+                      <?php $temp = 0; $no = 1; ?>
                       <?php foreach ($checklist as $checklist) { ?>
-<!--       <?php if ($checklist['Status'] == $status) { ?>
-      <?php if ($checklist['NamaPIC'] == $_SESSION['NamaPIC'] AND $checklist['StatusCheck'] == '1') { ?>
-        <tr style="background-color: #75e2f2;">
-      <?php } elseif( $checklist['StatusCheck'] != '1') { ?>
-        <tr style="background-color: #95f080;">
-          <?php } ?> -->
 
-          <?php  
-          if ($checklist['Status'] == $status) {
-            if ($checklist['StatusCheck'] == '1') { ?>
-            <tr style="background-color: #AFEEEE" class="hasilku" id="<?php echo 'hasilQ'.$temp; ?>">
-              <?php }
-              else if ($checklist['StatusCheck'] == '2'){ ?>
-              <tr style="background-color: tomato" class="hasilku" id="<?php echo 'hasilQ'.$temp; ?>" >
-                <?php }
-                else{ ?>
-                <tr class="hasilku" id="<?php echo 'hasilQ'.$temp; ?>">
-                  <?php }
-                }
-                ?>
+                      <?php  
+                      if ($checklist['StatusCheck'] == '1') { ?>
+                      <tr style="background-color: #AFEEEE" class="hasilku" id="<?php echo 'hasilQ'.$temp; ?>">
+                        <?php }
+                        else if ($checklist['StatusCheck'] == '2'){ ?>
+                        <tr style="background-color: tomato" class="hasilku" id="<?php echo 'hasilQ'.$temp; ?>" >
+                          <?php }
+                          else{ ?>
+                          <tr class="hasilku" id="<?php echo 'hasilQ'.$temp; ?>">
+                            <?php }
+                            ?>
 
-                <td><?php echo $nomor[$temp] ; $no = $no+1;?></td>
-                <td class="hari"><?php echo $checklist['Hari']; ?></td>
-                <input type="hidden"  class="statusCheck" value="<?php echo $checklist['StatusCheck'] ?>" id="<?php echo "sttsCheck".$temp ?>">
-                <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
-                <input class="info" type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
-                <td class="time"><?php echo $checklist['Jam']; ?></td>
-                <td class="batasP"><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
-                <td class="namaChecklist"><?php echo $checklist['NamaChecklist']; ?></td>
-                <td class="namaPIC">
-                  <?php if($checklist['NIKP'] == 0){ ?>
-                  <?php echo $checklist['NamaPIC']; ?>
-                  <?php } else { ?>
-                  <?php echo $picPengganti[$temp]['NamaP'] ?>
-                  <?php } ?>
-                </td> 
-                <td>
-                  <?php 
-                  $nInfo = NULL;
-                  $k = 0;
-                  $fh = fopen($checklist['Info'], 'r');
-                  while(!feof($fh)){
-                   $nInfo[$k] = fgets($fh);
-                   $k = $k +1;
-                 }
+                            <td><?php echo $no ; $no = $no+1;?></td>
+                            <td class="hari"><?php echo $checklist['Tanggal']; ?></td>
+                            <input type="hidden"  class="statusCheck" value="<?php echo $checklist['StatusCheck'] ?>" id="<?php echo "sttsCheck".$temp ?>">
+                            <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
+                            <input class="info" type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
+                            <td class="time"><?php echo $checklist['Jam']; ?></td>
+                            <td class="batasP"><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
+                            <td class="namaChecklist"><?php echo $checklist['NamaChecklist']; ?></td>
+                            <td class="namaPIC">
+                              <?php if($checklist['NIKP'] == 0){ ?>
+                              <?php echo $checklist['NamaPIC']; ?>
+                              <?php } else { ?>
+                              <?php echo $picP[$temp]['NamaPIC'] ?>
+                              <?php } ?>
+                            </td> 
+                            <td>
+                              <?php 
+                              $nInfo = NULL;
+                              $k = 0;
+                              $fh = fopen($checklist['Info'], 'r');
+                              while(!feof($fh)){
+                               $nInfo[$k] = fgets($fh);
+                               $k = $k +1;
+                             }
 
-                 ?>
+                             ?>
 
-                 <a href="#" data-featherlight=" <?php echo '#bio-name'.$temp ?>">Lihat</a>
-                 <div style="display:none;">
-                  <div id="<?php echo 'bio-name'.$temp ?>">
-                    <h3>Info Checklist</h3>
-                    <div class="ui segment">
-                     <?php foreach ($nInfo as $info) {
-                      echo '<p>'.$info.'</p>';
-                    } ?> 
-                  </div>
-                </div>
-              </div>
-            </td>
+                             <a href="#" data-featherlight=" <?php echo '#bio-name'.$temp ?>">Lihat</a>
+                             <div style="display:none;">
+                              <div id="<?php echo 'bio-name'.$temp ?>">
+                                <h3>Info Checklist</h3>
+                                <div class="ui segment">
+                                 <?php foreach ($nInfo as $info) {
+                                  echo '<p>'.$info.'</p>';
+                                } ?> 
+                              </div>
+                            </div>
+                          </div>
+                        </td>
 
-            <?php if ($checklist['StatusCheck'] == '0' AND $checklist['Hari'] == $hari) {?>
-            <td class="docheck" target="<?php echo $temp; ?>" id="<?php echo $temp; ?>">
-              <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
-              <div style="display:none;">
-                <div id="<?php echo 'tampilKet'.$temp ?>">
+                        <?php if ($checklist['StatusCheck'] == '0') {?>
+                        <td class="docheck" target="<?php echo $temp; ?>" id="<?php echo $temp; ?>">
+                          <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
+                          <div style="display:none;">
+                            <div id="<?php echo 'tampilKet'.$temp ?>">
 
-                  <form method="POST" class="form-check" id="<?php echo 'form'.$temp ?>" enctype="multipart/form-data">  
-                    <input type="hidden" name="NIK" id="<?php echo 'NIK'.$temp ?>" value="<?php echo $_SESSION['nik'] ?>">
-                    <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
-                    <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
-                    <input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">
-                    <input type="hidden" name="NamaPICSebenarnya" value="<?php echo $_SESSION['NamaPIC'] ?>">
-                    <input type="hidden" name="Jam" value="<?php echo $checklist['Jam'] ?>">
-                    <input type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
-                    <input type="hidden" name="Hari" value="<?php echo $checklist['Hari'] ?>">
-                    <h3>Status</h3>
-                    <div class="ui form">
-                      <select name="Status">
-                        <option value="OK">OK</option>
-                        <option value="Bad">Bad</option>
-                      </select>
-                    </div>
-                    <h3>Bukti Pengecekan (Screenshot)</h3>
-                    <div class="ui form">
-                      <div class="field">
-                        <input type="file" name="buktiCek" id="<?php echo 'buktiCek'?>" accept="image/*"><p><?php echo $temp ?></p>
-                      </div>
-                    </div>
-                    <h3>Keterangan</h3>
-                    <div class="ui form">
-                      <div class="field">
-                       <textarea name="Keterangan"></textarea>
-                     </div>
-                   </div>
-                   <br>
-                   <a class="tSimpan ui right floated blue small button" target="<?php echo $temp; ?>"><i class="save icon"  ></i>Simpan</a>
-                 </form>
-               </div>
-             </div>
-           </td>
-           <?php } else { ?>
-           <td class="docheck" target"<?php echo $temp; ?>" id="<?php echo $temp; ?>">Disabled</td>
-           <?php } ?> 
-         </tr> 
-         <?php $temp = $temp + 1; ?>
-         <?php } ?>
-         <?php } ?>
-       </tbody>
-       <tfoot>
-        <th colspan="8">
+                              <form method="POST" class="form-check" id="<?php echo 'form'.$temp ?>" enctype="multipart/form-data">  
+                                <input type="hidden" name="NIK" id="<?php echo 'NIK'.$temp ?>" value="<?php echo $_SESSION['nik'] ?>">
+                                <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
+                                <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
+                                <input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">
+                                <input type="hidden" name="NamaPICSebenarnya" value="<?php echo $_SESSION['NamaPIC'] ?>">
+                                <input type="hidden" name="Jam" value="<?php echo $checklist['Jam'] ?>">
+                                <input type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
+                                <input type="hidden" name="Hari" value="<?php echo $checklist['Tanggal'] ?>">
+                                <h3>Status</h3>
+                                <div class="ui form">
+                                  <select name="Status">
+                                    <option value="OK">OK</option>
+                                    <option value="Bad">Bad</option>
+                                  </select>
+                                </div>
+                                <h3>Bukti Pengecekan (Screenshot)</h3>
+                                <div class="ui form">
+                                  <div class="field">
+                                    <input type="file" name="buktiCek" id="<?php echo 'buktiCek'?>" accept="image/*"><p><?php echo $temp ?></p>
+                                  </div>
+                                </div>
+                                <h3>Keterangan</h3>
+                                <div class="ui form">
+                                  <div class="field">
+                                   <textarea name="Keterangan"></textarea>
+                                 </div>
+                               </div>
+                               <br>
+                               <a class="tSimpan ui right floated blue small button" target="<?php echo $temp; ?>"><i class="save icon"  ></i>Simpan</a>
+                             </form>
+                           </div>
+                         </div>
+                       </td>
+                       <?php } else { ?>
+                       <td class="docheck" target"<?php echo $temp; ?>" id="<?php echo $temp; ?>">Disabled</td>
+                       <?php } ?> 
+                     </tr> 
+                     <?php $temp = $temp + 1; ?>
+                     <?php } ?>
+                   </tbody>
+                   <tfoot>
+                    <th colspan="8">
 
-        </th>
-      </tfoot>
-    </table>
+                    </th>
+                  </tfoot>
+                </table>
   <!-- <div class="pagination-container">
             <nav>
                 <ul class="pagination"></ul>
             </nav>
           </div> -->
-
         </div>
       </div>
     </div>
+  </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
     <script> 
@@ -246,7 +232,7 @@
         });
       });
     </script> -->
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
       var interval = setInterval(myTimer,1000);
 
       function myTimer(){
@@ -316,8 +302,6 @@
           info[j] = document.getElementsByClassName("info")[j].value;
           batasP[j] = parseInt(document.getElementsByClassName("batasP")[j].innerHTML.substring(0,2));
           selisih[j] =  moment.duration(moment(time[j], 'hh:mm').diff(nowTime)).asMinutes();
-
-
         }
 
   // console.log(row);
@@ -329,11 +313,11 @@
   var cJumlah = 0;
 
 
-  for (var i = 0; i < row.length; i++) {
-    if (hari[i] == hariSekarang) {
-      jHariS = i+1;
-    }
-  }
+  // for (var i = 0; i < row.length; i++) {
+  //   if (hari[i] == hariSekarang) {
+  //     jHariS = i+1;
+  //   }
+  // }
   // console.log(jHariS);
 
   /*
@@ -358,38 +342,6 @@
 
     if (hari[j] == hariSekarang && (selisih[j]*(-1)) < 0) {
       document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
-    }
-    else{
-       // document.getElementsByClassName("docheck")[j].innerHTML = 
-       // '<a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>'+
-       // '<div style="display:none;">'+
-       // '<div id="<?php echo 'tampilKet'.$temp ?>">'+
-       // '<form method="POST" class="form-check"> '+
-       // '<input type="hidden" name="NIK" value="<?php echo $_SESSION['nik'] ?>">'+
-       // '<input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">'+
-       // '<input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">'+
-       // '<input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">'+
-       // '<input type="hidden" name="NamaPICSebenarnya" value="<?php echo $_SESSION['NamaPIC'] ?>">'+
-       // '<input type="hidden" name="Jam" value="<?php echo $checklist['Jam'] ?>">'+
-       // '<input type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">'+
-       // '<input type="hidden" name="Hari" value="<?php echo $checklist['Hari'] ?>">'+
-       // '<h3>Status</h3>'+
-       // ' <div class="ui form">'+
-       // '<select name="Status">'+
-       // '<option value="OK">OK</option>'+
-       // '<option value="Bad">Bad</option>'+
-       // ' </select>'+
-       // '</div>'+
-       // '<h3>Keterangan</h3>'+
-       // '<div class="ui form">'+
-       // '<div class="field">'+
-       // '<textarea name="Keterangan"></textarea>'+
-       // '</div>'+
-       // '</div>'+
-       // '<a class="tSimpan ui right floated blue small button"><i class="save icon" target="<?php echo $temp; ?> " ></i>Simpan</a>'+
-       // '</form>'+
-       // '</div>'+
-       // '</div>';
     }
     
     if (hari[j] == hariSekarang && statusCheck[j] == "0") { // 2
@@ -447,7 +399,7 @@
   }
   }//Akhir Method myTimer
 
-</script> -->
+</script> 
 
 
   <!-- <script>

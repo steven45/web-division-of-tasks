@@ -135,10 +135,10 @@ class mAdmin extends CI_Model
 
     public function getChecklistWhere()
     {
-        $query[0] = $this->db->query("SELECT `IDChecklist`,`Jam` FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = '07:00' OR `Jam` = '08:00' OR `Jam` = '09:00' OR `Jam` = '10:00' OR `Jam` = '11:00' OR `Jam` = '12:00' OR `Jam` = '13:00')")->result_array();
-        $query[1] = $this->db->query("SELECT `IDChecklist`,`Jam` FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = '14:00' OR `Jam` = '15:00' OR `Jam` = '16:00' )")->result_array();
-        $query[2] = $this->db->query("SELECT `IDChecklist`,`Jam` FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = '17:00' OR `Jam` = '18:00' OR `Jam` = '19:00' OR `Jam` = '20:00' OR `Jam` = '21:00')")->result_array();
-        $query[3] = $this->db->query("SELECT `IDChecklist`,`Jam`  FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = '22:00' OR `Jam` = '23:00' OR`Jam` = '00:00' OR `Jam` = '01:00'OR `Jam` = '02:00' OR `Jam` = '03:00' OR `Jam` = '04:00' OR `Jam` = '05:00' OR `Jam` = '06:00')")->result_array();
+        $query[0] = $this->db->query("SELECT `IDChecklist`,`Jam` FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = 07 OR `Jam` = 08 OR `Jam` = 09 OR `Jam` = 10 OR `Jam` = 11 OR `Jam` = 12 OR `Jam` = 13)")->result_array();
+        $query[1] = $this->db->query("SELECT `IDChecklist`,`Jam` FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = 00 OR `Jam` = 15 OR `Jam` = 16 )")->result_array();
+        $query[2] = $this->db->query("SELECT `IDChecklist`,`Jam` FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = 17 OR `Jam` = 18 OR `Jam` = 19 OR `Jam` = 20 OR `Jam` = 21)")->result_array();
+        $query[3] = $this->db->query("SELECT `IDChecklist`,`Jam`  FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = 22 OR `Jam` = 23 OR`Jam` = '00:00' OR `Jam` = 01 OR `Jam` = 02 OR `Jam` = 03 OR `Jam` = 04 OR `Jam` = 05 OR `Jam` = 06)")->result_array();
         return $query;
     }
 
@@ -176,6 +176,22 @@ class mAdmin extends CI_Model
         $this->db->update($table, $data);
     }
 
+    public function ubahJChecklist($table, $check, $where, $jam)
+    {
+         $query = $this->db->where($where);
+         $query = $this->db->where_in('c.Jam', $jam);
+         $query = $this->db->select('*');
+         $query = $this->db->from('jchecklist j');
+         $query = $this->db->join('checklist c','c.IDChecklist=j.IDChecklist');
+         $query = $this->db->get()->result_array();
+
+         if ($query != NULL) {
+            foreach ($query as $query) {  
+                $this->db->where('IDJadwalChecklist', $query['IDJadwalChecklist']);
+                $this->db->update($table, $check);
+            }
+         }
+    }
     public function lihatLastIDChecklist()
     {
         $query ="select * from checklist order by IDChecklist DESC limit 1";

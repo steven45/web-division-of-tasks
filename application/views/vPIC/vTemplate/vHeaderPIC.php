@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['nik'])) {
+<?php if (!isset($_SESSION['NamaPIC'])) {
   redirect(base_url("pic"));
 } ?>
 <!DOCTYPE html>
