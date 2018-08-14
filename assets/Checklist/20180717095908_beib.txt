@@ -1,4 +1,0 @@
-Pengecekan :
-1. Pengecekan A
-2. Pengecekan B
-3. Pengecekan C

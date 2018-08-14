@@ -34,6 +34,9 @@ $route['admin/validasitambahchecklist'] = 'cAdmin/validasiTambahChecklist';
 $route['admin/gantichecklist'] = 'cAdmin/gantiChecklist';
 $route['admin/jchecklist'] = 'cAdmin/lihatJChecklist';
 $route['admin/gantijchecklist'] = 'cAdmin/gantiJChecklist';
+$route['admin/getstatusjchecklist'] = 'cAdmin/getStatusJChecklist';
+$route['admin/jsonchecklist'] = 'cAdmin/jsonChecklist';
+
 
 //CRUD ABSENSI
 $route['admin/absensi'] = 'cAdmin/lihatAbsensi';

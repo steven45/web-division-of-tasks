@@ -445,4 +445,10 @@ class mAdmin extends CI_Model
             return "0";
         }
     }
+
+    public function getStatusJChecklist($table, $haritanggal)
+    {
+        $query = "SELECT `StatusCheck` FROM `$table` WHERE `Tanggal` = '$haritanggal'";
+        return $this->db->query($query)->result_array();
+    }
 }
