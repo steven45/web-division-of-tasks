@@ -55,7 +55,7 @@
           </h3>
         
           <form method="POST" action="<?php echo site_url('admin/jchecklist'); ?>">
-            <div class="ui calendar" style="margin-left: 76.8%; margin-top: -45px">
+            <div class="ui calendar" style="margin-left: 80%; margin-top: -45px">
               <div class="ui input left icon">
                 <i class="calendar icon"></i>
                 <input type="date" id="tanggal" value="<?php echo $tanggal; ?>" name="tanggal">

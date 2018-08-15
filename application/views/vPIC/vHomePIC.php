@@ -1,3 +1,6 @@
+<?php if (isset($_SESSION['NamaPIC'])) {
+	redirect(base_url("pic/beranda"));
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
