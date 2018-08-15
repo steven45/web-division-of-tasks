@@ -171,13 +171,19 @@
             <i class="save icon"></i>Simpan
           </button>
         </form>
+      <div class="ui basic segment">
+        <div class="ui blue ribbon label">
+          Page:
+        </div>
       <div class="pagination-container">
       <nav>
         <ul class="pagination"></ul>
       </nav>
+    </div>
     </div>  
     </div>
   </div>
+</div>
 </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>

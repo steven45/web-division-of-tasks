@@ -12,10 +12,10 @@
      <div class="segment"> 
       <form method="POST" action="<?php echo site_url('admin/absensi'); ?>">
         <div class="ui calendar" style="right: 0px; m">
-          <div class="ui input left icon">
-            <i class="calendar icon"></i>
+          <div class="ui input left icon" >
+            <i class="calendar icon" ></i>
             <input type="date" value="<?php echo $tanggal ?>" id="kalender" name="tanggal">
-            <button class="ui right floated tiny basic icon button" data-tooltip="Cari Absensi PIC" data-inverted="" data-position="top right">
+            <button class="ui right floated tiny basic icon button" data-tooltip="Klik untuk Cari Absensi PIC" data-inverted="" data-position="top right">
               <i class="search icon"></i>
             </button>
           </div>
@@ -28,7 +28,7 @@
           Absensi PIC 
         </h3>
         <?php if ($_SESSION['nama'] == 'admin'): ?>
-          <a class="ui right floated basic blue button" id="template" data-tooltip="Input Sesuai template" data-inverted="" data-position="top right" style="margin-top: -44px; margin-right: 40px;"><i class="calendar plus alternate icon"></i>Input Sesuai Template</a>
+          <a class="ui right floated basic blue button" id="template" data-tooltip="Klik untuk Input Sesuai template" data-inverted="" data-position="top right" style="margin-top: -44px; margin-right: 40px;"><i class="calendar plus alternate icon"></i>Input Sesuai Template</a>
           
           <div class="ui tiny modal">
             <div class="header">Input Tanggal</div>
@@ -55,7 +55,7 @@
 
             </div>
           </div>   
-          <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Absensi PIC" data-inverted="" data-position="top right" style="margin-top: -41px" href="<?php echo site_url('admin/tambahabsensi'); ?>">
+          <a class="ui right floated tiny blue icon button" data-tooltip="Klik untuk Tambah Absensi PIC" data-inverted="" data-position="top right" style="margin-top: -41px" href="<?php echo site_url('admin/tambahabsensi'); ?>">
             <i class="add icon"></i>
           </a>
         <?php endif ?>

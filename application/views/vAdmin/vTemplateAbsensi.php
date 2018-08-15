@@ -13,14 +13,14 @@
         </h3>
 
           <?php if ($_SESSION['nama'] == 'admin'): ?> 
-            <a class="ui right floated tiny blue icon button" data-tooltip="Tambah Template Absensi" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahtemplateabsensi'); ?>">
+            <a class="ui right floated tiny blue icon button" data-tooltip="Klik untuk Tambah Template Absensi" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahtemplateabsensi'); ?>">
               <i class="add icon"></i>
             </a>
           <?php endif ?>
       </div>
 
       <div class="ui divider"></div>
-      <div class="field" style="margin-left: 600px; margin-top: 5px" >
+      <div class="field" style="margin-left: 600px; margin-top: 5px" data-tooltip="Klik untuk Pilih Hari" data-inverted="" data-position="top right" >
         <select class="ui right selection tiny dropdown item" id="hari" >
           <!-- <option value="<?php echo $hari; ?>"><?php echo $hari; ?></option>         -->
           <option value="<?php echo $hari ?>"><?php echo $hari ?></option>
