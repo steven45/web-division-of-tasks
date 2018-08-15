@@ -90,9 +90,9 @@
 
         <th colspan="9">
 
-          <button class="ui right floated blue small button" style="margin-top: 5px;">
+          <!-- <button class="ui right floated blue small button" style="margin-top: 5px;">
             <i class="save icon"></i>Simpan
-          </button>
+          </button> -->
           
         </th>
 

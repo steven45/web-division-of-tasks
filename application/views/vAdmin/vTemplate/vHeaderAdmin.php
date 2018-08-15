@@ -88,7 +88,7 @@
         result = ''+days[day]+', '+h+':'+m+':'+s;
         document.getElementById(id).innerHTML = result;
         setTimeout('date_time("'+id+'");','1000');
-        console.log(result);
+        // console.log(result);
         return true;
 
     }
@@ -164,7 +164,7 @@
 </head>
 
 
-<body style="background-image: url(<?php echo base_url('assets/images/blue.png'); ?>);">
+<body style="background-image: url(<?php echo base_url('assets/images/9.jpg'); ?>); background-size: cover; background-attachment: fixed;">
   <!-- Header -->
   <div class="ui top fixed inverted pointing menu">
     <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">

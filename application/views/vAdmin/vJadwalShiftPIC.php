@@ -1,12 +1,12 @@
 <div class="ui three column centered grid">
 <div class="column">
-	<div class="ui segment" style="border-radius: 1.285714rem">
+	<div class="ui segment" style="border-radius: 1.0rem">
 		<h3 style="text-align: center;">
 			<div class="ui icon">
 	  		<i class="setting icon"></i>
 			Jadwal Shift PIC</div></h3>
 			<div class="ui divider"></div>
-			<table class="ui compact celled table" id="example">
+			<table class="ui compact celled table">
         <thead class="full-width" style="text-align: center; background-color: #dbedff">
           <tr>
             <th class="">Shift</th>

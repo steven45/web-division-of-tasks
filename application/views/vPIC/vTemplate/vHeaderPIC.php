@@ -79,7 +79,7 @@
       </title>
     </head>
 
-<body style="background-color: #B0E0E6">
+<body style="background-image: url(<?php echo base_url('assets/images/8.jpg'); ?>); background-size: cover; background-attachment: fixed;">
 
 <!-- <body style="background-image: url(<?php echo base_url('assets/images/square.png'); ?>);"> -->
 

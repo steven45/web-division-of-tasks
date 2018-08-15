@@ -68,10 +68,10 @@ $(document).ready(function(){
         <thead class="full-width" style="text-align: center; background-color: #dbedff">
           <tr>
             <th class="sorted ascending">NIK</th>
-            <th class="">Nama PIC</th>
+            <th class="" style="width: 250px;">Nama PIC</th>
             <th class="">Shift</th>
             <th class="">Jam</th>
-            <th class="">Hari</th>
+            <th class="" style="width: 150px;">Hari</th>
             <th class="">Kehadiran</th>
             <th class="">Pengganti</th>
              <?php if ($_SESSION['nama'] == 'admin'): ?>

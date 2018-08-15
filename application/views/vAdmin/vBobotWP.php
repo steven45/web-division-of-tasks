@@ -1,6 +1,6 @@
 <div class="ui three column centered grid">
 <div class="column">
-	<div class="ui segment" style="border-radius: 1.285714rem">
+	<div class="ui segment" style="border-radius: 1.0rem">
 		<h3 style="text-align: center;">
 			<div class="ui icon">
 	  		<i class="setting icon"></i>
