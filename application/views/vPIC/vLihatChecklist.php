@@ -13,7 +13,7 @@
             Daftar Checklist 
           </h3>
           <form method="POST" action="<?php echo site_url('pic/checklist'); ?>">
-            <div class="ui calendar" style="margin-left: 76.8%; margin-top: -45px">
+            <div class="ui calendar" style="margin-left: 81%; margin-top: -45px">
               <div class="ui input left icon">
                 <i class="calendar icon"></i>
                 <input type="date" value="<?php echo $tanggal; ?>" name="tanggal">
@@ -37,7 +37,7 @@
                     </select>
                   </div> -->
 
-                  <table class="ui sortable celled table" id="mytable" class="display">
+                  <table class="ui sortable celled table" id="mytable" class="display" style="text-align: center">
                     <thead>
                       <tr style="text-align: center">
                         <th class="sorted ascending">No</th>

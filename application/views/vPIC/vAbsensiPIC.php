@@ -13,7 +13,7 @@
 
         </h3>
 
-        <div class="ui right calendar" style="margin-left: 400px; margin-top: -45px">
+        <div class="ui right calendar" style="margin-left: 500px; margin-top: -45px">
           <div class="ui small input left icon">
             <i class="calendar icon"></i>
             <input type="date" value="<?php echo date('20y-m-d') ?>">
@@ -35,7 +35,7 @@
             </tr>
           </thead>
 
-          <tbody id="hasil">
+          <tbody id="hasil" style="text-align: center">
 
             <?php foreach ($absensi as $absensi ) { ?>
             <?php if ($absensi['Status'] == 'Enabled' AND $absensi['NIK'] == $_SESSION['nik']) { ?>
