@@ -319,8 +319,7 @@
 <br><br><br><br><br>
 
 
-          <script type="text/javascript">window.onload = date_time('date_time');
-          </script>
+<script type="text/javascript">window.onload = date_time('date_time');</script>
 
 
 
