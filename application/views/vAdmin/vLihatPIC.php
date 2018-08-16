@@ -15,7 +15,7 @@
       </h3>
       
       <?php if ($_SESSION['nama'] == 'admin'): ?>       
-          <a class="ui right floated tiny blue icon button" data-tooltip="Tambah PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahpic'); ?>">
+          <a class="ui right floated tiny blue icon button" data-tooltip="Klik untuk Tambah PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahpic'); ?>">
             <i class="add icon"></i>
           </a>
       <?php endif ?>
@@ -38,7 +38,7 @@
                     </select>
                   </div>
  -->
-<table class="ui sortable compact celled definition white table" id="mytable" class="display" style="text-align: center;">
+<table class="ui sortable compact celled definition white table" id="mytable" style="text-align: center;">
   <thead class="full-width" style="text-align: center; background-color: #dbedff">
     <tr>
       <th class="sorted ascending">NIK</th>
@@ -191,23 +191,19 @@
           Simpan
         </button>
       </form>
-    <div class="ui basic segment">
-      <div class="ui blue ribbon label">
-        Page:
-      </div>
+    
         <div class="pagination-container">
           <nav>
             <ul class="pagination"></ul>
           </nav>
         </div>
-      </div>
 <!-- <br><br> -->
 </div>
 </div>
 </div>
 
 
-<script>
+<!-- <script>
     var table = '#mytable'
     $(function(){
       $('.pagination').html('')
@@ -284,7 +280,7 @@
     //     })
     // })
 
-  </script>
+  </script> -->
 
 
 

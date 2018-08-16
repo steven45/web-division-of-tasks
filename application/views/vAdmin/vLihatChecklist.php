@@ -101,13 +101,19 @@
       </tbody>
       <tfoot>
         <th colspan="9">
-          <button class="ui right floated blue small button" >
-            <i class="save icon"></i>Simpan
-          </button>
         </th>
       </tfoot>
     </table>
-  </form>
+    <button class="ui right floated blue small button" >
+            <i class="save icon"></i>Simpan
+          </button>
+        </form>
+      
+      <div class="pagination-container">
+      <nav>
+        <ul class="pagination"></ul>
+      </nav>
+    </div>
 </div>
 </div>
 </div>

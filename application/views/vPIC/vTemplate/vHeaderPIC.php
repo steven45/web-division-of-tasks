@@ -108,6 +108,49 @@
 
     }
         </script>
+        
+<!-- Pagination -->
+<script>
+    var table = '#mytable'
+    $(function(){
+      $('.pagination').html('')
+        var trnum = 0
+        var maxRows = 50;
+        var totalRows = $(table+' tbody tr').length
+        $(table+' tr:gt(0)').each(function(){
+            trnum++
+            if(trnum > maxRows){
+                $(this).hide()
+            }
+            if(trnum <= maxRows){
+                $(this).show()
+            }
+        })
+
+        if(totalRows > maxRows){
+            var pagenum = Math.ceil(totalRows/maxRows)
+            for(var i=1;i<=pagenum;){
+                $('.pagination').append('<li data-page="'+i+'">\<span>'+ i++ +'<span class="sr-only">(current)</span></span>\</li>').show()
+            }
+        }
+        $('.pagination li:first-child').addClass('active')
+        $('.pagination li').on('click',function(){
+            var pageNum = $(this).attr('data-page')
+            var trIndex = 0;
+            $('.pagination li').removeClass('active')
+            $(this).addClass('active')
+            $(table+' tr:gt(0)').each(function(){
+                trIndex++
+                if(trIndex > (maxRows*pageNum) || trIndex <= ((maxRows*pageNum)-maxRows)){
+                    $(this).hide()
+                } else{
+                    $(this).show()
+                }
+            })
+        })
+    });
+  </script>
+<!-- End of Pagination -->
 
 
       <title>
@@ -115,12 +158,18 @@
       </title>
     </head>
 
+<<<<<<< HEAD
 
 <body style="background-image: url(<?php echo base_url('assets/images/hhh.jpeg'); ?>); background-size: cover; background-attachment: fixed;">
 
 <!-- <body style="background-color: #B0E0E6"> -->
 
+=======
+<body style="background-image: url(<?php echo base_url('assets/images/8.jpg'); ?>); background-size: cover; background-attachment: fixed;">
+>>>>>>> 480dc08c1c8244e70b8e13d040e040363b5c3898
 
+<!-- <body style="background-color: #B0E0E6"> -->
+  <!-- <body style="background-image: url(<?php echo base_url('assets/images/hhh.jpeg'); ?>);"> -->
 <!-- <body style="background-image: url(<?php echo base_url('assets/images/square.png'); ?>);"> -->
 
   <!-- Header -->
@@ -148,8 +197,13 @@
 
         
         <div class="right menu">
+<<<<<<< HEAD
        
           <div class="ui black label" style="margin-top: 3%">
+=======
+
+          <div class="ui black label" style="margin-top: 9.0%">
+>>>>>>> 480dc08c1c8244e70b8e13d040e040363b5c3898
      <!--      <i class="clock outline icon" style="margin-top: 3.5%; color: white;"></i> -->
           <span id="date_time" style="
                                     margin-top: 3.2%;

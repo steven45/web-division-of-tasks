@@ -1,44 +1,3 @@
-<script>
-    var table = '#mytable'
-    $(function(){
-      $('.pagination').html('')
-        var trnum = 0
-        var maxRows = 50;
-        var totalRows = $(table+' tbody tr').length
-        $(table+' tr:gt(0)').each(function(){
-            trnum++
-            if(trnum > maxRows){
-                $(this).hide()
-            }
-            if(trnum <= maxRows){
-                $(this).show()
-            }
-        })
-
-        if(totalRows > maxRows){
-            var pagenum = Math.ceil(totalRows/maxRows)
-            for(var i=1;i<=pagenum;){
-                $('.pagination').append('<li data-page="'+i+'">\<span>'+ i++ +'<span class="sr-only">(current)</span></span>\</li>').show()
-            }
-        }
-        $('.pagination li:first-child').addClass('active')
-        $('.pagination li').on('click',function(){
-            var pageNum = $(this).attr('data-page')
-            var trIndex = 0;
-            $('.pagination li').removeClass('active')
-            $(this).addClass('active')
-            $(table+' tr:gt(0)').each(function(){
-                trIndex++
-                if(trIndex > (maxRows*pageNum) || trIndex <= ((maxRows*pageNum)-maxRows)){
-                    $(this).hide()
-                } else{
-                    $(this).show()
-                }
-            })
-        })
-    });
-  </script>
-
 <div class="ui two column centered grid">
   <div class="column" style="width: auto;">
     <div class="ui segment" style="border-radius: 1.285714rem">
@@ -171,13 +130,15 @@
             <i class="save icon"></i>Simpan
           </button>
         </form>
+      
       <div class="pagination-container">
       <nav>
         <ul class="pagination"></ul>
       </nav>
-    </div>  
+    </div>
     </div>
   </div>
+</div>
 </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>

@@ -23,7 +23,7 @@
 
         <div class="ui divider"></div>
 
-        <table class="ui sortable compact celled definition table" id="example">
+        <table class="ui sortable compact celled definition table" id="mytable">
           <thead class="full-width" style="text-align: center; background-color: #dbedff">
             <tr>
               <th class="sorted ascending">NIK</th>
@@ -58,7 +58,11 @@
           </tfoot>
         </form>
       </table>
-      <br><br>
+      <div class="pagination-container">
+      <nav>
+        <ul class="pagination"></ul>
+      </nav>
+    </div>
     </div>
   </div>
 </div>
