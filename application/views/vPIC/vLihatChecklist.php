@@ -37,7 +37,7 @@
                     </select>
                   </div> -->
 
-                  <table class="ui sortable celled table" id="mytable" style="text-align: center">
+                  <table class="ui celled table" id="mytable" style="text-align: center">
                     <thead>
                       <tr style="text-align: center">
                         <th class="sorted ascending">No</th>
