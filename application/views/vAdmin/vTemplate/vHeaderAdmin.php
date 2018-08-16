@@ -275,7 +275,9 @@
       
         
         <div class="right menu">
+
           <div class="ui black label" style="margin-top: 3.2%">
+
      <!--      <i class="clock outline icon" style="margin-top: 3.5%; color: white;"></i> -->
           <span id="date_time" style="
                                     margin-top: 3.2%;
@@ -288,18 +290,19 @@
       
           
 
-          <!-- <div class="ui pointing dropdown link item">
-            <span class="text">
 
-            Notifications</span>
-            <div class="ui small label" style="background-color: red;"> -->
-              <!-- <?php echo $temp; ?> -->
-            <!-- 2</div>
-            <div class="menu">
-              <div class="header">
+          <!-- <div class="ui pointing dropdown link item"> -->
+            <!-- <span class="text">
+
+            Notifications</span> -->
+            <!-- <div class="ui small label" style="background-color: red;">
+              
+            2</div> -->
+           <!--  <div class="menu"> -->
+              <!-- <div class="header">
                 <i class= "bell icon"></i>
-              Notifications</div>
- -->
+              Notifications</div>-->
+
               <!-- <div class="ui relaxed divided list" style="margin: auto+10px auto+10px; padding-bottom: 10px;">
               <?php foreach ($notifikasi as $notifikasi): ?>
                 <a href="<?php echo site_url('admin/beranda'); ?>">
@@ -319,8 +322,10 @@
               <?php endforeach ?>
             </div> -->
 
-         <!--  </div>
-        </div> -->
+
+          <!-- </div> -->
+        <!-- </div> -->
+
 
         <div class="ui dropdown item">
           <i class="setting icon"></i>
@@ -347,7 +352,7 @@
             </button>
           </div>
         </form> -->
-
+        
         <a href="<?php echo site_url('admin/keluar'); ?>" style="color: white;" onClick="return confirm('Apa anda yakin ingin keluar ?');">
           <div class="item" style="margin-top: 3px ">
             <div class="ui teal button">
