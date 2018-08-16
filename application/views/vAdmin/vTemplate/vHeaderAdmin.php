@@ -202,9 +202,11 @@
 
 </head>
 
-  <body style="background-image: url(<?php echo base_url('assets/images/9.jpg'); ?>); background-size: cover; background-attachment: fixed;">
+ <!--  <body style="background-image: url(<?php echo base_url('assets/images/9.jpg'); ?>); background-size: cover; background-attachment: fixed;"> -->
   
   <!-- Top Menu -->
+
+<body style="background-image: url(<?php echo base_url('assets/images/hhh.jpeg'); ?>); background-size: cover; background-attachment: fixed;">
   <div class="ui top fixed inverted pointing menu">
     <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
       <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
@@ -273,29 +275,31 @@
       
         
         <div class="right menu">
-          <div class="ui black label" style="margin-top: 2.2%">
+          <div class="ui black label" style="margin-top: 3.2%">
      <!--      <i class="clock outline icon" style="margin-top: 3.5%; color: white;"></i> -->
           <span id="date_time" style="
                                     margin-top: 3.2%;
                                     color: white;
                                     font-size: 15px;
-                                    font-family: : Orbitron;
+                                   /* font-family: : Orbitron;*/
                                     letter-spacing: 1px;
           "></span>
           </div>
       
           
 
-          <div class="ui pointing dropdown link item">
+          <!-- <div class="ui pointing dropdown link item">
             <span class="text">
 
             Notifications</span>
-            <div class="ui small label" style="background-color: red;"><!-- <?php echo $temp; ?> -->2</div>
+            <div class="ui small label" style="background-color: red;"> -->
+              <!-- <?php echo $temp; ?> -->
+            <!-- 2</div>
             <div class="menu">
               <div class="header">
                 <i class= "bell icon"></i>
               Notifications</div>
-
+ -->
               <!-- <div class="ui relaxed divided list" style="margin: auto+10px auto+10px; padding-bottom: 10px;">
               <?php foreach ($notifikasi as $notifikasi): ?>
                 <a href="<?php echo site_url('admin/beranda'); ?>">
@@ -315,8 +319,8 @@
               <?php endforeach ?>
             </div> -->
 
-          </div>
-        </div>
+         <!--  </div>
+        </div> -->
 
         <div class="ui dropdown item">
           <i class="setting icon"></i>
