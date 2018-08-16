@@ -6,7 +6,7 @@
 	  		<i class="setting icon"></i>
 			Jadwal Shift PIC</div></h3>
 			<div class="ui divider"></div>
-			<table class="ui compact celled table">
+			<table class="ui compact celled table" id="mytable">
         <thead class="full-width" style="text-align: center; background-color: #dbedff">
           <tr>
             <th class="">Shift</th>

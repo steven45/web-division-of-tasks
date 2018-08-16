@@ -90,41 +90,12 @@
 
         <th colspan="9">
 
-          <!-- <button class="ui right floated blue small button" style="margin-top: 5px;">
-            <i class="save icon"></i>Simpan
-          </button> -->
-          
         </th>
 
       </tr>
     </tfoot>
-  <!-- </form> -->
 </table>
 <br><br>
 </div>
-
-
-
 </div>
 </div>
-
-<!-- <script>
-  jQuery(function() {
-
-    jQuery('.pengganti').hide();
-    var d = document.getElementsByClassName("absensi").length;
-  // console.log(d);
-  for (var i = 0; i < d; i++){
-    console.log(i +" = "+ $('.hadir'+i).val());
-    if($('.hadir'+i).val() == "Tidak Hadir"){
-      jQuery('#select' + $('.hadir'+i).attr('target')).show();
-    }
-
-
-    jQuery('.hadir'+i).change(function() {
-      jQuery('#select' + $(this).attr('target')).toggle();
-    });
-  }
-
-});
-</script> -->

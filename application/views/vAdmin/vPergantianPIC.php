@@ -17,7 +17,7 @@
       </div>
 
       <div class="ui divider"></div>
-        <table class="ui sortable celled table" id="example" style="margin-top: 20px; margin-left: 20px; width: 95%">
+        <table class="ui sortable celled table" id="mytable" style="margin-top: 20px; margin-left: 20px; width: 95%">
           <thead>
             <tr style="text-align: center">
               <th>No</th>
@@ -51,7 +51,12 @@
             </th> 
             </tr>
           </tfoot>
-        </table>
+        </table>      
+      <div class="pagination-container">
+      <nav>
+        <ul class="pagination"></ul>
+      </nav>
+    </div>
     </div>
   </div>
 </div>

@@ -64,7 +64,7 @@
 
 
       <form method="POST" action="<?php echo site_url('admin/gantiabsensi'); ?>">
-      <table class="ui sortable compact celled definition table">
+      <table class="ui sortable compact celled definition table" id="mytable">
         <thead class="full-width" style="text-align: center; background-color: #dbedff">
           <tr>
             <th class="sorted ascending">NIK</th>
@@ -193,15 +193,20 @@
       <tfoot class="full-width">
         <tr>
           <th colspan="9">
-            <button class="ui right floated blue small button" style="margin-top: 5px;">
-              <i class="save icon"></i>Simpan
-            </button>
+            
           </th>
         </tr>
       </tfoot>
-    </form>
   </table>
-  <br><br>
+  <button class="ui right floated blue small button" style="margin-top: 5px;">
+      <i class="save icon"></i>Simpan
+  </button>
+  </form>
+  <div class="pagination-container">
+        <nav>
+          <ul class="pagination"></ul>
+        </nav>
+  </div>
 </div>
 </div>
 </div>

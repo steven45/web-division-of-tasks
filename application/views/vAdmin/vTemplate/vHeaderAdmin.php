@@ -15,14 +15,7 @@
   <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/tablesort.js'); ?>"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/Semantic-UI/data-paging.js'); ?>"></script>
 
-<!--     <script type="text/javascript">
-      $(document).ready(function() {
-        $('#example').DataTable( {
-            "pagingType": "full_numbers"
-          } );
-        } );
-      </script> -->
-
+<!-- Table Sort -->
       <script type="text/javascript">
         $(document).ready(function() 
         { 
@@ -30,7 +23,9 @@
         } 
         ); 
       </script>
+<!-- End of Table Sort -->
 
+<!-- Dropdown -->
       <script type="text/javascript">
         $(document).ready(function() 
         { 
@@ -38,7 +33,9 @@
         } 
         ); 
       </script>
+<!-- End of Dropdown -->
 
+<!-- Sorting Days -->
       <script>
         $(document).ready(function(){
 
@@ -58,11 +55,11 @@
           });
         });
       </script>
+<!-- End of Sorting Days -->
 
-      <script>
-          
-        function date_time(id)
-    {
+<!-- Header Date -->
+      <script>  
+        function date_time(id){
         date = new Date;
         // year = date.getFullYear();
         // month = date.getMonth();
@@ -90,10 +87,52 @@
         setTimeout('date_time("'+id+'");','1000');
         // console.log(result);
         return true;
-
-    }
+        }
         </script>
+<!-- End of Header Date -->
 
+<!-- Pagination -->
+<script>
+    var table = '#mytable'
+    $(function(){
+      $('.pagination').html('')
+        var trnum = 0
+        var maxRows = 50;
+        var totalRows = $(table+' tbody tr').length
+        $(table+' tr:gt(0)').each(function(){
+            trnum++
+            if(trnum > maxRows){
+                $(this).hide()
+            }
+            if(trnum <= maxRows){
+                $(this).show()
+            }
+        })
+
+        if(totalRows > maxRows){
+            var pagenum = Math.ceil(totalRows/maxRows)
+            for(var i=1;i<=pagenum;){
+                $('.pagination').append('<li data-page="'+i+'">\<span>'+ i++ +'<span class="sr-only">(current)</span></span>\</li>').show()
+            }
+        }
+        $('.pagination li:first-child').addClass('active')
+        $('.pagination li').on('click',function(){
+            var pageNum = $(this).attr('data-page')
+            var trIndex = 0;
+            $('.pagination li').removeClass('active')
+            $(this).addClass('active')
+            $(table+' tr:gt(0)').each(function(){
+                trIndex++
+                if(trIndex > (maxRows*pageNum) || trIndex <= ((maxRows*pageNum)-maxRows)){
+                    $(this).hide()
+                } else{
+                    $(this).show()
+                }
+            })
+        })
+    });
+  </script>
+<!-- End of Pagination -->
 
 
 <!--   <script >
@@ -163,9 +202,9 @@
 
 </head>
 
-
-<body style="background-image: url(<?php echo base_url('assets/images/9.jpg'); ?>); background-size: cover; background-attachment: fixed;">
-  <!-- Header -->
+  <body style="background-image: url(<?php echo base_url('assets/images/9.jpg'); ?>); background-size: cover; background-attachment: fixed;">
+  
+  <!-- Top Menu -->
   <div class="ui top fixed inverted pointing menu">
     <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
       <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
