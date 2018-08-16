@@ -164,7 +164,7 @@
 </head>
 
 
-<body style="background-image: url(<?php echo base_url('assets/images/9.jpg'); ?>); background-size: cover; background-attachment: fixed;">
+<body style="background-image: url(<?php echo base_url('assets/images/hhh.jpeg'); ?>); background-size: cover; background-attachment: fixed;">
   <!-- Header -->
   <div class="ui top fixed inverted pointing menu">
     <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
@@ -240,7 +240,7 @@
                                     margin-top: 3.2%;
                                     color: white;
                                     font-size: 15px;
-                                    font-family: : Orbitron;
+                                   /* font-family: : Orbitron;*/
                                     letter-spacing: 1px;
           "></span>
           </div>
