@@ -206,7 +206,7 @@
   
   <!-- Top Menu -->
 
-<body style="background-image: url(<?php echo base_url('assets/images/hhh.jpeg'); ?>); background-size: cover; background-attachment: fixed;">
+<body style="background-image: url(<?php echo base_url('assets/images/ini.jpeg'); ?>); background-size: cover; background-attachment: fixed;">
   <div class="ui top fixed inverted pointing menu">
     <a class="header item" href="<?php echo site_url('admin/beranda'); ?>">
       <img class="ui avatar image" src="<?php echo base_url('assets/images/Artajasa.png'); ?> ">
