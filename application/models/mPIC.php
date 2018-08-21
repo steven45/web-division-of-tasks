@@ -74,7 +74,7 @@ class mPIC extends CI_Model
                 'StatusCheck' => $status
             );
             
-        $query = "UPDATE `checklist` SET `StatusCheck` = $status WHERE `checklist`.`IDChecklist` = $IDChecklist;";
+        $query = "UPDATE `jchecklist` SET `StatusCheck` = $status WHERE `jchecklist`.`IDJadwalChecklist` = $IDChecklist;";
         $this->db->query($query);
     }
 

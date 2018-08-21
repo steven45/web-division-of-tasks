@@ -10,7 +10,7 @@
 		<form class="ui form" method="POST" action="<?php echo site_url('admin/validasitambahpic'); ?>">
 		  <div class="field">
 		    <label>Nomor Induk Karyawan</label>
-		    <input type="text" name="NIK" placeholder="Nomor Induk Karyawan">
+		    <input type="number" name="NIK" placeholder="Nomor Induk Karyawan">
 		  </div>
 		  <div class="field">
 		    <label>Nama PIC</label>
@@ -30,7 +30,7 @@
 		  </div>
 		  <div class="field">
 		    <label>Tahun Masuk PIC</label>
-		    <input type="text" name="TahunMasuk" placeholder="Tahun Masuk PIC">
+		    <input type="number" name="TahunMasuk" placeholder="Tahun Masuk PIC">
 		  </div>
 		  
 	
@@ -41,8 +41,6 @@
 			</button>
 			</div>
 		</form>
-
-
 </div>
 </div>
 </div>

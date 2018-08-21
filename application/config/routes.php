@@ -59,7 +59,7 @@ $route['admin/edittemplateabsensi/(:any)'] = 'cAdmin/editTemplateAbsensi/$1';
 $route['admin/validasitemplateabsensi'] = 'cAdmin/validasiTemplateAbsensi';
 $route['admin/hapustemplateabsensi/(:any)'] = 'cAdmin/hapusTemplateAbsensi/$1';
 $route['admin/ikuttemplate'] = 'cAdmin/ikutTemplate';
-
+$route['admin/export'] = 'cAdmin/export';
 
 
 $route['admin/log'] = 'cAdmin/lihatLog';
@@ -86,3 +86,5 @@ $route['pic/absensi'] = 'cPIC/lihatAbsensi';
 $route['pic/ranking'] = 'cPIC/ranking';
 $route['pic/ubahPassword'] = 'cPIC/ubahPassword';
 $route['pic/validasiubahpassword'] = 'cPIC/validasiUbahPassword';
+
+$route['admin/lihatIP'] = 'cAdmin/lihatIP';

@@ -15,12 +15,41 @@
         <i class="clock icon"></i>
         L O G 
       </h3>
-        <div class="ui right calendar" style="margin-left: 80%; margin-top: -45px">
+        <div class="ui right calendar" style="margin-left: 80%; margin-top: -30px">
           <div class="ui input left icon">
             <i class="calendar icon"></i>
             <input type="date" value="<?php echo date('20y-m-d') ?>" id="kalender">
           </div>
       </div>
+       <h2 class="ui icon" style="margin-left: 97%;  margin-top: -35px;"">
+        <a href="#" id="template" data-tooltip="Download Report Checklist">
+          <i class="download icon"></i>
+        </a>
+        <div class="ui tiny modal">
+            <div class="header">Input Tanggal</div>
+            <div class="content">
+              <p>
+                <form method="POST" action="<?php echo site_url('admin/export'); ?>">
+                  <div class="ui center aligned basic segment">
+
+                    <div class="ui input left icon">
+                      <i class="calendar icon"></i>
+                      <input type="date" value="<?php echo date('Y-m-d', strtotime(date('Y-m-d') )); ?>" name="date0" id="date0">
+                    </div>
+                    Sampai:
+                    <div class="ui input left icon">
+                      <i class="calendar icon"></i>
+                      <input type="date" value="<?php echo date('Y-m-d', strtotime(date('Y-m-d'))); ?>" name="date1" id="date1">
+                    </div>
+                    <br>
+                    <br>
+                    <button class="ui blue button">Download</button>
+                  </div>
+                </form>
+              </p>
+
+            </div>
+      </h2>
       </div>
   
       <div class="ui divider"></div>
@@ -37,6 +66,7 @@
             <th>Instruksi Pengerjaan</th>
             <th>Status</th>
             <th>Keterangan</th>
+            <th>Bukti</th>
             </tr>
           </thead>
           <tbody id="hasilLog" style="text-align: center;">
@@ -93,12 +123,23 @@
                         </div>
                       </div>
                   </td>
+                  <td>
+                    <a href="#" data-featherlight="<?php echo '#lihatBukti'.$temp ?>">Lihat</a>
+                      <div style="display:none;">
+                        <div id="<?php echo 'lihatBukti'.$temp ?>">
+                          <h3>Bukti Pengecekan</h3>
+                          <div class="ui segment" >
+                            <img  height ="400" src="<?php echo site_url($log['Bukti']) ?>" alt="Bukti Pengecekan">
+                          </div>
+                        </div>
+                      </div>
+                  </td>
                 </tr>
             <?php endforeach ?>
           </tbody>
           <tfoot>
             <tr> 
-            <th colspan="9">
+            <th colspan="10">
             </th> 
             </tr>
           </tfoot>
@@ -124,4 +165,12 @@
       $(this).toggle($(this).text().toLowerCase().indexOf(kalender) > -1);
     });
   }); 
+</script>
+
+<script>
+  $(document).ready(function(){
+    $("#template").click(function(){
+      $('.tiny.modal').modal('show');
+    });
+  });
 </script>

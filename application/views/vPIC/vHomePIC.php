@@ -45,7 +45,7 @@
 				<form class="login100-form validate-form" method="POST" action="<?php echo site_url('pic/validation'); ?>">
 					<div class="wrap-input100 validate-input m-b-26" data-validate="NIK is required">
 						<span class="label-input100">NIK</span>
-						<input class="input100" type="text" name="NIK" placeholder="Enter username">
+						<input class="input100" type="number" name="NIK" placeholder="Enter username">
 						<span class="focus-input100"></span>
 					</div>
 

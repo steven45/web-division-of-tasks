@@ -16,7 +16,7 @@
             <div class="ui calendar" style="margin-left: 81%; margin-top: -45px">
               <div class="ui input left icon">
                 <i class="calendar icon"></i>
-                <input type="date" value="<?php echo $tanggal; ?>" name="tanggal">
+                <input type="date" value="<?php echo $tanggal; ?>" name="tanggal" id="tanggal">
                 <button class="ui right floated tiny basic icon button" data-tooltip="Cari Jadwal Checklist" data-inverted="" data-position="top right" >
                   <i class="search icon"></i>
                 </button>
@@ -70,7 +70,7 @@
                             <td><?php echo $no ; $no = $no+1;?></td>
                             <td class="hari"><?php echo $checklist['Tanggal']; ?></td>
                             <input type="hidden"  class="statusCheck" value="<?php echo $checklist['StatusCheck'] ?>" id="<?php echo "sttsCheck".$temp ?>">
-                            <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
+                            <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDJadwalChecklist'] ?>">
                             <input class="info" type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
                             <td class="time"><?php echo $checklist['Jam']; ?></td>
                             <td class="batasP"><?php echo $checklist['BatasPengecekan'] ?> Menit</td>
@@ -109,13 +109,14 @@
 
                         <?php if ($checklist['StatusCheck'] == '0') {?>
                         <td class="docheck" target="<?php echo $temp; ?>" id="<?php echo $temp; ?>">
-                          <a href="#" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
+                          <a href="#" class="tombolCheck" data-featherlight="<?php echo '#tampilKet'.$temp ?>">Check</a>
                           <div style="display:none;">
                             <div id="<?php echo 'tampilKet'.$temp ?>">
 
                               <form method="POST" class="form-check" id="<?php echo 'form'.$temp ?>" enctype="multipart/form-data">  
                                 <input type="hidden" name="NIK" id="<?php echo 'NIK'.$temp ?>" value="<?php echo $_SESSION['nik'] ?>">
-                                <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDChecklist'] ?>">
+                                <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDJadwalChecklist'] ?>">
+                                <input type="hidden" name="IDC" value="<?php echo $checklist['IDChecklist'] ?>">
                                 <input type="hidden" name="NamaPIC" value="<?php echo $checklist['NamaPIC'] ?>">
                                 <input type="hidden" name="NamaChecklist" value="<?php echo $checklist['NamaChecklist'] ?>">
                                 <input type="hidden" name="NamaPICSebenarnya" value="<?php echo $_SESSION['NamaPIC'] ?>">
@@ -132,7 +133,7 @@
                                 <h3>Bukti Pengecekan (Screenshot)</h3>
                                 <div class="ui form">
                                   <div class="field">
-                                    <input type="file" name="buktiCek" id="<?php echo 'buktiCek'?>" accept="image/*"><p><?php echo $temp ?></p>
+                                    <input type="file" name="buktiCek" id="<?php echo 'buktiCek'?>" accept="image/*">
                                   </div>
                                 </div>
                                 <h3>Keterangan</h3>
@@ -142,7 +143,7 @@
                                  </div>
                                </div>
                                <br>
-                               <a class="tSimpan ui right floated blue small button" target="<?php echo $temp; ?>"><i class="save icon"  ></i>Simpan</a>
+                               <button class="tSimpan ui right floated blue small button" target="<?php echo $temp; ?>"><i class="save icon"  ></i>Simpan</button>
                              </form>
                            </div>
                          </div>
@@ -172,234 +173,181 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
     <script> 
-
-      formdata = new FormData();
-      $('#buktiCek').change(function(){ 
-        if($(this).prop('files').length > 0){
-           file =$(this).prop('files')[0];
-           formdata.append("buktiCek", file);
-           console.log(file);
+      $(document).ready(function(e){
+        var row = document.querySelectorAll("table#mytable>tbody#hasil>tr");
+        for (var i = 0; i < row.length; i++) {
+          $("#form"+i).on('submit', function(e){
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo site_url('pic/docheck'); ?>',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
+                beforeSend: function(){
+                    $('.tSimpan').attr("disabled","disabled");
+                    $('#form').css("opacity",".5");
+                },
+                success: function(msg){
+                    $('#fupForm').css("opacity","");
+                    $(".tSimpan").removeAttr("disabled");
+                    var current = $.featherlight.current();
+                    current.close();
+                    alert(msg);
+                }
+            });
+          });
         }
-      })
-      $(".tSimpan").click(function(){
-        $.ajax({
-         url: '<?php echo site_url('pic/uploadBukti'); ?>',
-         type: "POST",
-         data: formdata,
-         processData: false,
-         contentType: false,
-         success: function (result) {
-           alert(result);
-         }
-        });
-
-        var data = $('.form-check').serialize();
-
-        $.ajax({
-          type: 'POST',
-          url        : "<?php echo site_url('pic/docheck'); ?>",
-          data       : data,
-          success    : function(hasil) {
-            // jQuery('#hasilQ' + $('.tSimpan').attr('target')).css("background-color","#AFEEEE");
-            // jQuery('#sttsCheck' + $('.tSimpan').attr('target')).val("1");
-            // jQuery('#' + $('.tSimpan').attr('target')).text("Disabled");
-            // alert("Checklist sukses");
-            // var current = $.featherlight.current();
-            // current.close();
-            alert(hasil);
-          }
-        });
       });
     </script>
 
-    <!-- <script type="text/javascript">
-      $(".tSimpan").click(function(){
-        var data = $('.form-check').serialize();
-
-        $.ajax({
-          type: 'POST',
-          url        : "<?php echo site_url('pic/docheck'); ?>",
-          data       : data,
-          success    : function(hasil) {
-            // jQuery('#hasilQ' + $('.tSimpan').attr('target')).css("background-color","#AFEEEE");
-            // jQuery('#sttsCheck' + $('.tSimpan').attr('target')).val("1");
-            // jQuery('#' + $('.tSimpan').attr('target')).text("Disabled");
-            // alert("Checklist sukses");
-            // var current = $.featherlight.current();
-            // current.close();
-            alert(hasil);
-          }
-        });
-      });
-    </script> -->
     <script type="text/javascript">
-      var interval = setInterval(myTimer,1000);
+      var d = document.getElementById("tanggal").value;
+      var nowDay = moment().format('dddd');
+      var nowDate = moment().format('YYYY-MM-DD');
 
-      function myTimer(){
-
-        $.getJSON("<?php echo site_url('pic/jChecklist') ?>", function(result){
-          $.each(result, function(i, field){
-            document.getElementsByClassName("statusCheck")[i].value = field['StatusCheck'];
+      if (d == nowDate){
+        var interval = setInterval(myTimer,1000);
+        function myTimer(){
+          $.getJSON("<?php echo site_url('pic/jChecklist') ?>", function(result){
+            $.each(result, function(i, field){
+              document.getElementsByClassName("statusCheck")[i].value = field['StatusCheck'];
+            });
           });
-        });
 
-        var d = new moment.locale();
-        console.log(d);
-        var nowTime = moment();
-        var nowDay = moment().format('dddd');
-        var checkTime = moment('13:00', 'hh:mm');
-        var duration = moment.duration(checkTime.diff(nowTime));
+          var d = new moment.locale();
+          var nowTime = moment();
+          var nowDay = moment().format('dddd');
+          var checkTime = moment('13:00', 'hh:mm');
+          var duration = moment.duration(checkTime.diff(nowTime));
 
-        // console.log('now time', nowTime);
-        // console.log('now day', nowDay);
-        // console.log('check time', checkTime);
-        // console.log('duration in hours', duration.asHours());
-        // console.log('duration in minutes', duration.asMinutes());
-        // console.log(moment().format());
+          // console.log('now time', nowTime);
+          // console.log('now day', nowDay);
+          // console.log('check time', checkTime);
+          // console.log('duration in hours', duration.asHours());
+          // console.log('duration in minutes', duration.asMinutes());
+          // console.log(moment().format());
 
-        var row = document.querySelectorAll("table#mytable>tbody#hasil>tr");
-        var time = [];
-        var namaChecklist = [];
-        var idChecklist = [];
-        var namaPIC = [];
-        var info = [];
-        var selisih = [];
-        var batasP = [];
-        var statusCheck = [];
-        var hari = [];
+          var row = document.querySelectorAll("table#mytable>tbody#hasil>tr");
+          var time = [];
+          var namaChecklist = [];
+          var idChecklist = [];
+          var namaPIC = [];
+          var info = [];
+          var selisih = [];
+          var batasP = [];
+          var statusCheck = [];
+          var hari = [];
 
+          var x = document.getElementsByClassName("time");
+          for(var j = 0; j < x.length; j++){
+            time[j] =  document.getElementsByClassName("time")[j].innerHTML;
+            namaChecklist[j] =  document.getElementsByClassName("namaChecklist")[j].innerHTML;
+            hari[j] =  document.getElementsByClassName("hari")[j].innerHTML;
+            statusCheck[j] = document.getElementsByClassName("statusCheck")[j].value;
+            idChecklist[j] = document.getElementsByClassName("idChecklist")[j].value;
+            namaPIC[j] =  document.getElementsByClassName("namaPIC")[j].innerHTML;
+            info[j] = document.getElementsByClassName("info")[j].value;
+            batasP[j] = parseInt(document.getElementsByClassName("batasP")[j].innerHTML.substring(0,2));
+            selisih[j] =  moment.duration(moment(time[j], 'hh:mm').diff(nowTime)).asMinutes();
+          }
 
-        if (nowDay == 'Sunday') {
-          var hariSekarang = "Minggu";
-        }
-        else if(nowDay == 'Monday'){
-          var hariSekarang = "Senin";
-        }
-        else if(nowDay == 'Tuesday'){
-          var hariSekarang = "Selasa";
-        }
-        else if(nowDay == 'Wednesday'){
-          var hariSekarang = "Rabu";
-        }
-        else if(nowDay == 'Thursday'){
-          var hariSekarang = "Kamis";
-        }
-        else if(nowDay == 'Friday'){
-          var hariSekarang = "Jumat";
-        }
-        else if(nowDay == 'Saturday'){
-          var hariSekarang = "Sabtu";
-        }
+          // console.log(row);
+          // console.log(time);
+          // console.log(selisih);
+          // console.log(batasP);
+          // console.log(hari);
+          var f = [];
+          var cJumlah = 0;
 
-        var x = document.getElementsByClassName("time");
-        for(var j = 0; j < x.length; j++){
-          time[j] =  document.getElementsByClassName("time")[j].innerHTML;
-          namaChecklist[j] =  document.getElementsByClassName("namaChecklist")[j].innerHTML;
-          hari[j] =  document.getElementsByClassName("hari")[j].innerHTML;
-          statusCheck[j] = document.getElementsByClassName("statusCheck")[j].value;
-          idChecklist[j] = document.getElementsByClassName("idChecklist")[j].value;
-          namaPIC[j] =  document.getElementsByClassName("namaPIC")[j].innerHTML;
-          info[j] = document.getElementsByClassName("info")[j].value;
-          batasP[j] = parseInt(document.getElementsByClassName("batasP")[j].innerHTML.substring(0,2));
-          selisih[j] =  moment.duration(moment(time[j], 'hh:mm').diff(nowTime)).asMinutes();
-        }
+/*
+Rule pewarnaan pada baris checklist :
+1. Membuat perulangan pada setiap baris checklist
+2. Jika hari adalah hari sekarang dan status check 0 (belum dicek)
+  2A. Jika selisih dari antara jam pada baris dan jam sekarang > 0 dan masih dibawah batas pengecekan buat kedip-kedip warna baris hijau
+  2B. Jika selisih dari antara jam pada baris dan jam sekarang sudah melebihi batas pengcekan maka buat kedip-kedip warna kuning
+  2C. Melakukan perulangan untuk mengecek apakah checklist pada baris tersebut sudah melampaui checklist berikutnya atau belum
+    2CA. Mengecek baris J dengan kondisi :
+         - Baris J apakah nama checklistnya sama atau tidak dengan baris K  
+         - Pada baris K selisihnya antara jam sekarang dengan jam pada baris tersebut apakah > 0 
+         - Warna background nya bukan merah
+         Jika kondisi terpenuhi maka buat warna baris J menjadi merah
+         2CAA. Jika warna baris K adalah merah maka buat status check menjadi 2 dan simpan di database
+3. Jika hari adalah hari sekarang dan status adalah check 2 (tidak dicek) maka tidak bisa mengecek lagi
+4. Jika hari adalah hari sekarang dan status adalah check 1 (sudah dicek) maka tidak bisa mengecek lagi
+5. Jika hari tidak hari sekarang maka tidak bisa dicek
+*/
+        for (var j = 0; j < row.length; j++) { // 1
+          f[j] = document.getElementsByClassName('hasilku')[j];
 
-  // console.log(row);
-  // console.log(time);
-  // console.log(selisih);
-  // console.log(batasP);
-  // console.log(hari);
-  var f = [];
-  var cJumlah = 0;
-
-
-  // for (var i = 0; i < row.length; i++) {
-  //   if (hari[i] == hariSekarang) {
-  //     jHariS = i+1;
-  //   }
-  // }
-  // console.log(jHariS);
-
-  /*
-  Rule pewarnaan pada baris checklist :
-  1. Membuat perulangan pada setiap baris checklist
-  2. Jika hari adalah hari sekarang dan status check 0 (belum dicek)
-    2A. Jika selisih dari antara jam pada baris dan jam sekarang > 0 dan masih dibawah batas pengecekan buat kedip-kedip warna baris hijau
-    2B. Jika selisih dari antara jam pada baris dan jam sekarang sudah melebihi batas pengcekan maka buat kedip-kedip warna kuning
-    2C. Melakukan perulangan untuk mengecek apakah checklist pada baris tersebut sudah melampaui checklist berikutnya atau belum
-      2CA. Mengecek baris J dengan kondisi :
-           - Baris J apakah nama checklistnya sama atau tidak dengan baris K  
-           - Pada baris K selisihnya antara jam sekarang dengan jam pada baris tersebut apakah > 0 
-           - Warna background nya bukan merah
-           Jika kondisi terpenuhi maka buat warna baris J menjadi merah
-           2CAA. Jika warna baris K adalah merah maka buat status check menjadi 2 dan simpan di database
-  3. Jika hari adalah hari sekarang dan status adalah check 2 (tidak dicek) maka tidak bisa mengecek lagi
-  4. Jika hari adalah hari sekarang dan status adalah check 1 (sudah dicek) maka tidak bisa mengecek lagi
-  5. Jika hari tidak hari sekarang maka tidak bisa dicek
-  */
-  for (var j = 0; j < row.length; j++) { // 1
-    f[j] = document.getElementsByClassName('hasilku')[j];
-
-    if (hari[j] == hariSekarang && (selisih[j]*(-1)) < 0) {
-      document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
-    }
-    
-    if (hari[j] == hariSekarang && statusCheck[j] == "0") { // 2
-      console.log(j);
-      console.log("Status cek nya : " +statusCheck[j]);
-      
-      if((selisih[j]*(-1)) > 0 && (selisih[j]*(-1)) < batasP[j] ){ // 2A
-        f[j].style.backgroundColor = (f[j].style.backgroundColor == 'mediumseagreen' ? '' : 'mediumseagreen');
-        console.log(f[j].style.backgroundColor);
-      }
-
-      else if ((selisih[j]*(-1)) > batasP[j]) { // 2B
-        f[j].style.backgroundColor = (f[j].style.backgroundColor == 'gold' ? '' : 'gold');
-        console.log(f[j].style.backgroundColor);
-      }
-
-      for (var k = j+1; k < jHariS; k++) { //2C
-        if (namaChecklist[j] == namaChecklist[k] && (selisih[k]*-1)>0 &&f[j].style.backgroundColor != 'tomato') { //2CA
-          // console.log(time[k] +" = "+ (selisih[k]*-1));
-          console.log("Awalanya colornya : " +f[j].style.backgroundColor)
-          f[j].style.backgroundColor = 'tomato';
-          console.log(hari[j]+" :: "+time[j]+" - "+ namaChecklist[j]+" == "+hari[k]+" :: "+time[k]+" - "+ namaChecklist[k]+" MAKA UBAH JADI "+ f[j].style.backgroundColor);
-
-          if (f[j].style.backgroundColor == 'tomato') { //2CAA
-            console.log("Kalau warnanya tomato maka kirim ke tabel log dan status check ganti 2");
-            document.getElementsByClassName("statusCheck")[j].value = "2";
-            document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
-            console.log("Status Check akhir : " + document.getElementsByClassName("statusCheck")[j].value);
-
-            $.post("<?php echo site_url('pic/nocheck'); ?>",
-            {
-              statusCheck : statusCheck[j],
-              IDChecklist: idChecklist[j],
-              NamaChecklist: namaChecklist[j],
-              NamaPIC : namaPIC[j],
-              Jam : time[j],
-              Info : info[j],
-              Hari : hari[j],
+          if ( (selisih[j]*(-1)) < 0) {
+            document.getElementsByClassName("docheck")[j].innerHTML = 'Disabled';
+            // $('.docheck').attr("disabled","disabled");
+          }
+          
+          if (statusCheck[j] == "0") { // 2
+            // console.log(j);
+            // console.log("Status cek nya : " +statusCheck[j]);
+            
+            if((selisih[j]*(-1)) > 0 && (selisih[j]*(-1)) < batasP[j] ){ // 2A
+              f[j].style.backgroundColor = (f[j].style.backgroundColor == 'mediumseagreen' ? '' : 'mediumseagreen');
+              // console.log(f[j].style.backgroundColor);
             }
-            );
+
+            else if ((selisih[j]*(-1)) > batasP[j]) { // 2B
+              f[j].style.backgroundColor = (f[j].style.backgroundColor == 'gold' ? '' : 'gold');
+              // console.log(f[j].style.backgroundColor);
+            }
+
+            for (var k = j+1; k < row.length; k++) { //2C
+              if (namaChecklist[j] == namaChecklist[k] && (selisih[k]*-1)>0 &&f[j].style.backgroundColor != 'tomato') { //2CA
+                console.log(time[k] +" = "+ (selisih[k]*-1));
+                console.log("Awalanya colornya : " +f[j].style.backgroundColor)
+                f[j].style.backgroundColor = 'tomato';
+                console.log(hari[j]+" :: "+time[j]+" - "+ namaChecklist[j]+" == "+hari[k]+" :: "+time[k]+" - "+ namaChecklist[k]+" MAKA UBAH JADI "+ f[j].style.backgroundColor);
+
+                if (f[j].style.backgroundColor == 'tomato') { //2CAA
+                  console.log("Kalau warnanya tomato maka kirim ke tabel log dan status check ganti 2");
+                  document.getElementsByClassName("statusCheck")[j].value = "2";
+                  document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
+                  console.log("Status Check akhir : " + document.getElementsByClassName("statusCheck")[j].value);
+
+                  // console.log('BAWAH INI');
+                  // console.log(statusCheck[j]);
+                  // console.log(idChecklist[j]);
+                  // console.log(namaChecklist[j]);
+                  console.log(namaPIC[j]);
+                  // console.log(time[j]);
+                  // console.log(info[j]);
+                  // console.log(hari[j]);
+                  $.post("<?php echo site_url('pic/nocheck'); ?>",
+                  {
+                    statusCheck : statusCheck[j],
+                    IDChecklist: idChecklist[j],
+                    NamaChecklist: namaChecklist[j],
+                    NamaPIC : namaPIC[j],
+                    Jam : time[j],
+                    Info : info[j],
+                    Hari : hari[j],
+                  }
+                  );
+                }
+              }
+            }
+          } 
+          else if(statusCheck[j] == "2"){ // 3
+            document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
+          }
+          else if(statusCheck[j] == "1"){ // 4
+            document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
+            f[j].style.backgroundColor = '#AFEEEE';
           }
         }
+        }//Akhir Method myTimer
       }
-    } 
-    else if(hari[j] == hariSekarang && statusCheck[j] == "2"){ // 3
-      document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
-    }
-    else if(hari[j] == hariSekarang && statusCheck[j] == "1"){ // 4
-      document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
-      f[j].style.backgroundColor = '#AFEEEE';
-    }
-    else if(hari[j] != hariSekarang){ // 5
-      document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
-    }
-  }
-  }//Akhir Method myTimer
 
-</script> 
+  </script> 
 
 
   <!-- <script>

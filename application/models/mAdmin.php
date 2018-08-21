@@ -136,9 +136,9 @@ class mAdmin extends CI_Model
     public function getChecklistWhere()
     {
         $query[0] = $this->db->query("SELECT `IDChecklist`,`Jam` FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = 07 OR `Jam` = 08 OR `Jam` = 09 OR `Jam` = 10 OR `Jam` = 11 OR `Jam` = 12 OR `Jam` = 13)")->result_array();
-        $query[1] = $this->db->query("SELECT `IDChecklist`,`Jam` FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = 00 OR `Jam` = 15 OR `Jam` = 16 )")->result_array();
+        $query[1] = $this->db->query("SELECT `IDChecklist`,`Jam` FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = 14 OR `Jam` = 15 OR `Jam` = 16 )")->result_array();
         $query[2] = $this->db->query("SELECT `IDChecklist`,`Jam` FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = 17 OR `Jam` = 18 OR `Jam` = 19 OR `Jam` = 20 OR `Jam` = 21)")->result_array();
-        $query[3] = $this->db->query("SELECT `IDChecklist`,`Jam`  FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = 22 OR `Jam` = 23 OR`Jam` = '00:00' OR `Jam` = 01 OR `Jam` = 02 OR `Jam` = 03 OR `Jam` = 04 OR `Jam` = 05 OR `Jam` = 06)")->result_array();
+        $query[3] = $this->db->query("SELECT `IDChecklist`,`Jam`  FROM checklist WHERE `Status` = 'Enabled' AND (`Jam` = 22 OR `Jam` = 23 OR `Jam` = 00 OR `Jam` = 01 OR `Jam` = 02 OR `Jam` = 03 OR `Jam` = 04 OR `Jam` = 05 OR `Jam` = 06)")->result_array();
         return $query;
     }
 
@@ -311,9 +311,22 @@ class mAdmin extends CI_Model
         }
     }
 
+    public function getLogFromDate($tanggal)
+    {
+       $query = $this->db->where_in('Hari',$tanggal);
+       $query = $this->db->from('log');
+       $query = $this->db->get()->result_array();
+       return $query;
+    }
+
     public function penggantiPIC($table, $data)
     {
         $this->db->insert($table,$data);
+    }
+
+    public function cekPenggantiPIC($table, $data)
+    {
+        return $this->db->get_where($table,$data)->row_array();
     }
 
     public function getPenggantiPIC()
@@ -450,5 +463,10 @@ class mAdmin extends CI_Model
     {
         $query = "SELECT `StatusCheck` FROM `$table` WHERE `Tanggal` = '$haritanggal'";
         return $this->db->query($query)->result_array();
+    }
+
+    public function tambahALog($table, $data)
+    {
+        $this->db->insert($table,$data); 
     }
 }

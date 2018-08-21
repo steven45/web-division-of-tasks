@@ -72,13 +72,13 @@
             Dari :   
             <div class="ui input left icon">
                 <i class="calendar icon"></i>
-                <input type="date" value="<?php echo date('20y-m-d'); ?>" name="date0">
+                <input type="date" value="<?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 day')); ?>" name="date0" id="date0">
             </div>
 
             Sampai :
             <div class="ui input left icon">
                 <i class="calendar icon"></i>
-                <input type="date" value="<?php echo date('20y-m-d'); ?>" name="date1">
+                <input type="date" value="<?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 day')); ?>" name="date1" id="date1">
             </div>
             <br><br>
             <button class="ui green button" data-tooltip="Klik untuk Menjadwalkan" data-inverted="" >Jadwalkan Sekarang! </button>
@@ -115,6 +115,40 @@
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#date0").change(function(){
+            var oneDay = 24*60*60*1000;
+            var tanggal = new Date($(this).val());
+            var nowDay = new Date();
+            var tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            // console.log(tomorrow.toISOString().split('T')[0]);
+            var diffDays = Math.round(Math.round((tanggal.getTime() - nowDay.getTime()) / (oneDay)));
+            if (diffDays < 0) {
+                $(this).val(tomorrow.toISOString().split('T')[0]);
+            }
+        })
+    })
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#date1").change(function(){
+            var oneDay = 24*60*60*1000;
+            var tanggal = new Date($(this).val());
+            var nowDay = new Date();
+            var tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            console.log(tomorrow.toISOString().split('T')[0]);
+            var diffDays = Math.round(Math.round((tanggal.getTime() - nowDay.getTime()) / (oneDay)));
+            if (diffDays < 0) {
+                $(this).val(tomorrow.toISOString().split('T')[0]);
+            }
+        })
+    })
+</script> 
+
 
 
 
