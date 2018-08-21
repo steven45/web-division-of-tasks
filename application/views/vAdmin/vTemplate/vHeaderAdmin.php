@@ -88,7 +88,7 @@
         result = ''+days[day]+', '+h+':'+m+':'+s;
         document.getElementById(id).innerHTML = result;
         setTimeout('date_time("'+id+'");','1000');
-        console.log(result);
+        // console.log(result);
         return true;
 
     }

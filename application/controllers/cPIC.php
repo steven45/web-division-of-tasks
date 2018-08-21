@@ -100,81 +100,6 @@ class cPIC extends CI_Controller {
 			}
 		}
 
-		// // var_dump($data['checklist']);
-		// $data['status'] = $status;
-		// if ($data['status'] == NULL) {
-		// 	$data['status'] = 'Enabled';
-		// }
-
-		// $date = date("N");
-		// switch ($date) {
-		// 	case '1':
-		// 	$hari = 'Senin';
-		// 	break;
-		// 	case '2':
-		// 	$hari = 'Selasa';
-		// 	break;
-		// 	case '3':
-		// 	$hari = 'Rabu';
-		// 	break;
-		// 	case '4':
-		// 	$hari = 'Kamis';
-		// 	break;
-		// 	case '5':
-		// 	$hari = 'Jumat';
-		// 	break;
-		// 	break;
-		// 	case '6':
-		// 	$hari = 'Sabtu';
-		// 	break;
-		// 	break;
-		// 	case '7':
-		// 	$hari = 'Minggu';
-		// 	break;
-		// 	break;
-		// }
-		// $data['hari'] = $hari;
-
-		// // Menyimpan Nomor Per Hari
-		// foreach ($data['checklist'] as $checklist) {
-		// 	$nJumlah[$checklist['Hari']] = 0;
-		// }
-		// $key = array_keys($nJumlah);
-		// $no = 0;
-		// foreach ($data['checklist'] as $checklist ) {
-			
-		// 	//Menyimpan PIC Pengganti jika ada
-		// 	if ($checklist['NIKP'] == '0') {
-		// 		$picPengganti[$no]['NIKP'] = '0';
-		// 		$picPengganti[$no]['NamaP'] = '0';	
-		// 	}
-		// 	else{
-		// 		$picP = $this->mPIC->getDaftarPIC($checklist['NIKP']);
-		// 		// var_dump($picP)
-		// 		$picPengganti[$no]['NIKP'] = $checklist['NIKP'];
-		// 		$picPengganti[$no]['NamaP'] = $picP['NamaPIC'];	
-		// 	}
-		// 	$no = $no+1; //Akhir Menyimpan pengganti
-
-		// 	for ($i=0; $i < count($key); $i++) { 
-		// 		if ($checklist['Hari'] == $key[$i]) {
-		// 			$nJumlah[$checklist['Hari']] = $nJumlah[$checklist['Hari']] +1;
-		// 		}
-		// 	}	
-		// }
-
-		// $temp = 0;
-		// foreach ($nJumlah as $jumlah) {
-		// 	for ($i=1; $i <= $jumlah; $i++) { 
-		// 		$nomor[$temp] = $i;
-		// 		$temp = $temp +1;
-		// 	}
-		// }
-
-		// $data['nomor'] = $nomor;
-		// $data['picPengganti'] = $picPengganti;
-		// $data['nomor'] = $nJumlah;
-
 		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
 		$this->load->view('vPIC/vLihatChecklist');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
@@ -182,46 +107,87 @@ class cPIC extends CI_Controller {
 
 	public function jChecklist()
 	{
-		$data = $this->mPIC->getChecklist();
+		$tanggal = date('20y-m-d');
+
+		$daftar_hari = array(
+			'Sunday'    => 'Minggu',
+			'Monday'    => 'Senin',
+			'Tuesday'   => 'Selasa',
+			'Wednesday' => 'Rabu',
+			'Thursday'  => 'Kamis',
+			'Friday'    => 'Jumat',
+			'Saturday'  => 'Sabtu'
+		);
+		$namahari = date('l', strtotime($tanggal));
+
+		$data['tanggal'] = $tanggal;
+		$tanggal = $daftar_hari[$namahari].', '.$tanggal;
+		$data = $this->mPIC->getChecklist($tanggal);
 		header("Content-type:application/json");
 		echo json_encode($data);
 	}
 
-	//Belum Selesai
-	public function uploadBukti()
-	{
-
-		date_default_timezone_set('Asia/Jakarta');
-		$target_dir = "assets/Bukti/";
-		$target_file = $target_dir .date('YmdHis').'_'. basename($_FILES["buktiCek"]["name"]);
-		$name = basename($_FILES["buktiCek"]["name"]);
-		$tmp_name = basename($_FILES["buktiCek"]["tmp_name"]);
-		echo $tmp_name;
-		// move_uploaded_file($_FILES["buktiCek"]["tmp_name"], $target_file);
-	}
-
-	//Belum Selesai
 	public function doChecklist()
 	{
 		// // header("Content-type:application/json");
 		// // $data['log']= $this->mAdmin->getLog();
 		// // echo json_encode($data);
 
-		// date_default_timezone_set('Asia/Jakarta');
+		date_default_timezone_set('Asia/Jakarta');
 
 		$NIK               = $this->input->post('NIK');
-		// $IDChecklist       = $this->input->post('IDChecklist');
-		// $namaPIC           = $this->input->post('NamaPIC');
-		// $namaChecklist     = $this->input->post('NamaChecklist');
-		// $namaPICSebenarnya = $this->input->post('NamaPICSebenarnya');
-		// $jam               = $this->input->post('Jam');
-		// $info              = $this->input->post('Info');
-		// $status            = $this->input->post('Status');
-		// $keterangan        = $this->input->post('Keterangan');
-		// $hari              = $this->input->post('Hari');
+		$IDChecklist       = $this->input->post('IDChecklist');
+		$IDC               = $this->input->post('IDC');
+		$namaPIC           = $this->input->post('NamaPIC');
+		$namaChecklist     = $this->input->post('NamaChecklist');
+		$namaPICSebenarnya = $this->input->post('NamaPICSebenarnya');
+		$jam               = $this->input->post('Jam');
+		$info              = $this->input->post('Info');
+		$status            = $this->input->post('Status');
+		$keterangan        = $this->input->post('Keterangan');
+		$hari              = $this->input->post('Hari');
 
+		if (!empty($_FILES['buktiCek']['name'])) {
+			$target_dir = "assets/Bukti/";
+			$target_file = $target_dir .date('YmdHis').'_'. basename($_FILES["buktiCek"]["name"]);
+			move_uploaded_file($_FILES["buktiCek"]["tmp_name"], $target_file);
+		}
+		else{
+			$target_file = "-";
+		}
+
+		$lihat = array(
+				'IDJadwalChecklist' => $IDChecklist
+			);
+
+		$lihatData = $this->mPIC->lihatDataLog('log', $lihat);
+
+		if ($lihatData == NULL) {
+			$data = array(
+				'NamaPIC' => $namaPIC,
+				'NamaChecklist' => $namaChecklist,
+				'IDJadwalChecklist' => $IDChecklist,
+				'PICCek' => $namaPICSebenarnya,
+				'Jam' => $jam,
+				'Info' => $info,
+				'Status' => $status,
+				'Keterangan' => $keterangan,
+				'Hari' => $hari,
+				'Bukti' => $target_file
+			);
+			$hasil = $this->mPIC->doChecklist('log', $data);
+
+			//mengubah status checklist menjadi 1 supaya tidak bisa mengecek ulang
+			$this->mPIC->ubahStatusCheck($IDChecklist, "1");
+
+			//Menambahkan jumlah pengecekan pada PIC
+			$this->mPIC->tambahJumlah($NIK, $IDC);
+			echo "Checklist ".$namaChecklist." Sukses Dicek.";
+		}
+		else{
+			echo "Checklist ".$namaChecklist." Gagal Dicek.";
+		}
 		// $name = basename($_FILES["buktiCek"]["name"]);
-		echo $NIK;
 		// $lihat = array(
 		// 	'Hari' => $hari,
 		// 	'Jam' => $jam,
@@ -313,9 +279,6 @@ class cPIC extends CI_Controller {
 
 	public function noChecklist()
 	{
-		// // header("Content-type:application/json");
-		// // $data['log']= $this->mAdmin->getLog();
-		// // echo json_encode($data);
 		$statusCheck = $this->input->post('statusCheck');
 		if ($statusCheck != '2') {
 			date_default_timezone_set('Asia/Jakarta');
@@ -323,6 +286,7 @@ class cPIC extends CI_Controller {
 			$NIK = "-";
 			$IDChecklist = $this->input->post('IDChecklist');
 			$namaPIC = $this->input->post('NamaPIC');
+			$namaPIC = str_replace("  ", "", $namaPIC);
 			$namaChecklist = $this->input->post('NamaChecklist');
 			$namaPICSebenarnya = "-";
 			$jam = $this->input->post('Jam');
@@ -332,61 +296,16 @@ class cPIC extends CI_Controller {
 			$hari = $this->input->post('Hari');
 
 			$lihat = array(
-				'Hari' => $hari,
-				'Jam' => $jam,
-				'NamaChecklist' => $namaChecklist
+				'IDJadwalChecklist' => $IDChecklist
 			);
 
 			$lihatData = $this->mPIC->lihatDataLog('log', $lihat);
-			
-			if ($lihatData != NULL) {
-				$tanggal = date("Y-m-d");
-				if (count($lihatData)== 1) {
-				// echo $tanggal;
-				// echo substr($lihatData[0]['Waktu'],0,10);
-					if ($tanggal != substr($lihatData[0]['Waktu'],0,10)) {
-						$data = array(
-							'NamaPIC' => $namaPIC,
-							'NamaChecklist' => $namaChecklist,
-							'PICCek' => $namaPICSebenarnya,
-							'Jam' => $jam,
-							'Info' => $info,
-							'Status' => $status,
-							'Keterangan' => $keterangan,
-							'Hari' => $hari
-						);
-						$hasil = $this->mPIC->doChecklist('log', $data);
-					// echo "JIKA DISINI MAKA DATANYA == 1 DAN DATANYA GA KEMBAR";
-					}
-				}
-				else{
-					$jumlah = 0;
-					foreach ($lihatData as $data) {
-						if ($tanggal == substr($lihatData[0]['Waktu'],0,10)) {
-							$jumlah = $jumlah + 1;
-						}
-					}
-					if ($jumlah == 0) {
-						$data = array(
-							'NamaPIC' => $namaPIC,
-							'NamaChecklist' => $namaChecklist,
-							'PICCek' => $namaPICSebenarnya,
-							'Jam' => $jam,
-							'Info' => $info,
-							'Status' => $status,
-							'Keterangan' => $keterangan,
-							'Hari' => $hari
-						);
-						$hasil = $this->mPIC->doChecklist('log', $data);
-						
-					}
-				// echo "DATA LEBIH DARI 1, MAKA DATA AKAN DI CEK APAKAH ADA YANG SAMA";
-				}
-			}
-			else{
+
+			if ($lihatData == NULL) {
 				$data = array(
 					'NamaPIC' => $namaPIC,
 					'NamaChecklist' => $namaChecklist,
+					'IDJadwalChecklist' => $IDChecklist,
 					'PICCek' => $namaPICSebenarnya,
 					'Jam' => $jam,
 					'Info' => $info,
@@ -395,23 +314,19 @@ class cPIC extends CI_Controller {
 					'Hari' => $hari
 				);
 				$hasil = $this->mPIC->doChecklist('log', $data);
-
-				// echo "NULL COY";
 			}
-
 			//mengubah status checklist menjadi 2 supaya tidak bisa mengecek ulang
 			$this->mPIC->ubahStatusCheck($IDChecklist, "2");
 
-			//Menyimpan di notifikasi
-			$notif = array(
-				'ForN' => 'admin',
-				'Waktu' => date("l, d-m-Y h:i:s a"),
-				'Isi' => $namaChecklist. "Tidak Dicek",
-				'Status' => 'Belum'
-			);
-			$this->mPIC->notifikasi('notifikasi', $notif);
-
-			echo "2";
+			// 	//Menyimpan di notifikasi
+			// 	$notif = array(
+			// 		'ForN' => 'admin',
+			// 		'Waktu' => date("l, d-m-Y h:i:s a"),
+			// 		'Isi' => $namaChecklist. "Tidak Dicek",
+			// 		'Status' => 'Belum'
+			// 	);
+			// 	$this->mPIC->notifikasi('notifikasi', $notif);
+			// 	echo "2";
 		}
 	}
 

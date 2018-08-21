@@ -37,6 +37,7 @@
             <th>Instruksi Pengerjaan</th>
             <th>Status</th>
             <th>Keterangan</th>
+            <th>Bukti</th>
             </tr>
           </thead>
           <tbody id="hasilLog" style="text-align: center;">
@@ -93,12 +94,23 @@
                         </div>
                       </div>
                   </td>
+                  <td>
+                    <a href="#" data-featherlight="<?php echo '#lihatBukti'.$temp ?>">Lihat</a>
+                      <div style="display:none;">
+                        <div id="<?php echo 'lihatBukti'.$temp ?>">
+                          <h3>Bukti Pengecekan</h3>
+                          <div class="ui segment" >
+                            <img  height ="400" src="<?php echo site_url($log['Bukti']) ?>" alt="Bukti Pengecekan">
+                          </div>
+                        </div>
+                      </div>
+                  </td>
                 </tr>
             <?php endforeach ?>
           </tbody>
           <tfoot>
             <tr> 
-            <th colspan="9">
+            <th colspan="10">
             </th> 
             </tr>
           </tfoot>

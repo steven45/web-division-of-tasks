@@ -14,12 +14,24 @@ class cAdmin extends CI_Controller {
 
 	public function index()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+
 		$this->load->view('vAdmin/vHomeAdmin.php');
 		$this->load->view('vAdmin/vFooterHomeAdmin.php');
 	}
 
 	public function validation()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/validation')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 
@@ -57,12 +69,24 @@ class cAdmin extends CI_Controller {
 
 	public function keluar()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/keluar')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+
 		session_destroy();
 		redirect(base_url("admin"));
 	}
 
 	public function validasiTambahPIC()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/validasitambahpic')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+
 		$NIK = $this->input->post('NIK');
 		$namaPIC = $this->input->post('NamaPIC');
 		$password = $this->input->post('Password');
@@ -138,8 +162,13 @@ class cAdmin extends CI_Controller {
 
 	public function editPIC($NIK = NULL)
 	{
-		$data['judul'] = "Edit PIC";
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/editpic/').$NIK
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 
+		$data['judul'] = "Edit PIC";
 		$data['pic'] = $this->mAdmin->getPIC($NIK);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vEditPIC', $data);
@@ -148,6 +177,12 @@ class cAdmin extends CI_Controller {
 
 	public function validasiEditPIC()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/validasieditpic')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+
 		$NIK = $this->input->post('NIK');
 		$namaPIC = $this->input->post('NamaPIC');
 		$divisi = $this->input->post('Divisi');
@@ -173,6 +208,12 @@ class cAdmin extends CI_Controller {
 
 	public function hapusPIC()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/hapuspic')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+
 		$nEnabled = $this->input->post('nEnabled');
 		$nDisabled = $this->input->post('nDisabled');
 		$nJumlah = $this->input->post('nJumlah');
@@ -208,6 +249,12 @@ class cAdmin extends CI_Controller {
 
 	public function tambahChecklist()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/tambahchecklist')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+
 		$data['judul'] = "Tambah Checklist";
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vTambahChecklist');
@@ -216,6 +263,12 @@ class cAdmin extends CI_Controller {
 
 	public function validasiTambahChecklist()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/validasitambahchecklist')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+
 		date_default_timezone_set('Asia/Jakarta');
 		$NIK = $this->input->post('NIK');
 		$namaChecklist = $this->input->post('NamaChecklist');
@@ -333,6 +386,12 @@ class cAdmin extends CI_Controller {
 
 	public function lihatChecklist($status = NULL)
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/checklist')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+	
 		$data['judul'] = "List Checklist";
 		$data['checklist']= $this->mAdmin->getChecklist();
 
@@ -347,6 +406,12 @@ class cAdmin extends CI_Controller {
 
 	public function lihatJChecklist($status = NULL)
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/jchecklist')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+
 		$tanggal = $this->input->post('tanggal');
 
 		if ($tanggal == NULL) {
@@ -389,6 +454,12 @@ class cAdmin extends CI_Controller {
 
 	public function editChecklist($IDChecklist = NULL)
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/editchecklist/').$IDChecklist
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+		
 		if (!isset($_SESSION['nama'])) {
 			redirect(base_url("admin"));
 		}
@@ -404,6 +475,12 @@ class cAdmin extends CI_Controller {
 
 	public function validasiEditChecklist()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/validasieditchecklist')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+		
 		date_default_timezone_set('Asia/Jakarta');
 		$IDChecklist     = $this->input->post('IDChecklist');
 		$namaChecklist   = $this->input->post('NamaChecklist');
@@ -466,6 +543,12 @@ class cAdmin extends CI_Controller {
 
 	public function lihatInfoChecklist($IDChecklist)
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/infochecklist/$IDChecklist')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+		
 		$hasil = $this->mAdmin->getInfoChecklist('checklist', $IDChecklist);
 		$data['judul'] = "Info Checklist";
 		$data['info'] = $hasil['Info'];
@@ -476,6 +559,12 @@ class cAdmin extends CI_Controller {
 
 	public function gantiChecklist()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/gantichecklist')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+		
 		$nJumlah = $this->input->post('nJumlah');
 		$checklist= $this->mAdmin->getChecklist();
 		// echo count($data['checklist']);
@@ -511,6 +600,12 @@ class cAdmin extends CI_Controller {
 
 	public function gantiJChecklist()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/gantijchecklist')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+		
 		$nJumlah = $this->input->post('nJumlah');
 		// echo count($data['checklist']);
 		// echo '<br>';
@@ -552,7 +647,10 @@ class cAdmin extends CI_Controller {
 						'NamaPICS' => $picS['NamaPIC'],
 						'NamaPICP' => $picP['NamaPIC']
 					);
-					$this->mAdmin->penggantiPIC('penggantipic', $pengganti);
+					$cek = $this->mAdmin->cekPenggantiPIC('penggantipic', $pengganti);
+					if ($cek == NULL) {
+						$this->mAdmin->penggantiPIC('penggantipic', $pengganti);
+					}
 					$query = $this->mAdmin->gantiJChecklist('jchecklist',$IDJadwalChecklist, $data);
 				}
 				else{
@@ -572,6 +670,12 @@ class cAdmin extends CI_Controller {
 
 	public function lihatAbsensi()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/absensi')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+		
 		$data['judul'] = "Lihat Absensi";
 		$tanggal = $this->input->post('tanggal');
 		if ($tanggal == NULL) {
@@ -593,13 +697,15 @@ class cAdmin extends CI_Controller {
 		$tanggal = $daftar_hari[$namahari].', '.$tanggal;
 		$data['absensi']= $this->mAdmin->getAbsensiWhere($tanggal);
 
-		// var_dump($data['absensi']);
 		$temp = 0;
+		$picP = array();
 		foreach ($data['absensi'] as $absensi) {
-			if ($absensi['NIKP'] != '0') {
+			if ($absensi['NIKP'] != '0' AND $absensi['NIKP'] != '') {
 				$hasil = $this->mAdmin->getPIC($absensi['NIKP']);
-				$picP[$temp]['NIK'] = $hasil['NIK'];
-				$picP[$temp]['NamaPIC'] = $hasil['NamaPIC'];
+				if ($hasil != NULL) {
+					$picP[$temp]['NIK'] = $hasil['NIK'];
+					$picP[$temp]['NamaPIC'] = $hasil['NamaPIC'];
+				}
 			}
 			else{
 				$picP[$temp]['NIK'] = '0';
@@ -607,6 +713,7 @@ class cAdmin extends CI_Controller {
 			}
 			$temp++;
 		}
+
 		$data['picP'] = $picP;
 		$data['picPengganti'] = $this->mAdmin->getPIC();
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
@@ -616,6 +723,11 @@ class cAdmin extends CI_Controller {
 
 	public function tambahAbsensi()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/tambahabsensi')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$data['judul'] = "Tambah Absensi";
 		$data['pic'] = $this->mAdmin->getPIC();
 		$data['jadwal'] = $this->mAdmin->getJadwal();
@@ -627,6 +739,11 @@ class cAdmin extends CI_Controller {
 
 	public function validasiTambahAbsensi()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/validasitambahabsensi')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$NIK = $this->input->post('NIK');
 		$IDJadwal = $this->input->post('IDJadwal');
 		$hari = $this->input->post('Hari');
@@ -670,6 +787,11 @@ class cAdmin extends CI_Controller {
 
 	public function hapusAbsensi($IDHarian)
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/hapusabsensi/').$IDHarian
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		if (!isset($_SESSION['nama'])) {
 			redirect(base_url("admin"));
 		}
@@ -682,6 +804,11 @@ class cAdmin extends CI_Controller {
 
 	public function editAbsensi($IDHarian= NULL)
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/editabsensi/').$IDHarian
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$data['judul'] = 'Edit Absensi';
 		$IDHarian = $IDHarian;
 		$data['absensi']= $this->mAdmin->getAbsensi($IDHarian);
@@ -692,6 +819,11 @@ class cAdmin extends CI_Controller {
 
 	public function validasiEditAbsensi()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/validasieditabsensi')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$IDHarian = $this->input->post('IDHarian');
 		$NIK = $this->input->post('NIK');
 		$IDJadwal = $this->input->post('IDJadwal');
@@ -802,11 +934,21 @@ class cAdmin extends CI_Controller {
 				$this->mAdmin->ubahJChecklist('jchecklist', $check, $where1, $jam4);
 			}
 			$this->mAdmin->gantiAbsensi('harian', $IDHarian, $data);
-		
-			echo "<script type='text/javascript'>
-			alert('Sukses menyimpan kehadiran dan mengganti PIC. ');
-			window.location.href = '" . base_url() . "admin/absensi';
-			</script>";
+			
+			$pengganti = array(
+						'IDChecklist' => $IDChecklist,
+						'IDJadwalChecklist' => $IDJadwalChecklist,
+						'NamaPICS' => $picS['NamaPIC'],
+						'NamaPICP' => $picP['NamaPIC']
+					);
+					$cek = $this->mAdmin->cekPenggantiPIC('penggantipic', $pengganti);
+					if ($cek == NULL) {
+						$this->mAdmin->penggantiPIC('penggantipic', $pengganti);
+					}
+			// echo "<script type='text/javascript'>
+			// alert('Sukses menyimpan kehadiran dan mengganti PIC. ');
+			// window.location.href = '" . base_url() . "admin/absensi';
+			// </script>";
 		}
 
 	}
@@ -814,6 +956,11 @@ class cAdmin extends CI_Controller {
 
 	public function templateAbsensi()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/templateabsensi')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$date = date("N");
 		switch ($date) {
 			case '1':
@@ -863,6 +1010,11 @@ class cAdmin extends CI_Controller {
 
 	public function lihatLog()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/log')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		// header("Content-type:application/json");
 		$data['judul'] = "Log Checklist";
 		$data['log']= $this->mAdmin->getLog();
@@ -877,6 +1029,7 @@ class cAdmin extends CI_Controller {
 
 	public function lihatLog1()
 	{
+
 		// header("Content-type:application/json");
 		$data['judul'] = "Log Checklist";
 		$data['log']= $this->mAdmin->getLog();
@@ -891,6 +1044,11 @@ class cAdmin extends CI_Controller {
 
 	public function ranking()
 	{	
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/ranking')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$data['judul'] = "Ranking PIC";
 		$data['pic'] = $this->mAdmin->getPIC();
 
@@ -941,6 +1099,9 @@ class cAdmin extends CI_Controller {
 			}
 			else if($jabatan[$i] == 'Chief Leader'){
 				$nilaiJabatan[$i] = 100;
+			}
+			else{
+				$nilaiJabatan[$i] = 90;
 			}
 		}
 
@@ -1000,6 +1161,11 @@ class cAdmin extends CI_Controller {
 
 	public function jRanking()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/jranking')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$wp = $this->ranking();
 		echo json_encode($wp);
 	}
@@ -1008,6 +1174,11 @@ class cAdmin extends CI_Controller {
 	{
 		//MULAI PERHITUNGAN UNTUK PENJADWALAN OTOMATIS
 		//1. Mengurutkan hasil dari WP
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/penjadwalan')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 
 		$begin = new DateTime($this->input->post('date0'));
 		$end = new DateTime($this->input->post('date1'));
@@ -1235,6 +1406,11 @@ class cAdmin extends CI_Controller {
 
 	public function tampilRangking()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/tampilRanking')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$data['judul'] = "Ranking PIC";
 		$data['alert'][0]['hasil'] = '';
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
@@ -1244,6 +1420,11 @@ class cAdmin extends CI_Controller {
 
 	public function pergantian()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/pergantian')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$data['judul'] = "Pergantian PIC";
 
 		$data['penggantiPIC'] = $this->mAdmin->getPenggantiPIC();
@@ -1262,6 +1443,11 @@ class cAdmin extends CI_Controller {
 
 	public function bobotWP()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/ubahbobotwp')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$data['judul'] = "Ubah Bobot Weighted Product";
 		$data['wp'] = $this->mAdmin->getKriteria();
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
@@ -1271,6 +1457,11 @@ class cAdmin extends CI_Controller {
 
 	public function ubahJadwalShift()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/ubahshift')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$data['judul'] = "Ubah Jadwal Shift PIC";
 		$data['jadwal'] = $this->mAdmin->getJadwal();
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
@@ -1280,6 +1471,11 @@ class cAdmin extends CI_Controller {
 
 	public function gantiBobotWP()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/gantibobotwp')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$temp= $this->input->post('temp');
 
 		for ($i=0; $i < $temp ; $i++) { 
@@ -1303,6 +1499,11 @@ class cAdmin extends CI_Controller {
 
 	public function gantiJadwal()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/gantijadwal')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$temp= $this->input->post('temp');
 
 		for ($i=0; $i < $temp ; $i++) { 
@@ -1326,6 +1527,11 @@ class cAdmin extends CI_Controller {
 
 	public function tambahTemplateAbsensi()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/tambahtemplateabsensi')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$data['judul'] = "Tambah Template Absensi";
 		$data['pic'] = $this->mAdmin->getPIC();
 		$data['jadwal'] = $this->mAdmin->getJadwal();
@@ -1337,6 +1543,11 @@ class cAdmin extends CI_Controller {
 
 	public function validasiTambahTemplate()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/validasitambahtemplate')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$NIK = $this->input->post('NIK');
 		$IDJadwal = $this->input->post('IDJadwal');
 		$hari = $this->input->post('Hari');
@@ -1368,6 +1579,11 @@ class cAdmin extends CI_Controller {
 
 	public function editTemplateAbsensi($IDTHarian= NULL)
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/edittemplateabsensi/').$IDHarian
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$data['judul'] = 'Edit Template Absensi';
 		$IDTHarian = $IDTHarian;
 		$data['template']= $this->mAdmin->getTemplateAbsensi($IDTHarian);
@@ -1378,6 +1594,11 @@ class cAdmin extends CI_Controller {
 
 	public function validasiTemplateAbsensi()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/validasitemplateabsensi')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$IDTHarian = $this->input->post('IDTHarian');
 		$NIK = $this->input->post('NIK');
 		$IDJadwal = $this->input->post('IDJadwal');
@@ -1405,6 +1626,11 @@ class cAdmin extends CI_Controller {
 
 	public function hapusTemplateAbsensi($IDTHarian)
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/hapustemplateabsensi/').$IDHarian
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		if (!isset($_SESSION['nama'])) {
 			redirect(base_url("admin"));
 		}
@@ -1417,6 +1643,11 @@ class cAdmin extends CI_Controller {
 
 	public function ikutTemplate()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/ikuttemplate')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$daftar_hari = array(
 			'Sunday'    => 'Minggu',
 			'Monday'    => 'Senin',
@@ -1485,6 +1716,11 @@ class cAdmin extends CI_Controller {
 
 	public function getStatusJChecklist()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/getstatusjchecklist')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$tanggal = date('20y-m-d');
 		$daftar_hari = array(
 			'Sunday'    => 'Minggu',
@@ -1505,6 +1741,11 @@ class cAdmin extends CI_Controller {
 
 	public function jsonChecklist()
 	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/jsonchecklist')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
 		$tanggal = date('20y-m-d');
 		$daftar_hari = array(
 			'Sunday'    => 'Minggu',
@@ -1522,5 +1763,123 @@ class cAdmin extends CI_Controller {
 		$data = $this->mAdmin->getJChecklist($haritanggal);
 		header("Content-type:application/json");
 		echo json_encode($data);
+	}
+
+	function get_client_ip() {
+	    $ipaddress = '';
+	    if (isset($_SERVER['HTTP_CLIENT_IP']))
+	        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+	    else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+	        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	    else if(isset($_SERVER['HTTP_X_FORWARDED']))
+	        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+	    else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+	        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+	    else if(isset($_SERVER['HTTP_FORWARDED']))
+	        $ipaddress = $_SERVER['HTTP_FORWARDED'];
+	    else if(isset($_SERVER['REMOTE_ADDR']))
+	        $ipaddress = $_SERVER['REMOTE_ADDR'];
+	    else
+	        $ipaddress = 'UNKNOWN';
+	    return $ipaddress;
+	}
+
+	function lihatIP()
+	{
+		$ip = $this->get_client_ip();
+		var_dump($a);
+	}
+
+	public function export()
+	{
+		$alog = array(
+			'IPAddress' => $ip = $this->get_client_ip(),
+			'Do' => site_url('admin/penjadwalan')
+		);
+		$this->mAdmin->tambahALog('alog',$alog);
+		
+		$begin = new DateTime($this->input->post('date0'));
+		$end = new DateTime($this->input->post('date1'));
+		$end = $end->modify( '+1 day' ); 
+
+		$interval = new DateInterval('P1D');
+		$daterange = new DatePeriod($begin, $interval ,$end);
+
+		$data['tanggalAwal'] = $begin->format("d-m-Y");
+		$data['tanggalAkhir'] = $end->format("d-m-Y");
+
+		$y = 0;
+		$countOK = 0;
+		$countBad = 0;
+		$countNotChecked = 0;
+
+		$y = 0;
+		foreach ($daterange as $date) {
+			$tanggal   = $date->format("Y-m-d");
+			$daftar_hari = array(
+				'Sunday'    => 'Minggu',
+				'Monday'    => 'Senin',
+				'Tuesday'   => 'Selasa',
+				'Wednesday' => 'Rabu',
+				'Thursday'  => 'Kamis',
+				'Friday'    => 'Jumat',
+				'Saturday'  => 'Sabtu'
+			);
+			$namahari = date('l', strtotime($tanggal));
+			$tanggalT[$y] = $daftar_hari[$namahari].', '.$tanggal;
+			$y++;
+		}
+		$hasil = $this->mAdmin->getLogFromDate($tanggalT);
+		$pic = $this->mAdmin->getPIC();
+
+		$export[count($pic)]['Jumlah']='Jumlah';
+		$export[count($pic)]['OK']          = 0;
+		$export[count($pic)]['Bad']         = 0;
+		$export[count($pic)]['Not Checked'] = 0;
+		$export[count($pic)]['JumlahSemua'] = count($hasil);
+		for ($i=0; $i < count($pic); $i++) { 
+			$export[$i]['NamaPIC'] = '';
+			$export[$i]['OK']          = 0;
+			$export[$i]['Bad']         = 0;
+			$export[$i]['Not Checked'] = 0;
+			$export[$i]['Jumlah']      = 0;
+			for ($j=0; $j < count($hasil); $j++) { 
+				$export[$i]['NamaPIC'] = $pic[$i]['NamaPIC'];
+				if ($hasil[$j]['PICCek'] == '-') {
+					if ($pic[$i]['NamaPIC'] == trim($hasil[$j]['NamaPIC'])) {
+						if ($hasil[$j]['Status'] == 'OK') {
+							$export[$i]['OK']++;	
+						}
+						elseif($hasil[$j]['Status'] == 'Bad') {
+							$export[$i]['Bad']++;
+						}
+						elseif($hasil[$j]['Status'] == 'Not Checked') {
+							$export[$i]['Not Checked']++;
+						}
+						$export[$i]['Jumlah']++;
+					}
+				}
+				else{
+					if ($pic[$i]['NamaPIC'] == trim($hasil[$j]['PICCek'])) {
+						if ($hasil[$j]['Status'] == 'OK') {
+							$export[$i]['OK']++;	
+						}
+						elseif($hasil[$j]['Status'] == 'Bad') {
+							$export[$i]['Bad']++;
+						}
+						elseif($hasil[$j]['Status'] == 'Not Checked') {
+							$export[$i]['Not Checked']++;
+						}
+						$export[$i]['Jumlah']++;
+					}
+				}
+			}
+			$export[count($pic)]['OK']+=$export[$i]['OK'];
+			$export[count($pic)]['Bad']+=$export[$i]['Bad'];
+			$export[count($pic)]['Not Checked']+=$export[$i]['Not Checked'];
+		}
+		// echo json_encode($export);
+		$data['export'] = $export;
+		$this->load->view('vAdmin/vExport', $data);
 	}
 }
