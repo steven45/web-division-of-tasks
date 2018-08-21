@@ -1,4 +1,10 @@
-
+<script type="text/javascript">
+        $(document).ready(function() 
+        { 
+          $('table').tablesort(); 
+        } 
+        ); 
+      </script>
 <div class="ui two column centered grid">
   <div class="column" style="width: auto;">
     <div class="ui segment" style="padding: 10px; border-radius: 1.285714rem">
@@ -25,7 +31,7 @@
   
       <div class="ui divider"></div>
     
-        <table class="ui sortable celled table" id="example" style="margin-top: 20px; margin-left: 20px; width: 95%">
+        <table class="ui sortable celled table" id="mytable" style="margin-top: 20px; margin-left: 20px; width: 95%">
           <thead style="text-align: center;">
             <tr>
             <th>No</th>
@@ -115,9 +121,11 @@
             </tr>
           </tfoot>
         </table>
-        <br>
-        <br>
-        <br>
+        <div class="pagination-container">
+          <nav>
+            <ul class="pagination"></ul>
+          </nav>
+        </div>
     </div>
   </div>
 </div>

@@ -14,7 +14,7 @@
           </h3>
         
           <form method="POST" action="<?php echo site_url('admin/jchecklist'); ?>">
-            <div class="ui calendar" style="margin-left: 76.8%; margin-top: -45px">
+            <div class="ui calendar" style="margin-left: 77.65%; margin-top: -45px">
               <div class="ui input left icon">
                 <i class="calendar icon"></i>
                 <input type="date" id="tanggal" value="<?php echo $tanggal; ?>" name="tanggal">
@@ -29,7 +29,18 @@
         </div>
         <form method="POST" action="<?php echo site_url('admin/gantijchecklist'); ?>">    
           <div class="ui divider"></div>
-
+          <div class= "ui field">
+        <!-- <select name="state" id="maxRows" class="form-control" style="width:150px;">
+                        <option value="5000">Show All</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="75">75</option>
+                        <option value="100">100</option>
+                    </select>
+                  </div> -->
           <table class="ui sortable celled table"  id="mytable">
             <thead>
               <tr style="text-align: center">
@@ -111,15 +122,23 @@
           </tbody>
           <tfoot>
             <th colspan="9">
-              <button class="ui right floated blue small button" >
-                <i class="save icon"></i>Simpan
-              </button>
+              
             </th>
           </tfoot>
         </table>
-      </form>
+          <button class="ui right floated blue small button" >
+            <i class="save icon"></i>Simpan
+          </button>
+        </form>
+      
+      <div class="pagination-container">
+      <nav>
+        <ul class="pagination"></ul>
+      </nav>
+    </div>
     </div>
   </div>
+</div>
 </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
@@ -216,3 +235,6 @@
 
 
 </script>
+
+
+

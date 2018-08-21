@@ -31,8 +31,7 @@
 
 					<div class="field">
 						<label>Tanggal</label>
-						<div class="ui input icon">
-							
+						<div class="ui input left icon">
 						<i class="calendar icon"></i>
 						<input type="date" name="Hari" value="<?php echo date('20y-m-d') ?>">
 						</div>

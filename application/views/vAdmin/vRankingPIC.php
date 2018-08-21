@@ -81,7 +81,7 @@
                 <input type="date" value="<?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 day')); ?>" name="date1" id="date1">
             </div>
             <br><br>
-            <button class="ui small green button">Jadwalkan Sekarang! </button>
+            <button class="ui green button" data-tooltip="Klik untuk Menjadwalkan" data-inverted="" >Jadwalkan Sekarang! </button>
         </div>
         </form>
         <?php for ($i=0; $i < count($alert); $i++) { ?>

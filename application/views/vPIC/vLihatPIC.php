@@ -1,3 +1,10 @@
+<script type="text/javascript">
+        $(document).ready(function() 
+        { 
+          $('table').tablesort(); 
+        } 
+        ); 
+      </script>
 <div class="ui two column centered grid">
 <div class="column" style="width: auto;">
   <div class="ui segment" style="border-radius: 1.285714rem">

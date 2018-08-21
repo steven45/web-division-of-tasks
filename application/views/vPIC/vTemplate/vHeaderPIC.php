@@ -22,13 +22,13 @@
           } );
         } );
       </script> -->
-      <script type="text/javascript">
+      <!-- <script type="text/javascript">
         $(document).ready(function() 
         { 
           $('table').tablesort(); 
         } 
         ); 
-      </script>
+      </script> -->
 
   <!-- <script>
     $(document).ready(function()
@@ -74,12 +74,52 @@
         });
       </script>
 
+      <script>
+          
+        function date_time(id)
+    {
+        date = new Date;
+        // year = date.getFullYear();
+        // month = date.getMonth();
+        // months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+        d = date.getDate();
+        day = date.getDay();
+        days = new Array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
+        h = date.getHours();
+        if(h<10)
+        { 
+                h = "0"+h;
+        }
+        m = date.getMinutes();
+        if(m<10)
+        {
+                m = "0"+m;
+        }
+        s = date.getSeconds();
+        if(s<10)
+        {
+                s = "0"+s;
+        }
+        result = ''+days[day]+', '+h+':'+m+':'+s;
+        document.getElementById(id).innerHTML = result;
+        setTimeout('date_time("'+id+'");','1000');
+        console.log(result);
+        return true;
+
+    }
+        </script>
+
+
       <title>
         <?php echo $judul; ?>
       </title>
     </head>
 
-<body style="background-color: #B0E0E6">
+
+<body style="background-image: url(<?php echo base_url('assets/images/hhh.jpeg'); ?>); background-size: cover; background-attachment: fixed;">
+
+<!-- <body style="background-color: #B0E0E6"> -->
+
 
 <!-- <body style="background-image: url(<?php echo base_url('assets/images/square.png'); ?>);"> -->
 
@@ -108,7 +148,20 @@
 
         
         <div class="right menu">
-          <div class="ui pointing dropdown link item">
+       
+          <div class="ui black label" style="margin-top: 3%">
+     <!--      <i class="clock outline icon" style="margin-top: 3.5%; color: white;"></i> -->
+          <span id="date_time" style="
+                                    margin-top: 3.2%;
+                                    color: white;
+                                    font-size: 15px;
+                                    font-family: : Orbitron;
+                                    letter-spacing: 1px;
+          "></span>
+         </div> 
+
+        
+          <!-- <div class="ui pointing dropdown link item">
             <span class="text">
 
             Notifications</span>
@@ -135,12 +188,12 @@
               </div>
               
             </div>
-          </div>
+          </div> -->
 
         <!-- <a class="item" href="<?php echo site_url('pic/ubahPassword'); ?>">
           <i class="cog icon"></i>Setting -->
 
-        </div>
+        
 
         <form method="POST" action="<?php echo site_url('pic/ubahPassword'); ?>">
           <input type="hidden" name="NIK" value="<?php echo($_SESSION['nik']) ?>">
@@ -164,4 +217,6 @@
     </div>
   </div>
   <br><br><br><br><br>
+
+  <script type="text/javascript">window.onload = date_time('date_time');</script>
 

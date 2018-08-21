@@ -15,7 +15,7 @@
       </h3>
       
       <?php if ($_SESSION['nama'] == 'admin'): ?>       
-          <a class="ui right floated tiny blue icon button" data-tooltip="Tambah PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahpic'); ?>">
+          <a class="ui right floated tiny blue icon button" data-tooltip="Klik untuk Tambah PIC" data-inverted="" data-position="top right" style="margin-top: -40px" href="<?php echo site_url('admin/tambahpic'); ?>">
             <i class="add icon"></i>
           </a>
       <?php endif ?>
@@ -24,8 +24,9 @@
       </div>
 
       <div class="ui divider"></div>
-      <div class= "ui field">
+      <!-- <div class= "ui field">
         <select name="state" id="maxRows" class="form-control" style="width:150px;">
+                        <option value="10">10</option>
                         <option value="5000">Show All</option>
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -36,8 +37,8 @@
                         <option value="100">100</option>
                     </select>
                   </div>
-
-<table class="ui sortable compact celled definition white table" id="mytable" class="display" style="text-align: center;">
+ -->
+<table class="ui sortable compact celled definition white table" id="mytable" style="text-align: center;">
   <thead class="full-width" style="text-align: center; background-color: #dbedff">
     <tr>
       <th class="sorted ascending">NIK</th>
@@ -59,7 +60,7 @@
       </th>
     </tr>
   </thead>
-  <tbody id="hasil">
+  <tbody >
     <form method="POST" action="<?php echo base_url('admin/hapuspic'); ?>">
     <?php $nEnabled = 0; $nDisabled = 0; $nJumlah = count($pic);?>
     <?php for ($i=0; $i < count($pic) ; $i++) { ?>
@@ -191,23 +192,23 @@
         </button>
       </form>
     
-    <div class="pagination-container">
-      <nav>
-        <ul class="pagination"></ul>
-      </nav>
-    </div>
-<br><br>
+        <div class="pagination-container">
+          <nav>
+            <ul class="pagination"></ul>
+          </nav>
+        </div>
+<!-- <br><br> -->
 </div>
 </div>
 </div>
 
 
-<script>
+<!-- <script>
     var table = '#mytable'
-    $('#maxRows').on('change', function(){
-        $('.pagination').html('')
+    $(function(){
+      $('.pagination').html('')
         var trnum = 0
-        var maxRows = parseInt($(this).val())
+        var maxRows = 10;
         var totalRows = $(table+' tbody tr').length
         $(table+' tr:gt(0)').each(function(){
             trnum++
@@ -218,6 +219,7 @@
                 $(this).show()
             }
         })
+
         if(totalRows > maxRows){
             var pagenum = Math.ceil(totalRows/maxRows)
             for(var i=1;i<=pagenum;){
@@ -239,8 +241,46 @@
                 }
             })
         })
-    })
-  </script>
+    });
+    // $('#maxRows').on('change', function(){
+    //     $('.pagination').html('')
+    //     var trnum = 0
+    //     var maxRows = parseInt($(this).val())
+    //     var totalRows = $(table+' tbody tr').length
+    //     $(table+' tr:gt(0)').each(function(){
+    //         trnum++
+    //         if(trnum > maxRows){
+    //             $(this).hide()
+    //         }
+    //         if(trnum <= maxRows){
+    //             $(this).show()
+    //         }
+    //     })
+
+    //     if(totalRows > maxRows){
+    //         var pagenum = Math.ceil(totalRows/maxRows)
+    //         for(var i=1;i<=pagenum;){
+    //             $('.pagination').append('<li data-page="'+i+'">\<span>'+ i++ +'<span class="sr-only">(current)</span></span>\</li>').show()
+    //         }
+    //     }
+    //     $('.pagination li:first-child').addClass('active')
+    //     $('.pagination li').on('click',function(){
+    //         var pageNum = $(this).attr('data-page')
+    //         var trIndex = 0;
+    //         $('.pagination li').removeClass('active')
+    //         $(this).addClass('active')
+    //         $(table+' tr:gt(0)').each(function(){
+    //             trIndex++
+    //             if(trIndex > (maxRows*pageNum) || trIndex <= ((maxRows*pageNum)-maxRows)){
+    //                 $(this).hide()
+    //             } else{
+    //                 $(this).show()
+    //             }
+    //         })
+    //     })
+    // })
+
+  </script> -->
 
 
 

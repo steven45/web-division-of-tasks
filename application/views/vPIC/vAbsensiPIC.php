@@ -1,4 +1,11 @@
-<div class="ui two column centered grid">
+<script type="text/javascript">
+        $(document).ready(function() 
+        { 
+          $('table').tablesort(); 
+        } 
+        ); 
+      </script>
+      <div class="ui two column centered grid">
   <div class="column" style="width: auto;">
     <div class="ui segment" style="border-radius: 1.285714rem">
      <div class="segment">
@@ -13,7 +20,7 @@
 
         </h3>
 
-        <div class="ui right calendar" style="margin-left: 400px; margin-top: -45px">
+        <div class="ui right calendar" style="margin-left: 500px; margin-top: -45px">
           <div class="ui small input left icon">
             <i class="calendar icon"></i>
             <input type="date" value="<?php echo date('20y-m-d') ?>">
@@ -23,7 +30,7 @@
 
         <div class="ui divider"></div>
 
-        <table class="ui sortable compact celled definition table" id="example">
+        <table class="ui sortable compact celled definition table" id="mytable">
           <thead class="full-width" style="text-align: center; background-color: #dbedff">
             <tr>
               <th class="sorted ascending">NIK</th>
@@ -35,7 +42,7 @@
             </tr>
           </thead>
 
-          <tbody id="hasil">
+          <tbody id="hasil" style="text-align: center">
 
             <?php foreach ($absensi as $absensi ) { ?>
             <?php if ($absensi['Status'] == 'Enabled' AND $absensi['NIK'] == $_SESSION['nik']) { ?>
@@ -58,7 +65,11 @@
           </tfoot>
         </form>
       </table>
-      <br><br>
+      <div class="pagination-container">
+      <nav>
+        <ul class="pagination"></ul>
+      </nav>
+    </div>
     </div>
   </div>
 </div>
