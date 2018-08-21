@@ -9,7 +9,7 @@
 			<table class="ui compact celled table">
         <thead class="full-width" style="text-align: center; background-color: #dbedff">
           <tr>
-            <th class="">Nama Parameter</th>
+            <th class="">Kriteria Penilaian</th>
             <th class="">Bobot</th>
             </tr>
         </thead>
