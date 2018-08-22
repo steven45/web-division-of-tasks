@@ -15,12 +15,17 @@
         <i class="clock icon"></i>
         L O G 
       </h3>
-        <div class="ui right calendar" style="margin-left: 80%; margin-top: -30px">
-          <div class="ui input left icon">
-            <i class="calendar icon"></i>
-            <input type="date" value="<?php echo date('20y-m-d') ?>" id="kalender">
+      <form method="POST" action="<?php echo site_url('admin/beranda'); ?>">
+        <div class="ui right calendar" style="margin-left: 77%; margin-top: -30px">
+          <div class="ui input left icon" >
+            <i class="calendar icon" ></i>
+            <input type="date" value="<?php echo $tanggal ?>" id="kalender" name="tanggal">
+            <button class="ui right floated tiny basic icon button" data-tooltip="Klik untuk Cari Absensi PIC" data-inverted="" data-position="top right">
+              <i class="search icon"></i>
+            </button>
           </div>
-      </div>
+        </div>
+      </form>
        <h2 class="ui icon" style="margin-left: 97%;  margin-top: -35px;"">
         <a href="#" id="template" data-tooltip="Download Report Checklist">
           <i class="download icon"></i>
@@ -69,7 +74,7 @@
             <th>Bukti</th>
             </tr>
           </thead>
-          <tbody id="hasilLog" style="text-align: center;">
+          <tbody id="hasil" style="text-align: center;">
             <?php $temp = 1; ?>
             <?php foreach ($log as $log): ?>
                 <tr>

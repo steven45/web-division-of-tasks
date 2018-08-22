@@ -60,7 +60,7 @@
       </th>
     </tr>
   </thead>
-  <tbody >
+  <tbody id="hasil">
     <form method="POST" action="<?php echo base_url('admin/hapuspic'); ?>">
     <?php $nEnabled = 0; $nDisabled = 0; $nJumlah = count($pic);?>
     <?php for ($i=0; $i < count($pic) ; $i++) { ?>

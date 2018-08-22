@@ -15,7 +15,7 @@
           $("#hasil tr").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
           });
-          $("#hasilLog tr").filter(function() {
+          $("#hasil tr").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
           });
         }); 

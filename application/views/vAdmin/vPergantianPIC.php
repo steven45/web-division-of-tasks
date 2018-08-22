@@ -29,7 +29,7 @@
               <th>Waktu Pergantian PIC</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="hasil">
             <?php $temp = 1; ?>
             <?php foreach ($penggantiPIC as $pic): ?>
               <tr style="text-align: center">

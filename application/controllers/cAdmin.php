@@ -94,6 +94,7 @@ class cAdmin extends CI_Controller {
 		$jabatan = $this->input->post('Jabatan');
 		$tahunMasuk = $this->input->post('TahunMasuk');
 
+		$min = $this->mAdmin->minPIC();
 		$data = array(
 			'NIK' => $NIK,
 			'NamaPIC' => $namaPIC,
@@ -101,7 +102,10 @@ class cAdmin extends CI_Controller {
 			'Password' => md5($password),
 			'Jabatan' => $jabatan,
 			'TahunMasuk' => $tahunMasuk,
-			'JumlahPengecekan' => 0,
+			'JumlahPengecekan' => $min['JumlahPengecekan'],
+			'JMudah' => $min['JMudah'],
+			'JSedang' => $min['JSedang'],
+			'JSulit' => $min['JSulit'],
 			'Status' => 'Enabled'
 		);
 
@@ -131,7 +135,6 @@ class cAdmin extends CI_Controller {
 			window.location.href = '" . base_url() . "admin/tambahpic';
 			</script>";
 		}
-		
 	}
 
 	public function tambahPIC()
@@ -183,13 +186,26 @@ class cAdmin extends CI_Controller {
 		);
 		$this->mAdmin->tambahALog('alog',$alog);
 
-		$NIK = $this->input->post('NIK');
-		$namaPIC = $this->input->post('NamaPIC');
-		$divisi = $this->input->post('Divisi');
-		$jabatan = $this->input->post('Jabatan');
-		$tahunMasuk = $this->input->post('TahunMasuk');
+		$NIK              = $this->input->post('NIK');
+		$password         = $this->input->post('Password');
+		$namaPIC          = $this->input->post('NamaPIC');
+		$divisi           = $this->input->post('Divisi');
+		$jabatan          = $this->input->post('Jabatan');
+		$tahunMasuk       = $this->input->post('TahunMasuk');
 		$jumlahPengecekan = $this->input->post('JumlahPengecekan');
 
+		$admin = $this->mAdmin->getAdmin('admin', array('Username'=>$NIK))->row_array();
+		if ($jabatan == 'Chief Leader' AND $admin == NULL) {
+			$dataA = array(
+				'Username' => $NIK,
+				'Password' => $password
+			);
+
+			$this->mAdmin->tambahAdmin('admin', $dataA, $NIK);
+		}
+		elseif($jabatan == 'Staff' AND $admin != NULL){
+			$this->mAdmin->hapusAdmin('admin', $NIK);
+		}
 		$data = array(
 			'NIK' => $NIK,
 			'NamaPIC' => $namaPIC,
@@ -919,36 +935,27 @@ class cAdmin extends CI_Controller {
 				'NIKP' => $NIKPengganti
 			);
 
+		
 			if ($shift == '1') {
-				$this->mAdmin->ubahJChecklist('jchecklist', $check, $where, $jam1);
+				$this->mAdmin->ubahJChecklistForAbsensi('jchecklist', $check, $where, $jam1);
 			}
 			elseif ($shift == '2') {
-				$this->mAdmin->ubahJChecklist('jchecklist', $check, $where, $jam2);
+				$this->mAdmin->ubahJChecklistForAbsensi('jchecklist', $check, $where, $jam2);
 			}
 			elseif ($shift == '3') {
 				$where1 = array(
 					'j.Tanggal' => $tanggalNext,
 					'j.NIK'     => $NIKSebenarnya
 				);
-				$this->mAdmin->ubahJChecklist('jchecklist', $check, $where, $jam3);
-				$this->mAdmin->ubahJChecklist('jchecklist', $check, $where1, $jam4);
+				$this->mAdmin->ubahJChecklistForAbsensi('jchecklist', $check, $where, $jam3);
+				$this->mAdmin->ubahJChecklistForAbsensi('jchecklist', $check, $where1, $jam4);
 			}
 			$this->mAdmin->gantiAbsensi('harian', $IDHarian, $data);
-			
-			$pengganti = array(
-						'IDChecklist' => $IDChecklist,
-						'IDJadwalChecklist' => $IDJadwalChecklist,
-						'NamaPICS' => $picS['NamaPIC'],
-						'NamaPICP' => $picP['NamaPIC']
-					);
-					$cek = $this->mAdmin->cekPenggantiPIC('penggantipic', $pengganti);
-					if ($cek == NULL) {
-						$this->mAdmin->penggantiPIC('penggantipic', $pengganti);
-					}
-			// echo "<script type='text/javascript'>
-			// alert('Sukses menyimpan kehadiran dan mengganti PIC. ');
-			// window.location.href = '" . base_url() . "admin/absensi';
-			// </script>";
+
+			echo "<script type='text/javascript'>
+			alert('Sukses menyimpan kehadiran dan mengganti PIC. ');
+			window.location.href = '" . base_url() . "admin/absensi';
+			</script>";
 		}
 
 	}
@@ -1015,13 +1022,32 @@ class cAdmin extends CI_Controller {
 			'Do' => site_url('admin/log')
 		);
 		$this->mAdmin->tambahALog('alog',$alog);
-		// header("Content-type:application/json");
+
+		$tanggal = $this->input->post('tanggal');
+		if ($tanggal == NULL) {
+			$tanggal = date('20y-m-d');
+		}
+
+		$daftar_hari = array(
+			'Sunday'    => 'Minggu',
+			'Monday'    => 'Senin',
+			'Tuesday'   => 'Selasa',
+			'Wednesday' => 'Rabu',
+			'Thursday'  => 'Kamis',
+			'Friday'    => 'Jumat',
+			'Saturday'  => 'Sabtu'
+		);
+		$namahari = date('l', strtotime($tanggal));
+
+		$data['tanggal'] = $tanggal;
+		$tanggal = $daftar_hari[$namahari].', '.$tanggal;
+
 		$data['judul'] = "Log Checklist";
-		$data['log']= $this->mAdmin->getLog();
+		$data['log']= $this->mAdmin->getLogFromDate($tanggal);
 		
 		$data['notifikasi'] = $this->mAdmin->getNotifikasi();
 		$data['temp'] = $this->notifikasi();
-		// echo json_encode($data);
+
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vBerandaAdmin', $data);
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
