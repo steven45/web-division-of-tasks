@@ -38,9 +38,9 @@ class mPIC extends CI_Model
     	}
     }
 
-    public function getAbsensiPIC($IDHarian = false)
+    public function getAbsensiPIC($NIK = false)
     {
-        if ($IDHarian == NULL) {
+        if ($NIK == NULL) {
             $query = $this->db->order_by('j.Shift','ASC');
             $query = $this->db->order_by('h.Hari','ASC');
             $this->db->select('h.IDHarian, h.NIK, h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam, p.Status');
@@ -52,11 +52,11 @@ class mPIC extends CI_Model
         }
         else{
             $query = $this->db->order_by('j.Shift','ASC');
-            $this->db->select('h.IDHarian, h.NIK, h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam');
+            $this->db->select('h.IDHarian, h.NIK, h.IDJadwal, h.Hari, h.Kehadiran, p.NamaPIC, j.Shift, j.Jam, p.Status');
              $this->db->from('harian h');
              $this->db->join('pic p','p.NIK=h.NIK');
              $this->db->join('jadwal j','j.IDJadwal=h.IDJadwal');
-             $this->db->where(array('IDHarian' => $IDHarian));
+             $this->db->where(array('h.NIK' => $NIK));
              $query = $this->db->get();
              return $query->result_array();
         }
@@ -96,6 +96,16 @@ class mPIC extends CI_Model
             $query = "SELECT * FROM `log` WHERE `IDLog` = $IDLog";
             return $this->db->query($query)->row_array();
         }
+    }
+
+    public function getLogFromDate($tanggal)
+    {
+        $query = $this->db->order_by('Waktu','DESC');
+        $query = $this->db->order_by('Jam','DESC');
+       $query = $this->db->where_in('Hari',$tanggal);
+       $query = $this->db->from('log');
+       $query = $this->db->get()->result_array();
+       return $query;
     }
 
     public function notifikasi($table, $data)

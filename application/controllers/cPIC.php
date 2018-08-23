@@ -51,13 +51,27 @@ class cPIC extends CI_Controller {
 
 	public function lihatLog()
 	{
-		// // header("Content-type:application/json");
-		$data['judul'] = "Beranda PIC";
 		$data['judul'] = "Log Checklist";
-		$data['log']= $this->mPIC->getLog();
-		// // $data['log']= $this->mAdmin->getLog();
+		$tanggal = $this->input->post('tanggal');
+		if ($tanggal == NULL) {
+			$tanggal = date('20y-m-d');
+		}
 
-		// // echo json_encode($data);
+		$daftar_hari = array(
+			'Sunday'    => 'Minggu',
+			'Monday'    => 'Senin',
+			'Tuesday'   => 'Selasa',
+			'Wednesday' => 'Rabu',
+			'Thursday'  => 'Kamis',
+			'Friday'    => 'Jumat',
+			'Saturday'  => 'Sabtu'
+		);
+		$namahari = date('l', strtotime($tanggal));
+
+		$data['tanggal'] = $tanggal;
+		$tanggal = $daftar_hari[$namahari].', '.$tanggal;
+		$data['log']= $this->mPIC->getLogFromDate($tanggal);
+
 		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
 		$this->load->view('vPIC/vBerandaPIC');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');
@@ -346,9 +360,130 @@ class cPIC extends CI_Controller {
 	
 	public function lihatAbsensi()
 	{
+  		function method1($a,$b) 
+		{
+			$first = explode(' ',$a['Hari']);
+			$second = explode(' ',$b['Hari']);
+		    return ($first[1] <= $second[1]) ? -1 : 1;
+		}
+		
 		$data['judul'] = "Lihat Absensi";
-		$data['absensi'] = $this->mPIC->getAbsensiPIC();
+		$data['absensi'] = $this->mPIC->getAbsensiPIC($_SESSION['nik']);
+		usort($data['absensi'], "method1");
 
+		for ($i=0; $i < count($data['absensi']); $i++) { 
+			$bln = explode(' ', $data['absensi'][$i]['Hari']);
+			$bln = explode('-', $bln[1]);
+			$bulan[$i] = $bln[0].'-'.$bln[1];
+		}
+
+		for ($i = 0; $i < count($bulan); $i++) {
+			$bln =explode('-', $bulan[$i]);
+			switch ($bln[1]) {
+		    case 1:
+		        $bln[1] = 'Januari';
+		        break;
+		    case 2:
+		        $bln[1] = 'Februari';
+		        break;
+		    case 3:
+		        $bln[1] = 'Maret';
+		        break;
+		    case 4:
+		        $bln[1] = 'April';
+		        break;
+		    case 5:
+		        $bln[1] = 'Mei';
+		        break;
+		    case 6:
+		        $bln[1] = 'Juni';
+		        break;
+		    case 7:
+		        $bln[1] = 'Juli';
+		        break;
+		    case 8:
+		        $bln[1] = 'Agustus';
+		        break;
+		    case 9:
+		        $bln[1] = 'September';
+		        break;
+		    case 10:
+		        $bln[1] = 'Oktober';
+		        break;
+		    case 11:
+		        $bln[1] = 'November';
+		        break;
+		    case 12:
+		        $bln[1] = 'Desember';
+		        break;
+			}
+
+			$bulan[$i] = $bln[1].', '.$bln[0];
+		}
+		
+		$bulan = array_unique($bulan);
+
+		$input = $this->input->post('bulan');
+		if ($input == NULL) {
+			$input = $bulan[0];
+		}
+		$input = explode(', ', $input);
+
+		switch ($input[0]) {
+		    case 'Januari':
+		        $input[0] = '01';
+		        break;
+		    case 'Februari':
+		        $input[0] = '02';
+		        break;
+		    case 'Maret':
+		        $input[0] = '03';
+		        break;
+		    case 'April':
+		        $input[0] = '04';
+		        break;
+		    case 'Mei':
+		        $input[0] = '05';
+		        break;
+		    case 'Juni':
+		        $input[0] = '06';
+		        break;
+		    case 'Juli':
+		        $input[0] = '07';
+		        break;
+		    case 'Agustus':
+		        $input[0] = '08';
+		        break;
+		    case 'September':
+		        $input[0] = '09';
+		        break;
+		    case 'Oktober':
+		        $input[0] = '10';
+		        break;
+		    case 'November':
+		        $input[0] = '11';
+		        break;
+		    case 'Desember':
+		        $input[0] = '12';
+		        break;
+		}
+		$hInput = $input[1].'-'.$input[0];
+		$y = 0;
+		for ($i=0; $i < count($data['absensi']); $i++) { 
+			$b = explode(' ', $data['absensi'][$i]['Hari']);
+			$bln = explode('-', $b[1]);
+			if ($hInput == ($bln[0].'-'.$bln[1])) {
+				$hasil[$y] = $data['absensi'][$i];
+				$y++;
+			}
+		}
+
+		$data['absensi'] = $hasil;
+		$data['bulan'] = $bulan;
+		$data['bulanini'] = $this->input->post('bulan');
+		if ($data['bulanini']== NULL) {
+			$data['bulanini'] = $bulan[0];
+		}
 		$this->load->view('vPIC/vTemplate/vHeaderPIC', $data);
 		$this->load->view('vPIC/vAbsensiPIC');
 		$this->load->view('vPIC/vTemplate/vFooterPIC');

@@ -53,7 +53,7 @@
                 <th >Instruksi Pengerjaan</th>
               </tr>
             </thead>
-            <tbody id="tabelku">
+            <tbody id="tabelku" >
               <?php $temp = 0; $no = 1; ?>
               <input type="hidden" name="nJumlah" value="<?php echo count($checklist); ?>">
               <?php foreach ($checklist as $checklist) { ?>
@@ -135,6 +135,32 @@
       <nav>
         <ul class="pagination"></ul>
       </nav>
+    </div>
+    <div class="ui divider"></div>
+    <div>
+      <h4 style="margin-left:5px;"> Keterangan :</h4>
+      <div class="ui equal width aligned padded grid">
+        <div class="row" style="padding:5px;">
+          <div class="column" style="background-color: tomato;color: #FFFFFF;"></div>
+          <div class="column">Tidak Dicek</div>
+          <div class="column"></div>
+        </div>
+        <div class="row" style="padding:5px;">
+          <div class="column" style="background-color: mediumseagreen;color: #FFFFFF;"></div>
+          <div class="column">Waktu Pengecekan Dimulai</div>
+          <div class="column"></div>
+        </div>
+        <div class="row" style="padding:5px;">
+          <div class="column" style="background-color: gold;color: #FFFFFF;"></div>
+          <div class="column">Waktu Pengecekan Telah Melewati Batas</div>
+          <div class="column"></div>
+        </div>
+        <div class="row" style="padding:5px; ">
+          <div class="column" style="background-color: #75e2f2;color: #FFFFFF;"></div>
+          <div class="column">Berhasil Dicek</div>
+          <div class="column"></div>
+        </div>
+      </div>
     </div>
     </div>
   </div>
@@ -235,6 +261,20 @@
 
 
 </script>
+
+<script type="text/javascript">
+      $(document).ready(function(){
+        $("#pencarian").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#tabelku tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+          $("#tabelku tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        }); 
+      });
+  </script>
 
 
 

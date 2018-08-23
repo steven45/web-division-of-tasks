@@ -49,6 +49,11 @@ class mAdmin extends CI_Model
         }
     }    
 
+    public function hapusAdmin($table, $username)
+    {
+        $this->db->delete($table, array('Username' => $username));
+    }
+
     public function getPIC($NIK = false)
     {
         if ($NIK == null) {
@@ -74,6 +79,16 @@ class mAdmin extends CI_Model
     {
         $this->db->where('NIK', $NIK);
         $this->db->update($table, $data);
+    }
+
+    public function minPIC()
+    {   $min = "SELECT MIN(JumlahPengecekan) AS min FROM `pic`";
+        $min = $this->db->query($min)->row_array();
+        $min = (int) $min['min'];
+
+        $query = "SELECT * FROM `pic` WHERE `JumlahPengecekan` = $min";
+        $query = $this->db->query($query)->row_array();
+        return $query;
     }
 
     public function tambahChecklist($table, $data, $namaChecklist, $jam)
@@ -192,6 +207,40 @@ class mAdmin extends CI_Model
             }
          }
     }
+
+    public function ubahJChecklistForAbsensi($table, $check, $where, $jam)
+    {
+         $query = $this->db->where($where);
+         $query = $this->db->where_in('c.Jam', $jam);
+         $query = $this->db->select('*');
+         $query = $this->db->from('jchecklist j');
+         $query = $this->db->join('checklist c','c.IDChecklist=j.IDChecklist');
+         $query = $this->db->get()->result_array();
+
+         
+         if ($query != NULL) {
+            foreach ($query as $query) {  
+                if ($query['NIKP'] != 0 AND $query['NIKP'] != NULL) {
+                    $picS = $this->getPIC($query['NIK']);
+                    $picP = $this->getPIC($query['NIKP']);
+                    $pengganti = array(
+                         'IDChecklist' => $query['IDChecklist'],
+                         'IDJadwalChecklist' => $query['IDJadwalChecklist'],
+                         'NamaPICS' => $picS['NamaPIC'],
+                         'NamaPICP' => $picP['NamaPIC']
+                    );
+                    $cek = $this->cekPenggantiPIC('penggantipic', $pengganti);
+                    if ($cek == NULL) {
+                        $this->penggantiPIC('penggantipic', $pengganti);
+                    }
+                }
+
+                $this->db->where('IDJadwalChecklist', $query['IDJadwalChecklist']);
+                $this->db->update($table, $check);
+            }
+         }
+    }
+
     public function lihatLastIDChecklist()
     {
         $query ="select * from checklist order by IDChecklist DESC limit 1";
@@ -313,10 +362,12 @@ class mAdmin extends CI_Model
 
     public function getLogFromDate($tanggal)
     {
-       $query = $this->db->where_in('Hari',$tanggal);
-       $query = $this->db->from('log');
-       $query = $this->db->get()->result_array();
-       return $query;
+        $query = $this->db->order_by('Waktu','DESC');
+        $query = $this->db->order_by('Jam','DESC');
+        $query = $this->db->where_in('Hari',$tanggal);
+        $query = $this->db->from('log');
+        $query = $this->db->get()->result_array();
+        return $query;
     }
 
     public function penggantiPIC($table, $data)

@@ -20,11 +20,19 @@
 
         </h3>
 
-        <div class="ui right calendar" style="margin-left: 500px; margin-top: -45px">
-          <div class="ui small input left icon">
-            <i class="calendar icon"></i>
-            <input type="date" value="<?php echo date('20y-m-d') ?>">
-          </div>
+        <div class="field" style="margin-left: 600px; margin-top: -45px" data-tooltip="Klik untuk Pilih Bulan" data-inverted="" data-position="top right" >
+          <form method="POST" action="<?php echo site_url('pic/absensi') ?>">
+          <select class="ui search right selection tiny dropdown item" name="bulan">
+            <option value="<?php echo $bulanini; ?>"><?php echo $bulanini; ?></option>
+            <?php foreach ($bulan as $bulan) { ?>
+              <option value="<?php echo $bulan; ?>"><?php echo $bulan; ?></option>
+            <?php } ?>
+          </select> 
+          <button class="ui right floated tiny basic icon button" data-tooltip="Cari Absensi" data-inverted="" data-position="top right" >
+                <i class="search icon" style="padding-bottom:10px; padding-top:10px; "></i>
+            </button>          
+          </form>
+        </div>
           
         </div>
 
