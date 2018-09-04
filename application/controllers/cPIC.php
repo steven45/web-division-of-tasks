@@ -79,10 +79,19 @@ class cPIC extends CI_Controller {
 
 	public function lihatChecklist($status = NULL)
 	{
+		$status = explode(".", $status);
+		$data['status'] = $status[0];
+		if ($data['status'] == NULL) {
+			$data['status'] = 'Enabled';
+		}
+
 		$tanggal = $this->input->post('tanggal');
 
-		if ($tanggal == NULL) {
+		if ($tanggal == NULL AND $status[0] == NULL) {
 			$tanggal = date('20y-m-d');
+		}
+		else if($tanggal ==  NULL AND $status[0] != NULL){
+			$tanggal = $status[1];
 		}
 
 		$daftar_hari = array(

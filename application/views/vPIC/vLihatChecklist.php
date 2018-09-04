@@ -47,16 +47,23 @@
                         <th style="width: 330px;">Nama Checklist</th>
                         <th style="width: 200px;"">Nama PIC</th>
                         <th >Instruksi Pengerjaan</th>
-                        <th >Check</th>
+                        <th >
+                          <div class="ui simple dropdown item" style="color: black;">
+                            Check
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                              <a class="item" href="<?php echo site_url('pic/checklist/Enabled.'. $tanggal) ?>">Enabled</a>
+                              <a class="item" href="<?php echo site_url('pic/checklist/Disabled.'. $tanggal) ?>">Disabled</a>
+                            </div>
+                          </div>
+                        </th>
 
                       </tr>
                     </thead>
                     <tbody id="hasil">
                       <?php $temp = 0; $no = 1; ?>
                       <?php foreach ($checklist as $checklist) { ?>
-
-                      <?php  
-                      if ($checklist['StatusCheck'] == '1') { ?>
+                      <?php if ($checklist['StatusCheck'] == '1') { ?>
                       <tr style="background-color: #AFEEEE" class="hasilku" id="<?php echo 'hasilQ'.$temp; ?>">
                         <?php }
                         else if ($checklist['StatusCheck'] == '2'){ ?>
@@ -69,6 +76,7 @@
 
                             <td><?php echo $no ; $no = $no+1;?></td>
                             <td class="hari"><?php echo $checklist['Tanggal']; ?></td>
+                            <input type="hidden" class="status" value="<?php echo $status ?>">
                             <input type="hidden"  class="statusCheck" value="<?php echo $checklist['StatusCheck'] ?>" id="<?php echo "sttsCheck".$temp ?>">
                             <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDJadwalChecklist'] ?>">
                             <input class="info" type="hidden" name="Info" value="<?php echo $checklist['Info'] ?>">
@@ -264,6 +272,7 @@
           var batasP = [];
           var statusCheck = [];
           var hari = [];
+          var status = [];
 
           var x = document.getElementsByClassName("time");
           for(var j = 0; j < x.length; j++){
@@ -274,6 +283,7 @@
             idChecklist[j] = document.getElementsByClassName("idChecklist")[j].value;
             namaPIC[j] =  document.getElementsByClassName("namaPIC")[j].innerHTML;
             info[j] = document.getElementsByClassName("info")[j].value;
+            status[j] = document.getElementsByClassName("status")[j].value;
             batasP[j] = parseInt(document.getElementsByClassName("batasP")[j].innerHTML.substring(0,2));
             selisih[j] =  moment.duration(moment(time[j], 'hh:mm').diff(nowTime)).asMinutes();
           }
@@ -306,12 +316,18 @@ Rule pewarnaan pada baris checklist :
         for (var j = 0; j < row.length; j++) { // 1
           f[j] = document.getElementsByClassName('hasilku')[j];
 
-          if ( (selisih[j]*(-1)) < 0) {
+          if ((selisih[j]*(-1)) < 0) {
             document.getElementsByClassName("docheck")[j].innerHTML = 'Disabled';
+            if (status[j] == 'Disabled') {
+              f[j].style.display = "none";
+            }
             // $('.docheck').attr("disabled","disabled");
           }
           
           if (statusCheck[j] == "0") { // 2
+            if (status[j] == 'Disabled') {
+              f[j].style.display = "none";
+            }
             // console.log(j);
             // console.log("Status cek nya : " +statusCheck[j]);
             
@@ -330,6 +346,7 @@ Rule pewarnaan pada baris checklist :
                 console.log(time[k] +" = "+ (selisih[k]*-1));
                 console.log("Awalanya colornya : " +f[j].style.backgroundColor)
                 f[j].style.backgroundColor = 'tomato';
+                f[j].style.display = "none";
                 console.log(hari[j]+" :: "+time[j]+" - "+ namaChecklist[j]+" == "+hari[k]+" :: "+time[k]+" - "+ namaChecklist[k]+" MAKA UBAH JADI "+ f[j].style.backgroundColor);
 
                 if (f[j].style.backgroundColor == 'tomato') { //2CAA
@@ -363,10 +380,17 @@ Rule pewarnaan pada baris checklist :
           } 
           else if(statusCheck[j] == "2"){ // 3
             document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
+            if (status[j] == 'Enabled') {
+              f[j].style.display = "none";
+            }
+            
           }
           else if(statusCheck[j] == "1"){ // 4
             document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
             f[j].style.backgroundColor = '#AFEEEE';
+            if (status[j] == 'Disabled') {
+              f[j].style.display = "none";
+            }
           }
         }
         }//Akhir Method myTimer

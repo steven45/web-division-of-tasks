@@ -77,6 +77,7 @@ $route['pic/validation'] = 'cPIC/validation';
 $route['pic/beranda'] = 'cPIC/lihatLog';
 $route['pic/keluar'] = 'cPIC/keluar';
 $route['pic/checklist'] = 'cPIC/lihatChecklist';
+$route['pic/checklist/(:any)'] = 'cPIC/lihatChecklist/$1';
 $route['pic/jChecklist'] = 'cPIC/jChecklist';
 $route['pic/docheck'] = 'cPIC/doChecklist';
 $route['pic/nocheck'] = 'cPIC/noChecklist';
