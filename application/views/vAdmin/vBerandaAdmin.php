@@ -15,8 +15,9 @@
         <i class="clock icon"></i>
         L O G 
       </h3>
+
       <form method="POST" action="<?php echo site_url('admin/beranda'); ?>">
-        <div class="ui right calendar" style="margin-left: 77%; margin-top: -30px">
+        <div class="ui right calendar" style="margin-left: 75%; margin-top: -45px">
           <div class="ui input left icon" >
             <i class="calendar icon" ></i>
             <input type="date" value="<?php echo $tanggal ?>" id="kalender" name="tanggal">
@@ -27,6 +28,7 @@
         </div>
       </form>
        <h2 class="ui icon" style="margin-left: 97%;  margin-top: -35px;"">
+
         <a href="#" id="template" data-tooltip="Download Report Checklist">
           <i class="download icon"></i>
         </a>
@@ -48,7 +50,9 @@
                     </div>
                     <br>
                     <br>
+                  
                     <button class="ui blue button">Download</button>
+                   
                   </div>
                 </form>
               </p>
