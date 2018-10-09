@@ -63,7 +63,7 @@ class cAdmin extends CI_Controller {
 		$data['judul'] = "Beranda Admin";
 		$data['active'] = "active";
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
-		$this->load->view('vAdmin/vBerandaAdmin');	
+		$this->load->view('vAdmin/vBerandaAdmin');
 		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
@@ -120,7 +120,7 @@ class cAdmin extends CI_Controller {
 			$this->mAdmin->tambahAdmin('admin', $dataA, $NIK);
 		}
 
-		if ($query == 1) 
+		if ($query == 1)
 		{
 			echo "<script type='text/javascript'>
 			alert('Sukses Menambahkan PIC');
@@ -234,13 +234,13 @@ class cAdmin extends CI_Controller {
 		$nDisabled = $this->input->post('nDisabled');
 		$nJumlah = $this->input->post('nJumlah');
 
-		for ($i=0; $i < $nJumlah; $i++) { 
+		for ($i=0; $i < $nJumlah; $i++) {
 			$id[$i] = 'NIK'.$i;
 			$nStatus[$i] = 'status'.$i;
 
 		}
 
-		for ($i=0; $i < $nJumlah; $i++) { 
+		for ($i=0; $i < $nJumlah; $i++) {
 			$NIK = $this->input->post($id[$i]);
 			$status = $this->input->post($nStatus[$i]);
 
@@ -250,13 +250,13 @@ class cAdmin extends CI_Controller {
 			if ($NIK != NULL AND $status != NULL) {
 				$query = $this->mAdmin->hapusPIC('pic',$NIK, $data);
 			}
-		}	
+		}
 
 		// $NIK = $this->input->post('NIK');
 		// $data = array(
 		// 	'Status' => 'Disabled'
 		// );
-		// $this->mAdmin->hapusPIC('pic', $data, $NIK);	
+		// $this->mAdmin->hapusPIC('pic', $data, $NIK);
 		echo "<script type='text/javascript'>
 		alert('Sukses Menyimpan Status PIC ');
 		window.location.href = '" . base_url() . "admin/pic';
@@ -309,7 +309,7 @@ class cAdmin extends CI_Controller {
 
 			move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
 
-				for ($i=0; $i < 24 ; $i++) { 
+				for ($i=0; $i < 24 ; $i++) {
 					if ($i < 10) {
 						$nJam = "0".$i.":00";
 					}
@@ -327,7 +327,7 @@ class cAdmin extends CI_Controller {
 					);
 
 					$hasil = $this->mAdmin->tambahChecklist('checklist', $data, $namaChecklist, $i);
-					$hasilJam[$i] = $hasil;		
+					$hasilJam[$i] = $hasil;
 				}
 		}
 		elseif ($jam == "Lainnya") {
@@ -355,7 +355,7 @@ class cAdmin extends CI_Controller {
 
 				move_uploaded_file($_FILES["Info"]["tmp_name"], $target_file);
 
-					for ($i=0; $i < count($nJam); $i++) { 
+					for ($i=0; $i < count($nJam); $i++) {
 						$data = array(
 							'Info' => $target_file,
 							'NamaChecklist' => $namaChecklist,
@@ -371,9 +371,9 @@ class cAdmin extends CI_Controller {
 		}
 		$tampil1 = "";
 		$tampil2 = "";
-		for ($i=0; $i < count($hasilJam); $i++) { 
+		for ($i=0; $i < count($hasilJam); $i++) {
 			if (substr($hasilJam[$i], 0,1) == "_") {
-				$tampil1= $tampil1." ".str_replace("_","",$hasilJam[$i]); 
+				$tampil1= $tampil1." ".str_replace("_","",$hasilJam[$i]);
 			}
 			else{
 				$tampil2 = $tampil2." ".$hasilJam[$i];
@@ -407,7 +407,7 @@ class cAdmin extends CI_Controller {
 			'Do' => site_url('admin/checklist')
 		);
 		$this->mAdmin->tambahALog('alog',$alog);
-	
+
 		$data['judul'] = "List Checklist";
 		$data['checklist']= $this->mAdmin->getChecklist();
 
@@ -451,7 +451,7 @@ class cAdmin extends CI_Controller {
 		$data['checklist']= $this->mAdmin->getJChecklist($tanggal);
 		$data['pic'] = $this->mAdmin->getPIC();
 
-		for ($i=0; $i < count($data['checklist']); $i++) { 
+		for ($i=0; $i < count($data['checklist']); $i++) {
 			if ($data['checklist'][$i]['NIKP'] != '0' AND $data['checklist'][$i]['NIKP'] != NULL) {
 				$picP = $this->mAdmin->getPIC($data['checklist'][$i]['NIKP']);
 				$data['picP'][$i]['NamaPIC'] = $picP['NamaPIC'];
@@ -475,7 +475,7 @@ class cAdmin extends CI_Controller {
 			'Do' => site_url('admin/editchecklist/').$IDChecklist
 		);
 		$this->mAdmin->tambahALog('alog',$alog);
-		
+
 		if (!isset($_SESSION['nama'])) {
 			redirect(base_url("admin"));
 		}
@@ -496,7 +496,7 @@ class cAdmin extends CI_Controller {
 			'Do' => site_url('admin/validasieditchecklist')
 		);
 		$this->mAdmin->tambahALog('alog',$alog);
-		
+
 		date_default_timezone_set('Asia/Jakarta');
 		$IDChecklist     = $this->input->post('IDChecklist');
 		$namaChecklist   = $this->input->post('NamaChecklist');
@@ -541,7 +541,7 @@ class cAdmin extends CI_Controller {
 				}
 			}
 		}
-		
+
 		if ($data == 1) {
 			echo "<script type='text/javascript'>
 			alert('Sukses Mengedit Checklist');
@@ -564,7 +564,7 @@ class cAdmin extends CI_Controller {
 			'Do' => site_url('admin/infochecklist/$IDChecklist')
 		);
 		$this->mAdmin->tambahALog('alog',$alog);
-		
+
 		$hasil = $this->mAdmin->getInfoChecklist('checklist', $IDChecklist);
 		$data['judul'] = "Info Checklist";
 		$data['info'] = $hasil['Info'];
@@ -580,13 +580,13 @@ class cAdmin extends CI_Controller {
 			'Do' => site_url('admin/gantichecklist')
 		);
 		$this->mAdmin->tambahALog('alog',$alog);
-		
+
 		$nJumlah = $this->input->post('nJumlah');
 		$checklist= $this->mAdmin->getChecklist();
 		// echo count($data['checklist']);
 		// echo '<br>';
 		// echo $nJumlah;
-		for ($i=0; $i < $nJumlah; $i++) { 
+		for ($i=0; $i < $nJumlah; $i++) {
 			$id[$i] = 'IDChecklist'.$i;
 			$nStatus[$i] = 'Status'.$i;
 			// echo $id[$i]. ' '. $nStatus[$i].' '.$nNIK[$i];
@@ -594,7 +594,7 @@ class cAdmin extends CI_Controller {
 			// echo '<br>';
 		}
 
-		for ($i=0; $i < $nJumlah; $i++) { 
+		for ($i=0; $i < $nJumlah; $i++) {
 			$IDChecklist = $this->input->post($id[$i]);
 			$status      = $this->input->post($nStatus[$i]);
 
@@ -621,12 +621,12 @@ class cAdmin extends CI_Controller {
 			'Do' => site_url('admin/gantijchecklist')
 		);
 		$this->mAdmin->tambahALog('alog',$alog);
-		
+
 		$nJumlah = $this->input->post('nJumlah');
 		// echo count($data['checklist']);
 		// echo '<br>';
 		// echo $nJumlah;
-		for ($i=0; $i < $nJumlah; $i++) { 
+		for ($i=0; $i < $nJumlah; $i++) {
 			$nNIK[$i] = 'NIK'.$i;
 			$nNIKP[$i] = 'NIKP'.$i;
 			$id[$i] = 'IDChecklist'.$i;
@@ -636,7 +636,7 @@ class cAdmin extends CI_Controller {
 			// echo '<br>';
 		}
 
-		for ($i=0; $i < $nJumlah; $i++) { 
+		for ($i=0; $i < $nJumlah; $i++) {
 			$IDChecklist = $this->input->post($id[$i]);
 			$IDJadwalChecklist = $this->input->post($idJ[$i]);
 			$NIK         = $this->input->post($nNIK[$i]);
@@ -677,7 +677,7 @@ class cAdmin extends CI_Controller {
 				}
 			}
 		}
-	
+
 		echo "<script type='text/javascript'>
 		alert('Sukses mengganti PIC');
 		window.location.href = '" . base_url() . "admin/jchecklist';
@@ -691,7 +691,7 @@ class cAdmin extends CI_Controller {
 			'Do' => site_url('admin/absensi')
 		);
 		$this->mAdmin->tambahALog('alog',$alog);
-		
+
 		$data['judul'] = "Lihat Absensi";
 		$tanggal = $this->input->post('tanggal');
 		if ($tanggal == NULL) {
@@ -784,7 +784,7 @@ class cAdmin extends CI_Controller {
 		$h = $daftar_hari[$namahari].', '.$hari;
 		$query = $this->mAdmin->tambahAbsensi('harian', $data, $NIK, $IDJadwal, $h);
 
-		if ($query == 1) 
+		if ($query == 1)
 		{
 			echo "<script type='text/javascript'>
 			alert('Sukses Menambahkan Absensi');
@@ -830,7 +830,7 @@ class cAdmin extends CI_Controller {
 		$data['absensi']= $this->mAdmin->getAbsensi($IDHarian);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vEditAbsensiPIC', $data);
-		$this->load->view('vAdmin/vTemplate/vFooterAdmin');		
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
 	public function validasiEditAbsensi()
@@ -879,7 +879,7 @@ class cAdmin extends CI_Controller {
 	public function gantiAbsensi()
 	{
 		$jumlahAbsensi= $this->input->post('jumlahAbsensi');
-		for ($i=0; $i < $jumlahAbsensi; $i++) { 
+		for ($i=0; $i < $jumlahAbsensi; $i++) {
 			$IDHarian      = $this->input->post('IDHarian'.$i);
 			$Kehadiran     = $this->input->post('Kehadiran'.$i);
 			if ($Kehadiran == 'Hadir') {
@@ -900,7 +900,7 @@ class cAdmin extends CI_Controller {
 
 			$dateAj = explode(" ", $tanggal);
 			$tanggalNext = new DateTime($dateAj[1]);
-			$tanggalNext = $tanggalNext->modify( '+1 day' ); 
+			$tanggalNext = $tanggalNext->modify( '+1 day' );
 			$tanggalNext = $tanggalNext->format("Y-m-d");
 			$daftar_hari = array(
 				'Sunday'    => 'Minggu',
@@ -935,7 +935,7 @@ class cAdmin extends CI_Controller {
 				'NIKP' => $NIKPengganti
 			);
 
-		
+
 			if ($shift == '1') {
 				$this->mAdmin->ubahJChecklistForAbsensi('jchecklist', $check, $where, $jam1);
 			}
@@ -1044,7 +1044,7 @@ class cAdmin extends CI_Controller {
 
 		$data['judul'] = "Log Checklist";
 		$data['log']= $this->mAdmin->getLogFromDate($tanggal);
-		
+
 		$data['notifikasi'] = $this->mAdmin->getNotifikasi();
 		$data['temp'] = $this->notifikasi();
 
@@ -1059,7 +1059,7 @@ class cAdmin extends CI_Controller {
 		// header("Content-type:application/json");
 		$data['judul'] = "Log Checklist";
 		$data['log']= $this->mAdmin->getLog();
-		
+
 		$data['notifikasi'] = $this->mAdmin->getNotifikasi();
 		$data['temp'] = $this->notifikasi();
 		// echo json_encode($data);
@@ -1069,121 +1069,133 @@ class cAdmin extends CI_Controller {
 	}
 
 	public function ranking()
-	{	
-		$alog = array(
-			'IPAddress' => $ip = $this->get_client_ip(),
-			'Do' => site_url('admin/ranking')
-		);
-		$this->mAdmin->tambahALog('alog',$alog);
-		$data['judul'] = "Ranking PIC";
-		$data['pic'] = $this->mAdmin->getPIC();
+    {
+        $alog = array(
+            'IPAddress' => $ip = $this->get_client_ip(),
+            'Do' => site_url('admin/ranking')
+        );
+        $this->mAdmin->tambahALog('alog', $alog);
+        $data['judul'] = "Ranking PIC";
+        $data['pic'] = $this->mAdmin->getPIC();
 
-		$jumlah = count($data['pic']);
-		$temp = 0;
+        $jumlah = count($data['pic']);
+        $temp = 0;
 
-		$maxMudah = $data['pic'][0]['JMudah'];
-		$maxSedang = $data['pic'][0]['JSedang'];
-		$maxSulit = $data['pic'][0]['JSulit'];	
+        $maxMudah = $data['pic'][0]['JMudah'];
+        $maxSedang = $data['pic'][0]['JSedang'];
+        $maxSulit = $data['pic'][0]['JSulit'];
 
-		foreach ($data['pic'] as $pic) {
-			if ($pic['JMudah'] > $maxMudah) {
-				$maxMudah = $pic['JMudah'];
-			}
-			if ($pic['JSedang'] > $maxSedang) {
-				$maxSedang = $pic['JSedang'];
-			}
-			if ($pic['JSulit'] > $maxSulit) {
-				$maxSulit = $pic['JSulit'];
-			}
-		}
+        foreach ($data['pic'] as $pic) {
+            if ($pic['JMudah'] > $maxMudah) {
+                $maxMudah = $pic['JMudah'];
+            }
+            if ($pic['JSedang'] > $maxSedang) {
+                $maxSedang = $pic['JSedang'];
+            }
+            if ($pic['JSulit'] > $maxSulit) {
+                $maxSulit = $pic['JSulit'];
+            }
+        }
 
-		foreach ($data['pic'] as $pic) {
-			$nama[$temp] = $pic['NamaPIC'];
-			$jumlahCek[$temp] = $pic['JumlahPengecekan'];
-			$jabatan[$temp] = $pic['Jabatan'];
-			$lamaKerja[$temp] = (date("Y")) - $pic['TahunMasuk'];
-			$rataChecklist[$temp] = ($pic['JMudah']/$maxMudah*20)+($pic['JSedang']/$maxSedang*30)+($pic['JSulit']/$maxSulit*50);
-			$temp = $temp+1;
-		}
+        if ($maxSulit == 0) {
+            $maxSulit += 1;
+        }
+        if ($maxMudah == 0) {
+            $maxMudah += 1;
+        }
+        if ($maxSedang == 0) {
+            $maxSedang += 1;
+        }
 
-		
-		for ($i=0; $i < count($rataChecklist) ; $i++) { 
-			if ($rataChecklist[$i] < 60) {
-				$checklist[$i] = 60;
-			}
-			elseif ($rataChecklist[$i] >= 60 && $rataChecklist[$i] < 80) {
-				$checklist[$i] = 80;
-			}
-			else{
-				$checklist[$i] = 100;
-			}
-		}
+        foreach ($data['pic'] as $pic) {
+            $nama[$temp] = $pic['NamaPIC'];
+            $jumlahCek[$temp] = $pic['JumlahPengecekan'];
+            $jabatan[$temp] = $pic['Jabatan'];
+            $lamaKerja[$temp] = (date("Y")) - $pic['TahunMasuk'];
+            $rataChecklist[$temp] = ($pic['JMudah']/$maxMudah*20)+($pic['JSedang']/$maxSedang*30)+($pic['JSulit']/$maxSulit*50);
+            $temp = $temp+1;
+        }
 
-		for ($i=0; $i < count($jabatan) ; $i++) { 
-			if($jabatan[$i] == 'Staff'){
-				$nilaiJabatan[$i] = 80;
-			}
-			else if($jabatan[$i] == 'Chief Leader'){
-				$nilaiJabatan[$i] = 100;
-			}
-			else{
-				$nilaiJabatan[$i] = 90;
-			}
-		}
 
-		for ($j=0; $j < count($lamaKerja); $j++) { 
-			if ($lamaKerja[$j] < 4 ){ 
-				$nilaiLamaKerja[$j] = 40;
-			}
-			else if($lamaKerja[$j] < 7){
-				$nilaiLamaKerja[$j]= 55;
-			}
-			else if($lamaKerja[$j] < 10){
-				$nilaiLamaKerja[$j] = 70;
-			}
-			else{
-				$nilaiLamaKerja[$j] = 85;
-			}
-		}
+        for ($i=0; $i < count($rataChecklist) ; $i++) {
+            if ($rataChecklist[$i] < 60) {
+                $checklist[$i] = 60;
+            } elseif ($rataChecklist[$i] >= 60 && $rataChecklist[$i] < 80) {
+                $checklist[$i] = 80;
+            } else {
+                $checklist[$i] = 100;
+            }
+        }
 
-			//kriteria
-		$data['kriteria'] = $this->mAdmin->getKriteria();
-		for ($i=0; $i < count($data['kriteria']); $i++) { 
-			$kriteria[$i] = $data['kriteria'][$i]['NamaParameter'];
-			$bobot[$i] = $data['kriteria'][$i]['Bobot'];
-		}
+        for ($i=0; $i < count($jabatan) ; $i++) {
+            if ($jabatan[$i] == 'Staff') {
+                $nilaiJabatan[$i] = 80;
+            } elseif ($jabatan[$i] == 'Chief Leader') {
+                $nilaiJabatan[$i] = 100;
+            } else {
+                $nilaiJabatan[$i] = 90;
+            }
+        }
 
-		$jumlahS = 0;
+        for ($j=0; $j < count($lamaKerja); $j++) {
+            if ($lamaKerja[$j] < 4) {
+                $nilaiLamaKerja[$j] = 40;
+            } elseif ($lamaKerja[$j] < 7) {
+                $nilaiLamaKerja[$j]= 55;
+            } elseif ($lamaKerja[$j] < 10) {
+                $nilaiLamaKerja[$j] = 70;
+            } else {
+                $nilaiLamaKerja[$j] = 85;
+            }
+        }
 
-		for ($k=0; $k < count($data['pic']) ; $k++) { 
-			$hasilS[$k] = pow($jumlahCek[$k],$bobot[0])* pow($nilaiJabatan[$k],$bobot[1])* pow($checklist[$k],$bobot[2])* pow($nilaiLamaKerja[$k],$bobot[3]);
+        //Mengambil kriteria dan perbaikan bobot
+        $data['kriteria'] = $this->mAdmin->getKriteria();
+        $x = 0;
+        for ($i=0; $i < count($data['kriteria']); $i++) {
+            $kriteria[$i] = $data['kriteria'][$i]['NamaParameter'];
+            $bobot[$i] = $data['kriteria'][$i]['Bobot'];
+            $x += $bobot[$i];
+        }
 
-			$jumlahS = $jumlahS + $hasilS[$k];		
-		}
+        for ($i=0; $i < count($data['kriteria']); $i++) {
+            $bobot[$i] = $bobot[$i]/$x;
+        }
 
-		for ($m=0; $m < count($data['pic']) ; $m++) { 
-			$hasilV[$m] = $hasilS[$m] / $jumlahS;
-		}
+        $jumlahS = 0;
 
-		for ($i=0; $i < count($hasilV); $i++) { 
-			$hasilAkhir[$i]['nama'] = $nama[$i];
-			$hasilAkhir[$i]['hasilV'] = $hasilV[$i];
+        for ($k=0; $k < count($data['pic']) ; $k++) {
+            $hasilS[$k] = pow($jumlahCek[$k], $bobot[0])* pow($nilaiJabatan[$k], $bobot[1])* pow($checklist[$k], $bobot[2])* pow($nilaiLamaKerja[$k], $bobot[3]);
 
-			$wp[$i]['NIK'] = $data['pic'][$i]['NIK'];
-			$wp[$i]['nama'] = $nama[$i];
-			$wp[$i]['hasilV'] = $hasilV[$i];
-		}
-		return $hasilAkhir;
-		// echo json_encode($hasilAkhir);
+            $jumlahS = $jumlahS + $hasilS[$k];
+        }
 
-		//MENAMPILKAN HASIL DARI PERHITUNGAN WEIGHT PRODUCT
-		// echo "<table border ='1px'>";
-		// echo "<tr><td>Nama</td> <td>Jumlah Pengecekan</td><td>Jabatan</td><td>Checklist</td><td>Lama Kerja</td><td>S(i)</td><td>V(i)</td></tr>";
-		// for ($i=0; $i < count($data['pic']); $i++) { 
-		// 	echo "<tr><td>".$nama[$i] ."</td> <td>". $jumlahCek[$i] ."</td><td>". $nilaiJabatan[$i] ."</td><td>". $checklist[$i] ."</td><td>". $nilaiLamaKerja[$i] ."</td><td>". $hasilS[$i] ."</td><td>".$hasilV[$i] ."</td></tr>";
-		// }
-		// echo "</table>";
-	}
+        $jumlahV = 0;
+        for ($m=0; $m < count($data['pic']) ; $m++) {
+            $hasilV[$m] = $hasilS[$m] / $jumlahS;
+            $jumlahV += $hasilV[$m];
+        }
+
+        for ($i=0; $i < count($hasilV); $i++) {
+            $hasilAkhir[$i]['nama'] = $nama[$i];
+            $hasilAkhir[$i]['hasilV'] = $hasilV[$i];
+
+            $wp[$i]['NIK'] = $data['pic'][$i]['NIK'];
+            $wp[$i]['nama'] = $nama[$i];
+            $wp[$i]['hasilV'] = $hasilV[$i];
+        }
+        return $hasilAkhir;
+        // echo json_encode($hasilAkhir);
+
+        // //MENAMPILKAN HASIL DARI PERHITUNGAN WEIGHT PRODUCT
+        // echo "Bobot : ". $bobot[0]." ". $bobot[1]." ".$bobot[2]." ".$bobot[3];
+        // echo "<table border ='1px'>";
+        // echo "<tr><td>Nama</td> <td>Jumlah Pengecekan</td><td>Jabatan</td><td>Checklist</td><td>Lama Kerja</td><td>S(i)</td><td>V(i)</td></tr>";
+        // for ($i=0; $i < count($data['pic']); $i++) {
+        // 	echo "<tr><td>".$nama[$i] ."</td> <td>". $jumlahCek[$i] ."</td><td>". $nilaiJabatan[$i] ."</td><td>". $checklist[$i] ."</td><td>". $nilaiLamaKerja[$i] ."</td><td>". $hasilS[$i] ."</td><td>".$hasilV[$i] ."</td></tr>";
+        // }
+        // echo "</table>";
+    }
 
 	public function jRanking()
 	{
@@ -1197,238 +1209,261 @@ class cAdmin extends CI_Controller {
 	}
 
 	public function penjadwalan()
-	{
-		//MULAI PERHITUNGAN UNTUK PENJADWALAN OTOMATIS
-		//1. Mengurutkan hasil dari WP
-		$alog = array(
-			'IPAddress' => $ip = $this->get_client_ip(),
-			'Do' => site_url('admin/penjadwalan')
-		);
-		$this->mAdmin->tambahALog('alog',$alog);
+  {
+        //MULAI PERHITUNGAN UNTUK PENJADWALAN OTOMATIS
+        //1. Mengurutkan hasil dari WP
+        $alog = array(
+            'IPAddress' => $ip = $this->get_client_ip(),
+            'Do' => site_url('admin/penjadwalan')
+        );
+        $this->mAdmin->tambahALog('alog', $alog);
 
-		$begin = new DateTime($this->input->post('date0'));
-		$end = new DateTime($this->input->post('date1'));
-		$end = $end->modify( '+1 day' ); 
+        $begin = new DateTime($this->input->post('date0'));
+        $end = new DateTime($this->input->post('date1'));
+        $end = $end->modify('+1 day');
 
-		$interval = new DateInterval('P1D');
-		$daterange = new DatePeriod($begin, $interval ,$end);
+        $interval = new DateInterval('P1D');
+        $daterange = new DatePeriod($begin, $interval, $end);
 
-		$y = 0;
-		foreach($daterange as $date){
-			$wp         = $this->ranking(); 
-			$data       = $this->mAdmin->getPIC();
-			$jChecklist = $this->mAdmin->getChecklistWhere();
-			$tanggal0   = $date->format("Y-m-d");
-			$tanggal1   = date('Y-m-d', strtotime($tanggal0. ' + 1 days'));
+        $y = 0;
+        foreach ($daterange as $date) {
+            $wp         = $this->ranking();
+            $data       = $this->mAdmin->getPIC();
+            $jChecklist = $this->mAdmin->getChecklistWhere();
+            $tanggal0   = $date->format("Y-m-d");
+            $tanggal1   = date('Y-m-d', strtotime($tanggal0. ' + 1 days'));
 
-			$daftar_hari = array(
-				'Sunday'    => 'Minggu',
-				'Monday'    => 'Senin',
-				'Tuesday'   => 'Selasa',
-				'Wednesday' => 'Rabu',
-				'Thursday'  => 'Kamis',
-				'Friday'    => 'Jumat',
-				'Saturday'  => 'Sabtu'
-			);
-			$namahari0 = date('l', strtotime($tanggal0));
-			$namahari1 = date('l', strtotime($tanggal1));
+            $daftar_hari = array(
+                'Sunday'    => 'Minggu',
+                'Monday'    => 'Senin',
+                'Tuesday'   => 'Selasa',
+                'Wednesday' => 'Rabu',
+                'Thursday'  => 'Kamis',
+                'Friday'    => 'Jumat',
+                'Saturday'  => 'Sabtu'
+            );
+            $namahari0 = date('l', strtotime($tanggal0));
+            $namahari1 = date('l', strtotime($tanggal1));
 
-			$tanggal0 = $daftar_hari[$namahari0].', '.$tanggal0;
-			$tanggal1 = $daftar_hari[$namahari1].', '.$tanggal1;
+            $tanggal0 = $daftar_hari[$namahari0].', '.$tanggal0;
+            $tanggal1 = $daftar_hari[$namahari1].', '.$tanggal1;
 
-			$absensi = $this->mAdmin->getAbsensiDate($tanggal0);
-			if ($absensi == NULL) {
-				$alert[$y]['hasil'] = 'gagal';
-				$alert[$y]['tanggal'] = $tanggal0;
-				$y++;
-			}
-			else{
-				$alert[$y]['hasil'] = 'benar';
-				$alert[$y]['tanggal'] = $tanggal0;
-				$y++;
-				for ($i=0; $i < count($data); $i++) { 
-					$wp[$i]['NIK'] = $data[$i]['NIK'];
-					$hasilV[$i] = $wp[$i]['hasilV'];
-				}
+            $absensi = $this->mAdmin->getAbsensiDate($tanggal0);
+            if ($absensi == null) {
+                $alert[$y]['hasil'] = 'gagal';
+                $alert[$y]['tanggal'] = $tanggal0;
+                $y++;
+            } else {
+                $alert[$y]['hasil'] = 'benar';
+                $alert[$y]['tanggal'] = $tanggal0;
+                $y++;
+                for ($i=0; $i < count($data); $i++) {
+                    $wp[$i]['NIK'] = $data[$i]['NIK'];
+                    $hasilV[$i] = $wp[$i]['hasilV'];
+                }
 
-				array_multisort($hasilV,SORT_DESC,$wp); //1. 
-				sort($hasilV); //
+                // //Pembagian baru dengan membalik hasil
+                // array_multisort($hasilV,SORT_DESC,$wp); //1.
+                // sort($hasilV); //
 
-				$jumlahV = 0;
-				for ($i=0; $i < count($data); $i++) { 
-					$wp[$i]['hasilVB'] = $hasilV[$i];
-					$jumlahV = $jumlahV + $hasilV[$i];
-				}
+                // Pembagian baru dengan tetap membagi miliknya sendiri
+                $jumlahHasilV = 0;
+                for ($i=0; $i < count($data); $i++) {
+                    $hasilV[$i] = 1- $hasilV[$i];
+                    $jumlahHasilV += $hasilV[$i];
+                }
 
-				$t0 = 0; $t1 = 0;$t2 = 0;
-				$sWP[0] = 0; $sWP[1] = 0; $sWP[2] = 0; $sWP[3] = 0;
-				for ($i = 0; $i < count($absensi); $i++) {
-					for ($j=0; $j < count($wp); $j++) { 
-						if ($absensi[$i]['Shift'] == '1' AND $absensi[$i]['NIK']==$wp[$j]['NIK']) {
-							$pic[0][$t0]['NIK']     = $wp[$j]['NIK'];
-							$pic[0][$t0]['NamaPIC'] = $wp[$j]['nama'];
-							$pic[0][$t0]['hasilVB'] = $wp[$j]['hasilVB'];
-							$sWP[0] = $sWP[0] + $pic[0][$t0]['hasilVB'];
+                for ($i=0; $i < count($data); $i++) {
+                    $hasilVB[$i] = $hasilV[$i]/$jumlahHasilV;
+                }
 
-							$pic[1][$t0]['NIK']     = $wp[$j]['NIK'];
-							$pic[1][$t0]['NamaPIC'] = $wp[$j]['nama'];
-							$pic[1][$t0]['hasilVB'] = $wp[$j]['hasilVB'];
-							$sWP[1] = $sWP[1] + $pic[1][$t0]['hasilVB'];
+                $jumlahVB = 0;
+                for ($i=0; $i < count($data); $i++) {
+                    $wp[$i]['hasilVB'] = $hasilVB[$i];
+                    $jumlahVB += $hasilVB[$i];
+                }
+                //Akhir pembagian baru
 
-							$t0 = $t0+1;
-						}
-						elseif ($absensi[$i]['Shift'] == '2' AND $absensi[$i]['NIK']==$wp[$j]['NIK']){
-							$bool = true;
-							$k = 0;
-							while ($bool == true AND $k < $i) {
-								if ($pic[1][$k]['NIK'] == $wp[$j]['NIK']) {		
-									$bool = false;
-								}
-								else{
-									$bool = true;
-								}
-								$k = $k+1;
-							}
-							if ($bool == true) {
-								$pic[1][$t0]['NIK'] = $wp[$j]['NIK'];
-								$pic[1][$t0]['NamaPIC'] = $wp[$j]['nama'];
-								$pic[1][$t0]['hasilVB'] = $wp[$j]['hasilVB'];
-								$sWP[1] = $sWP[1] + $pic[1][$t0]['hasilVB'];
-							}
+                $t0 = 0;
+                $t1 = 0;
+                $t2 = 0;
+                $sWP[0] = 0;
+                $sWP[1] = 0;
+                $sWP[2] = 0;
+                $sWP[3] = 0;
+                for ($i = 0; $i < count($absensi); $i++) {
+                    for ($j=0; $j < count($wp); $j++) {
+                        if ($absensi[$i]['Shift'] == '1' and $absensi[$i]['NIK']==$wp[$j]['NIK']) {
+                            $pic[0][$t0]['NIK']     = $wp[$j]['NIK'];
+                            $pic[0][$t0]['NamaPIC'] = $wp[$j]['nama'];
+                            $pic[0][$t0]['hasilVB'] = $wp[$j]['hasilVB'];
+                            $sWP[0] = $sWP[0] + $pic[0][$t0]['hasilVB'];
 
-							$pic[2][$t1]['NIK'] = $wp[$j]['NIK'];
-							$pic[2][$t1]['NamaPIC'] = $wp[$j]['nama'];
-							$pic[2][$t1]['hasilVB'] = $wp[$j]['hasilVB'];
-							$sWP[2] = $sWP[2] + $pic[2][$t1]['hasilVB'];
-							$t1 = $t1+1;
-							$t0 = $t0+1;
-						}
-						elseif ($absensi[$i]['Shift'] == '3'AND $absensi[$i]['NIK']==$wp[$j]['NIK']){
-							$pic[3][$t2]['NIK'] = $wp[$j]['NIK'];
-							$pic[3][$t2]['NamaPIC'] = $wp[$j]['nama'];
-							$pic[3][$t2]['hasilVB'] = $wp[$j]['hasilVB'];
-							$sWP[3] = $sWP[3] + $pic[3][$t2]['hasilVB'];
-							$t2 = $t2+1;
-						}
-					}
-				}
+                            $pic[1][$t0]['NIK']     = $wp[$j]['NIK'];
+                            $pic[1][$t0]['NamaPIC'] = $wp[$j]['nama'];
+                            $pic[1][$t0]['hasilVB'] = $wp[$j]['hasilVB'];
+                            $sWP[1] = $sWP[1] + $pic[1][$t0]['hasilVB'];
 
-				//Cari rata-rata pada setiap jumlah pembagian
-				for ($i=0; $i < count($pic); $i++) { 
-					$rataPembagian[$i] = count($jChecklist[$i])/count($pic[$i]);
-				}
-				// var_dump($rataPembagian);
+                            $t0 = $t0+1;
+                        } elseif ($absensi[$i]['Shift'] == '2' and $absensi[$i]['NIK']==$wp[$j]['NIK']) {
+                            $bool = true;
+                            $k = 0;
+                            while ($bool == true and $k < $i) {
+                                if ($pic[1][$k]['NIK'] == $wp[$j]['NIK']) {
+                                    $bool = false;
+                                } else {
+                                    $bool = true;
+                                }
+                                $k = $k+1;
+                            }
+                            if ($bool == true) {
+                                $pic[1][$t0]['NIK'] = $wp[$j]['NIK'];
+                                $pic[1][$t0]['NamaPIC'] = $wp[$j]['nama'];
+                                $pic[1][$t0]['hasilVB'] = $wp[$j]['hasilVB'];
+                                $sWP[1] = $sWP[1] + $pic[1][$t0]['hasilVB'];
+                            }
 
-				$sRPembagian[0] = 0; $sRPembagian[1] = 0; $sRPembagian[2] = 0; $sRPembagian[3] = 0;
-				$sPembagian[0] = 0; $sPembagian[1] = 0; $sPembagian[2] = 0; $sPembagian[3] = 0;
-				for ($i=0; $i < count($pic); $i++) { 
-					for ($j=0; $j < count($pic[$i]); $j++) { 
-						$pic[$i][$j]['jPembagian'] = $pic[$i][$j]['hasilVB']/$sWP[$i]*count($jChecklist[$i]);
-						if ($pic[$i][$j]['jPembagian']<$rataPembagian[$i]) {
-							$pic[$i][$j]['rPembagian'] = floor($pic[$i][$j]['jPembagian']);
-						}
-						else{
-							$pic[$i][$j]['rPembagian'] = ceil($pic[$i][$j]['jPembagian']);
-						}
-						$sPembagian[$i] = $sPembagian[$i] + $pic[$i][$j]['jPembagian'];
-						$sRPembagian[$i] = $sRPembagian[$i] + $pic[$i][$j]['rPembagian'];
-					}
-				}
+                            $pic[2][$t1]['NIK'] = $wp[$j]['NIK'];
+                            $pic[2][$t1]['NamaPIC'] = $wp[$j]['nama'];
+                            $pic[2][$t1]['hasilVB'] = $wp[$j]['hasilVB'];
+                            $sWP[2] = $sWP[2] + $pic[2][$t1]['hasilVB'];
+                            $t1 = $t1+1;
+                            $t0 = $t0+1;
+                        } elseif ($absensi[$i]['Shift'] == '3'and $absensi[$i]['NIK']==$wp[$j]['NIK']) {
+                            $pic[3][$t2]['NIK'] = $wp[$j]['NIK'];
+                            $pic[3][$t2]['NamaPIC'] = $wp[$j]['nama'];
+                            $pic[3][$t2]['hasilVB'] = $wp[$j]['hasilVB'];
+                            $sWP[3] = $sWP[3] + $pic[3][$t2]['hasilVB'];
+                            $t2 = $t2+1;
+                        }
+                    }
+                }
 
-				
-				for ($i=0; $i < count($pic); $i++) { 
-					(int) $selisih[$i] = (count($jChecklist[$i]) - (int) $sRPembagian[$i] );
-					if ($selisih[$i] > 0) {
-						for ($j=0; $j < $selisih[$i]; $j++) { 
-							$rand = rand(0, (count($pic[$i])-1));
-							$pic[$i][$rand]['rPembagian'] = $pic[$i][$rand]['rPembagian'] +1;
-						}
-					}
-					elseif ($selisih[$i] < 0) {
-						$j = 0;
-						$k = 0;
-						while ($j < ($selisih[$i]*-1)) {
-							$rand = rand(0, (count($pic[$i])-1));
-							if ($pic[$i][$rand]['rPembagian'] > 0) {
-								$pic[$i][$rand]['rPembagian'] = $pic[$i][$rand]['rPembagian'] -1;
-								$j = $j+1;
-							}
-						}
-					}
-				}
+                //Cari rata-rata pada setiap jumlah pembagian
+                for ($i=0; $i < count($pic); $i++) {
+                    $rataPembagian[$i] = count($jChecklist[$i])/count($pic[$i]);
+                }
+                // var_dump($rataPembagian);
 
-				$sRPembagianNew[0] = 0; $sRPembagianNew[1] = 0; $sRPembagianNew[2] = 0; $sRPembagianNew[3] = 0;
-				for ($i=0; $i < count($pic); $i++) { 
-					for ($j=0; $j < count($pic[$i]); $j++) { 
-						$sRPembagianNew[$i] = $sRPembagianNew[$i] + $pic[$i][$j]['rPembagian'];
-					}
-				}
+                $sRPembagian[0] = 0;
+                $sRPembagian[1] = 0;
+                $sRPembagian[2] = 0;
+                $sRPembagian[3] = 0;
+                $sPembagian[0] = 0;
+                $sPembagian[1] = 0;
+                $sPembagian[2] = 0;
+                $sPembagian[3] = 0;
+                for ($i=0; $i < count($pic); $i++) {
+                    for ($j=0; $j < count($pic[$i]); $j++) {
+                        $pic[$i][$j]['jPembagian'] = $pic[$i][$j]['hasilVB']/$sWP[$i]*count($jChecklist[$i]);
+                        if ($pic[$i][$j]['jPembagian']<$rataPembagian[$i]) {
+                            $pic[$i][$j]['rPembagian'] = floor($pic[$i][$j]['jPembagian']);
+                        } else {
+                            $pic[$i][$j]['rPembagian'] = ceil($pic[$i][$j]['jPembagian']);
+                        }
+                        $sPembagian[$i] = $sPembagian[$i] + $pic[$i][$j]['jPembagian'];
+                        $sRPembagian[$i] = $sRPembagian[$i] + $pic[$i][$j]['rPembagian'];
+                    }
+                }
 
-				// //Menampilkan perhitungan penjadwalan otomatis
-				// for ($i=0; $i < count($pic); $i++) { 
-				// 	echo "Jumlah Pengecekan : ". count($jChecklist[$i]);
-				// 	echo "<table border ='1px'>";
-				// 	echo "<tr><td>NIK</td> <td>Nama</td><td>Hasil WP</td><td>Jumlah Pembagian</td><td>Real Pembagian</td></tr>";
-				// 	for ($j=0; $j < count($pic[$i]); $j++) { 
-				// 		echo "<tr><td>".$pic[$i][$j]['NIK'] ."</td> <td>".$pic[$i][$j]['NamaPIC']."</td> <td>".$pic[$i][$j]['hasilVB']."</td> <td>".$pic[$i][$j]['jPembagian']."</td> <td>".$pic[$i][$j]['rPembagian']."</td></tr>";
-				// 	}
-				// 	echo "<tr style='background-color:tomato;'><td> Jumlah </td><td>". count($pic[$i])."</td><td>". $sWP[$i] . "</td><td>".$sPembagian[$i]."</td><td>".$sRPembagianNew[$i]. "</td></tr>";
-				// 	echo "</table>";
-				// 	echo "<br>";
-				// }
+                //Memasukkan sisa penjadwalan
+                for ($i=0; $i < count($pic); $i++) {
+                    (int) $selisih[$i] = (count($jChecklist[$i]) - (int) $sRPembagian[$i]);
+                    if ($selisih[$i] > 0) {
+                        for ($j=0; $j < $selisih[$i]; $j++) {
+                            $rand = rand(0, (count($pic[$i])-1));
+                            $pic[$i][$rand]['rPembagian'] = $pic[$i][$rand]['rPembagian'] +1;
+                        }
+                    } elseif ($selisih[$i] < 0) {
+                        $j = 0;
+                        $k = 0;
+                        while ($j < ($selisih[$i]*-1)) {
+                            $rand = rand(0, (count($pic[$i])-1));
+                            if ($pic[$i][$rand]['rPembagian'] > 0) {
+                                $pic[$i][$rand]['rPembagian'] = $pic[$i][$rand]['rPembagian'] -1;
+                                $j = $j+1;
+                            }
+                        }
+                    }
+                }
 
-				//MULAI MENAMBAHKAN KE DATABASE
-				for ($i=0; $i < count($pic); $i++) { 
-					$temp = 0;
-					for ($j=0; $j < count($pic[$i]); $j++) { 
-						if ($pic[$i][$j]['rPembagian']>0) {
-							for ($k=0; $k < $pic[$i][$j]['rPembagian']; $k++) { 
-								// echo $pic[$i][$j]['NamaPIC']." ";
-								// echo $jChecklist[$i][$temp]['IDChecklist']."<br>";
+                $sRPembagianNew[0] = 0;
+                $sRPembagianNew[1] = 0;
+                $sRPembagianNew[2] = 0;
+                $sRPembagianNew[3] = 0;
+                for ($i=0; $i < count($pic); $i++) {
+                    for ($j=0; $j < count($pic[$i]); $j++) {
+                        $sRPembagianNew[$i] = $sRPembagianNew[$i] + $pic[$i][$j]['rPembagian'];
+                    }
+                }
 
-								$data0 = array(
-									"NIK" => $pic[$i][$j]['NIK'],
-									"NIKP" => '0',
-									"IDChecklist" => $jChecklist[$i][$temp]['IDChecklist'],
-									"StatusCheck" => '0',
-									"Tanggal" => $tanggal0
-								);
+                // echo "<h3>Hari : " .$tanggal0."</h3>";
+                // //Menampilkan perhitungan penjadwalan otomatis
+                // for ($i=0; $i < count($pic); $i++) {
+                //     echo "Jumlah Pengecekan : ". count($jChecklist[$i]);
+                //     echo "<table border ='1px'>";
+                //     echo "<tr><td>NIK</td> <td>Nama</td><td>Hasil WP</td><td>Jumlah Pembagian</td><td>Real Pembagian</td></tr>";
+                //     for ($j=0; $j < count($pic[$i]); $j++) {
+                //         echo "<tr><td>".$pic[$i][$j]['NIK'] ."</td> <td>".$pic[$i][$j]['NamaPIC']."</td> <td>".$pic[$i][$j]['hasilVB']."</td> <td>".$pic[$i][$j]['jPembagian']."</td> <td>".$pic[$i][$j]['rPembagian']."</td></tr>";
+                //     }
+                //     echo "<tr style='background-color:tomato;'><td> Jumlah </td><td>". count($pic[$i])."</td><td>". $sWP[$i] . "</td><td>".$sPembagian[$i]."</td><td>".$sRPembagianNew[$i]. "</td></tr>";
+                //     echo "</table>";
+                //     echo "<br>";
+                // }
 
-								$data1 = array(
-									"NIK" => $pic[$i][$j]['NIK'],
-									"NIKP" => '0',
-									"IDChecklist" => $jChecklist[$i][$temp]['IDChecklist'],
-									"StatusCheck" => '0',
-									"Tanggal" => $tanggal1
-								);
 
-								if ($i == 3) {
-									if (substr($jChecklist[$i][$temp]['Jam'],0,2) == '22' OR substr($jChecklist[$i][$temp]['Jam'],0,2) == '23') {
-										$this->mAdmin->penjadwalan($jChecklist[$i][$temp]['IDChecklist'], $data0, $tanggal0);
-									}
-									else{
-										$this->mAdmin->penjadwalan($jChecklist[$i][$temp]['IDChecklist'], $data1, $tanggal1);
-									}
-								}
-								else{
-									$this->mAdmin->penjadwalan($jChecklist[$i][$temp]['IDChecklist'], $data0, $tanggal0);
-								}
-								$temp = $temp+1;
-							}
-						}
-					}
-				}
-			}
-		}
-		if ($y == 0) {
-			$alert[$y]['hasil'] = 'kosong';
-		}
-		$data['judul'] = "Ranking PIC";
-		$data['alert'] = $alert;
-		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
-		$this->load->view('vAdmin/vRankingPIC');
-		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
-	}
+                //MULAI MENAMBAHKAN KE DATABASE
+                for ($i=0; $i < count($pic); $i++) {
+                	$temp = 0;
+                	for ($j=0; $j < count($pic[$i]); $j++) {
+                		if ($pic[$i][$j]['rPembagian']>0) {
+                			for ($k=0; $k < $pic[$i][$j]['rPembagian']; $k++) {
+                				// echo $pic[$i][$j]['NamaPIC']." ";
+                				// echo $jChecklist[$i][$temp]['IDChecklist']."<br>";
+
+                				$data0 = array(
+                					"NIK" => $pic[$i][$j]['NIK'],
+                					"NIKP" => '0',
+                					"IDChecklist" => $jChecklist[$i][$temp]['IDChecklist'],
+                					"StatusCheck" => '0',
+                					"Tanggal" => $tanggal0
+                				);
+
+                				$data1 = array(
+                					"NIK" => $pic[$i][$j]['NIK'],
+                					"NIKP" => '0',
+                					"IDChecklist" => $jChecklist[$i][$temp]['IDChecklist'],
+                					"StatusCheck" => '0',
+                					"Tanggal" => $tanggal1
+                				);
+
+                				if ($i == 3) {
+                					if (substr($jChecklist[$i][$temp]['Jam'],0,2) == '22' OR substr($jChecklist[$i][$temp]['Jam'],0,2) == '23') {
+                						$this->mAdmin->penjadwalan($jChecklist[$i][$temp]['IDChecklist'], $data0, $tanggal0);
+                					}
+                					else{
+                						$this->mAdmin->penjadwalan($jChecklist[$i][$temp]['IDChecklist'], $data1, $tanggal1);
+                					}
+                				}
+                				else{
+                					$this->mAdmin->penjadwalan($jChecklist[$i][$temp]['IDChecklist'], $data0, $tanggal0);
+                				}
+                				$temp = $temp+1;
+                			}
+                		}
+                	}
+                }
+            }
+        }
+        if ($y == 0) {
+        	$alert[$y]['hasil'] = 'kosong';
+        }
+        $data['judul'] = "Ranking PIC";
+        $data['alert'] = $alert;
+        $this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
+        $this->load->view('vAdmin/vRankingPIC');
+        $this->load->view('vAdmin/vTemplate/vFooterAdmin');
+  }
 
 	public function tampilRangking()
 	{
@@ -1504,11 +1539,11 @@ class cAdmin extends CI_Controller {
 		$this->mAdmin->tambahALog('alog',$alog);
 		$temp= $this->input->post('temp');
 
-		for ($i=0; $i < $temp ; $i++) { 
+		for ($i=0; $i < $temp ; $i++) {
 			$IDParameter[$i]	= $this->input->post('IDParameter'.$i);
 			$bobot[$i]			= $this->input->post('Bobot'.$i);
 		}
-		for ($i=0; $i < $temp; $i++) { 
+		for ($i=0; $i < $temp; $i++) {
 			$data = array(
 				'Bobot' => $bobot[$i]
 			);
@@ -1520,7 +1555,7 @@ class cAdmin extends CI_Controller {
 		alert('Sukses Mengganti Bobot. ');
 		window.location.href = '" . base_url() . "admin/ubahbobotwp';
 		</script>";
-		
+
 	}
 
 	public function gantiJadwal()
@@ -1532,11 +1567,11 @@ class cAdmin extends CI_Controller {
 		$this->mAdmin->tambahALog('alog',$alog);
 		$temp= $this->input->post('temp');
 
-		for ($i=0; $i < $temp ; $i++) { 
+		for ($i=0; $i < $temp ; $i++) {
 			$IDJadwal[$i]	= $this->input->post('IDJadwal'.$i);
 			$jam[$i]		= $this->input->post('Jam'.$i);
 		}
-		for ($i=0; $i < $temp; $i++) { 
+		for ($i=0; $i < $temp; $i++) {
 			$data = array(
 				'Jam' => $jam[$i]
 			);
@@ -1586,7 +1621,7 @@ class cAdmin extends CI_Controller {
 		$query = $this->mAdmin->tambahTemplateAbsensi('templateabsensi', $data, $NIK, $IDJadwal, $hari);
 
 
-		if ($query == 1) 
+		if ($query == 1)
 		{
 			echo "<script type='text/javascript'>
 			alert('Sukses Menambahkan Template');
@@ -1615,7 +1650,7 @@ class cAdmin extends CI_Controller {
 		$data['template']= $this->mAdmin->getTemplateAbsensi($IDTHarian);
 		$this->load->view('vAdmin/vTemplate/vHeaderAdmin', $data);
 		$this->load->view('vAdmin/vEditTemplateAbsensi', $data);
-		$this->load->view('vAdmin/vTemplate/vFooterAdmin');		
+		$this->load->view('vAdmin/vTemplate/vFooterAdmin');
 	}
 
 	public function validasiTemplateAbsensi()
@@ -1688,7 +1723,7 @@ class cAdmin extends CI_Controller {
 		// $tanggal = $daftar_hari[$namahari].', '.$tanggal;
 		$begin = new DateTime($this->input->post('date0'));
 		$end = new DateTime($this->input->post('date1'));
-		$end = $end->modify( '+1 day' ); 
+		$end = $end->modify( '+1 day' );
 
 		$interval = new DateInterval('P1D');
 		$daterange = new DatePeriod($begin, $interval ,$end);
@@ -1705,7 +1740,7 @@ class cAdmin extends CI_Controller {
 			alert('Template Kosong!');
 			window.location.href = '" . base_url() . "admin/absensi';
 			</script>";
-			
+
 			}
 			else{
 			foreach ($template as $template) {
@@ -1715,7 +1750,7 @@ class cAdmin extends CI_Controller {
 					'Hari' => $haritanggal,
 					'NIKP' => "0",
 					'Kehadiran' => "Hadir"
-					
+
 				);
 				// var_dump($data);
 				$query = $this->mAdmin->tambahAbsensiTemplate('harian', $data, $template['NIK'], $template['IDJadwal'], $haritanggal);
@@ -1823,10 +1858,10 @@ class cAdmin extends CI_Controller {
 			'Do' => site_url('admin/penjadwalan')
 		);
 		$this->mAdmin->tambahALog('alog',$alog);
-		
+
 		$begin = new DateTime($this->input->post('date0'));
 		$end = new DateTime($this->input->post('date1'));
-		$end = $end->modify( '+1 day' ); 
+		$end = $end->modify( '+1 day' );
 
 		$interval = new DateInterval('P1D');
 		$daterange = new DatePeriod($begin, $interval ,$end);
@@ -1863,18 +1898,18 @@ class cAdmin extends CI_Controller {
 		$export[count($pic)]['Bad']         = 0;
 		$export[count($pic)]['Not Checked'] = 0;
 		$export[count($pic)]['JumlahSemua'] = count($hasil);
-		for ($i=0; $i < count($pic); $i++) { 
+		for ($i=0; $i < count($pic); $i++) {
 			$export[$i]['NamaPIC'] = '';
 			$export[$i]['OK']          = 0;
 			$export[$i]['Bad']         = 0;
 			$export[$i]['Not Checked'] = 0;
 			$export[$i]['Jumlah']      = 0;
-			for ($j=0; $j < count($hasil); $j++) { 
+			for ($j=0; $j < count($hasil); $j++) {
 				$export[$i]['NamaPIC'] = $pic[$i]['NamaPIC'];
 				if ($hasil[$j]['PICCek'] == '-') {
 					if ($pic[$i]['NamaPIC'] == trim($hasil[$j]['NamaPIC'])) {
 						if ($hasil[$j]['Status'] == 'OK') {
-							$export[$i]['OK']++;	
+							$export[$i]['OK']++;
 						}
 						elseif($hasil[$j]['Status'] == 'Bad') {
 							$export[$i]['Bad']++;
@@ -1888,7 +1923,7 @@ class cAdmin extends CI_Controller {
 				else{
 					if ($pic[$i]['NamaPIC'] == trim($hasil[$j]['PICCek'])) {
 						if ($hasil[$j]['Status'] == 'OK') {
-							$export[$i]['OK']++;	
+							$export[$i]['OK']++;
 						}
 						elseif($hasil[$j]['Status'] == 'Bad') {
 							$export[$i]['Bad']++;
