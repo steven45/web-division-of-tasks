@@ -22,7 +22,7 @@ class mAdmin extends CI_Model
     	$query = "SELECT * FROM `pic` WHERE `NIK` = $NIK";
     	$hasil =  $this->db->query($query)->row_array();
 
-    	if ($hasil['NIK'] == $NIK) 
+    	if ($hasil['NIK'] == $NIK)
     	{
     		return "0";
     	}
@@ -38,7 +38,7 @@ class mAdmin extends CI_Model
         $query = "SELECT * FROM `admin` WHERE `username` = $username";
         $hasil =  $this->db->query($query)->row_array();
 
-        if ($hasil['username'] == $username) 
+        if ($hasil['username'] == $username)
         {
             return "0";
         }
@@ -47,7 +47,7 @@ class mAdmin extends CI_Model
             $this->db->insert($table,$data);
             return "1";
         }
-    }    
+    }
 
     public function hapusAdmin($table, $username)
     {
@@ -96,7 +96,7 @@ class mAdmin extends CI_Model
         $query = "SELECT * FROM `checklist` WHERE `NamaChecklist` = '$namaChecklist' AND `Jam` = $jam ";
         $hasil =  $this->db->query($query)->row_array();
         if ($hasil == NULL) {
-            $query = $this->db->insert($table,$data); 
+            $query = $this->db->insert($table,$data);
             return "_".$data['Jam'];
         }
         else{
@@ -110,7 +110,7 @@ class mAdmin extends CI_Model
         $query = "SELECT * FROM `checklist` WHERE `NamaChecklist` = '$namaChecklist' AND `Jam` = $jam AND `Hari` = '$hari'";
         $hasil =  $this->db->query($query)->row_array();
         if ($hasil == NULL) {
-            $query = $this->db->insert($table,$data); 
+            $query = $this->db->insert($table,$data);
             return "_".$data['Jam'];
         }
         else{
@@ -201,7 +201,7 @@ class mAdmin extends CI_Model
          $query = $this->db->get()->result_array();
 
          if ($query != NULL) {
-            foreach ($query as $query) {  
+            foreach ($query as $query) {
                 $this->db->where('IDJadwalChecklist', $query['IDJadwalChecklist']);
                 $this->db->update($table, $check);
             }
@@ -217,9 +217,9 @@ class mAdmin extends CI_Model
          $query = $this->db->join('checklist c','c.IDChecklist=j.IDChecklist');
          $query = $this->db->get()->result_array();
 
-         
+
          if ($query != NULL) {
-            foreach ($query as $query) {  
+            foreach ($query as $query) {
                 if ($query['NIKP'] != 0 AND $query['NIKP'] != NULL) {
                     $picS = $this->getPIC($query['NIK']);
                     $picP = $this->getPIC($query['NIKP']);
@@ -268,7 +268,7 @@ class mAdmin extends CI_Model
              $query = $this->db->get();
              return $query->result_array();
         }
-         
+
     }
     public function getAbsensiWhere($tanggal)
     {
@@ -320,7 +320,7 @@ class mAdmin extends CI_Model
         else{
             return "0";
         }
-        
+
     }
 
     public function gantiAbsensi($table, $IDHarian, $data)
@@ -420,7 +420,7 @@ class mAdmin extends CI_Model
         if ($hasil == NULL) {
             $this->db->insert('jChecklist',$data);
         }
-        else{   
+        else{
             $this->db->where('IDJadwalChecklist', $hasil['IDJadwalChecklist']);
             $this->db->update('jChecklist', $data);
         }
@@ -430,7 +430,7 @@ class mAdmin extends CI_Model
     {
         $query = "SELECT * FROM $table WHERE `NIK` = '$NIK' AND `IDJadwal` = '$IDJadwal' AND `hari` = '$hari'";
         $hasil =  $this->db->query($query)->row_array();
-        
+
         if ($hasil == NULL) {
             $this->db->insert($table,$data);
             return "1";
@@ -475,7 +475,7 @@ class mAdmin extends CI_Model
         else{
             return "0";
         }
-        
+
     }
 
     public function hapusTemplateAbsensi($table, $IDTHarian)
@@ -518,6 +518,6 @@ class mAdmin extends CI_Model
 
     public function tambahALog($table, $data)
     {
-        $this->db->insert($table,$data); 
+        $this->db->insert($table,$data);
     }
 }

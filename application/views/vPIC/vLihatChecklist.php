@@ -10,7 +10,7 @@
         <h3 style="text-align: center; margin-top: -30px;">
           <div class="ui icon">
             <i class="tasks icon"></i>
-            Daftar Checklist 
+            Daftar Checklist
           </h3>
           <form method="POST" action="<?php echo site_url('pic/checklist'); ?>">
             <div class="ui calendar" style="margin-left: 81%; margin-top: -45px">
@@ -89,9 +89,9 @@
                               <?php } else { ?>
                               <?php echo $picP[$temp]['NamaPIC'] ?>
                               <?php } ?>
-                            </td> 
+                            </td>
                             <td>
-                              <?php 
+                              <?php
                               $nInfo = NULL;
                               $k = 0;
                               $fh = fopen($checklist['Info'], 'r');
@@ -109,7 +109,7 @@
                                 <div class="ui segment">
                                  <?php foreach ($nInfo as $info) {
                                   echo '<p>'.$info.'</p>';
-                                } ?> 
+                                } ?>
                               </div>
                             </div>
                           </div>
@@ -121,7 +121,7 @@
                           <div style="display:none;">
                             <div id="<?php echo 'tampilKet'.$temp ?>">
 
-                              <form method="POST" class="form-check" id="<?php echo 'form'.$temp ?>" enctype="multipart/form-data">  
+                              <form method="POST" class="form-check" id="<?php echo 'form'.$temp ?>" enctype="multipart/form-data">
                                 <input type="hidden" name="NIK" id="<?php echo 'NIK'.$temp ?>" value="<?php echo $_SESSION['nik'] ?>">
                                 <input class="idChecklist" type="hidden" name="IDChecklist" value="<?php echo $checklist['IDJadwalChecklist'] ?>">
                                 <input type="hidden" name="IDC" value="<?php echo $checklist['IDChecklist'] ?>">
@@ -158,8 +158,8 @@
                        </td>
                        <?php } else { ?>
                        <td class="docheck" target"<?php echo $temp; ?>" id="<?php echo $temp; ?>">Disabled</td>
-                       <?php } ?> 
-                     </tr> 
+                       <?php } ?>
+                     </tr>
                      <?php $temp = $temp + 1; ?>
                      <?php } ?>
                    </tbody>
@@ -205,7 +205,7 @@
         </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
-    <script> 
+    <script>
       $(document).ready(function(e){
         var row = document.querySelectorAll("table#mytable>tbody#hasil>tr");
         for (var i = 0; i < row.length; i++) {
@@ -304,8 +304,8 @@ Rule pewarnaan pada baris checklist :
   2B. Jika selisih dari antara jam pada baris dan jam sekarang sudah melebihi batas pengcekan maka buat kedip-kedip warna kuning
   2C. Melakukan perulangan untuk mengecek apakah checklist pada baris tersebut sudah melampaui checklist berikutnya atau belum
     2CA. Mengecek baris J dengan kondisi :
-         - Baris J apakah nama checklistnya sama atau tidak dengan baris K  
-         - Pada baris K selisihnya antara jam sekarang dengan jam pada baris tersebut apakah > 0 
+         - Baris J apakah nama checklistnya sama atau tidak dengan baris K
+         - Pada baris K selisihnya antara jam sekarang dengan jam pada baris tersebut apakah > 0
          - Warna background nya bukan merah
          Jika kondisi terpenuhi maka buat warna baris J menjadi merah
          2CAA. Jika warna baris K adalah merah maka buat status check menjadi 2 dan simpan di database
@@ -323,21 +323,21 @@ Rule pewarnaan pada baris checklist :
             }
             // $('.docheck').attr("disabled","disabled");
           }
-          
+
           if (statusCheck[j] == "0") { // 2
             if (status[j] == 'Disabled') {
               f[j].style.display = "none";
             }
             // console.log(j);
             // console.log("Status cek nya : " +statusCheck[j]);
-            
+
             if((selisih[j]*(-1)) > 0 && (selisih[j]*(-1)) < batasP[j] ){ // 2A
-              f[j].style.backgroundColor = (f[j].style.backgroundColor == 'mediumseagreen' ? '' : 'mediumseagreen');
+              f[j].style.backgroundColor = 'mediumseagreen';
               // console.log(f[j].style.backgroundColor);
             }
 
             else if ((selisih[j]*(-1)) > batasP[j]) { // 2B
-              f[j].style.backgroundColor = (f[j].style.backgroundColor == 'gold' ? '' : 'gold');
+              f[j].style.backgroundColor = 'gold';
               // console.log(f[j].style.backgroundColor);
             }
 
@@ -377,13 +377,13 @@ Rule pewarnaan pada baris checklist :
                 }
               }
             }
-          } 
+          }
           else if(statusCheck[j] == "2"){ // 3
             document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
             if (status[j] == 'Enabled') {
               f[j].style.display = "none";
             }
-            
+
           }
           else if(statusCheck[j] == "1"){ // 4
             document.getElementsByClassName("docheck")[j].innerHTML ="Disabled";
@@ -396,7 +396,7 @@ Rule pewarnaan pada baris checklist :
         }//Akhir Method myTimer
       }
 
-  </script> 
+  </script>
 
 
   <!-- <script>
@@ -438,8 +438,3 @@ Rule pewarnaan pada baris checklist :
         })
     })
   </script> -->
-
-
-
-
-
