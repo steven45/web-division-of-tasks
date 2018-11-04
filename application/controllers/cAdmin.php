@@ -1209,7 +1209,7 @@ class cAdmin extends CI_Controller {
 	}
 
 	public function penjadwalan()
-  {
+    {
         //MULAI PERHITUNGAN UNTUK PENJADWALAN OTOMATIS
         //1. Mengurutkan hasil dari WP
         $alog = array(
@@ -1224,12 +1224,12 @@ class cAdmin extends CI_Controller {
 
         $interval = new DateInterval('P1D');
         $daterange = new DatePeriod($begin, $interval, $end);
+        $wp         = $this->ranking();
+        $data       = $this->mAdmin->getPIC();
+        $jChecklist = $this->mAdmin->getChecklistWhere();
 
         $y = 0;
         foreach ($daterange as $date) {
-            $wp         = $this->ranking();
-            $data       = $this->mAdmin->getPIC();
-            $jChecklist = $this->mAdmin->getChecklistWhere();
             $tanggal0   = $date->format("Y-m-d");
             $tanggal1   = date('Y-m-d', strtotime($tanggal0. ' + 1 days'));
 
@@ -1249,6 +1249,7 @@ class cAdmin extends CI_Controller {
             $tanggal1 = $daftar_hari[$namahari1].', '.$tanggal1;
 
             $absensi = $this->mAdmin->getAbsensiDate($tanggal0);
+
             if ($absensi == null) {
                 $alert[$y]['hasil'] = 'gagal';
                 $alert[$y]['tanggal'] = $tanggal0;
@@ -1261,22 +1262,23 @@ class cAdmin extends CI_Controller {
                     $wp[$i]['NIK'] = $data[$i]['NIK'];
                     $hasilV[$i] = $wp[$i]['hasilV'];
                 }
-
-                // //Pembagian baru dengan membalik hasil
-                // array_multisort($hasilV,SORT_DESC,$wp); //1.
-                // sort($hasilV); //
-
+                
+						//
+            //     // //Pembagian baru dengan membalik hasil
+            //     // array_multisort($hasilV,SORT_DESC,$wp); //1.
+            //     // sort($hasilV); //
+						
                 // Pembagian baru dengan tetap membagi miliknya sendiri
                 $jumlahHasilV = 0;
                 for ($i=0; $i < count($data); $i++) {
                     $hasilV[$i] = 1- $hasilV[$i];
                     $jumlahHasilV += $hasilV[$i];
                 }
-
+						
                 for ($i=0; $i < count($data); $i++) {
                     $hasilVB[$i] = $hasilV[$i]/$jumlahHasilV;
                 }
-
+						
                 $jumlahVB = 0;
                 for ($i=0; $i < count($data); $i++) {
                     $wp[$i]['hasilVB'] = $hasilVB[$i];
@@ -1291,6 +1293,7 @@ class cAdmin extends CI_Controller {
                 $sWP[1] = 0;
                 $sWP[2] = 0;
                 $sWP[3] = 0;
+                $pic = [];
                 for ($i = 0; $i < count($absensi); $i++) {
                     for ($j=0; $j < count($wp); $j++) {
                         if ($absensi[$i]['Shift'] == '1' and $absensi[$i]['NIK']==$wp[$j]['NIK']) {
@@ -1298,12 +1301,12 @@ class cAdmin extends CI_Controller {
                             $pic[0][$t0]['NamaPIC'] = $wp[$j]['nama'];
                             $pic[0][$t0]['hasilVB'] = $wp[$j]['hasilVB'];
                             $sWP[0] = $sWP[0] + $pic[0][$t0]['hasilVB'];
-
+						
                             $pic[1][$t0]['NIK']     = $wp[$j]['NIK'];
                             $pic[1][$t0]['NamaPIC'] = $wp[$j]['nama'];
                             $pic[1][$t0]['hasilVB'] = $wp[$j]['hasilVB'];
                             $sWP[1] = $sWP[1] + $pic[1][$t0]['hasilVB'];
-
+						
                             $t0 = $t0+1;
                         } elseif ($absensi[$i]['Shift'] == '2' and $absensi[$i]['NIK']==$wp[$j]['NIK']) {
                             $bool = true;
@@ -1322,7 +1325,7 @@ class cAdmin extends CI_Controller {
                                 $pic[1][$t0]['hasilVB'] = $wp[$j]['hasilVB'];
                                 $sWP[1] = $sWP[1] + $pic[1][$t0]['hasilVB'];
                             }
-
+						
                             $pic[2][$t1]['NIK'] = $wp[$j]['NIK'];
                             $pic[2][$t1]['NamaPIC'] = $wp[$j]['nama'];
                             $pic[2][$t1]['hasilVB'] = $wp[$j]['hasilVB'];
@@ -1338,13 +1341,13 @@ class cAdmin extends CI_Controller {
                         }
                     }
                 }
-
+						//
                 //Cari rata-rata pada setiap jumlah pembagian
                 for ($i=0; $i < count($pic); $i++) {
                     $rataPembagian[$i] = count($jChecklist[$i])/count($pic[$i]);
                 }
                 // var_dump($rataPembagian);
-
+						
                 $sRPembagian[0] = 0;
                 $sRPembagian[1] = 0;
                 $sRPembagian[2] = 0;
@@ -1365,7 +1368,7 @@ class cAdmin extends CI_Controller {
                         $sRPembagian[$i] = $sRPembagian[$i] + $pic[$i][$j]['rPembagian'];
                     }
                 }
-
+						
                 //Memasukkan sisa penjadwalan
                 for ($i=0; $i < count($pic); $i++) {
                     (int) $selisih[$i] = (count($jChecklist[$i]) - (int) $sRPembagian[$i]);
@@ -1386,7 +1389,7 @@ class cAdmin extends CI_Controller {
                         }
                     }
                 }
-
+						
                 $sRPembagianNew[0] = 0;
                 $sRPembagianNew[1] = 0;
                 $sRPembagianNew[2] = 0;
@@ -1396,7 +1399,7 @@ class cAdmin extends CI_Controller {
                         $sRPembagianNew[$i] = $sRPembagianNew[$i] + $pic[$i][$j]['rPembagian'];
                     }
                 }
-
+						
                 // echo "<h3>Hari : " .$tanggal0."</h3>";
                 // //Menampilkan perhitungan penjadwalan otomatis
                 // for ($i=0; $i < count($pic); $i++) {
@@ -1410,8 +1413,8 @@ class cAdmin extends CI_Controller {
                 //     echo "</table>";
                 //     echo "<br>";
                 // }
-
-
+						
+						
                 //MULAI MENAMBAHKAN KE DATABASE
                 for ($i=0; $i < count($pic); $i++) {
                 	$temp = 0;
@@ -1420,7 +1423,7 @@ class cAdmin extends CI_Controller {
                 			for ($k=0; $k < $pic[$i][$j]['rPembagian']; $k++) {
                 				// echo $pic[$i][$j]['NamaPIC']." ";
                 				// echo $jChecklist[$i][$temp]['IDChecklist']."<br>";
-
+						
                 				$data0 = array(
                 					"NIK" => $pic[$i][$j]['NIK'],
                 					"NIKP" => '0',
@@ -1428,7 +1431,7 @@ class cAdmin extends CI_Controller {
                 					"StatusCheck" => '0',
                 					"Tanggal" => $tanggal0
                 				);
-
+						
                 				$data1 = array(
                 					"NIK" => $pic[$i][$j]['NIK'],
                 					"NIKP" => '0',
@@ -1436,7 +1439,7 @@ class cAdmin extends CI_Controller {
                 					"StatusCheck" => '0',
                 					"Tanggal" => $tanggal1
                 				);
-
+						
                 				if ($i == 3) {
                 					if (substr($jChecklist[$i][$temp]['Jam'],0,2) == '22' OR substr($jChecklist[$i][$temp]['Jam'],0,2) == '23') {
                 						$this->mAdmin->penjadwalan($jChecklist[$i][$temp]['IDChecklist'], $data0, $tanggal0);
